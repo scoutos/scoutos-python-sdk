@@ -4,7 +4,7 @@ import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..types.req_body_input_value import ReqBodyInputValue
 from ..core.request_options import RequestOptions
-from ..types.workflow_run_response_streaming import WorkflowRunResponseStreaming
+from ..types.message_chunk import MessageChunk
 from ..core.jsonable_encoder import jsonable_encoder
 import httpx_sse
 from ..core.pydantic_utilities import parse_obj_as
@@ -32,7 +32,7 @@ class WorkflowsClient:
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Iterator[WorkflowRunResponseStreaming]:
+    ) -> typing.Iterator[MessageChunk]:
         """
         Parameters
         ----------
@@ -49,7 +49,7 @@ class WorkflowsClient:
 
         Yields
         ------
-        typing.Iterator[WorkflowRunResponseStreaming]
+        typing.Iterator[MessageChunk]
 
 
         Examples
@@ -88,9 +88,9 @@ class WorkflowsClient:
                     for _sse in _event_source.iter_sse():
                         try:
                             yield typing.cast(
-                                WorkflowRunResponseStreaming,
+                                MessageChunk,
                                 parse_obj_as(
-                                    type_=WorkflowRunResponseStreaming,  # type: ignore
+                                    type_=MessageChunk,  # type: ignore
                                     object_=json.loads(_sse.data),
                                 ),
                             )
@@ -204,7 +204,7 @@ class AsyncWorkflowsClient:
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.AsyncIterator[WorkflowRunResponseStreaming]:
+    ) -> typing.AsyncIterator[MessageChunk]:
         """
         Parameters
         ----------
@@ -221,7 +221,7 @@ class AsyncWorkflowsClient:
 
         Yields
         ------
-        typing.AsyncIterator[WorkflowRunResponseStreaming]
+        typing.AsyncIterator[MessageChunk]
 
 
         Examples
@@ -268,9 +268,9 @@ class AsyncWorkflowsClient:
                     async for _sse in _event_source.aiter_sse():
                         try:
                             yield typing.cast(
-                                WorkflowRunResponseStreaming,
+                                MessageChunk,
                                 parse_obj_as(
-                                    type_=WorkflowRunResponseStreaming,  # type: ignore
+                                    type_=MessageChunk,  # type: ignore
                                     object_=json.loads(_sse.data),
                                 ),
                             )
