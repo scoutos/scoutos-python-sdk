@@ -2,4 +2,14 @@
 
 import typing
 
-WorkflowRunEvent = typing.Union[typing.Literal["app_run_started", "app_run_completed", "app_run_failed"], typing.Any]
+WorkflowRunEvent = typing.Union[
+    typing.Literal[
+        "app_run_started",
+        "app_run_completed",
+        "app_run_failed",
+        "block_run_started",
+        "block_run_completed",
+        "block_run_failed",
+    ],
+    typing.Any,
+]

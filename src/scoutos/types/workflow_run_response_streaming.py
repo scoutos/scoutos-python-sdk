@@ -2,14 +2,15 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 from .workflow_run_event import WorkflowRunEvent
-import typing
+from .workflow_run_response_streaming_data import WorkflowRunResponseStreamingData
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
+import typing
 import pydantic
 
 
 class WorkflowRunResponseStreaming(UniversalBaseModel):
-    event: WorkflowRunEvent
-    data: typing.Dict[str, typing.Optional[typing.Any]]
+    name: WorkflowRunEvent
+    data: WorkflowRunResponseStreamingData
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
