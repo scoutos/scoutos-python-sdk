@@ -16,9 +16,9 @@ pip install scoutos-test
 Instantiate and use the client with the following:
 
 ```python
-from scoutos import ScoutosApi
+from scoutos import Scout
 
-client = ScoutosApi(
+client = Scout(
     api_key="YOUR_API_KEY",
 )
 response = client.workflows.execute_stream(
@@ -38,9 +38,9 @@ The SDK also exports an `async` client so that you can make non-blocking calls t
 ```python
 import asyncio
 
-from scoutos import AsyncScoutosApi
+from scoutos import AsyncScout
 
-client = AsyncScoutosApi(
+client = AsyncScout(
     api_key="YOUR_API_KEY",
 )
 
@@ -79,9 +79,9 @@ except ApiError as e:
 The SDK supports streaming responses, as well, the response will be a generator that you can loop over.
 
 ```python
-from scoutos import ScoutosApi
+from scoutos import Scout
 
-client = ScoutosApi(
+client = Scout(
     api_key="YOUR_API_KEY",
 )
 response = client.workflows.execute_stream(
@@ -122,9 +122,9 @@ The SDK defaults to a 60 second timeout. You can configure this with a timeout o
 
 ```python
 
-from scoutos import ScoutosApi
+from scoutos import Scout
 
-client = ScoutosApi(
+client = Scout(
     ...,
     timeout=20.0,
 )
@@ -142,9 +142,9 @@ You can override the `httpx` client to customize it for your use-case. Some comm
 and transports.
 ```python
 import httpx
-from scoutos import ScoutosApi
+from scoutos import Scout
 
-client = ScoutosApi(
+client = Scout(
     ...,
     httpx_client=httpx.Client(
         proxies="http://my.test.proxy.example.com",

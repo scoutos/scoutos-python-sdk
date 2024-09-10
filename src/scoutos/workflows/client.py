@@ -54,9 +54,9 @@ class WorkflowsClient:
 
         Examples
         --------
-        from scoutos import ScoutosApi
+        from scoutos import Scout
 
-        client = ScoutosApi(
+        client = Scout(
             api_key="YOUR_API_KEY",
         )
         response = client.workflows.execute_stream(
@@ -143,9 +143,9 @@ class WorkflowsClient:
 
         Examples
         --------
-        from scoutos import ScoutosApi
+        from scoutos import Scout
 
-        client = ScoutosApi(
+        client = Scout(
             api_key="YOUR_API_KEY",
         )
         client.workflows.execute(
@@ -228,9 +228,9 @@ class AsyncWorkflowsClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScoutosApi
+        from scoutos import AsyncScout
 
-        client = AsyncScoutosApi(
+        client = AsyncScout(
             api_key="YOUR_API_KEY",
         )
 
@@ -325,9 +325,9 @@ class AsyncWorkflowsClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScoutosApi
+        from scoutos import AsyncScout
 
-        client = AsyncScoutosApi(
+        client = AsyncScout(
             api_key="YOUR_API_KEY",
         )
 

@@ -13,9 +13,9 @@
 <dd>
 
 ```python
-from scoutos import ScoutosApi
+from scoutos import Scout
 
-client = ScoutosApi(
+client = Scout(
     api_key="YOUR_API_KEY",
 )
 response = client.workflows.execute_stream(
@@ -98,9 +98,9 @@ for chunk in response:
 <dd>
 
 ```python
-from scoutos import ScoutosApi
+from scoutos import Scout
 
-client = ScoutosApi(
+client = Scout(
     api_key="YOUR_API_KEY",
 )
 client.workflows.execute(
@@ -180,9 +180,9 @@ client.workflows.execute(
 <dd>
 
 ```python
-from scoutos import ScoutosApi
+from scoutos import Scout
 
-client = ScoutosApi(
+client = Scout(
     api_key="YOUR_API_KEY",
 )
 client.collections.get(
@@ -236,9 +236,9 @@ client.collections.get(
 <dd>
 
 ```python
-from scoutos import ScoutosApi
+from scoutos import Scout
 
-client = ScoutosApi(
+client = Scout(
     api_key="YOUR_API_KEY",
 )
 client.collections.create()
@@ -314,9 +314,9 @@ client.collections.create()
 <dd>
 
 ```python
-from scoutos import ScoutosApi
+from scoutos import Scout
 
-client = ScoutosApi(
+client = Scout(
     api_key="YOUR_API_KEY",
 )
 client.collections.update(
@@ -416,9 +416,9 @@ Delete a collection given a collection_id.
 <dd>
 
 ```python
-from scoutos import ScoutosApi
+from scoutos import Scout
 
-client = ScoutosApi(
+client = Scout(
     api_key="YOUR_API_KEY",
 )
 client.collections.delete(
@@ -473,9 +473,9 @@ client.collections.delete(
 <dd>
 
 ```python
-from scoutos import ScoutosApi
+from scoutos import Scout
 
-client = ScoutosApi(
+client = Scout(
     api_key="YOUR_API_KEY",
 )
 client.documents.get(
@@ -538,9 +538,9 @@ client.documents.get(
 <dd>
 
 ```python
-from scoutos import DocumentDataInput, ScoutosApi
+from scoutos import DocumentDataInput, Scout
 
-client = ScoutosApi(
+client = Scout(
     api_key="YOUR_API_KEY",
 )
 client.documents.create(
@@ -603,9 +603,9 @@ client.documents.create(
 <dd>
 
 ```python
-from scoutos import ScoutosApi
+from scoutos import Scout
 
-client = ScoutosApi(
+client = Scout(
     api_key="YOUR_API_KEY",
 )
 client.documents.update(
@@ -714,9 +714,9 @@ Delete a document given a document_id.
 <dd>
 
 ```python
-from scoutos import ScoutosApi
+from scoutos import Scout
 
-client = ScoutosApi(
+client = Scout(
     api_key="YOUR_API_KEY",
 )
 client.documents.delete(

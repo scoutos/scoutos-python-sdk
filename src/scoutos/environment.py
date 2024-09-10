@@ -3,5 +3,5 @@
 import enum
 
 
-class ScoutosApiEnvironment(enum.Enum):
+class ScoutEnvironment(enum.Enum):
     PROD = "https://api-prod.scoutos.com"

@@ -45,9 +45,9 @@ class DocumentsClient:
 
         Examples
         --------
-        from scoutos import ScoutosApi
+        from scoutos import Scout
 
-        client = ScoutosApi(
+        client = Scout(
             api_key="YOUR_API_KEY",
         )
         client.documents.get(
@@ -108,9 +108,9 @@ class DocumentsClient:
 
         Examples
         --------
-        from scoutos import DocumentDataInput, ScoutosApi
+        from scoutos import DocumentDataInput, Scout
 
-        client = ScoutosApi(
+        client = Scout(
             api_key="YOUR_API_KEY",
         )
         client.documents.create(
@@ -185,9 +185,9 @@ class DocumentsClient:
 
         Examples
         --------
-        from scoutos import ScoutosApi
+        from scoutos import Scout
 
-        client = ScoutosApi(
+        client = Scout(
             api_key="YOUR_API_KEY",
         )
         client.documents.update(
@@ -253,9 +253,9 @@ class DocumentsClient:
 
         Examples
         --------
-        from scoutos import ScoutosApi
+        from scoutos import Scout
 
-        client = ScoutosApi(
+        client = Scout(
             api_key="YOUR_API_KEY",
         )
         client.documents.delete(
@@ -319,9 +319,9 @@ class AsyncDocumentsClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScoutosApi
+        from scoutos import AsyncScout
 
-        client = AsyncScoutosApi(
+        client = AsyncScout(
             api_key="YOUR_API_KEY",
         )
 
@@ -390,9 +390,9 @@ class AsyncDocumentsClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScoutosApi, DocumentDataInput
+        from scoutos import AsyncScout, DocumentDataInput
 
-        client = AsyncScoutosApi(
+        client = AsyncScout(
             api_key="YOUR_API_KEY",
         )
 
@@ -475,9 +475,9 @@ class AsyncDocumentsClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScoutosApi
+        from scoutos import AsyncScout
 
-        client = AsyncScoutosApi(
+        client = AsyncScout(
             api_key="YOUR_API_KEY",
         )
 
@@ -551,9 +551,9 @@ class AsyncDocumentsClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScoutosApi
+        from scoutos import AsyncScout
 
-        client = AsyncScoutosApi(
+        client = AsyncScout(
             api_key="YOUR_API_KEY",
         )
 

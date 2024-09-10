@@ -86,9 +86,9 @@ from .types import (
 )
 from .errors import UnprocessableEntityError
 from . import collections, documents, workflows
-from .client import AsyncScoutosApi, ScoutosApi
+from .client import AsyncScout, Scout
 from .documents import DocumentsCreateRequest
-from .environment import ScoutosApiEnvironment
+from .environment import ScoutEnvironment
 from .version import __version__
 
 __all__ = [
@@ -104,7 +104,7 @@ __all__ = [
     "AppRunStarted",
     "AppRunStartedData",
     "AppRunStartedEnvironment",
-    "AsyncScoutosApi",
+    "AsyncScout",
     "BlockRunCompleted",
     "BlockRunCompletedData",
     "BlockRunCompletedEnvironment",
@@ -167,8 +167,8 @@ __all__ = [
     "MessageChunk",
     "ReqBody",
     "ReqBodyInputValue",
-    "ScoutosApi",
-    "ScoutosApiEnvironment",
+    "Scout",
+    "ScoutEnvironment",
     "SelectOptionItem",
     "UnprocessableEntityError",
     "UserIdentity",
