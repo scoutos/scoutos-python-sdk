@@ -52,16 +52,21 @@ from .column_type_item_select import ColumnTypeItemSelect
 from .column_type_item_text_long import ColumnTypeItemTextLong
 from .column_type_item_text_short import ColumnTypeItemTextShort
 from .content_type import ContentType
-from .create_document_v_2_collections_collection_id_documents_post_request import (
-    CreateDocumentV2CollectionsCollectionIdDocumentsPostRequest,
-)
+from .document import Document
 from .document_content import DocumentContent
-from .document_data import DocumentData
+from .document_data_input import DocumentDataInput
+from .document_data_output import DocumentDataOutput
 from .eval_service_handlers_create_collection_response import EvalServiceHandlersCreateCollectionResponse
+from .eval_service_handlers_create_document_response import EvalServiceHandlersCreateDocumentResponse
+from .eval_service_handlers_create_document_response_data import EvalServiceHandlersCreateDocumentResponseData
 from .eval_service_handlers_delete_collection_response import EvalServiceHandlersDeleteCollectionResponse
 from .eval_service_handlers_delete_document_response import EvalServiceHandlersDeleteDocumentResponse
+from .eval_service_handlers_get_collection_response import EvalServiceHandlersGetCollectionResponse
 from .eval_service_handlers_get_collections_response import EvalServiceHandlersGetCollectionsResponse
+from .eval_service_handlers_get_document_response import EvalServiceHandlersGetDocumentResponse
+from .eval_service_handlers_get_documents_response import EvalServiceHandlersGetDocumentsResponse
 from .eval_service_handlers_update_collection_response import EvalServiceHandlersUpdateCollectionResponse
+from .eval_service_handlers_update_document_response import EvalServiceHandlersUpdateDocumentResponse
 from .event_name import EventName
 from .event_version import EventVersion
 from .http_validation_error import HttpValidationError
@@ -131,14 +136,21 @@ __all__ = [
     "ColumnTypeItemTextLong",
     "ColumnTypeItemTextShort",
     "ContentType",
-    "CreateDocumentV2CollectionsCollectionIdDocumentsPostRequest",
+    "Document",
     "DocumentContent",
-    "DocumentData",
+    "DocumentDataInput",
+    "DocumentDataOutput",
     "EvalServiceHandlersCreateCollectionResponse",
+    "EvalServiceHandlersCreateDocumentResponse",
+    "EvalServiceHandlersCreateDocumentResponseData",
     "EvalServiceHandlersDeleteCollectionResponse",
     "EvalServiceHandlersDeleteDocumentResponse",
+    "EvalServiceHandlersGetCollectionResponse",
     "EvalServiceHandlersGetCollectionsResponse",
+    "EvalServiceHandlersGetDocumentResponse",
+    "EvalServiceHandlersGetDocumentsResponse",
     "EvalServiceHandlersUpdateCollectionResponse",
+    "EvalServiceHandlersUpdateDocumentResponse",
     "EventName",
     "EventVersion",
     "HttpValidationError",

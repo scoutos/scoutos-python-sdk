@@ -2,16 +2,13 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
-from .document_content import DocumentContent
+from .collection import Collection
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class DocumentData(UniversalBaseModel):
-    id: typing.Optional[str] = None
-    columns: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
-    display_name: typing.Optional[str] = None
-    content: typing.Optional[typing.List[DocumentContent]] = None
+class EvalServiceHandlersGetCollectionResponse(UniversalBaseModel):
+    data: typing.Optional[Collection] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

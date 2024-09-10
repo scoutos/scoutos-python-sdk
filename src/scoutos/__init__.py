@@ -49,14 +49,21 @@ from .types import (
     ColumnTypeItemTextLong,
     ColumnTypeItemTextShort,
     ContentType,
-    CreateDocumentV2CollectionsCollectionIdDocumentsPostRequest,
+    Document,
     DocumentContent,
-    DocumentData,
+    DocumentDataInput,
+    DocumentDataOutput,
     EvalServiceHandlersCreateCollectionResponse,
+    EvalServiceHandlersCreateDocumentResponse,
+    EvalServiceHandlersCreateDocumentResponseData,
     EvalServiceHandlersDeleteCollectionResponse,
     EvalServiceHandlersDeleteDocumentResponse,
+    EvalServiceHandlersGetCollectionResponse,
     EvalServiceHandlersGetCollectionsResponse,
+    EvalServiceHandlersGetDocumentResponse,
+    EvalServiceHandlersGetDocumentsResponse,
     EvalServiceHandlersUpdateCollectionResponse,
+    EvalServiceHandlersUpdateDocumentResponse,
     EventName,
     EventVersion,
     HttpValidationError,
@@ -78,8 +85,9 @@ from .types import (
     WorkflowRunResponseStreamingData,
 )
 from .errors import UnprocessableEntityError
-from . import workflows
+from . import collections, documents, workflows
 from .client import AsyncScoutosApi, ScoutosApi
+from .documents import DocumentsCreateRequest
 from .environment import ScoutosApiEnvironment
 from .version import __version__
 
@@ -133,14 +141,22 @@ __all__ = [
     "ColumnTypeItemTextLong",
     "ColumnTypeItemTextShort",
     "ContentType",
-    "CreateDocumentV2CollectionsCollectionIdDocumentsPostRequest",
+    "Document",
     "DocumentContent",
-    "DocumentData",
+    "DocumentDataInput",
+    "DocumentDataOutput",
+    "DocumentsCreateRequest",
     "EvalServiceHandlersCreateCollectionResponse",
+    "EvalServiceHandlersCreateDocumentResponse",
+    "EvalServiceHandlersCreateDocumentResponseData",
     "EvalServiceHandlersDeleteCollectionResponse",
     "EvalServiceHandlersDeleteDocumentResponse",
+    "EvalServiceHandlersGetCollectionResponse",
     "EvalServiceHandlersGetCollectionsResponse",
+    "EvalServiceHandlersGetDocumentResponse",
+    "EvalServiceHandlersGetDocumentsResponse",
     "EvalServiceHandlersUpdateCollectionResponse",
+    "EvalServiceHandlersUpdateDocumentResponse",
     "EventName",
     "EventVersion",
     "HttpValidationError",
@@ -164,5 +180,7 @@ __all__ = [
     "WorkflowRunResponseStreaming",
     "WorkflowRunResponseStreamingData",
     "__version__",
+    "collections",
+    "documents",
     "workflows",
 ]

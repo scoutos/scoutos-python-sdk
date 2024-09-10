@@ -21,7 +21,14 @@ from scoutos import ScoutosApi
 client = ScoutosApi(
     api_key="YOUR_API_KEY",
 )
-client.create_collection_v_2_collections_post()
+response = client.workflows.execute_stream(
+    workflow_id="string",
+    revision_id="string",
+    session_id="string",
+    input={"string": 1},
+)
+for chunk in response:
+    yield chunk
 ```
 
 ## Async Client
@@ -39,7 +46,14 @@ client = AsyncScoutosApi(
 
 
 async def main() -> None:
-    await client.create_collection_v_2_collections_post()
+    response = await client.workflows.execute_stream(
+        workflow_id="string",
+        revision_id="string",
+        session_id="string",
+        input={"string": 1},
+    )
+    async for chunk in response:
+        yield chunk
 
 
 asyncio.run(main())
@@ -54,7 +68,7 @@ will be thrown.
 from scoutos.core.api_error import ApiError
 
 try:
-    client.create_collection_v_2_collections_post(...)
+    client.workflows.execute_stream(...)
 except ApiError as e:
     print(e.status_code)
     print(e.body)
@@ -97,7 +111,7 @@ A request is deemed retriable when any of the following HTTP status codes is ret
 Use the `max_retries` request option to configure this behavior.
 
 ```python
-client.create_collection_v_2_collections_post(..., {
+client.workflows.execute_stream(..., {
     "max_retries": 1
 })
 ```
@@ -117,7 +131,7 @@ client = ScoutosApi(
 
 
 # Override timeout for a specific method
-client.create_collection_v_2_collections_post(..., {
+client.workflows.execute_stream(..., {
     "timeout_in_seconds": 1
 })
 ```
