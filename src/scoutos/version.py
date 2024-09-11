@@ -1,3 +1,3 @@
 from importlib import metadata
 
-__version__ = metadata.version("scoutos-test")
+__version__ = metadata.version("scoutos")

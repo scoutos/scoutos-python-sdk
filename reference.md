@@ -1,5 +1,75 @@
 # Reference
 ## Workflows
+<details><summary><code>client.workflows.<a href="src/scoutos/workflows/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Fetch app configuration by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.workflows.get(
+    workflow_id="workflow_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workflow_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.workflows.<a href="src/scoutos/workflows/client.py">execute_stream</a>(...)</code></summary>
 <dl>
 <dd>
@@ -22,6 +92,7 @@ response = client.workflows.execute_stream(
     workflow_id="string",
     revision_id="string",
     session_id="string",
+    streaming=True,
     input={"string": 1},
 )
 for chunk in response:
@@ -66,6 +137,14 @@ for chunk in response:
 <dd>
 
 **session_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**streaming:** `typing.Optional[bool]` 
     
 </dd>
 </dl>
@@ -147,6 +226,14 @@ client.workflows.execute(
 <dd>
 
 **session_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**streaming:** `typing.Optional[bool]` 
     
 </dd>
 </dl>
