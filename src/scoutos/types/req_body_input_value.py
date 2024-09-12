@@ -2,4 +2,6 @@
 
 import typing
 
-ReqBodyInputValue = typing.Union[int, float, str, typing.Dict[str, typing.Optional[typing.Any]]]
+ReqBodyInputValue = typing.Union[
+    int, float, str, typing.Dict[str, typing.Optional[typing.Any]], typing.List[typing.Optional[typing.Any]]
+]

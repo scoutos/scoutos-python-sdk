@@ -2,19 +2,18 @@
 
 import typing
 from ..core.client_wrapper import SyncClientWrapper
+from ..types.req_body_input_value import ReqBodyInputValue
 from ..core.request_options import RequestOptions
-from ..types.response import Response
+from ..types.workflow_execute_event import WorkflowExecuteEvent
 from ..core.jsonable_encoder import jsonable_encoder
+import httpx_sse
 from ..core.pydantic_utilities import parse_obj_as
+import json
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
-from ..types.req_body_input_value import ReqBodyInputValue
-from ..types.workflow_run_response_streaming import WorkflowRunResponseStreaming
-import httpx_sse
-import json
-from ..types.workflow_run_response_batch import WorkflowRunResponseBatch
+from ..types.workflow_execute_response import WorkflowExecuteResponse
 from ..core.client_wrapper import AsyncClientWrapper
 
 # this is used as the default value for optional parameters
@@ -25,62 +24,6 @@ class WorkflowsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def get(self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Response:
-        """
-        Fetch app configuration by ID.
-
-        Parameters
-        ----------
-        workflow_id : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        Response
-            Successful Response
-
-        Examples
-        --------
-        from scoutos import Scout
-
-        client = Scout(
-            api_key="YOUR_API_KEY",
-        )
-        client.workflows.get(
-            workflow_id="workflow_id",
-        )
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            f"v2/apps/{jsonable_encoder(workflow_id)}",
-            method="GET",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    Response,
-                    parse_obj_as(
-                        type_=Response,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
-
     def execute_stream(
         self,
         workflow_id: str,
@@ -88,9 +31,9 @@ class WorkflowsClient:
         input: typing.Dict[str, ReqBodyInputValue],
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
-        streaming: typing.Optional[bool] = None,
+        streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Iterator[WorkflowRunResponseStreaming]:
+    ) -> typing.Iterator[WorkflowExecuteEvent]:
         """
         Parameters
         ----------
@@ -109,7 +52,7 @@ class WorkflowsClient:
 
         Yields
         ------
-        typing.Iterator[WorkflowRunResponseStreaming]
+        typing.Iterator[WorkflowExecuteEvent]
 
 
         Examples
@@ -135,11 +78,11 @@ class WorkflowsClient:
             params={
                 "revision_id": revision_id,
                 "session_id": session_id,
-                "streaming": streaming,
             },
             json={
+                "streaming": streaming,
                 "input": input,
-                "streaming": True,
+                "stream": True,
             },
             request_options=request_options,
             omit=OMIT,
@@ -150,9 +93,9 @@ class WorkflowsClient:
                     for _sse in _event_source.iter_sse():
                         try:
                             yield typing.cast(
-                                WorkflowRunResponseStreaming,
+                                WorkflowExecuteEvent,
                                 parse_obj_as(
-                                    type_=WorkflowRunResponseStreaming,  # type: ignore
+                                    type_=WorkflowExecuteEvent,  # type: ignore
                                     object_=json.loads(_sse.data),
                                 ),
                             )
@@ -182,9 +125,9 @@ class WorkflowsClient:
         input: typing.Dict[str, ReqBodyInputValue],
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
-        streaming: typing.Optional[bool] = None,
+        streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> WorkflowRunResponseBatch:
+    ) -> WorkflowExecuteResponse:
         """
         Parameters
         ----------
@@ -203,7 +146,7 @@ class WorkflowsClient:
 
         Returns
         -------
-        WorkflowRunResponseBatch
+        WorkflowExecuteResponse
 
 
         Examples
@@ -224,11 +167,11 @@ class WorkflowsClient:
             params={
                 "revision_id": revision_id,
                 "session_id": session_id,
-                "streaming": streaming,
             },
             json={
+                "streaming": streaming,
                 "input": input,
-                "streaming": False,
+                "stream": False,
             },
             request_options=request_options,
             omit=OMIT,
@@ -236,9 +179,9 @@ class WorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    WorkflowRunResponseBatch,
+                    WorkflowExecuteResponse,
                     parse_obj_as(
-                        type_=WorkflowRunResponseBatch,  # type: ignore
+                        type_=WorkflowExecuteResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -262,70 +205,6 @@ class AsyncWorkflowsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def get(self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Response:
-        """
-        Fetch app configuration by ID.
-
-        Parameters
-        ----------
-        workflow_id : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        Response
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from scoutos import AsyncScout
-
-        client = AsyncScout(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.workflows.get(
-                workflow_id="workflow_id",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            f"v2/apps/{jsonable_encoder(workflow_id)}",
-            method="GET",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    Response,
-                    parse_obj_as(
-                        type_=Response,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
-
     async def execute_stream(
         self,
         workflow_id: str,
@@ -333,9 +212,9 @@ class AsyncWorkflowsClient:
         input: typing.Dict[str, ReqBodyInputValue],
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
-        streaming: typing.Optional[bool] = None,
+        streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.AsyncIterator[WorkflowRunResponseStreaming]:
+    ) -> typing.AsyncIterator[WorkflowExecuteEvent]:
         """
         Parameters
         ----------
@@ -354,7 +233,7 @@ class AsyncWorkflowsClient:
 
         Yields
         ------
-        typing.AsyncIterator[WorkflowRunResponseStreaming]
+        typing.AsyncIterator[WorkflowExecuteEvent]
 
 
         Examples
@@ -388,11 +267,11 @@ class AsyncWorkflowsClient:
             params={
                 "revision_id": revision_id,
                 "session_id": session_id,
-                "streaming": streaming,
             },
             json={
+                "streaming": streaming,
                 "input": input,
-                "streaming": True,
+                "stream": True,
             },
             request_options=request_options,
             omit=OMIT,
@@ -403,9 +282,9 @@ class AsyncWorkflowsClient:
                     async for _sse in _event_source.aiter_sse():
                         try:
                             yield typing.cast(
-                                WorkflowRunResponseStreaming,
+                                WorkflowExecuteEvent,
                                 parse_obj_as(
-                                    type_=WorkflowRunResponseStreaming,  # type: ignore
+                                    type_=WorkflowExecuteEvent,  # type: ignore
                                     object_=json.loads(_sse.data),
                                 ),
                             )
@@ -435,9 +314,9 @@ class AsyncWorkflowsClient:
         input: typing.Dict[str, ReqBodyInputValue],
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
-        streaming: typing.Optional[bool] = None,
+        streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> WorkflowRunResponseBatch:
+    ) -> WorkflowExecuteResponse:
         """
         Parameters
         ----------
@@ -456,7 +335,7 @@ class AsyncWorkflowsClient:
 
         Returns
         -------
-        WorkflowRunResponseBatch
+        WorkflowExecuteResponse
 
 
         Examples
@@ -485,11 +364,11 @@ class AsyncWorkflowsClient:
             params={
                 "revision_id": revision_id,
                 "session_id": session_id,
-                "streaming": streaming,
             },
             json={
+                "streaming": streaming,
                 "input": input,
-                "streaming": False,
+                "stream": False,
             },
             request_options=request_options,
             omit=OMIT,
@@ -497,9 +376,9 @@ class AsyncWorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    WorkflowRunResponseBatch,
+                    WorkflowExecuteResponse,
                     parse_obj_as(
-                        type_=WorkflowRunResponseBatch,  # type: ignore
+                        type_=WorkflowExecuteResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -4,4 +4,4 @@ import typing
 from .app_run_completed import AppRunCompleted
 from .app_run_failed import AppRunFailed
 
-WorkflowRunResponseBatchData = typing.Union[AppRunCompleted, AppRunFailed]
+WorkflowExecuteResponseData = typing.Union[AppRunCompleted, AppRunFailed]

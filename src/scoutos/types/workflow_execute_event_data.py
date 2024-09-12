@@ -8,6 +8,6 @@ from .block_run_started import BlockRunStarted
 from .block_run_completed import BlockRunCompleted
 from .block_run_failed import BlockRunFailed
 
-WorkflowRunResponseStreamingData = typing.Union[
+WorkflowExecuteEventData = typing.Union[
     AppRunStarted, AppRunCompleted, AppRunFailed, BlockRunStarted, BlockRunCompleted, BlockRunFailed
 ]

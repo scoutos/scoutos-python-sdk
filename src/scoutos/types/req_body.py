@@ -8,6 +8,7 @@ import pydantic
 
 
 class ReqBody(UniversalBaseModel):
+    streaming: typing.Optional[bool] = None
     input: typing.Dict[str, ReqBodyInputValue]
 
     if IS_PYDANTIC_V2:
