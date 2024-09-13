@@ -1,6 +1,6 @@
 # Reference
 ## Workflows
-<details><summary><code>client.workflows.<a href="src/scoutos/workflows/client.py">execute_stream</a>(...)</code></summary>
+<details><summary><code>client.workflows.<a href="src/scoutos/workflows/client.py">run_stream</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -18,12 +18,12 @@ from scoutos import Scout
 client = Scout(
     api_key="YOUR_API_KEY",
 )
-response = client.workflows.execute_stream(
+response = client.workflows.run_stream(
     workflow_id="string",
     revision_id="string",
     session_id="string",
+    input={"string": True},
     streaming=True,
-    input={"string": 1},
 )
 for chunk in response:
     yield chunk
@@ -94,7 +94,7 @@ for chunk in response:
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="src/scoutos/workflows/client.py">execute</a>(...)</code></summary>
+<details><summary><code>client.workflows.<a href="src/scoutos/workflows/client.py">run</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -112,9 +112,9 @@ from scoutos import Scout
 client = Scout(
     api_key="YOUR_API_KEY",
 )
-client.workflows.execute(
+client.workflows.run(
     workflow_id="workflow_id",
-    input={"key": 1},
+    input={"key": True},
 )
 
 ```

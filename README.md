@@ -21,12 +21,12 @@ from scoutos import Scout
 client = Scout(
     api_key="YOUR_API_KEY",
 )
-response = client.workflows.execute_stream(
+response = client.workflows.run_stream(
     workflow_id="string",
     revision_id="string",
     session_id="string",
+    input={"string": True},
     streaming=True,
-    input={"string": 1},
 )
 for chunk in response:
     yield chunk
@@ -47,12 +47,12 @@ client = AsyncScout(
 
 
 async def main() -> None:
-    response = await client.workflows.execute_stream(
+    response = await client.workflows.run_stream(
         workflow_id="string",
         revision_id="string",
         session_id="string",
+        input={"string": True},
         streaming=True,
-        input={"string": 1},
     )
     async for chunk in response:
         yield chunk
@@ -70,7 +70,7 @@ will be thrown.
 from scoutos.core.api_error import ApiError
 
 try:
-    client.workflows.execute_stream(...)
+    client.workflows.run_stream(...)
 except ApiError as e:
     print(e.status_code)
     print(e.body)
@@ -86,12 +86,12 @@ from scoutos import Scout
 client = Scout(
     api_key="YOUR_API_KEY",
 )
-response = client.workflows.execute_stream(
+response = client.workflows.run_stream(
     workflow_id="string",
     revision_id="string",
     session_id="string",
+    input={"string": True},
     streaming=True,
-    input={"string": 1},
 )
 for chunk in response:
     yield chunk
@@ -114,7 +114,7 @@ A request is deemed retriable when any of the following HTTP status codes is ret
 Use the `max_retries` request option to configure this behavior.
 
 ```python
-client.workflows.execute_stream(..., {
+client.workflows.run_stream(..., {
     "max_retries": 1
 })
 ```
@@ -134,7 +134,7 @@ client = Scout(
 
 
 # Override timeout for a specific method
-client.workflows.execute_stream(..., {
+client.workflows.run_stream(..., {
     "timeout_in_seconds": 1
 })
 ```

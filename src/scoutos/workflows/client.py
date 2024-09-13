@@ -4,7 +4,7 @@ import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..types.req_body_input_value import ReqBodyInputValue
 from ..core.request_options import RequestOptions
-from ..types.workflow_execute_event import WorkflowExecuteEvent
+from ..types.workflow_run_event import WorkflowRunEvent
 from ..core.jsonable_encoder import jsonable_encoder
 import httpx_sse
 from ..core.pydantic_utilities import parse_obj_as
@@ -13,7 +13,7 @@ from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
-from ..types.workflow_execute_response import WorkflowExecuteResponse
+from ..types.workflow_run_response import WorkflowRunResponse
 from ..core.client_wrapper import AsyncClientWrapper
 
 # this is used as the default value for optional parameters
@@ -24,7 +24,7 @@ class WorkflowsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def execute_stream(
+    def run_stream(
         self,
         workflow_id: str,
         *,
@@ -33,7 +33,7 @@ class WorkflowsClient:
         session_id: typing.Optional[str] = None,
         streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Iterator[WorkflowExecuteEvent]:
+    ) -> typing.Iterator[WorkflowRunEvent]:
         """
         Parameters
         ----------
@@ -52,7 +52,7 @@ class WorkflowsClient:
 
         Yields
         ------
-        typing.Iterator[WorkflowExecuteEvent]
+        typing.Iterator[WorkflowRunEvent]
 
 
         Examples
@@ -62,12 +62,12 @@ class WorkflowsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        response = client.workflows.execute_stream(
+        response = client.workflows.run_stream(
             workflow_id="string",
             revision_id="string",
             session_id="string",
+            input={"string": True},
             streaming=True,
-            input={"string": 1},
         )
         for chunk in response:
             yield chunk
@@ -80,8 +80,8 @@ class WorkflowsClient:
                 "session_id": session_id,
             },
             json={
-                "streaming": streaming,
                 "input": input,
+                "streaming": streaming,
                 "stream": True,
             },
             request_options=request_options,
@@ -93,9 +93,9 @@ class WorkflowsClient:
                     for _sse in _event_source.iter_sse():
                         try:
                             yield typing.cast(
-                                WorkflowExecuteEvent,
+                                WorkflowRunEvent,
                                 parse_obj_as(
-                                    type_=WorkflowExecuteEvent,  # type: ignore
+                                    type_=WorkflowRunEvent,  # type: ignore
                                     object_=json.loads(_sse.data),
                                 ),
                             )
@@ -118,7 +118,7 @@ class WorkflowsClient:
                 raise ApiError(status_code=_response.status_code, body=_response.text)
             raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def execute(
+    def run(
         self,
         workflow_id: str,
         *,
@@ -127,7 +127,7 @@ class WorkflowsClient:
         session_id: typing.Optional[str] = None,
         streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> WorkflowExecuteResponse:
+    ) -> WorkflowRunResponse:
         """
         Parameters
         ----------
@@ -146,7 +146,7 @@ class WorkflowsClient:
 
         Returns
         -------
-        WorkflowExecuteResponse
+        WorkflowRunResponse
 
 
         Examples
@@ -156,9 +156,9 @@ class WorkflowsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.workflows.execute(
+        client.workflows.run(
             workflow_id="workflow_id",
-            input={"key": 1},
+            input={"key": True},
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -169,8 +169,8 @@ class WorkflowsClient:
                 "session_id": session_id,
             },
             json={
-                "streaming": streaming,
                 "input": input,
+                "streaming": streaming,
                 "stream": False,
             },
             request_options=request_options,
@@ -179,9 +179,9 @@ class WorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    WorkflowExecuteResponse,
+                    WorkflowRunResponse,
                     parse_obj_as(
-                        type_=WorkflowExecuteResponse,  # type: ignore
+                        type_=WorkflowRunResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -205,7 +205,7 @@ class AsyncWorkflowsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def execute_stream(
+    async def run_stream(
         self,
         workflow_id: str,
         *,
@@ -214,7 +214,7 @@ class AsyncWorkflowsClient:
         session_id: typing.Optional[str] = None,
         streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.AsyncIterator[WorkflowExecuteEvent]:
+    ) -> typing.AsyncIterator[WorkflowRunEvent]:
         """
         Parameters
         ----------
@@ -233,7 +233,7 @@ class AsyncWorkflowsClient:
 
         Yields
         ------
-        typing.AsyncIterator[WorkflowExecuteEvent]
+        typing.AsyncIterator[WorkflowRunEvent]
 
 
         Examples
@@ -248,12 +248,12 @@ class AsyncWorkflowsClient:
 
 
         async def main() -> None:
-            response = await client.workflows.execute_stream(
+            response = await client.workflows.run_stream(
                 workflow_id="string",
                 revision_id="string",
                 session_id="string",
+                input={"string": True},
                 streaming=True,
-                input={"string": 1},
             )
             async for chunk in response:
                 yield chunk
@@ -269,8 +269,8 @@ class AsyncWorkflowsClient:
                 "session_id": session_id,
             },
             json={
-                "streaming": streaming,
                 "input": input,
+                "streaming": streaming,
                 "stream": True,
             },
             request_options=request_options,
@@ -282,9 +282,9 @@ class AsyncWorkflowsClient:
                     async for _sse in _event_source.aiter_sse():
                         try:
                             yield typing.cast(
-                                WorkflowExecuteEvent,
+                                WorkflowRunEvent,
                                 parse_obj_as(
-                                    type_=WorkflowExecuteEvent,  # type: ignore
+                                    type_=WorkflowRunEvent,  # type: ignore
                                     object_=json.loads(_sse.data),
                                 ),
                             )
@@ -307,7 +307,7 @@ class AsyncWorkflowsClient:
                 raise ApiError(status_code=_response.status_code, body=_response.text)
             raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def execute(
+    async def run(
         self,
         workflow_id: str,
         *,
@@ -316,7 +316,7 @@ class AsyncWorkflowsClient:
         session_id: typing.Optional[str] = None,
         streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> WorkflowExecuteResponse:
+    ) -> WorkflowRunResponse:
         """
         Parameters
         ----------
@@ -335,7 +335,7 @@ class AsyncWorkflowsClient:
 
         Returns
         -------
-        WorkflowExecuteResponse
+        WorkflowRunResponse
 
 
         Examples
@@ -350,9 +350,9 @@ class AsyncWorkflowsClient:
 
 
         async def main() -> None:
-            await client.workflows.execute(
+            await client.workflows.run(
                 workflow_id="workflow_id",
-                input={"key": 1},
+                input={"key": True},
             )
 
 
@@ -366,8 +366,8 @@ class AsyncWorkflowsClient:
                 "session_id": session_id,
             },
             json={
-                "streaming": streaming,
                 "input": input,
+                "streaming": streaming,
                 "stream": False,
             },
             request_options=request_options,
@@ -376,9 +376,9 @@ class AsyncWorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    WorkflowExecuteResponse,
+                    WorkflowRunResponse,
                     parse_obj_as(
-                        type_=WorkflowExecuteResponse,  # type: ignore
+                        type_=WorkflowRunResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

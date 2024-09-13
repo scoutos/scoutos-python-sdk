@@ -3,14 +3,13 @@
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
 import pydantic
-from .event_name import EventName
 from .event_version import EventVersion
-from .app_run_completed_environment import AppRunCompletedEnvironment
+from .workflow_run_completed_environment import WorkflowRunCompletedEnvironment
 from .app_run_completed_data import AppRunCompletedData
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
-class AppRunCompleted(UniversalBaseModel):
+class WorkflowRunCompleted(UniversalBaseModel):
     organization_id: str
     id: typing.Optional[str] = pydantic.Field(default=None)
     """
@@ -22,9 +21,8 @@ class AppRunCompleted(UniversalBaseModel):
     Identifies the root cause of the event. If not set, it defaults to the event id.
     """
 
-    name: typing.Optional[EventName] = None
     version: typing.Optional[EventVersion] = None
-    environment: AppRunCompletedEnvironment
+    environment: WorkflowRunCompletedEnvironment
     timestamp: typing.Optional[str] = pydantic.Field(default=None)
     """
     The timestamp of the event as UTC ISO 8601 string

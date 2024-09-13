@@ -3,14 +3,13 @@
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
 import pydantic
-from .event_name import EventName
 from .event_version import EventVersion
-from .app_run_failed_environment import AppRunFailedEnvironment
+from .workflow_run_failed_environment import WorkflowRunFailedEnvironment
 from .app_run_failed_data import AppRunFailedData
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
-class AppRunFailed(UniversalBaseModel):
+class WorkflowRunFailed(UniversalBaseModel):
     organization_id: str
     id: typing.Optional[str] = pydantic.Field(default=None)
     """
@@ -22,9 +21,8 @@ class AppRunFailed(UniversalBaseModel):
     Identifies the root cause of the event. If not set, it defaults to the event id.
     """
 
-    name: typing.Optional[EventName] = None
     version: typing.Optional[EventVersion] = None
-    environment: AppRunFailedEnvironment
+    environment: WorkflowRunFailedEnvironment
     timestamp: typing.Optional[str] = pydantic.Field(default=None)
     """
     The timestamp of the event as UTC ISO 8601 string

@@ -3,7 +3,6 @@
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
 import pydantic
-from .event_name import EventName
 from .event_version import EventVersion
 from .block_run_completed_environment import BlockRunCompletedEnvironment
 from .block_run_completed_data import BlockRunCompletedData
@@ -22,7 +21,6 @@ class BlockRunCompleted(UniversalBaseModel):
     Identifies the root cause of the event. If not set, it defaults to the event id.
     """
 
-    name: typing.Optional[EventName] = None
     version: typing.Optional[EventVersion] = None
     environment: BlockRunCompletedEnvironment
     timestamp: typing.Optional[str] = pydantic.Field(default=None)
