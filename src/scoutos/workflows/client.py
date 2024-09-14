@@ -3,6 +3,7 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..types.req_body_input_value import ReqBodyInputValue
+from ..types.environment import Environment
 from ..core.request_options import RequestOptions
 from ..types.workflow_run_event import WorkflowRunEvent
 from ..core.jsonable_encoder import jsonable_encoder
@@ -31,6 +32,7 @@ class WorkflowsClient:
         input: typing.Dict[str, ReqBodyInputValue],
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
+        environment: typing.Optional[Environment] = None,
         streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Iterator[WorkflowRunEvent]:
@@ -44,6 +46,8 @@ class WorkflowsClient:
         revision_id : typing.Optional[str]
 
         session_id : typing.Optional[str]
+
+        environment : typing.Optional[Environment]
 
         streaming : typing.Optional[bool]
 
@@ -66,6 +70,7 @@ class WorkflowsClient:
             workflow_id="string",
             revision_id="string",
             session_id="string",
+            environment="production",
             input={"string": True},
             streaming=True,
         )
@@ -78,6 +83,7 @@ class WorkflowsClient:
             params={
                 "revision_id": revision_id,
                 "session_id": session_id,
+                "environment": environment,
             },
             json={
                 "input": input,
@@ -125,6 +131,7 @@ class WorkflowsClient:
         input: typing.Dict[str, ReqBodyInputValue],
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
+        environment: typing.Optional[Environment] = None,
         streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> WorkflowRunResponse:
@@ -138,6 +145,8 @@ class WorkflowsClient:
         revision_id : typing.Optional[str]
 
         session_id : typing.Optional[str]
+
+        environment : typing.Optional[Environment]
 
         streaming : typing.Optional[bool]
 
@@ -167,6 +176,7 @@ class WorkflowsClient:
             params={
                 "revision_id": revision_id,
                 "session_id": session_id,
+                "environment": environment,
             },
             json={
                 "input": input,
@@ -212,6 +222,7 @@ class AsyncWorkflowsClient:
         input: typing.Dict[str, ReqBodyInputValue],
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
+        environment: typing.Optional[Environment] = None,
         streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.AsyncIterator[WorkflowRunEvent]:
@@ -225,6 +236,8 @@ class AsyncWorkflowsClient:
         revision_id : typing.Optional[str]
 
         session_id : typing.Optional[str]
+
+        environment : typing.Optional[Environment]
 
         streaming : typing.Optional[bool]
 
@@ -252,6 +265,7 @@ class AsyncWorkflowsClient:
                 workflow_id="string",
                 revision_id="string",
                 session_id="string",
+                environment="production",
                 input={"string": True},
                 streaming=True,
             )
@@ -267,6 +281,7 @@ class AsyncWorkflowsClient:
             params={
                 "revision_id": revision_id,
                 "session_id": session_id,
+                "environment": environment,
             },
             json={
                 "input": input,
@@ -314,6 +329,7 @@ class AsyncWorkflowsClient:
         input: typing.Dict[str, ReqBodyInputValue],
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
+        environment: typing.Optional[Environment] = None,
         streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> WorkflowRunResponse:
@@ -327,6 +343,8 @@ class AsyncWorkflowsClient:
         revision_id : typing.Optional[str]
 
         session_id : typing.Optional[str]
+
+        environment : typing.Optional[Environment]
 
         streaming : typing.Optional[bool]
 
@@ -364,6 +382,7 @@ class AsyncWorkflowsClient:
             params={
                 "revision_id": revision_id,
                 "session_id": session_id,
+                "environment": environment,
             },
             json={
                 "input": input,

@@ -50,6 +50,7 @@ from .document import Document
 from .document_content import DocumentContent
 from .document_data_input import DocumentDataInput
 from .document_data_output import DocumentDataOutput
+from .environment import Environment
 from .eval_service_handlers_create_collection_response import EvalServiceHandlersCreateCollectionResponse
 from .eval_service_handlers_create_document_response import EvalServiceHandlersCreateDocumentResponse
 from .eval_service_handlers_create_document_response_data import EvalServiceHandlersCreateDocumentResponseData
@@ -144,6 +145,7 @@ __all__ = [
     "DocumentContent",
     "DocumentDataInput",
     "DocumentDataOutput",
+    "Environment",
     "EvalServiceHandlersCreateCollectionResponse",
     "EvalServiceHandlersCreateDocumentResponse",
     "EvalServiceHandlersCreateDocumentResponseData",

@@ -25,6 +25,7 @@ response = client.workflows.run_stream(
     workflow_id="string",
     revision_id="string",
     session_id="string",
+    environment="production",
     input={"string": True},
     streaming=True,
 )
@@ -51,6 +52,7 @@ async def main() -> None:
         workflow_id="string",
         revision_id="string",
         session_id="string",
+        environment="production",
         input={"string": True},
         streaming=True,
     )
@@ -90,6 +92,7 @@ response = client.workflows.run_stream(
     workflow_id="string",
     revision_id="string",
     session_id="string",
+    environment="production",
     input={"string": True},
     streaming=True,
 )
