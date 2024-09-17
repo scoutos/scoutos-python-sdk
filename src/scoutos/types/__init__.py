@@ -3,9 +3,6 @@
 from .actor import Actor
 from .actor_type import ActorType
 from .api_key_identity import ApiKeyIdentity
-from .app_run_completed_data import AppRunCompletedData
-from .app_run_failed_data import AppRunFailedData
-from .app_run_started_data import AppRunStartedData
 from .block_run_completed import BlockRunCompleted
 from .block_run_completed_data import BlockRunCompletedData
 from .block_run_completed_environment import BlockRunCompletedEnvironment
@@ -15,6 +12,10 @@ from .block_run_failed_environment import BlockRunFailedEnvironment
 from .block_run_started import BlockRunStarted
 from .block_run_started_data import BlockRunStartedData
 from .block_run_started_environment import BlockRunStartedEnvironment
+from .block_state_updated import BlockStateUpdated
+from .block_state_updated_data import BlockStateUpdatedData
+from .block_state_updated_data_update_type import BlockStateUpdatedDataUpdateType
+from .block_state_updated_environment import BlockStateUpdatedEnvironment
 from .collection import Collection
 from .collection_config_input import CollectionConfigInput
 from .collection_config_input_columns_item import (
@@ -70,14 +71,14 @@ from .identity_types import IdentityTypes
 from .message import Message
 from .message_chunk import MessageChunk
 from .req_body import ReqBody
-from .req_body_input_value import ReqBodyInputValue
+from .req_body_inputs_value import ReqBodyInputsValue
 from .select_option_item import SelectOptionItem
 from .user_identity import UserIdentity
 from .validation_error import ValidationError
 from .validation_error_loc_item import ValidationErrorLocItem
-from .workflow import Workflow
 from .workflow_run import WorkflowRun
 from .workflow_run_completed import WorkflowRunCompleted
+from .workflow_run_completed_data import WorkflowRunCompletedData
 from .workflow_run_completed_environment import WorkflowRunCompletedEnvironment
 from .workflow_run_event import WorkflowRunEvent
 from .workflow_run_event_data import (
@@ -85,15 +86,18 @@ from .workflow_run_event_data import (
     WorkflowRunEventData_BlockRunCompleted,
     WorkflowRunEventData_BlockRunFailed,
     WorkflowRunEventData_BlockRunStarted,
+    WorkflowRunEventData_BlockStateUpdated,
     WorkflowRunEventData_WorkflowRunCompleted,
     WorkflowRunEventData_WorkflowRunFailed,
     WorkflowRunEventData_WorkflowRunStarted,
 )
 from .workflow_run_event_names import WorkflowRunEventNames
 from .workflow_run_failed import WorkflowRunFailed
+from .workflow_run_failed_data import WorkflowRunFailedData
 from .workflow_run_failed_environment import WorkflowRunFailedEnvironment
 from .workflow_run_response import WorkflowRunResponse
 from .workflow_run_started import WorkflowRunStarted
+from .workflow_run_started_data import WorkflowRunStartedData
 from .workflow_run_started_environment import WorkflowRunStartedEnvironment
 from .workflow_run_state_value import WorkflowRunStateValue
 from .workflow_run_stop_reason import WorkflowRunStopReason
@@ -102,9 +106,6 @@ __all__ = [
     "Actor",
     "ActorType",
     "ApiKeyIdentity",
-    "AppRunCompletedData",
-    "AppRunFailedData",
-    "AppRunStartedData",
     "BlockRunCompleted",
     "BlockRunCompletedData",
     "BlockRunCompletedEnvironment",
@@ -114,6 +115,10 @@ __all__ = [
     "BlockRunStarted",
     "BlockRunStartedData",
     "BlockRunStartedEnvironment",
+    "BlockStateUpdated",
+    "BlockStateUpdatedData",
+    "BlockStateUpdatedDataUpdateType",
+    "BlockStateUpdatedEnvironment",
     "Collection",
     "CollectionConfigInput",
     "CollectionConfigInputColumnsItem",
@@ -165,28 +170,31 @@ __all__ = [
     "Message",
     "MessageChunk",
     "ReqBody",
-    "ReqBodyInputValue",
+    "ReqBodyInputsValue",
     "SelectOptionItem",
     "UserIdentity",
     "ValidationError",
     "ValidationErrorLocItem",
-    "Workflow",
     "WorkflowRun",
     "WorkflowRunCompleted",
+    "WorkflowRunCompletedData",
     "WorkflowRunCompletedEnvironment",
     "WorkflowRunEvent",
     "WorkflowRunEventData",
     "WorkflowRunEventData_BlockRunCompleted",
     "WorkflowRunEventData_BlockRunFailed",
     "WorkflowRunEventData_BlockRunStarted",
+    "WorkflowRunEventData_BlockStateUpdated",
     "WorkflowRunEventData_WorkflowRunCompleted",
     "WorkflowRunEventData_WorkflowRunFailed",
     "WorkflowRunEventData_WorkflowRunStarted",
     "WorkflowRunEventNames",
     "WorkflowRunFailed",
+    "WorkflowRunFailedData",
     "WorkflowRunFailedEnvironment",
     "WorkflowRunResponse",
     "WorkflowRunStarted",
+    "WorkflowRunStartedData",
     "WorkflowRunStartedEnvironment",
     "WorkflowRunStateValue",
     "WorkflowRunStopReason",

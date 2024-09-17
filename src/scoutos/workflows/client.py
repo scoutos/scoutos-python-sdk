@@ -2,7 +2,7 @@
 
 import typing
 from ..core.client_wrapper import SyncClientWrapper
-from ..types.req_body_input_value import ReqBodyInputValue
+from ..types.req_body_inputs_value import ReqBodyInputsValue
 from ..types.environment import Environment
 from ..core.request_options import RequestOptions
 from ..types.workflow_run_event import WorkflowRunEvent
@@ -29,7 +29,7 @@ class WorkflowsClient:
         self,
         workflow_id: str,
         *,
-        input: typing.Dict[str, ReqBodyInputValue],
+        inputs: typing.Dict[str, ReqBodyInputsValue],
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
         environment: typing.Optional[Environment] = None,
@@ -41,7 +41,7 @@ class WorkflowsClient:
         ----------
         workflow_id : str
 
-        input : typing.Dict[str, ReqBodyInputValue]
+        inputs : typing.Dict[str, ReqBodyInputsValue]
 
         revision_id : typing.Optional[str]
 
@@ -71,7 +71,7 @@ class WorkflowsClient:
             revision_id="string",
             session_id="string",
             environment="production",
-            input={"string": True},
+            inputs={"string": True},
             streaming=True,
         )
         for chunk in response:
@@ -86,7 +86,7 @@ class WorkflowsClient:
                 "environment": environment,
             },
             json={
-                "input": input,
+                "inputs": inputs,
                 "streaming": streaming,
                 "stream": True,
             },
@@ -128,7 +128,7 @@ class WorkflowsClient:
         self,
         workflow_id: str,
         *,
-        input: typing.Dict[str, ReqBodyInputValue],
+        inputs: typing.Dict[str, ReqBodyInputsValue],
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
         environment: typing.Optional[Environment] = None,
@@ -140,7 +140,7 @@ class WorkflowsClient:
         ----------
         workflow_id : str
 
-        input : typing.Dict[str, ReqBodyInputValue]
+        inputs : typing.Dict[str, ReqBodyInputsValue]
 
         revision_id : typing.Optional[str]
 
@@ -167,7 +167,7 @@ class WorkflowsClient:
         )
         client.workflows.run(
             workflow_id="workflow_id",
-            input={"key": True},
+            inputs={"key": True},
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -179,7 +179,7 @@ class WorkflowsClient:
                 "environment": environment,
             },
             json={
-                "input": input,
+                "inputs": inputs,
                 "streaming": streaming,
                 "stream": False,
             },
@@ -219,7 +219,7 @@ class AsyncWorkflowsClient:
         self,
         workflow_id: str,
         *,
-        input: typing.Dict[str, ReqBodyInputValue],
+        inputs: typing.Dict[str, ReqBodyInputsValue],
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
         environment: typing.Optional[Environment] = None,
@@ -231,7 +231,7 @@ class AsyncWorkflowsClient:
         ----------
         workflow_id : str
 
-        input : typing.Dict[str, ReqBodyInputValue]
+        inputs : typing.Dict[str, ReqBodyInputsValue]
 
         revision_id : typing.Optional[str]
 
@@ -266,7 +266,7 @@ class AsyncWorkflowsClient:
                 revision_id="string",
                 session_id="string",
                 environment="production",
-                input={"string": True},
+                inputs={"string": True},
                 streaming=True,
             )
             async for chunk in response:
@@ -284,7 +284,7 @@ class AsyncWorkflowsClient:
                 "environment": environment,
             },
             json={
-                "input": input,
+                "inputs": inputs,
                 "streaming": streaming,
                 "stream": True,
             },
@@ -326,7 +326,7 @@ class AsyncWorkflowsClient:
         self,
         workflow_id: str,
         *,
-        input: typing.Dict[str, ReqBodyInputValue],
+        inputs: typing.Dict[str, ReqBodyInputsValue],
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
         environment: typing.Optional[Environment] = None,
@@ -338,7 +338,7 @@ class AsyncWorkflowsClient:
         ----------
         workflow_id : str
 
-        input : typing.Dict[str, ReqBodyInputValue]
+        inputs : typing.Dict[str, ReqBodyInputsValue]
 
         revision_id : typing.Optional[str]
 
@@ -370,7 +370,7 @@ class AsyncWorkflowsClient:
         async def main() -> None:
             await client.workflows.run(
                 workflow_id="workflow_id",
-                input={"key": True},
+                inputs={"key": True},
             )
 
 
@@ -385,7 +385,7 @@ class AsyncWorkflowsClient:
                 "environment": environment,
             },
             json={
-                "input": input,
+                "inputs": inputs,
                 "streaming": streaming,
                 "stream": False,
             },

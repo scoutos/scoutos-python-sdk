@@ -5,7 +5,7 @@ import typing
 import pydantic
 from .event_version import EventVersion
 from .workflow_run_failed_environment import WorkflowRunFailedEnvironment
-from .app_run_failed_data import AppRunFailedData
+from .workflow_run_failed_data import WorkflowRunFailedData
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
@@ -28,7 +28,7 @@ class WorkflowRunFailed(UniversalBaseModel):
     The timestamp of the event as UTC ISO 8601 string
     """
 
-    data: AppRunFailedData
+    data: WorkflowRunFailedData
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

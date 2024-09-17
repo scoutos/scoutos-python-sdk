@@ -2,13 +2,13 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
-from .req_body_input_value import ReqBodyInputValue
+from .req_body_inputs_value import ReqBodyInputsValue
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
 class ReqBody(UniversalBaseModel):
-    input: typing.Dict[str, ReqBodyInputValue]
+    inputs: typing.Dict[str, ReqBodyInputsValue]
     streaming: typing.Optional[bool] = None
 
     if IS_PYDANTIC_V2:

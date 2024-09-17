@@ -10,6 +10,7 @@ WorkflowRunEventNames = typing.Union[
         "block_run_started",
         "block_run_completed",
         "block_run_failed",
+        "block_state_updated",
     ],
     typing.Any,
 ]

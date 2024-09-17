@@ -1,14 +1,14 @@
 # Scoutos Python Library
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://github.com/fern-api/fern)
-[![pypi](https://img.shields.io/pypi/v/scoutos-test)](https://pypi.python.org/pypi/scoutos-test)
+[![pypi](https://img.shields.io/pypi/v/scoutos)](https://pypi.python.org/pypi/scoutos)
 
 The Scoutos Python library provides convenient access to the Scoutos API from Python.
 
 ## Installation
 
 ```sh
-pip install scoutos-test
+pip install scoutos
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ response = client.workflows.run_stream(
     revision_id="string",
     session_id="string",
     environment="production",
-    input={"string": True},
+    inputs={"string": True},
     streaming=True,
 )
 for chunk in response:
@@ -53,7 +53,7 @@ async def main() -> None:
         revision_id="string",
         session_id="string",
         environment="production",
-        input={"string": True},
+        inputs={"string": True},
         streaming=True,
     )
     async for chunk in response:
@@ -93,7 +93,7 @@ response = client.workflows.run_stream(
     revision_id="string",
     session_id="string",
     environment="production",
-    input={"string": True},
+    inputs={"string": True},
     streaming=True,
 )
 for chunk in response:

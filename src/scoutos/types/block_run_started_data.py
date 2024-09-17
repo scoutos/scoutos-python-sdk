@@ -7,8 +7,8 @@ import pydantic
 
 
 class BlockRunStartedData(UniversalBaseModel):
-    app_id: str
-    app_run_id: str
+    workflow_id: str
+    workflow_run_id: str
     block_id: typing.Optional[str] = None
     config: typing.Dict[str, typing.Optional[typing.Any]]
     metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None

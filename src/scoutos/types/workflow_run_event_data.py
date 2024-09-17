@@ -12,12 +12,14 @@ from .block_run_failed_environment import BlockRunFailedEnvironment
 from .block_run_failed_data import BlockRunFailedData
 from .block_run_started_environment import BlockRunStartedEnvironment
 from .block_run_started_data import BlockRunStartedData
+from .block_state_updated_environment import BlockStateUpdatedEnvironment
+from .block_state_updated_data import BlockStateUpdatedData
 from .workflow_run_completed_environment import WorkflowRunCompletedEnvironment
-from .app_run_completed_data import AppRunCompletedData
+from .workflow_run_completed_data import WorkflowRunCompletedData
 from .workflow_run_failed_environment import WorkflowRunFailedEnvironment
-from .app_run_failed_data import AppRunFailedData
+from .workflow_run_failed_data import WorkflowRunFailedData
 from .workflow_run_started_environment import WorkflowRunStartedEnvironment
-from .app_run_started_data import AppRunStartedData
+from .workflow_run_started_data import WorkflowRunStartedData
 
 
 class WorkflowRunEventData_BlockRunCompleted(UniversalBaseModel):
@@ -80,6 +82,26 @@ class WorkflowRunEventData_BlockRunStarted(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
+class WorkflowRunEventData_BlockStateUpdated(UniversalBaseModel):
+    name: typing.Literal["block_state_updated"] = "block_state_updated"
+    organization_id: str
+    id: typing.Optional[str] = None
+    correlation_id: typing.Optional[str] = None
+    version: typing.Optional[EventVersion] = None
+    environment: BlockStateUpdatedEnvironment
+    timestamp: typing.Optional[str] = None
+    data: BlockStateUpdatedData
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
 class WorkflowRunEventData_WorkflowRunCompleted(UniversalBaseModel):
     name: typing.Literal["workflow_run_completed"] = "workflow_run_completed"
     organization_id: str
@@ -88,7 +110,7 @@ class WorkflowRunEventData_WorkflowRunCompleted(UniversalBaseModel):
     version: typing.Optional[EventVersion] = None
     environment: WorkflowRunCompletedEnvironment
     timestamp: typing.Optional[str] = None
-    data: AppRunCompletedData
+    data: WorkflowRunCompletedData
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
@@ -108,7 +130,7 @@ class WorkflowRunEventData_WorkflowRunFailed(UniversalBaseModel):
     version: typing.Optional[EventVersion] = None
     environment: WorkflowRunFailedEnvironment
     timestamp: typing.Optional[str] = None
-    data: AppRunFailedData
+    data: WorkflowRunFailedData
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
@@ -128,7 +150,7 @@ class WorkflowRunEventData_WorkflowRunStarted(UniversalBaseModel):
     version: typing.Optional[EventVersion] = None
     environment: WorkflowRunStartedEnvironment
     timestamp: typing.Optional[str] = None
-    data: AppRunStartedData
+    data: WorkflowRunStartedData
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
@@ -144,6 +166,7 @@ WorkflowRunEventData = typing.Union[
     WorkflowRunEventData_BlockRunCompleted,
     WorkflowRunEventData_BlockRunFailed,
     WorkflowRunEventData_BlockRunStarted,
+    WorkflowRunEventData_BlockStateUpdated,
     WorkflowRunEventData_WorkflowRunCompleted,
     WorkflowRunEventData_WorkflowRunFailed,
     WorkflowRunEventData_WorkflowRunStarted,

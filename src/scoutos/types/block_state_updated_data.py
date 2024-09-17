@@ -2,19 +2,20 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing
-from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from .block_state_updated_data_update_type import BlockStateUpdatedDataUpdateType
 import pydantic
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
-class BlockRunCompletedData(UniversalBaseModel):
+class BlockStateUpdatedData(UniversalBaseModel):
     workflow_id: str
     workflow_run_id: str
     block_id: typing.Optional[str] = None
-    config: typing.Dict[str, typing.Optional[typing.Any]]
-    cost: typing.Optional[float] = None
-    metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
-    state: typing.Dict[str, typing.Optional[typing.Any]]
-    session_id: str
+    update_data: typing.Dict[str, typing.Optional[typing.Any]]
+    update_type: typing.Optional[BlockStateUpdatedDataUpdateType] = pydantic.Field(default=None)
+    """
+    If `complete` represents a full replacement of state, versus `partial` that indicates data must be _merged_.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -23,7 +23,7 @@ response = client.workflows.run_stream(
     revision_id="string",
     session_id="string",
     environment="production",
-    input={"string": True},
+    inputs={"string": True},
     streaming=True,
 )
 for chunk in response:
@@ -51,7 +51,7 @@ for chunk in response:
 <dl>
 <dd>
 
-**input:** `typing.Dict[str, ReqBodyInputValue]` 
+**inputs:** `typing.Dict[str, ReqBodyInputsValue]` 
     
 </dd>
 </dl>
@@ -123,7 +123,7 @@ client = Scout(
 )
 client.workflows.run(
     workflow_id="workflow_id",
-    input={"key": True},
+    inputs={"key": True},
 )
 
 ```
@@ -148,7 +148,7 @@ client.workflows.run(
 <dl>
 <dd>
 
-**input:** `typing.Dict[str, ReqBodyInputValue]` 
+**inputs:** `typing.Dict[str, ReqBodyInputsValue]` 
     
 </dd>
 </dl>

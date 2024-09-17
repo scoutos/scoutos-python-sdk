@@ -6,12 +6,12 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class AppRunCompletedData(UniversalBaseModel):
-    app_id: str
-    app_run_id: str
-    output: typing.Dict[str, typing.Optional[typing.Any]]
+class WorkflowRunFailedData(UniversalBaseModel):
+    workflow_id: str
+    workflow_run_id: str
+    message: str
     session_id: str
-    app_config: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
+    workflow_config: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

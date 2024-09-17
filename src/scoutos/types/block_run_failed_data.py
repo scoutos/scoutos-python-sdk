@@ -7,8 +7,8 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
 class BlockRunFailedData(UniversalBaseModel):
-    app_id: str
-    app_run_id: str
+    workflow_id: str
+    workflow_run_id: str
     block_id: typing.Optional[str] = None
     cost: typing.Optional[float] = None
     config: typing.Dict[str, typing.Optional[typing.Any]]

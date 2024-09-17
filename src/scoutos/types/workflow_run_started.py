@@ -5,7 +5,7 @@ import typing
 import pydantic
 from .event_version import EventVersion
 from .workflow_run_started_environment import WorkflowRunStartedEnvironment
-from .app_run_started_data import AppRunStartedData
+from .workflow_run_started_data import WorkflowRunStartedData
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
@@ -28,7 +28,7 @@ class WorkflowRunStarted(UniversalBaseModel):
     The timestamp of the event as UTC ISO 8601 string
     """
 
-    data: AppRunStartedData
+    data: WorkflowRunStartedData
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
