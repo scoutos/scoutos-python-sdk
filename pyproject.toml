@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "scoutos-test"
-version = "0.1.17"
+name = "scoutos"
+version = "0.1.18"
 description = ""
 readme = "README.md"
 authors = []
