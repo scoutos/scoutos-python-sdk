@@ -9,6 +9,7 @@ import pydantic
 class ColumnTypeItemJson(UncheckedBaseModel):
     column_id: typing.Optional[str] = None
     column_display_name: typing.Optional[str] = None
+    column_type: typing.Literal["json"] = "json"
     default_value: typing.Optional[str] = None
     data_type: typing.Optional[typing.Literal["json"]] = None
 

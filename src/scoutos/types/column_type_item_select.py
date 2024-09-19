@@ -10,6 +10,7 @@ import pydantic
 class ColumnTypeItemSelect(UncheckedBaseModel):
     column_id: typing.Optional[str] = None
     column_display_name: typing.Optional[str] = None
+    column_type: typing.Literal["select"] = "select"
     options: typing.List[SelectOptionItem]
     selected_option: typing.Optional[int] = None
     data_type: typing.Optional[typing.Literal["string"]] = None

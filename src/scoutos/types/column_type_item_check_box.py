@@ -9,6 +9,7 @@ import pydantic
 class ColumnTypeItemCheckBox(UncheckedBaseModel):
     column_id: typing.Optional[str] = None
     column_display_name: typing.Optional[str] = None
+    column_type: typing.Literal["boolean"] = "boolean"
     default_value: typing.Optional[bool] = None
     data_type: typing.Optional[typing.Literal["boolean"]] = None
 

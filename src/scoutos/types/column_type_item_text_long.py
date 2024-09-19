@@ -9,6 +9,7 @@ import pydantic
 class ColumnTypeItemTextLong(UncheckedBaseModel):
     column_id: typing.Optional[str] = None
     column_display_name: typing.Optional[str] = None
+    column_type: typing.Literal["text-long"] = "text-long"
     default_value: typing.Optional[str] = None
     data_type: typing.Optional[typing.Literal["string"]] = None
 

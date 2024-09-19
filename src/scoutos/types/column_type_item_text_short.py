@@ -9,6 +9,7 @@ import pydantic
 class ColumnTypeItemTextShort(UncheckedBaseModel):
     column_id: typing.Optional[str] = None
     column_display_name: typing.Optional[str] = None
+    column_type: typing.Literal["text-short"] = "text-short"
     default_value: typing.Optional[str] = None
     data_type: typing.Optional[typing.Literal["string"]] = None
 

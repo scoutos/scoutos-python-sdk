@@ -12,6 +12,7 @@ import pydantic
 class ColumnTypeItemNumber(UncheckedBaseModel):
     column_id: typing.Optional[str] = None
     column_display_name: typing.Optional[str] = None
+    column_type: typing.Literal["number"] = "number"
     default_value: typing.Optional[ColumnTypeItemNumberDefaultValue] = None
     min_value: typing.Optional[ColumnTypeItemNumberMinValue] = None
     max_value: typing.Optional[ColumnTypeItemNumberMaxValue] = None
