@@ -24,7 +24,6 @@ response = client.workflows.run_stream(
     session_id="string",
     environment="production",
     inputs={"string": True},
-    streaming=True,
 )
 for chunk in response:
     yield chunk
@@ -76,14 +75,6 @@ for chunk in response:
 <dd>
 
 **environment:** `typing.Optional[Environment]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**streaming:** `typing.Optional[bool]` 
     
 </dd>
 </dl>
@@ -173,14 +164,6 @@ client.workflows.run(
 <dd>
 
 **environment:** `typing.Optional[Environment]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**streaming:** `typing.Optional[bool]` 
     
 </dd>
 </dl>

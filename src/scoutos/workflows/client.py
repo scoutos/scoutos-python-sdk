@@ -33,7 +33,6 @@ class WorkflowsClient:
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
         environment: typing.Optional[Environment] = None,
-        streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Iterator[WorkflowRunEvent]:
         """
@@ -48,8 +47,6 @@ class WorkflowsClient:
         session_id : typing.Optional[str]
 
         environment : typing.Optional[Environment]
-
-        streaming : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -72,7 +69,6 @@ class WorkflowsClient:
             session_id="string",
             environment="production",
             inputs={"string": True},
-            streaming=True,
         )
         for chunk in response:
             yield chunk
@@ -87,8 +83,7 @@ class WorkflowsClient:
             },
             json={
                 "inputs": inputs,
-                "streaming": streaming,
-                "stream": True,
+                "streaming": True,
             },
             request_options=request_options,
             omit=OMIT,
@@ -132,7 +127,6 @@ class WorkflowsClient:
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
         environment: typing.Optional[Environment] = None,
-        streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> WorkflowRunResponse:
         """
@@ -147,8 +141,6 @@ class WorkflowsClient:
         session_id : typing.Optional[str]
 
         environment : typing.Optional[Environment]
-
-        streaming : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -180,8 +172,7 @@ class WorkflowsClient:
             },
             json={
                 "inputs": inputs,
-                "streaming": streaming,
-                "stream": False,
+                "streaming": False,
             },
             request_options=request_options,
             omit=OMIT,
@@ -223,7 +214,6 @@ class AsyncWorkflowsClient:
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
         environment: typing.Optional[Environment] = None,
-        streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.AsyncIterator[WorkflowRunEvent]:
         """
@@ -238,8 +228,6 @@ class AsyncWorkflowsClient:
         session_id : typing.Optional[str]
 
         environment : typing.Optional[Environment]
-
-        streaming : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -267,7 +255,6 @@ class AsyncWorkflowsClient:
                 session_id="string",
                 environment="production",
                 inputs={"string": True},
-                streaming=True,
             )
             async for chunk in response:
                 yield chunk
@@ -285,8 +272,7 @@ class AsyncWorkflowsClient:
             },
             json={
                 "inputs": inputs,
-                "streaming": streaming,
-                "stream": True,
+                "streaming": True,
             },
             request_options=request_options,
             omit=OMIT,
@@ -330,7 +316,6 @@ class AsyncWorkflowsClient:
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
         environment: typing.Optional[Environment] = None,
-        streaming: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> WorkflowRunResponse:
         """
@@ -345,8 +330,6 @@ class AsyncWorkflowsClient:
         session_id : typing.Optional[str]
 
         environment : typing.Optional[Environment]
-
-        streaming : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -386,8 +369,7 @@ class AsyncWorkflowsClient:
             },
             json={
                 "inputs": inputs,
-                "streaming": streaming,
-                "stream": False,
+                "streaming": False,
             },
             request_options=request_options,
             omit=OMIT,

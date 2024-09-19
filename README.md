@@ -27,7 +27,6 @@ response = client.workflows.run_stream(
     session_id="string",
     environment="production",
     inputs={"string": True},
-    streaming=True,
 )
 for chunk in response:
     yield chunk
@@ -54,7 +53,6 @@ async def main() -> None:
         session_id="string",
         environment="production",
         inputs={"string": True},
-        streaming=True,
     )
     async for chunk in response:
         yield chunk
@@ -94,7 +92,6 @@ response = client.workflows.run_stream(
     session_id="string",
     environment="production",
     inputs={"string": True},
-    streaming=True,
 )
 for chunk in response:
     yield chunk
