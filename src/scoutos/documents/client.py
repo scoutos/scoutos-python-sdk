@@ -5,7 +5,7 @@ from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.eval_service_handlers_get_document_response import EvalServiceHandlersGetDocumentResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import parse_obj_as
+from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
@@ -64,7 +64,7 @@ class DocumentsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     EvalServiceHandlersGetDocumentResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=EvalServiceHandlersGetDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -73,7 +73,7 @@ class DocumentsClient:
                 raise UnprocessableEntityError(
                     typing.cast(
                         HttpValidationError,
-                        parse_obj_as(
+                        construct_type(
                             type_=HttpValidationError,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -129,7 +129,7 @@ class DocumentsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     EvalServiceHandlersCreateDocumentResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=EvalServiceHandlersCreateDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -138,7 +138,7 @@ class DocumentsClient:
                 raise UnprocessableEntityError(
                     typing.cast(
                         HttpValidationError,
-                        parse_obj_as(
+                        construct_type(
                             type_=HttpValidationError,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -211,7 +211,7 @@ class DocumentsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     EvalServiceHandlersUpdateDocumentResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=EvalServiceHandlersUpdateDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -220,7 +220,7 @@ class DocumentsClient:
                 raise UnprocessableEntityError(
                     typing.cast(
                         HttpValidationError,
-                        parse_obj_as(
+                        construct_type(
                             type_=HttpValidationError,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -272,7 +272,7 @@ class DocumentsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     EvalServiceHandlersDeleteDocumentResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=EvalServiceHandlersDeleteDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -281,7 +281,7 @@ class DocumentsClient:
                 raise UnprocessableEntityError(
                     typing.cast(
                         HttpValidationError,
-                        parse_obj_as(
+                        construct_type(
                             type_=HttpValidationError,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -344,7 +344,7 @@ class AsyncDocumentsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     EvalServiceHandlersGetDocumentResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=EvalServiceHandlersGetDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -353,7 +353,7 @@ class AsyncDocumentsClient:
                 raise UnprocessableEntityError(
                     typing.cast(
                         HttpValidationError,
-                        parse_obj_as(
+                        construct_type(
                             type_=HttpValidationError,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -417,7 +417,7 @@ class AsyncDocumentsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     EvalServiceHandlersCreateDocumentResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=EvalServiceHandlersCreateDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -426,7 +426,7 @@ class AsyncDocumentsClient:
                 raise UnprocessableEntityError(
                     typing.cast(
                         HttpValidationError,
-                        parse_obj_as(
+                        construct_type(
                             type_=HttpValidationError,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -507,7 +507,7 @@ class AsyncDocumentsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     EvalServiceHandlersUpdateDocumentResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=EvalServiceHandlersUpdateDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -516,7 +516,7 @@ class AsyncDocumentsClient:
                 raise UnprocessableEntityError(
                     typing.cast(
                         HttpValidationError,
-                        parse_obj_as(
+                        construct_type(
                             type_=HttpValidationError,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -576,7 +576,7 @@ class AsyncDocumentsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     EvalServiceHandlersDeleteDocumentResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=EvalServiceHandlersDeleteDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -585,7 +585,7 @@ class AsyncDocumentsClient:
                 raise UnprocessableEntityError(
                     typing.cast(
                         HttpValidationError,
-                        parse_obj_as(
+                        construct_type(
                             type_=HttpValidationError,  # type: ignore
                             object_=_response.json(),
                         ),

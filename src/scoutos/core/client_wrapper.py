@@ -22,7 +22,7 @@ class BaseClientWrapper:
         headers: typing.Dict[str, str] = {
             "X-Fern-Language": "Python",
             "X-Fern-SDK-Name": "scoutos",
-            "X-Fern-SDK-Version": "0.1.18",
+            "X-Fern-SDK-Version": "0.1.19",
         }
         headers["Authorization"] = f"Bearer {self._get_api_key()}"
         return headers

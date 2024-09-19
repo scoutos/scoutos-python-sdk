@@ -8,7 +8,7 @@ from ..core.request_options import RequestOptions
 from ..types.workflow_run_event import WorkflowRunEvent
 from ..core.jsonable_encoder import jsonable_encoder
 import httpx_sse
-from ..core.pydantic_utilities import parse_obj_as
+from ..core.unchecked_base_model import construct_type
 import json
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
@@ -95,7 +95,7 @@ class WorkflowsClient:
                         try:
                             yield typing.cast(
                                 WorkflowRunEvent,
-                                parse_obj_as(
+                                construct_type(
                                     type_=WorkflowRunEvent,  # type: ignore
                                     object_=json.loads(_sse.data),
                                 ),
@@ -108,7 +108,7 @@ class WorkflowsClient:
                     raise UnprocessableEntityError(
                         typing.cast(
                             HttpValidationError,
-                            parse_obj_as(
+                            construct_type(
                                 type_=HttpValidationError,  # type: ignore
                                 object_=_response.json(),
                             ),
@@ -181,7 +181,7 @@ class WorkflowsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     WorkflowRunResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=WorkflowRunResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -190,7 +190,7 @@ class WorkflowsClient:
                 raise UnprocessableEntityError(
                     typing.cast(
                         HttpValidationError,
-                        parse_obj_as(
+                        construct_type(
                             type_=HttpValidationError,  # type: ignore
                             object_=_response.json(),
                         ),
@@ -284,7 +284,7 @@ class AsyncWorkflowsClient:
                         try:
                             yield typing.cast(
                                 WorkflowRunEvent,
-                                parse_obj_as(
+                                construct_type(
                                     type_=WorkflowRunEvent,  # type: ignore
                                     object_=json.loads(_sse.data),
                                 ),
@@ -297,7 +297,7 @@ class AsyncWorkflowsClient:
                     raise UnprocessableEntityError(
                         typing.cast(
                             HttpValidationError,
-                            parse_obj_as(
+                            construct_type(
                                 type_=HttpValidationError,  # type: ignore
                                 object_=_response.json(),
                             ),
@@ -378,7 +378,7 @@ class AsyncWorkflowsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     WorkflowRunResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=WorkflowRunResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -387,7 +387,7 @@ class AsyncWorkflowsClient:
                 raise UnprocessableEntityError(
                     typing.cast(
                         HttpValidationError,
-                        parse_obj_as(
+                        construct_type(
                             type_=HttpValidationError,  # type: ignore
                             object_=_response.json(),
                         ),
