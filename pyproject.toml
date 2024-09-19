@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "scoutos"
-version = "0.1.14"
+version = "0.1.16"
 description = ""
 readme = "README.md"
 authors = []
