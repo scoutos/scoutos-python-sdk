@@ -1,14 +1,14 @@
 # Scoutos Python Library
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://github.com/fern-api/fern)
-[![pypi](https://img.shields.io/pypi/v/scoutos)](https://pypi.python.org/pypi/scoutos)
+[![pypi](https://img.shields.io/pypi/v/scoutos-test)](https://pypi.python.org/pypi/scoutos-test)
 
 The Scoutos Python library provides convenient access to the Scoutos API from Python.
 
 ## Installation
 
 ```sh
-pip install scoutos
+pip install scoutos-test
 ```
 
 ## Usage
