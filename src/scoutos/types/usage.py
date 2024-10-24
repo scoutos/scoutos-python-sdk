@@ -2,19 +2,14 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .actor import Actor
+from .block_run_usage import BlockRunUsage
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class WorkflowRunStartedData(UncheckedBaseModel):
-    actor: typing.Optional[Actor] = None
-    workflow_id: str
-    workflow_run_id: typing.Optional[str] = None
-    inputs: typing.Dict[str, typing.Optional[typing.Any]]
-    session_id: typing.Optional[str] = None
-    state: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
-    workflow_config: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
+class Usage(UncheckedBaseModel):
+    usage: typing.List[BlockRunUsage]
+    total_cost: float
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

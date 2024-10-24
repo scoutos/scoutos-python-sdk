@@ -2,8 +2,7 @@
 
 import typing
 from ..core.client_wrapper import SyncClientWrapper
-from ..types.req_body_inputs_value import ReqBodyInputsValue
-from ..types.environment import Environment
+from .types.workflows_run_stream_request_inputs_value import WorkflowsRunStreamRequestInputsValue
 from ..core.request_options import RequestOptions
 from ..types.workflow_run_event import WorkflowRunEvent
 from ..core.jsonable_encoder import jsonable_encoder
@@ -14,6 +13,7 @@ from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
+from .types.workflows_run_request_inputs_value import WorkflowsRunRequestInputsValue
 from ..types.workflow_run_response import WorkflowRunResponse
 from ..core.client_wrapper import AsyncClientWrapper
 
@@ -29,10 +29,10 @@ class WorkflowsClient:
         self,
         workflow_id: str,
         *,
-        inputs: typing.Dict[str, ReqBodyInputsValue],
+        environment: typing.Optional[str] = None,
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
-        environment: typing.Optional[Environment] = None,
+        inputs: typing.Optional[typing.Dict[str, WorkflowsRunStreamRequestInputsValue]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Iterator[WorkflowRunEvent]:
         """
@@ -40,13 +40,19 @@ class WorkflowsClient:
         ----------
         workflow_id : str
 
-        inputs : typing.Dict[str, ReqBodyInputsValue]
+        environment : typing.Optional[str]
+            Specifies the execution environment for the workflow. The available environments include:
+
+            - `production`: The production environment, where workflows are executed under live conditions.
+            - `staging`: A staging environment used for testing prior to production deployment.
+            - `development`: A development environment used for testing new changes.
+            - `console`: The console environment, runs latest changes on a workflow.
 
         revision_id : typing.Optional[str]
 
         session_id : typing.Optional[str]
 
-        environment : typing.Optional[Environment]
+        inputs : typing.Optional[typing.Dict[str, WorkflowsRunStreamRequestInputsValue]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -65,9 +71,9 @@ class WorkflowsClient:
         )
         response = client.workflows.run_stream(
             workflow_id="string",
+            environment="string",
             revision_id="string",
             session_id="string",
-            environment="production",
             inputs={"string": True},
         )
         for chunk in response:
@@ -77,9 +83,9 @@ class WorkflowsClient:
             f"v2/workflows/{jsonable_encoder(workflow_id)}/execute",
             method="POST",
             params={
+                "environment": environment,
                 "revision_id": revision_id,
                 "session_id": session_id,
-                "environment": environment,
             },
             json={
                 "inputs": inputs,
@@ -123,10 +129,10 @@ class WorkflowsClient:
         self,
         workflow_id: str,
         *,
-        inputs: typing.Dict[str, ReqBodyInputsValue],
+        environment: typing.Optional[str] = None,
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
-        environment: typing.Optional[Environment] = None,
+        inputs: typing.Optional[typing.Dict[str, WorkflowsRunRequestInputsValue]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> WorkflowRunResponse:
         """
@@ -134,13 +140,19 @@ class WorkflowsClient:
         ----------
         workflow_id : str
 
-        inputs : typing.Dict[str, ReqBodyInputsValue]
+        environment : typing.Optional[str]
+            Specifies the execution environment for the workflow. The available environments include:
+
+            - `production`: The production environment, where workflows are executed under live conditions.
+            - `staging`: A staging environment used for testing prior to production deployment.
+            - `development`: A development environment used for testing new changes.
+            - `console`: The console environment, runs latest changes on a workflow.
 
         revision_id : typing.Optional[str]
 
         session_id : typing.Optional[str]
 
-        environment : typing.Optional[Environment]
+        inputs : typing.Optional[typing.Dict[str, WorkflowsRunRequestInputsValue]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -159,16 +171,15 @@ class WorkflowsClient:
         )
         client.workflows.run(
             workflow_id="workflow_id",
-            inputs={"key": True},
         )
         """
         _response = self._client_wrapper.httpx_client.request(
             f"v2/workflows/{jsonable_encoder(workflow_id)}/execute",
             method="POST",
             params={
+                "environment": environment,
                 "revision_id": revision_id,
                 "session_id": session_id,
-                "environment": environment,
             },
             json={
                 "inputs": inputs,
@@ -210,10 +221,10 @@ class AsyncWorkflowsClient:
         self,
         workflow_id: str,
         *,
-        inputs: typing.Dict[str, ReqBodyInputsValue],
+        environment: typing.Optional[str] = None,
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
-        environment: typing.Optional[Environment] = None,
+        inputs: typing.Optional[typing.Dict[str, WorkflowsRunStreamRequestInputsValue]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.AsyncIterator[WorkflowRunEvent]:
         """
@@ -221,13 +232,19 @@ class AsyncWorkflowsClient:
         ----------
         workflow_id : str
 
-        inputs : typing.Dict[str, ReqBodyInputsValue]
+        environment : typing.Optional[str]
+            Specifies the execution environment for the workflow. The available environments include:
+
+            - `production`: The production environment, where workflows are executed under live conditions.
+            - `staging`: A staging environment used for testing prior to production deployment.
+            - `development`: A development environment used for testing new changes.
+            - `console`: The console environment, runs latest changes on a workflow.
 
         revision_id : typing.Optional[str]
 
         session_id : typing.Optional[str]
 
-        environment : typing.Optional[Environment]
+        inputs : typing.Optional[typing.Dict[str, WorkflowsRunStreamRequestInputsValue]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -251,9 +268,9 @@ class AsyncWorkflowsClient:
         async def main() -> None:
             response = await client.workflows.run_stream(
                 workflow_id="string",
+                environment="string",
                 revision_id="string",
                 session_id="string",
-                environment="production",
                 inputs={"string": True},
             )
             async for chunk in response:
@@ -266,9 +283,9 @@ class AsyncWorkflowsClient:
             f"v2/workflows/{jsonable_encoder(workflow_id)}/execute",
             method="POST",
             params={
+                "environment": environment,
                 "revision_id": revision_id,
                 "session_id": session_id,
-                "environment": environment,
             },
             json={
                 "inputs": inputs,
@@ -312,10 +329,10 @@ class AsyncWorkflowsClient:
         self,
         workflow_id: str,
         *,
-        inputs: typing.Dict[str, ReqBodyInputsValue],
+        environment: typing.Optional[str] = None,
         revision_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
-        environment: typing.Optional[Environment] = None,
+        inputs: typing.Optional[typing.Dict[str, WorkflowsRunRequestInputsValue]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> WorkflowRunResponse:
         """
@@ -323,13 +340,19 @@ class AsyncWorkflowsClient:
         ----------
         workflow_id : str
 
-        inputs : typing.Dict[str, ReqBodyInputsValue]
+        environment : typing.Optional[str]
+            Specifies the execution environment for the workflow. The available environments include:
+
+            - `production`: The production environment, where workflows are executed under live conditions.
+            - `staging`: A staging environment used for testing prior to production deployment.
+            - `development`: A development environment used for testing new changes.
+            - `console`: The console environment, runs latest changes on a workflow.
 
         revision_id : typing.Optional[str]
 
         session_id : typing.Optional[str]
 
-        environment : typing.Optional[Environment]
+        inputs : typing.Optional[typing.Dict[str, WorkflowsRunRequestInputsValue]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -353,7 +376,6 @@ class AsyncWorkflowsClient:
         async def main() -> None:
             await client.workflows.run(
                 workflow_id="workflow_id",
-                inputs={"key": True},
             )
 
 
@@ -363,9 +385,9 @@ class AsyncWorkflowsClient:
             f"v2/workflows/{jsonable_encoder(workflow_id)}/execute",
             method="POST",
             params={
+                "environment": environment,
                 "revision_id": revision_id,
                 "session_id": session_id,
-                "environment": environment,
             },
             json={
                 "inputs": inputs,

@@ -2,13 +2,18 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .req_body_inputs_value import ReqBodyInputsValue
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class ReqBody(UncheckedBaseModel):
-    inputs: typing.Dict[str, ReqBodyInputsValue]
+class BlockRunUsage(UncheckedBaseModel):
+    organization_id: typing.Optional[str] = None
+    workflow_run_type: typing.Optional[str] = None
+    block_archetype_id: typing.Optional[str] = None
+    execution_date: typing.Optional[str] = None
+    total_cost: float
+    total_execution_duration_ms: typing.Optional[int] = None
+    display_name: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

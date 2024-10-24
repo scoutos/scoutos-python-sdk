@@ -7,10 +7,12 @@ import httpx
 from .core.api_error import ApiError
 from .core.client_wrapper import SyncClientWrapper
 from .workflows.client import WorkflowsClient
+from .usage.client import UsageClient
 from .collections.client import CollectionsClient
 from .documents.client import DocumentsClient
 from .core.client_wrapper import AsyncClientWrapper
 from .workflows.client import AsyncWorkflowsClient
+from .usage.client import AsyncUsageClient
 from .collections.client import AsyncCollectionsClient
 from .documents.client import AsyncDocumentsClient
 
@@ -76,6 +78,7 @@ class Scout:
             timeout=_defaulted_timeout,
         )
         self.workflows = WorkflowsClient(client_wrapper=self._client_wrapper)
+        self.usage = UsageClient(client_wrapper=self._client_wrapper)
         self.collections = CollectionsClient(client_wrapper=self._client_wrapper)
         self.documents = DocumentsClient(client_wrapper=self._client_wrapper)
 
@@ -141,6 +144,7 @@ class AsyncScout:
             timeout=_defaulted_timeout,
         )
         self.workflows = AsyncWorkflowsClient(client_wrapper=self._client_wrapper)
+        self.usage = AsyncUsageClient(client_wrapper=self._client_wrapper)
         self.collections = AsyncCollectionsClient(client_wrapper=self._client_wrapper)
         self.documents = AsyncDocumentsClient(client_wrapper=self._client_wrapper)
 

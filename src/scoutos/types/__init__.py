@@ -12,6 +12,7 @@ from .block_run_failed_environment import BlockRunFailedEnvironment
 from .block_run_started import BlockRunStarted
 from .block_run_started_data import BlockRunStartedData
 from .block_run_started_environment import BlockRunStartedEnvironment
+from .block_run_usage import BlockRunUsage
 from .block_state_updated import BlockStateUpdated
 from .block_state_updated_data import BlockStateUpdatedData
 from .block_state_updated_data_update_type import BlockStateUpdatedDataUpdateType
@@ -35,7 +36,6 @@ from .document import Document
 from .document_content import DocumentContent
 from .document_data_input import DocumentDataInput
 from .document_data_output import DocumentDataOutput
-from .environment import Environment
 from .eval_service_handlers_create_collection_response import EvalServiceHandlersCreateCollectionResponse
 from .eval_service_handlers_create_document_response import EvalServiceHandlersCreateDocumentResponse
 from .eval_service_handlers_create_document_response_data import EvalServiceHandlersCreateDocumentResponseData
@@ -54,9 +54,9 @@ from .identity_details import IdentityDetails
 from .identity_types import IdentityTypes
 from .message import Message
 from .message_chunk import MessageChunk
-from .req_body import ReqBody
-from .req_body_inputs_value import ReqBodyInputsValue
+from .response_model_usage import ResponseModelUsage
 from .select_option_item import SelectOptionItem
+from .usage import Usage
 from .user_identity import UserIdentity
 from .validation_error import ValidationError
 from .validation_error_loc_item import ValidationErrorLocItem
@@ -90,6 +90,7 @@ __all__ = [
     "BlockRunStarted",
     "BlockRunStartedData",
     "BlockRunStartedEnvironment",
+    "BlockRunUsage",
     "BlockStateUpdated",
     "BlockStateUpdatedData",
     "BlockStateUpdatedDataUpdateType",
@@ -113,7 +114,6 @@ __all__ = [
     "DocumentContent",
     "DocumentDataInput",
     "DocumentDataOutput",
-    "Environment",
     "EvalServiceHandlersCreateCollectionResponse",
     "EvalServiceHandlersCreateDocumentResponse",
     "EvalServiceHandlersCreateDocumentResponseData",
@@ -132,9 +132,9 @@ __all__ = [
     "IdentityTypes",
     "Message",
     "MessageChunk",
-    "ReqBody",
-    "ReqBodyInputsValue",
+    "ResponseModelUsage",
     "SelectOptionItem",
+    "Usage",
     "UserIdentity",
     "ValidationError",
     "ValidationErrorLocItem",

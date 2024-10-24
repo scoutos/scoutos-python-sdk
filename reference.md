@@ -20,9 +20,9 @@ client = Scout(
 )
 response = client.workflows.run_stream(
     workflow_id="string",
+    environment="string",
     revision_id="string",
     session_id="string",
-    environment="production",
     inputs={"string": True},
 )
 for chunk in response:
@@ -50,7 +50,14 @@ for chunk in response:
 <dl>
 <dd>
 
-**inputs:** `typing.Dict[str, ReqBodyInputsValue]` 
+**environment:** `typing.Optional[str]` 
+
+Specifies the execution environment for the workflow. The available environments include:
+
+- `production`: The production environment, where workflows are executed under live conditions.
+- `staging`: A staging environment used for testing prior to production deployment.
+- `development`: A development environment used for testing new changes.
+- `console`: The console environment, runs latest changes on a workflow.
     
 </dd>
 </dl>
@@ -74,7 +81,7 @@ for chunk in response:
 <dl>
 <dd>
 
-**environment:** `typing.Optional[Environment]` 
+**inputs:** `typing.Optional[typing.Dict[str, WorkflowsRunStreamRequestInputsValue]]` 
     
 </dd>
 </dl>
@@ -114,7 +121,6 @@ client = Scout(
 )
 client.workflows.run(
     workflow_id="workflow_id",
-    inputs={"key": True},
 )
 
 ```
@@ -139,7 +145,14 @@ client.workflows.run(
 <dl>
 <dd>
 
-**inputs:** `typing.Dict[str, ReqBodyInputsValue]` 
+**environment:** `typing.Optional[str]` 
+
+Specifies the execution environment for the workflow. The available environments include:
+
+- `production`: The production environment, where workflows are executed under live conditions.
+- `staging`: A staging environment used for testing prior to production deployment.
+- `development`: A development environment used for testing new changes.
+- `console`: The console environment, runs latest changes on a workflow.
     
 </dd>
 </dl>
@@ -163,7 +176,70 @@ client.workflows.run(
 <dl>
 <dd>
 
-**environment:** `typing.Optional[Environment]` 
+**inputs:** `typing.Optional[typing.Dict[str, WorkflowsRunRequestInputsValue]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Usage
+<details><summary><code>client.usage.<a href="src/scoutos/usage/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.usage.get()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**start_date:** `typing.Optional[str]` — Start date for the usage data
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `typing.Optional[str]` — End date for the usage data
     
 </dd>
 </dl>

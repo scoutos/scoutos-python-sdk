@@ -13,6 +13,7 @@ from .types import (
     BlockRunStarted,
     BlockRunStartedData,
     BlockRunStartedEnvironment,
+    BlockRunUsage,
     BlockStateUpdated,
     BlockStateUpdatedData,
     BlockStateUpdatedDataUpdateType,
@@ -36,7 +37,6 @@ from .types import (
     DocumentContent,
     DocumentDataInput,
     DocumentDataOutput,
-    Environment,
     EvalServiceHandlersCreateCollectionResponse,
     EvalServiceHandlersCreateDocumentResponse,
     EvalServiceHandlersCreateDocumentResponseData,
@@ -55,9 +55,9 @@ from .types import (
     IdentityTypes,
     Message,
     MessageChunk,
-    ReqBody,
-    ReqBodyInputsValue,
+    ResponseModelUsage,
     SelectOptionItem,
+    Usage,
     UserIdentity,
     ValidationError,
     ValidationErrorLocItem,
@@ -79,11 +79,12 @@ from .types import (
     WorkflowRunStopReason,
 )
 from .errors import UnprocessableEntityError
-from . import collections, documents, workflows
+from . import collections, documents, usage, workflows
 from .client import AsyncScout, Scout
 from .documents import DocumentsCreateRequest
 from .environment import ScoutEnvironment
 from .version import __version__
+from .workflows import WorkflowsRunRequestInputsValue, WorkflowsRunStreamRequestInputsValue
 
 __all__ = [
     "Actor",
@@ -99,6 +100,7 @@ __all__ = [
     "BlockRunStarted",
     "BlockRunStartedData",
     "BlockRunStartedEnvironment",
+    "BlockRunUsage",
     "BlockStateUpdated",
     "BlockStateUpdatedData",
     "BlockStateUpdatedDataUpdateType",
@@ -123,7 +125,6 @@ __all__ = [
     "DocumentDataInput",
     "DocumentDataOutput",
     "DocumentsCreateRequest",
-    "Environment",
     "EvalServiceHandlersCreateCollectionResponse",
     "EvalServiceHandlersCreateDocumentResponse",
     "EvalServiceHandlersCreateDocumentResponseData",
@@ -142,12 +143,12 @@ __all__ = [
     "IdentityTypes",
     "Message",
     "MessageChunk",
-    "ReqBody",
-    "ReqBodyInputsValue",
+    "ResponseModelUsage",
     "Scout",
     "ScoutEnvironment",
     "SelectOptionItem",
     "UnprocessableEntityError",
+    "Usage",
     "UserIdentity",
     "ValidationError",
     "ValidationErrorLocItem",
@@ -167,8 +168,11 @@ __all__ = [
     "WorkflowRunStartedEnvironment",
     "WorkflowRunStateValue",
     "WorkflowRunStopReason",
+    "WorkflowsRunRequestInputsValue",
+    "WorkflowsRunStreamRequestInputsValue",
     "__version__",
     "collections",
     "documents",
+    "usage",
     "workflows",
 ]
