@@ -2,17 +2,23 @@
 
 import typing
 from ..core.client_wrapper import SyncClientWrapper
-from .types.workflows_run_stream_request_inputs_value import WorkflowsRunStreamRequestInputsValue
 from ..core.request_options import RequestOptions
-from ..types.workflow_run_event import WorkflowRunEvent
-from ..core.jsonable_encoder import jsonable_encoder
-import httpx_sse
+from ..types.apps_service_handlers_list_workflows_response import AppsServiceHandlersListWorkflowsResponse
 from ..core.unchecked_base_model import construct_type
-import json
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
+from ..types.block_input import BlockInput
+from ..types.apps_service_handlers_create_workflow_response import AppsServiceHandlersCreateWorkflowResponse
+from ..types.apps_service_handlers_get_workflow_response import AppsServiceHandlersGetWorkflowResponse
+from ..core.jsonable_encoder import jsonable_encoder
+from ..types.apps_service_handlers_update_workflow_response import AppsServiceHandlersUpdateWorkflowResponse
+from ..types.apps_service_handlers_delete_workflow_response import AppsServiceHandlersDeleteWorkflowResponse
+from .types.workflows_run_stream_request_inputs_value import WorkflowsRunStreamRequestInputsValue
+from ..types.workflow_run_event import WorkflowRunEvent
+import httpx_sse
+import json
 from .types.workflows_run_request_inputs_value import WorkflowsRunRequestInputsValue
 from ..types.workflow_run_response import WorkflowRunResponse
 from ..core.client_wrapper import AsyncClientWrapper
@@ -24,6 +30,364 @@ OMIT = typing.cast(typing.Any, ...)
 class WorkflowsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
+
+    def list(
+        self,
+        *,
+        sort: typing.Optional[str] = None,
+        direction: typing.Optional[str] = None,
+        start_at: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        query: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AppsServiceHandlersListWorkflowsResponse:
+        """
+        List all workflows in the organization from Firestore.
+
+        Parameters
+        ----------
+        sort : typing.Optional[str]
+            Field to sort by
+
+        direction : typing.Optional[str]
+            Sort in ascending or descending order
+
+        start_at : typing.Optional[str]
+            created_at to start at
+
+        limit : typing.Optional[int]
+            Limit of records to return
+
+        query : typing.Optional[str]
+            Search query
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AppsServiceHandlersListWorkflowsResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.workflows.list()
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "v2/workflows",
+            method="GET",
+            params={
+                "sort": sort,
+                "direction": direction,
+                "start_at": start_at,
+                "limit": limit,
+                "query": query,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    AppsServiceHandlersListWorkflowsResponse,
+                    construct_type(
+                        type_=AppsServiceHandlersListWorkflowsResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def post(
+        self,
+        *,
+        workflow_display_name: typing.Optional[str] = OMIT,
+        workflow_schema_version: typing.Optional[str] = OMIT,
+        workflow_img_url: typing.Optional[str] = OMIT,
+        workflow_description: typing.Optional[str] = OMIT,
+        blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AppsServiceHandlersCreateWorkflowResponse:
+        """
+        Parameters
+        ----------
+        workflow_display_name : typing.Optional[str]
+
+        workflow_schema_version : typing.Optional[str]
+
+        workflow_img_url : typing.Optional[str]
+
+        workflow_description : typing.Optional[str]
+
+        blocks : typing.Optional[typing.Sequence[BlockInput]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AppsServiceHandlersCreateWorkflowResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.workflows.post()
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "v2/workflows",
+            method="POST",
+            json={
+                "workflow_display_name": workflow_display_name,
+                "workflow_schema_version": workflow_schema_version,
+                "workflow_img_url": workflow_img_url,
+                "workflow_description": workflow_description,
+                "blocks": blocks,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    AppsServiceHandlersCreateWorkflowResponse,
+                    construct_type(
+                        type_=AppsServiceHandlersCreateWorkflowResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def get(
+        self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AppsServiceHandlersGetWorkflowResponse:
+        """
+        Fetch app configuration by ID.
+
+        Parameters
+        ----------
+        workflow_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AppsServiceHandlersGetWorkflowResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.workflows.get(
+            workflow_id="workflow_id",
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/workflows/{jsonable_encoder(workflow_id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    AppsServiceHandlersGetWorkflowResponse,
+                    construct_type(
+                        type_=AppsServiceHandlersGetWorkflowResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def put(
+        self,
+        workflow_id: str,
+        *,
+        workflow_display_name: typing.Optional[str] = OMIT,
+        workflow_schema_version: typing.Optional[str] = OMIT,
+        workflow_img_url: typing.Optional[str] = OMIT,
+        workflow_description: typing.Optional[str] = OMIT,
+        blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AppsServiceHandlersUpdateWorkflowResponse:
+        """
+        Parameters
+        ----------
+        workflow_id : str
+
+        workflow_display_name : typing.Optional[str]
+
+        workflow_schema_version : typing.Optional[str]
+
+        workflow_img_url : typing.Optional[str]
+
+        workflow_description : typing.Optional[str]
+
+        blocks : typing.Optional[typing.Sequence[BlockInput]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AppsServiceHandlersUpdateWorkflowResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.workflows.put(
+            workflow_id="workflow_id",
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/workflows/{jsonable_encoder(workflow_id)}",
+            method="PUT",
+            json={
+                "workflow_display_name": workflow_display_name,
+                "workflow_schema_version": workflow_schema_version,
+                "workflow_img_url": workflow_img_url,
+                "workflow_description": workflow_description,
+                "blocks": blocks,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    AppsServiceHandlersUpdateWorkflowResponse,
+                    construct_type(
+                        type_=AppsServiceHandlersUpdateWorkflowResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def delete(
+        self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AppsServiceHandlersDeleteWorkflowResponse:
+        """
+        Given an App ID, return it's configuration data.
+
+        Parameters
+        ----------
+        workflow_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AppsServiceHandlersDeleteWorkflowResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.workflows.delete(
+            workflow_id="workflow_id",
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/workflows/{jsonable_encoder(workflow_id)}",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    AppsServiceHandlersDeleteWorkflowResponse,
+                    construct_type(
+                        type_=AppsServiceHandlersDeleteWorkflowResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def run_stream(
         self,
@@ -216,6 +580,404 @@ class WorkflowsClient:
 class AsyncWorkflowsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
+
+    async def list(
+        self,
+        *,
+        sort: typing.Optional[str] = None,
+        direction: typing.Optional[str] = None,
+        start_at: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        query: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AppsServiceHandlersListWorkflowsResponse:
+        """
+        List all workflows in the organization from Firestore.
+
+        Parameters
+        ----------
+        sort : typing.Optional[str]
+            Field to sort by
+
+        direction : typing.Optional[str]
+            Sort in ascending or descending order
+
+        start_at : typing.Optional[str]
+            created_at to start at
+
+        limit : typing.Optional[int]
+            Limit of records to return
+
+        query : typing.Optional[str]
+            Search query
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AppsServiceHandlersListWorkflowsResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.workflows.list()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "v2/workflows",
+            method="GET",
+            params={
+                "sort": sort,
+                "direction": direction,
+                "start_at": start_at,
+                "limit": limit,
+                "query": query,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    AppsServiceHandlersListWorkflowsResponse,
+                    construct_type(
+                        type_=AppsServiceHandlersListWorkflowsResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def post(
+        self,
+        *,
+        workflow_display_name: typing.Optional[str] = OMIT,
+        workflow_schema_version: typing.Optional[str] = OMIT,
+        workflow_img_url: typing.Optional[str] = OMIT,
+        workflow_description: typing.Optional[str] = OMIT,
+        blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AppsServiceHandlersCreateWorkflowResponse:
+        """
+        Parameters
+        ----------
+        workflow_display_name : typing.Optional[str]
+
+        workflow_schema_version : typing.Optional[str]
+
+        workflow_img_url : typing.Optional[str]
+
+        workflow_description : typing.Optional[str]
+
+        blocks : typing.Optional[typing.Sequence[BlockInput]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AppsServiceHandlersCreateWorkflowResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.workflows.post()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "v2/workflows",
+            method="POST",
+            json={
+                "workflow_display_name": workflow_display_name,
+                "workflow_schema_version": workflow_schema_version,
+                "workflow_img_url": workflow_img_url,
+                "workflow_description": workflow_description,
+                "blocks": blocks,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    AppsServiceHandlersCreateWorkflowResponse,
+                    construct_type(
+                        type_=AppsServiceHandlersCreateWorkflowResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def get(
+        self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AppsServiceHandlersGetWorkflowResponse:
+        """
+        Fetch app configuration by ID.
+
+        Parameters
+        ----------
+        workflow_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AppsServiceHandlersGetWorkflowResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.workflows.get(
+                workflow_id="workflow_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/workflows/{jsonable_encoder(workflow_id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    AppsServiceHandlersGetWorkflowResponse,
+                    construct_type(
+                        type_=AppsServiceHandlersGetWorkflowResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def put(
+        self,
+        workflow_id: str,
+        *,
+        workflow_display_name: typing.Optional[str] = OMIT,
+        workflow_schema_version: typing.Optional[str] = OMIT,
+        workflow_img_url: typing.Optional[str] = OMIT,
+        workflow_description: typing.Optional[str] = OMIT,
+        blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AppsServiceHandlersUpdateWorkflowResponse:
+        """
+        Parameters
+        ----------
+        workflow_id : str
+
+        workflow_display_name : typing.Optional[str]
+
+        workflow_schema_version : typing.Optional[str]
+
+        workflow_img_url : typing.Optional[str]
+
+        workflow_description : typing.Optional[str]
+
+        blocks : typing.Optional[typing.Sequence[BlockInput]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AppsServiceHandlersUpdateWorkflowResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.workflows.put(
+                workflow_id="workflow_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/workflows/{jsonable_encoder(workflow_id)}",
+            method="PUT",
+            json={
+                "workflow_display_name": workflow_display_name,
+                "workflow_schema_version": workflow_schema_version,
+                "workflow_img_url": workflow_img_url,
+                "workflow_description": workflow_description,
+                "blocks": blocks,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    AppsServiceHandlersUpdateWorkflowResponse,
+                    construct_type(
+                        type_=AppsServiceHandlersUpdateWorkflowResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def delete(
+        self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AppsServiceHandlersDeleteWorkflowResponse:
+        """
+        Given an App ID, return it's configuration data.
+
+        Parameters
+        ----------
+        workflow_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AppsServiceHandlersDeleteWorkflowResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.workflows.delete(
+                workflow_id="workflow_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/workflows/{jsonable_encoder(workflow_id)}",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    AppsServiceHandlersDeleteWorkflowResponse,
+                    construct_type(
+                        type_=AppsServiceHandlersDeleteWorkflowResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
 
     async def run_stream(
         self,

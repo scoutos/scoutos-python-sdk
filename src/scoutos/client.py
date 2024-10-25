@@ -7,12 +7,18 @@ import httpx
 from .core.api_error import ApiError
 from .core.client_wrapper import SyncClientWrapper
 from .workflows.client import WorkflowsClient
+from .environments.client import EnvironmentsClient
+from .revisions.client import RevisionsClient
 from .usage.client import UsageClient
+from .workflow_logs.client import WorkflowLogsClient
 from .collections.client import CollectionsClient
 from .documents.client import DocumentsClient
 from .core.client_wrapper import AsyncClientWrapper
 from .workflows.client import AsyncWorkflowsClient
+from .environments.client import AsyncEnvironmentsClient
+from .revisions.client import AsyncRevisionsClient
 from .usage.client import AsyncUsageClient
+from .workflow_logs.client import AsyncWorkflowLogsClient
 from .collections.client import AsyncCollectionsClient
 from .documents.client import AsyncDocumentsClient
 
@@ -78,7 +84,10 @@ class Scout:
             timeout=_defaulted_timeout,
         )
         self.workflows = WorkflowsClient(client_wrapper=self._client_wrapper)
+        self.environments = EnvironmentsClient(client_wrapper=self._client_wrapper)
+        self.revisions = RevisionsClient(client_wrapper=self._client_wrapper)
         self.usage = UsageClient(client_wrapper=self._client_wrapper)
+        self.workflow_logs = WorkflowLogsClient(client_wrapper=self._client_wrapper)
         self.collections = CollectionsClient(client_wrapper=self._client_wrapper)
         self.documents = DocumentsClient(client_wrapper=self._client_wrapper)
 
@@ -144,7 +153,10 @@ class AsyncScout:
             timeout=_defaulted_timeout,
         )
         self.workflows = AsyncWorkflowsClient(client_wrapper=self._client_wrapper)
+        self.environments = AsyncEnvironmentsClient(client_wrapper=self._client_wrapper)
+        self.revisions = AsyncRevisionsClient(client_wrapper=self._client_wrapper)
         self.usage = AsyncUsageClient(client_wrapper=self._client_wrapper)
+        self.workflow_logs = AsyncWorkflowLogsClient(client_wrapper=self._client_wrapper)
         self.collections = AsyncCollectionsClient(client_wrapper=self._client_wrapper)
         self.documents = AsyncDocumentsClient(client_wrapper=self._client_wrapper)
 
