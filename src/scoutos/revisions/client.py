@@ -29,7 +29,7 @@ class RevisionsClient:
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AppsServiceHandlersListWorkflowRevisionsResponse:
         """
-        List all app revisions in the organization from Firestore.
+        List all app revisions in the organization
 
         Parameters
         ----------
@@ -83,7 +83,7 @@ class RevisionsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def put(
+    def update(
         self, workflow_id: str, revision_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AppsServiceHandlersPromoteWorkflowRevisionResponse:
         """
@@ -108,7 +108,7 @@ class RevisionsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.revisions.put(
+        client.revisions.update(
             workflow_id="workflow_id",
             revision_id="revision_id",
         )
@@ -210,7 +210,7 @@ class AsyncRevisionsClient:
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AppsServiceHandlersListWorkflowRevisionsResponse:
         """
-        List all app revisions in the organization from Firestore.
+        List all app revisions in the organization
 
         Parameters
         ----------
@@ -272,7 +272,7 @@ class AsyncRevisionsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def put(
+    async def update(
         self, workflow_id: str, revision_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AppsServiceHandlersPromoteWorkflowRevisionResponse:
         """
@@ -302,7 +302,7 @@ class AsyncRevisionsClient:
 
 
         async def main() -> None:
-            await client.revisions.put(
+            await client.revisions.update(
                 workflow_id="workflow_id",
                 revision_id="revision_id",
             )

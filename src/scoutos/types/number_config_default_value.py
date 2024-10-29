@@ -2,4 +2,4 @@
 
 import typing
 
-ColumnTypeItemNumberDefaultValue = typing.Union[int, float]
+NumberConfigDefaultValue = typing.Union[int, float]

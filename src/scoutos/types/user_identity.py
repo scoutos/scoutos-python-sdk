@@ -7,8 +7,8 @@ import pydantic
 
 
 class UserIdentity(UncheckedBaseModel):
-    clerk_user_id: str
-    clerk_org_id: str
+    user_id: str
+    org_id: str
     scout_organization_id: str
     email: typing.Dict[str, typing.Optional[typing.Any]]
 

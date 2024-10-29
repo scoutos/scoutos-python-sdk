@@ -12,7 +12,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from .types.documents_create_request import DocumentsCreateRequest
 from ..types.eval_service_handlers_create_document_response import EvalServiceHandlersCreateDocumentResponse
-from ..types.document_content import DocumentContent
+from ..types.document_data_input_content import DocumentDataInputContent
 from ..types.eval_service_handlers_update_document_response import EvalServiceHandlersUpdateDocumentResponse
 from ..types.eval_service_handlers_delete_document_response import EvalServiceHandlersDeleteDocumentResponse
 from ..core.client_wrapper import AsyncClientWrapper
@@ -157,7 +157,7 @@ class DocumentsClient:
         id: typing.Optional[str] = OMIT,
         columns: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         display_name: typing.Optional[str] = OMIT,
-        content: typing.Optional[typing.Sequence[DocumentContent]] = OMIT,
+        content: typing.Optional[DocumentDataInputContent] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> EvalServiceHandlersUpdateDocumentResponse:
         """
@@ -173,7 +173,7 @@ class DocumentsClient:
 
         display_name : typing.Optional[str]
 
-        content : typing.Optional[typing.Sequence[DocumentContent]]
+        content : typing.Optional[DocumentDataInputContent]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -445,7 +445,7 @@ class AsyncDocumentsClient:
         id: typing.Optional[str] = OMIT,
         columns: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         display_name: typing.Optional[str] = OMIT,
-        content: typing.Optional[typing.Sequence[DocumentContent]] = OMIT,
+        content: typing.Optional[DocumentDataInputContent] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> EvalServiceHandlersUpdateDocumentResponse:
         """
@@ -461,7 +461,7 @@ class AsyncDocumentsClient:
 
         display_name : typing.Optional[str]
 
-        content : typing.Optional[typing.Sequence[DocumentContent]]
+        content : typing.Optional[DocumentDataInputContent]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.

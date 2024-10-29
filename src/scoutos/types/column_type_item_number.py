@@ -2,9 +2,7 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .column_type_item_number_default_value import ColumnTypeItemNumberDefaultValue
-from .column_type_item_number_min_value import ColumnTypeItemNumberMinValue
-from .column_type_item_number_max_value import ColumnTypeItemNumberMaxValue
+from .number_config import NumberConfig
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
@@ -13,9 +11,7 @@ class ColumnTypeItemNumber(UncheckedBaseModel):
     column_id: typing.Optional[str] = None
     column_display_name: typing.Optional[str] = None
     column_type: typing.Literal["number"] = "number"
-    default_value: typing.Optional[ColumnTypeItemNumberDefaultValue] = None
-    min_value: typing.Optional[ColumnTypeItemNumberMinValue] = None
-    max_value: typing.Optional[ColumnTypeItemNumberMaxValue] = None
+    number: NumberConfig
     data_type: typing.Optional[typing.Literal["number"]] = None
 
     if IS_PYDANTIC_V2:

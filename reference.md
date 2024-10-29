@@ -12,7 +12,7 @@
 <dl>
 <dd>
 
-List all workflows in the organization from Firestore.
+List all workflows in the organization
 </dd>
 </dl>
 </dd>
@@ -100,7 +100,7 @@ client.workflows.list()
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="src/scoutos/workflows/client.py">post</a>(...)</code></summary>
+<details><summary><code>client.workflows.<a href="src/scoutos/workflows/client.py">create</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -118,7 +118,7 @@ from scoutos import Scout
 client = Scout(
     api_key="YOUR_API_KEY",
 )
-client.workflows.post()
+client.workflows.create()
 
 ```
 </dd>
@@ -256,7 +256,7 @@ client.workflows.get(
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="src/scoutos/workflows/client.py">put</a>(...)</code></summary>
+<details><summary><code>client.workflows.<a href="src/scoutos/workflows/client.py">update</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -274,7 +274,7 @@ from scoutos import Scout
 client = Scout(
     api_key="YOUR_API_KEY",
 )
-client.workflows.put(
+client.workflows.update(
     workflow_id="workflow_id",
 )
 
@@ -355,20 +355,6 @@ client.workflows.put(
 <details><summary><code>client.workflows.<a href="src/scoutos/workflows/client.py">delete</a>(...)</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Given an App ID, return it's configuration data.
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 
@@ -631,7 +617,7 @@ Specifies the execution environment for the workflow. The available environments
 <dl>
 <dd>
 
-List all environments for a workflow in the organization from Firestore.
+List all environments for a workflow in the organization
 </dd>
 </dl>
 </dd>
@@ -689,7 +675,7 @@ client.environments.list(
 </dl>
 </details>
 
-<details><summary><code>client.environments.<a href="src/scoutos/environments/client.py">put</a>(...)</code></summary>
+<details><summary><code>client.environments.<a href="src/scoutos/environments/client.py">update</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -721,7 +707,7 @@ from scoutos import EnvironmentDeploymentConfig, Scout
 client = Scout(
     api_key="YOUR_API_KEY",
 )
-client.environments.put(
+client.environments.update(
     workflow_id="workflow_id",
     environment_id="environment_id",
     name="name",
@@ -812,7 +798,7 @@ client.environments.put(
 <dl>
 <dd>
 
-List all app revisions in the organization from Firestore.
+List all app revisions in the organization
 </dd>
 </dl>
 </dd>
@@ -870,7 +856,7 @@ client.revisions.list(
 </dl>
 </details>
 
-<details><summary><code>client.revisions.<a href="src/scoutos/revisions/client.py">put</a>(...)</code></summary>
+<details><summary><code>client.revisions.<a href="src/scoutos/revisions/client.py">update</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -888,7 +874,7 @@ from scoutos import Scout
 client = Scout(
     api_key="YOUR_API_KEY",
 )
-client.revisions.put(
+client.revisions.update(
     workflow_id="workflow_id",
     revision_id="revision_id",
 )
@@ -1669,7 +1655,7 @@ client.documents.update(
 <dl>
 <dd>
 
-**content:** `typing.Optional[typing.Sequence[DocumentContent]]` 
+**content:** `typing.Optional[DocumentDataInputContent]` 
     
 </dd>
 </dl>

@@ -2,4 +2,4 @@
 
 import typing
 
-ColumnTypeItemNumberMaxValue = typing.Union[int, float]
+NumberConfigMaxValue = typing.Union[int, float]

@@ -30,7 +30,7 @@ class EnvironmentsClient:
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AppsServiceHandlersGetWorkflowEnvironmentsResponse:
         """
-        List all environments for a workflow in the organization from Firestore.
+        List all environments for a workflow in the organization
 
         Parameters
         ----------
@@ -84,7 +84,7 @@ class EnvironmentsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def put(
+    def update(
         self,
         workflow_id: str,
         environment_id: str,
@@ -124,7 +124,7 @@ class EnvironmentsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.environments.put(
+        client.environments.update(
             workflow_id="workflow_id",
             environment_id="environment_id",
             name="name",
@@ -180,7 +180,7 @@ class AsyncEnvironmentsClient:
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AppsServiceHandlersGetWorkflowEnvironmentsResponse:
         """
-        List all environments for a workflow in the organization from Firestore.
+        List all environments for a workflow in the organization
 
         Parameters
         ----------
@@ -242,7 +242,7 @@ class AsyncEnvironmentsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def put(
+    async def update(
         self,
         workflow_id: str,
         environment_id: str,
@@ -287,7 +287,7 @@ class AsyncEnvironmentsClient:
 
 
         async def main() -> None:
-            await client.environments.put(
+            await client.environments.update(
                 workflow_id="workflow_id",
                 environment_id="environment_id",
                 name="name",

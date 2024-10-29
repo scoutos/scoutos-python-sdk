@@ -42,7 +42,7 @@ class WorkflowsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AppsServiceHandlersListWorkflowsResponse:
         """
-        List all workflows in the organization from Firestore.
+        List all workflows in the organization
 
         Parameters
         ----------
@@ -114,7 +114,7 @@ class WorkflowsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def post(
+    def create(
         self,
         *,
         workflow_display_name: typing.Optional[str] = OMIT,
@@ -152,7 +152,7 @@ class WorkflowsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.workflows.post()
+        client.workflows.create()
         """
         _response = self._client_wrapper.httpx_client.request(
             "v2/workflows",
@@ -249,7 +249,7 @@ class WorkflowsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def put(
+    def update(
         self,
         workflow_id: str,
         *,
@@ -290,7 +290,7 @@ class WorkflowsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.workflows.put(
+        client.workflows.update(
             workflow_id="workflow_id",
         )
         """
@@ -335,8 +335,6 @@ class WorkflowsClient:
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AppsServiceHandlersDeleteWorkflowResponse:
         """
-        Given an App ID, return it's configuration data.
-
         Parameters
         ----------
         workflow_id : str
@@ -592,7 +590,7 @@ class AsyncWorkflowsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AppsServiceHandlersListWorkflowsResponse:
         """
-        List all workflows in the organization from Firestore.
+        List all workflows in the organization
 
         Parameters
         ----------
@@ -672,7 +670,7 @@ class AsyncWorkflowsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def post(
+    async def create(
         self,
         *,
         workflow_display_name: typing.Optional[str] = OMIT,
@@ -715,7 +713,7 @@ class AsyncWorkflowsClient:
 
 
         async def main() -> None:
-            await client.workflows.post()
+            await client.workflows.create()
 
 
         asyncio.run(main())
@@ -823,7 +821,7 @@ class AsyncWorkflowsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def put(
+    async def update(
         self,
         workflow_id: str,
         *,
@@ -869,7 +867,7 @@ class AsyncWorkflowsClient:
 
 
         async def main() -> None:
-            await client.workflows.put(
+            await client.workflows.update(
                 workflow_id="workflow_id",
             )
 
@@ -917,8 +915,6 @@ class AsyncWorkflowsClient:
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AppsServiceHandlersDeleteWorkflowResponse:
         """
-        Given an App ID, return it's configuration data.
-
         Parameters
         ----------
         workflow_id : str

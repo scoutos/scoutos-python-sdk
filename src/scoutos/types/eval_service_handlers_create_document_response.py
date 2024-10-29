@@ -2,13 +2,13 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .eval_service_handlers_create_document_response_data import EvalServiceHandlersCreateDocumentResponseData
+from .document import Document
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
 class EvalServiceHandlersCreateDocumentResponse(UncheckedBaseModel):
-    data: typing.Optional[EvalServiceHandlersCreateDocumentResponseData] = None
+    data: typing.List[Document]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

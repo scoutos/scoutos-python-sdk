@@ -7,6 +7,7 @@ from .column_type_item_number import ColumnTypeItemNumber
 from .column_type_item_select import ColumnTypeItemSelect
 from .column_type_item_text_long import ColumnTypeItemTextLong
 from .column_type_item_text_short import ColumnTypeItemTextShort
+from .column_type_item_url import ColumnTypeItemUrl
 
 CollectionConfigOutputColumnsItem = typing.Union[
     ColumnTypeItemCheckBox,
@@ -15,4 +16,5 @@ CollectionConfigOutputColumnsItem = typing.Union[
     ColumnTypeItemSelect,
     ColumnTypeItemTextLong,
     ColumnTypeItemTextShort,
+    ColumnTypeItemUrl,
 ]

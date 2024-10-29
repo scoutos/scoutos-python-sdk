@@ -2,4 +2,4 @@
 
 import typing
 
-ColumnTypeItemNumberMinValue = typing.Union[int, float]
+NumberConfigMinValue = typing.Union[int, float]

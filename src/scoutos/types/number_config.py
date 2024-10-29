@@ -2,16 +2,17 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .document_data_output_content import DocumentDataOutputContent
+from .number_config_default_value import NumberConfigDefaultValue
+from .number_config_min_value import NumberConfigMinValue
+from .number_config_max_value import NumberConfigMaxValue
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class DocumentDataOutput(UncheckedBaseModel):
-    id: typing.Optional[str] = None
-    columns: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
-    display_name: typing.Optional[str] = None
-    content: typing.Optional[DocumentDataOutputContent] = None
+class NumberConfig(UncheckedBaseModel):
+    default_value: typing.Optional[NumberConfigDefaultValue] = None
+    min_value: typing.Optional[NumberConfigMinValue] = None
+    max_value: typing.Optional[NumberConfigMaxValue] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

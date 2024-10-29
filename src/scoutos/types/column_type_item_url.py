@@ -2,16 +2,16 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .document_data_output_content import DocumentDataOutputContent
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class DocumentDataOutput(UncheckedBaseModel):
-    id: typing.Optional[str] = None
-    columns: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
-    display_name: typing.Optional[str] = None
-    content: typing.Optional[DocumentDataOutputContent] = None
+class ColumnTypeItemUrl(UncheckedBaseModel):
+    column_id: typing.Optional[str] = None
+    column_display_name: typing.Optional[str] = None
+    column_type: typing.Literal["url"] = "url"
+    url: typing.Optional[str] = None
+    data_type: typing.Optional[typing.Literal["string"]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
