@@ -9,12 +9,10 @@ from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
-from ..types.copilot_config_mode import CopilotConfigMode
-from ..types.copilot_config_fab_value import CopilotConfigFabValue
-from ..types.apps_service_handlers_create_copilot_response import AppsServiceHandlersCreateCopilotResponse
+from ..types.block_input import BlockInput
+from ..types.apps_service_handlers_create_workflow_response import AppsServiceHandlersCreateWorkflowResponse
 from ..types.apps_service_handlers_get_workflow_response import AppsServiceHandlersGetWorkflowResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..types.block_input import BlockInput
 from ..types.apps_service_handlers_update_workflow_response import AppsServiceHandlersUpdateWorkflowResponse
 from ..types.apps_service_handlers_delete_workflow_response import AppsServiceHandlersDeleteWorkflowResponse
 from .types.workflows_run_stream_request_inputs_value import WorkflowsRunStreamRequestInputsValue
@@ -119,44 +117,32 @@ class WorkflowsClient:
     def create(
         self,
         *,
-        workflow_id: typing.Optional[str] = OMIT,
-        img_url: typing.Optional[str] = OMIT,
-        display_name: typing.Optional[str] = OMIT,
-        mode: typing.Optional[CopilotConfigMode] = OMIT,
-        colors: typing.Optional[typing.Dict[str, str]] = OMIT,
-        fab: typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]] = OMIT,
-        message_placeholder: typing.Optional[str] = OMIT,
-        initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
-        allowed_origins: typing.Optional[str] = OMIT,
+        workflow_display_name: typing.Optional[str] = OMIT,
+        workflow_schema_version: typing.Optional[str] = OMIT,
+        workflow_img_url: typing.Optional[str] = OMIT,
+        workflow_description: typing.Optional[str] = OMIT,
+        blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersCreateCopilotResponse:
+    ) -> AppsServiceHandlersCreateWorkflowResponse:
         """
         Parameters
         ----------
-        workflow_id : typing.Optional[str]
+        workflow_display_name : typing.Optional[str]
 
-        img_url : typing.Optional[str]
+        workflow_schema_version : typing.Optional[str]
 
-        display_name : typing.Optional[str]
+        workflow_img_url : typing.Optional[str]
 
-        mode : typing.Optional[CopilotConfigMode]
+        workflow_description : typing.Optional[str]
 
-        colors : typing.Optional[typing.Dict[str, str]]
-
-        fab : typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]]
-
-        message_placeholder : typing.Optional[str]
-
-        initial_activity : typing.Optional[typing.Sequence[typing.Optional[typing.Any]]]
-
-        allowed_origins : typing.Optional[str]
+        blocks : typing.Optional[typing.Sequence[BlockInput]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AppsServiceHandlersCreateCopilotResponse
+        AppsServiceHandlersCreateWorkflowResponse
             Successful Response
 
         Examples
@@ -169,18 +155,14 @@ class WorkflowsClient:
         client.workflows.create()
         """
         _response = self._client_wrapper.httpx_client.request(
-            "v2/copilots",
+            "v2/workflows",
             method="POST",
             json={
-                "workflow_id": workflow_id,
-                "img_url": img_url,
-                "display_name": display_name,
-                "mode": mode,
-                "colors": colors,
-                "fab": fab,
-                "message_placeholder": message_placeholder,
-                "initial_activity": initial_activity,
-                "allowed_origins": allowed_origins,
+                "workflow_display_name": workflow_display_name,
+                "workflow_schema_version": workflow_schema_version,
+                "workflow_img_url": workflow_img_url,
+                "workflow_description": workflow_description,
+                "blocks": blocks,
             },
             request_options=request_options,
             omit=OMIT,
@@ -188,9 +170,9 @@ class WorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersCreateCopilotResponse,
+                    AppsServiceHandlersCreateWorkflowResponse,
                     construct_type(
-                        type_=AppsServiceHandlersCreateCopilotResponse,  # type: ignore
+                        type_=AppsServiceHandlersCreateWorkflowResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -691,44 +673,32 @@ class AsyncWorkflowsClient:
     async def create(
         self,
         *,
-        workflow_id: typing.Optional[str] = OMIT,
-        img_url: typing.Optional[str] = OMIT,
-        display_name: typing.Optional[str] = OMIT,
-        mode: typing.Optional[CopilotConfigMode] = OMIT,
-        colors: typing.Optional[typing.Dict[str, str]] = OMIT,
-        fab: typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]] = OMIT,
-        message_placeholder: typing.Optional[str] = OMIT,
-        initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
-        allowed_origins: typing.Optional[str] = OMIT,
+        workflow_display_name: typing.Optional[str] = OMIT,
+        workflow_schema_version: typing.Optional[str] = OMIT,
+        workflow_img_url: typing.Optional[str] = OMIT,
+        workflow_description: typing.Optional[str] = OMIT,
+        blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersCreateCopilotResponse:
+    ) -> AppsServiceHandlersCreateWorkflowResponse:
         """
         Parameters
         ----------
-        workflow_id : typing.Optional[str]
+        workflow_display_name : typing.Optional[str]
 
-        img_url : typing.Optional[str]
+        workflow_schema_version : typing.Optional[str]
 
-        display_name : typing.Optional[str]
+        workflow_img_url : typing.Optional[str]
 
-        mode : typing.Optional[CopilotConfigMode]
+        workflow_description : typing.Optional[str]
 
-        colors : typing.Optional[typing.Dict[str, str]]
-
-        fab : typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]]
-
-        message_placeholder : typing.Optional[str]
-
-        initial_activity : typing.Optional[typing.Sequence[typing.Optional[typing.Any]]]
-
-        allowed_origins : typing.Optional[str]
+        blocks : typing.Optional[typing.Sequence[BlockInput]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AppsServiceHandlersCreateCopilotResponse
+        AppsServiceHandlersCreateWorkflowResponse
             Successful Response
 
         Examples
@@ -749,18 +719,14 @@ class AsyncWorkflowsClient:
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "v2/copilots",
+            "v2/workflows",
             method="POST",
             json={
-                "workflow_id": workflow_id,
-                "img_url": img_url,
-                "display_name": display_name,
-                "mode": mode,
-                "colors": colors,
-                "fab": fab,
-                "message_placeholder": message_placeholder,
-                "initial_activity": initial_activity,
-                "allowed_origins": allowed_origins,
+                "workflow_display_name": workflow_display_name,
+                "workflow_schema_version": workflow_schema_version,
+                "workflow_img_url": workflow_img_url,
+                "workflow_description": workflow_description,
+                "blocks": blocks,
             },
             request_options=request_options,
             omit=OMIT,
@@ -768,9 +734,9 @@ class AsyncWorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersCreateCopilotResponse,
+                    AppsServiceHandlersCreateWorkflowResponse,
                     construct_type(
-                        type_=AppsServiceHandlersCreateCopilotResponse,  # type: ignore
+                        type_=AppsServiceHandlersCreateWorkflowResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -134,7 +134,7 @@ client.workflows.create()
 <dl>
 <dd>
 
-**workflow_id:** `typing.Optional[str]` 
+**workflow_display_name:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -142,7 +142,7 @@ client.workflows.create()
 <dl>
 <dd>
 
-**img_url:** `typing.Optional[str]` 
+**workflow_schema_version:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -150,7 +150,7 @@ client.workflows.create()
 <dl>
 <dd>
 
-**display_name:** `typing.Optional[str]` 
+**workflow_img_url:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -158,7 +158,7 @@ client.workflows.create()
 <dl>
 <dd>
 
-**mode:** `typing.Optional[CopilotConfigMode]` 
+**workflow_description:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -166,39 +166,7 @@ client.workflows.create()
 <dl>
 <dd>
 
-**colors:** `typing.Optional[typing.Dict[str, str]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**fab:** `typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**message_placeholder:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**initial_activity:** `typing.Optional[typing.Sequence[typing.Optional[typing.Any]]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**allowed_origins:** `typing.Optional[str]` 
+**blocks:** `typing.Optional[typing.Sequence[BlockInput]]` 
     
 </dd>
 </dl>
@@ -1268,6 +1236,124 @@ client.copilots.list()
 <dd>
 
 **query:** `typing.Optional[str]` — Search query
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.copilots.<a href="src/scoutos/copilots/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.copilots.create()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workflow_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**img_url:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**display_name:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**mode:** `typing.Optional[CopilotConfigMode]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**colors:** `typing.Optional[typing.Dict[str, str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fab:** `typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**message_placeholder:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**initial_activity:** `typing.Optional[typing.Sequence[typing.Optional[typing.Any]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**allowed_origins:** `typing.Optional[str]` 
     
 </dd>
 </dl>

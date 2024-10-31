@@ -9,10 +9,11 @@ from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
-from ..types.apps_service_handlers_get_copilot_response import AppsServiceHandlersGetCopilotResponse
-from ..core.jsonable_encoder import jsonable_encoder
 from ..types.copilot_config_mode import CopilotConfigMode
 from ..types.copilot_config_fab_value import CopilotConfigFabValue
+from ..types.apps_service_handlers_create_copilot_response import AppsServiceHandlersCreateCopilotResponse
+from ..types.apps_service_handlers_get_copilot_response import AppsServiceHandlersGetCopilotResponse
+from ..core.jsonable_encoder import jsonable_encoder
 from ..types.apps_service_handlers_update_copilot_response import AppsServiceHandlersUpdateCopilotResponse
 from ..types.apps_service_handlers_delete_copilot_response import AppsServiceHandlersDeleteCopilotResponse
 from ..core.client_wrapper import AsyncClientWrapper
@@ -90,6 +91,99 @@ class CopilotsClient:
                     AppsServiceHandlersListCopilotsResponse,
                     construct_type(
                         type_=AppsServiceHandlersListCopilotsResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def create(
+        self,
+        *,
+        workflow_id: typing.Optional[str] = OMIT,
+        img_url: typing.Optional[str] = OMIT,
+        display_name: typing.Optional[str] = OMIT,
+        mode: typing.Optional[CopilotConfigMode] = OMIT,
+        colors: typing.Optional[typing.Dict[str, str]] = OMIT,
+        fab: typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]] = OMIT,
+        message_placeholder: typing.Optional[str] = OMIT,
+        initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
+        allowed_origins: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AppsServiceHandlersCreateCopilotResponse:
+        """
+        Parameters
+        ----------
+        workflow_id : typing.Optional[str]
+
+        img_url : typing.Optional[str]
+
+        display_name : typing.Optional[str]
+
+        mode : typing.Optional[CopilotConfigMode]
+
+        colors : typing.Optional[typing.Dict[str, str]]
+
+        fab : typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]]
+
+        message_placeholder : typing.Optional[str]
+
+        initial_activity : typing.Optional[typing.Sequence[typing.Optional[typing.Any]]]
+
+        allowed_origins : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AppsServiceHandlersCreateCopilotResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.copilots.create()
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "v2/copilots",
+            method="POST",
+            json={
+                "workflow_id": workflow_id,
+                "img_url": img_url,
+                "display_name": display_name,
+                "mode": mode,
+                "colors": colors,
+                "fab": fab,
+                "message_placeholder": message_placeholder,
+                "initial_activity": initial_activity,
+                "allowed_origins": allowed_origins,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    AppsServiceHandlersCreateCopilotResponse,
+                    construct_type(
+                        type_=AppsServiceHandlersCreateCopilotResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -398,6 +492,107 @@ class AsyncCopilotsClient:
                     AppsServiceHandlersListCopilotsResponse,
                     construct_type(
                         type_=AppsServiceHandlersListCopilotsResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def create(
+        self,
+        *,
+        workflow_id: typing.Optional[str] = OMIT,
+        img_url: typing.Optional[str] = OMIT,
+        display_name: typing.Optional[str] = OMIT,
+        mode: typing.Optional[CopilotConfigMode] = OMIT,
+        colors: typing.Optional[typing.Dict[str, str]] = OMIT,
+        fab: typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]] = OMIT,
+        message_placeholder: typing.Optional[str] = OMIT,
+        initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
+        allowed_origins: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AppsServiceHandlersCreateCopilotResponse:
+        """
+        Parameters
+        ----------
+        workflow_id : typing.Optional[str]
+
+        img_url : typing.Optional[str]
+
+        display_name : typing.Optional[str]
+
+        mode : typing.Optional[CopilotConfigMode]
+
+        colors : typing.Optional[typing.Dict[str, str]]
+
+        fab : typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]]
+
+        message_placeholder : typing.Optional[str]
+
+        initial_activity : typing.Optional[typing.Sequence[typing.Optional[typing.Any]]]
+
+        allowed_origins : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AppsServiceHandlersCreateCopilotResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.copilots.create()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "v2/copilots",
+            method="POST",
+            json={
+                "workflow_id": workflow_id,
+                "img_url": img_url,
+                "display_name": display_name,
+                "mode": mode,
+                "colors": colors,
+                "fab": fab,
+                "message_placeholder": message_placeholder,
+                "initial_activity": initial_activity,
+                "allowed_origins": allowed_origins,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    AppsServiceHandlersCreateCopilotResponse,
+                    construct_type(
+                        type_=AppsServiceHandlersCreateCopilotResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
