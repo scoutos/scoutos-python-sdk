@@ -20,6 +20,7 @@ class BlockRunFailedData(UncheckedBaseModel):
     metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
     state: typing.Dict[str, typing.Optional[typing.Any]]
     session_id: str
+    block_type: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

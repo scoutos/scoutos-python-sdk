@@ -134,7 +134,7 @@ client.workflows.create()
 <dl>
 <dd>
 
-**workflow_display_name:** `typing.Optional[str]` 
+**workflow_id:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -142,7 +142,7 @@ client.workflows.create()
 <dl>
 <dd>
 
-**workflow_schema_version:** `typing.Optional[str]` 
+**img_url:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -150,7 +150,7 @@ client.workflows.create()
 <dl>
 <dd>
 
-**workflow_img_url:** `typing.Optional[str]` 
+**display_name:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -158,7 +158,7 @@ client.workflows.create()
 <dl>
 <dd>
 
-**workflow_description:** `typing.Optional[str]` 
+**mode:** `typing.Optional[CopilotConfigMode]` 
     
 </dd>
 </dl>
@@ -166,7 +166,39 @@ client.workflows.create()
 <dl>
 <dd>
 
-**blocks:** `typing.Optional[typing.Sequence[BlockInput]]` 
+**colors:** `typing.Optional[typing.Dict[str, str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fab:** `typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**message_placeholder:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**initial_activity:** `typing.Optional[typing.Sequence[typing.Optional[typing.Any]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**allowed_origins:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -1135,6 +1167,361 @@ client.workflow_logs.get(
 <dd>
 
 **cursor:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Copilots
+<details><summary><code>client.copilots.<a href="src/scoutos/copilots/client.py">list</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all copilots in the organization
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.copilots.list()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[str]` — Field to sort by
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**direction:** `typing.Optional[str]` — Sort in ascending or descending order
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start_at:** `typing.Optional[str]` — created_at to start at
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Limit of records to return
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**query:** `typing.Optional[str]` — Search query
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.copilots.<a href="src/scoutos/copilots/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Fetch app configuration by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.copilots.get(
+    copilot_id="copilot_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**copilot_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.copilots.<a href="src/scoutos/copilots/client.py">update</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.copilots.update(
+    copilot_id="copilot_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**copilot_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workflow_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**img_url:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**display_name:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**mode:** `typing.Optional[CopilotConfigMode]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**colors:** `typing.Optional[typing.Dict[str, str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fab:** `typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**message_placeholder:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**initial_activity:** `typing.Optional[typing.Sequence[typing.Optional[typing.Any]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**allowed_origins:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.copilots.<a href="src/scoutos/copilots/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.copilots.delete(
+    copilot_id="copilot_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**copilot_id:** `str` 
     
 </dd>
 </dl>

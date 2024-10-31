@@ -3,14 +3,19 @@
 from .actor import Actor
 from .actor_type import ActorType
 from .api_key_identity import ApiKeyIdentity
+from .apps_service_handlers_create_copilot_response import AppsServiceHandlersCreateCopilotResponse
 from .apps_service_handlers_create_workflow_response import AppsServiceHandlersCreateWorkflowResponse
+from .apps_service_handlers_delete_copilot_response import AppsServiceHandlersDeleteCopilotResponse
 from .apps_service_handlers_delete_workflow_response import AppsServiceHandlersDeleteWorkflowResponse
 from .apps_service_handlers_delete_workflow_revision_response import AppsServiceHandlersDeleteWorkflowRevisionResponse
+from .apps_service_handlers_get_copilot_response import AppsServiceHandlersGetCopilotResponse
 from .apps_service_handlers_get_workflow_environments_response import AppsServiceHandlersGetWorkflowEnvironmentsResponse
 from .apps_service_handlers_get_workflow_response import AppsServiceHandlersGetWorkflowResponse
+from .apps_service_handlers_list_copilots_response import AppsServiceHandlersListCopilotsResponse
 from .apps_service_handlers_list_workflow_revisions_response import AppsServiceHandlersListWorkflowRevisionsResponse
 from .apps_service_handlers_list_workflows_response import AppsServiceHandlersListWorkflowsResponse
 from .apps_service_handlers_promote_workflow_revision_response import AppsServiceHandlersPromoteWorkflowRevisionResponse
+from .apps_service_handlers_update_copilot_response import AppsServiceHandlersUpdateCopilotResponse
 from .apps_service_handlers_update_workflow_environment_response import (
     AppsServiceHandlersUpdateWorkflowEnvironmentResponse,
 )
@@ -58,6 +63,10 @@ from .column_type_item_text_long import ColumnTypeItemTextLong
 from .column_type_item_text_short import ColumnTypeItemTextShort
 from .column_type_item_url import ColumnTypeItemUrl
 from .content_type import ContentType
+from .copilot import Copilot
+from .copilot_config import CopilotConfig
+from .copilot_config_fab_value import CopilotConfigFabValue
+from .copilot_config_mode import CopilotConfigMode
 from .dependency import Dependency
 from .document import Document
 from .document_content import DocumentContent
@@ -126,14 +135,19 @@ __all__ = [
     "Actor",
     "ActorType",
     "ApiKeyIdentity",
+    "AppsServiceHandlersCreateCopilotResponse",
     "AppsServiceHandlersCreateWorkflowResponse",
+    "AppsServiceHandlersDeleteCopilotResponse",
     "AppsServiceHandlersDeleteWorkflowResponse",
     "AppsServiceHandlersDeleteWorkflowRevisionResponse",
+    "AppsServiceHandlersGetCopilotResponse",
     "AppsServiceHandlersGetWorkflowEnvironmentsResponse",
     "AppsServiceHandlersGetWorkflowResponse",
+    "AppsServiceHandlersListCopilotsResponse",
     "AppsServiceHandlersListWorkflowRevisionsResponse",
     "AppsServiceHandlersListWorkflowsResponse",
     "AppsServiceHandlersPromoteWorkflowRevisionResponse",
+    "AppsServiceHandlersUpdateCopilotResponse",
     "AppsServiceHandlersUpdateWorkflowEnvironmentResponse",
     "AppsServiceHandlersUpdateWorkflowResponse",
     "BlockConfigItemBoolean",
@@ -179,6 +193,10 @@ __all__ = [
     "ColumnTypeItemTextShort",
     "ColumnTypeItemUrl",
     "ContentType",
+    "Copilot",
+    "CopilotConfig",
+    "CopilotConfigFabValue",
+    "CopilotConfigMode",
     "Dependency",
     "Document",
     "DocumentContent",

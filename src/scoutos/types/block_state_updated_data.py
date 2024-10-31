@@ -2,8 +2,8 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .block_state_updated_data_update_type import BlockStateUpdatedDataUpdateType
 import pydantic
+from .block_state_updated_data_update_type import BlockStateUpdatedDataUpdateType
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
@@ -11,6 +11,11 @@ class BlockStateUpdatedData(UncheckedBaseModel):
     workflow_id: str
     workflow_run_id: str
     block_id: typing.Optional[str] = None
+    block_type: str = pydantic.Field()
+    """
+    The block archetype ID
+    """
+
     update_data: typing.Dict[str, typing.Optional[typing.Any]]
     update_type: typing.Optional[BlockStateUpdatedDataUpdateType] = pydantic.Field(default=None)
     """
