@@ -90,6 +90,7 @@ from .eval_service_handlers_get_document_response import EvalServiceHandlersGetD
 from .eval_service_handlers_get_documents_response import EvalServiceHandlersGetDocumentsResponse
 from .eval_service_handlers_update_collection_response import EvalServiceHandlersUpdateCollectionResponse
 from .eval_service_handlers_update_document_response import EvalServiceHandlersUpdateDocumentResponse
+from .event_name import EventName
 from .event_version import EventVersion
 from .http_validation_error import HttpValidationError
 from .identity import Identity
@@ -120,7 +121,7 @@ from .workflow_run_completed_data import WorkflowRunCompletedData
 from .workflow_run_completed_environment import WorkflowRunCompletedEnvironment
 from .workflow_run_event import WorkflowRunEvent
 from .workflow_run_event_data import WorkflowRunEventData
-from .workflow_run_event_names import WorkflowRunEventNames
+from .workflow_run_event_environment import WorkflowRunEventEnvironment
 from .workflow_run_failed import WorkflowRunFailed
 from .workflow_run_failed_data import WorkflowRunFailedData
 from .workflow_run_failed_environment import WorkflowRunFailedEnvironment
@@ -220,6 +221,7 @@ __all__ = [
     "EvalServiceHandlersGetDocumentsResponse",
     "EvalServiceHandlersUpdateCollectionResponse",
     "EvalServiceHandlersUpdateDocumentResponse",
+    "EventName",
     "EventVersion",
     "HttpValidationError",
     "Identity",
@@ -250,7 +252,7 @@ __all__ = [
     "WorkflowRunCompletedEnvironment",
     "WorkflowRunEvent",
     "WorkflowRunEventData",
-    "WorkflowRunEventNames",
+    "WorkflowRunEventEnvironment",
     "WorkflowRunFailed",
     "WorkflowRunFailedData",
     "WorkflowRunFailedEnvironment",
