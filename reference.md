@@ -1,4 +1,50 @@
 # Reference
+<details><summary><code>client.<a href="src/scoutos/client.py">list_source_archetypes_v_2_sources_get</a>()</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.list_source_archetypes_v_2_sources_get()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Workflows
 <details><summary><code>client.workflows.<a href="src/scoutos/workflows/client.py">list</a>(...)</code></summary>
 <dl>
@@ -1742,14 +1788,6 @@ client.collections.create()
 <dl>
 <dd>
 
-**columns:** `typing.Optional[typing.Sequence[CollectionConfigInputColumnsItem]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -1823,14 +1861,6 @@ client.collections.update(
 <dd>
 
 **collection_description:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**columns:** `typing.Optional[typing.Sequence[CollectionConfigInputColumnsItem]]` 
     
 </dd>
 </dl>
@@ -1920,6 +1950,336 @@ client.collections.delete(
 </dl>
 </details>
 
+## Tables
+<details><summary><code>client.tables.<a href="src/scoutos/tables/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.tables.get(
+    collection_id="collection_id",
+    table_id="table_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tables.<a href="src/scoutos/tables/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.tables.create(
+    collection_id="collection_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_display_name:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_img_url:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_description:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**schema:** `typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tables.<a href="src/scoutos/tables/client.py">update</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.tables.update(
+    collection_id="collection_id",
+    table_id="table_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_display_name:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_img_url:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_description:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**schema:** `typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tables.<a href="src/scoutos/tables/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a table given a table_id.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.tables.delete(
+    collection_id="collection_id",
+    table_id="table_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Documents
 <details><summary><code>client.documents.<a href="src/scoutos/documents/client.py">get</a>(...)</code></summary>
 <dl>
@@ -1941,6 +2301,7 @@ client = Scout(
 )
 client.documents.get(
     collection_id="collection_id",
+    table_id="table_id",
     document_id="document_id",
 )
 
@@ -1959,6 +2320,14 @@ client.documents.get(
 <dd>
 
 **collection_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `str` 
     
 </dd>
 </dl>
@@ -1999,14 +2368,15 @@ client.documents.get(
 <dd>
 
 ```python
-from scoutos import DocumentDataInput, Scout
+from scoutos import Scout
 
 client = Scout(
     api_key="YOUR_API_KEY",
 )
 client.documents.create(
     collection_id="collection_id",
-    request=DocumentDataInput(),
+    table_id="table_id",
+    request={"key": True},
 )
 
 ```
@@ -2024,6 +2394,14 @@ client.documents.create(
 <dd>
 
 **collection_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `str` 
     
 </dd>
 </dl>
@@ -2072,6 +2450,8 @@ client = Scout(
 client.documents.update(
     collection_id="collection_id",
     document_id="document_id",
+    table_id="table_id",
+    request={"key": True},
 )
 
 ```
@@ -2104,7 +2484,7 @@ client.documents.update(
 <dl>
 <dd>
 
-**id:** `typing.Optional[str]` 
+**table_id:** `str` 
     
 </dd>
 </dl>
@@ -2112,23 +2492,7 @@ client.documents.update(
 <dl>
 <dd>
 
-**columns:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**display_name:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**content:** `typing.Optional[DocumentDataInputContent]` 
+**request:** `typing.Dict[str, DocumentsUpdateRequestValue]` 
     
 </dd>
 </dl>
@@ -2182,6 +2546,7 @@ client = Scout(
 )
 client.documents.delete(
     collection_id="collection_id",
+    table_id="table_id",
     document_id="document_id",
 )
 
@@ -2200,6 +2565,14 @@ client.documents.delete(
 <dd>
 
 **collection_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `str` 
     
 </dd>
 </dl>

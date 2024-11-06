@@ -2,16 +2,16 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .collection_config_input_columns_item import CollectionConfigInputColumnsItem
-from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from .table_config_output_schema_item import TableConfigOutputSchemaItem
 import pydantic
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
-class CollectionConfigInput(UncheckedBaseModel):
-    collection_display_name: typing.Optional[str] = None
-    collection_img_url: typing.Optional[str] = None
-    collection_description: typing.Optional[str] = None
-    columns: typing.Optional[typing.List[CollectionConfigInputColumnsItem]] = None
+class TableConfigOutput(UncheckedBaseModel):
+    table_display_name: typing.Optional[str] = None
+    table_img_url: typing.Optional[str] = None
+    table_description: typing.Optional[str] = None
+    schema_: typing.Optional[typing.List[TableConfigOutputSchemaItem]] = pydantic.Field(alias="schema", default=None)
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

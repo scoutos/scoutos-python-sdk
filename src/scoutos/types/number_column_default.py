@@ -2,4 +2,4 @@
 
 import typing
 
-ContentType = typing.Literal["paragraph"]
+NumberColumnDefault = typing.Union[int, float]

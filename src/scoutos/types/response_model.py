@@ -2,16 +2,13 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
+from .source_archetype import SourceArchetype
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class ColumnTypeItemJson(UncheckedBaseModel):
-    column_id: typing.Optional[str] = None
-    column_display_name: typing.Optional[str] = None
-    column_type: typing.Literal["json"] = "json"
-    default_value: typing.Optional[str] = None
-    data_type: typing.Optional[typing.Literal["json"]] = None
+class ResponseModel(UncheckedBaseModel):
+    sources: typing.List[SourceArchetype]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

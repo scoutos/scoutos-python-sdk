@@ -12,7 +12,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from .types.documents_create_request import DocumentsCreateRequest
 from ..types.eval_service_handlers_create_document_response import EvalServiceHandlersCreateDocumentResponse
-from ..types.document_data_input_content import DocumentDataInputContent
+from .types.documents_update_request_value import DocumentsUpdateRequestValue
 from ..types.eval_service_handlers_update_document_response import EvalServiceHandlersUpdateDocumentResponse
 from ..types.eval_service_handlers_delete_document_response import EvalServiceHandlersDeleteDocumentResponse
 from ..core.client_wrapper import AsyncClientWrapper
@@ -26,12 +26,19 @@ class DocumentsClient:
         self._client_wrapper = client_wrapper
 
     def get(
-        self, collection_id: str, document_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        collection_id: str,
+        table_id: str,
+        document_id: str,
+        *,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> EvalServiceHandlersGetDocumentResponse:
         """
         Parameters
         ----------
         collection_id : str
+
+        table_id : str
 
         document_id : str
 
@@ -52,11 +59,12 @@ class DocumentsClient:
         )
         client.documents.get(
             collection_id="collection_id",
+            table_id="table_id",
             document_id="document_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/documents/{jsonable_encoder(document_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -87,6 +95,7 @@ class DocumentsClient:
     def create(
         self,
         collection_id: str,
+        table_id: str,
         *,
         request: DocumentsCreateRequest,
         request_options: typing.Optional[RequestOptions] = None,
@@ -95,6 +104,8 @@ class DocumentsClient:
         Parameters
         ----------
         collection_id : str
+
+        table_id : str
 
         request : DocumentsCreateRequest
 
@@ -108,18 +119,19 @@ class DocumentsClient:
 
         Examples
         --------
-        from scoutos import DocumentDataInput, Scout
+        from scoutos import Scout
 
         client = Scout(
             api_key="YOUR_API_KEY",
         )
         client.documents.create(
             collection_id="collection_id",
-            request=DocumentDataInput(),
+            table_id="table_id",
+            request={"key": True},
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/documents",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents",
             method="POST",
             json=request,
             request_options=request_options,
@@ -153,11 +165,9 @@ class DocumentsClient:
         self,
         collection_id: str,
         document_id: str,
+        table_id: str,
         *,
-        id: typing.Optional[str] = OMIT,
-        columns: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
-        display_name: typing.Optional[str] = OMIT,
-        content: typing.Optional[DocumentDataInputContent] = OMIT,
+        request: typing.Dict[str, DocumentsUpdateRequestValue],
         request_options: typing.Optional[RequestOptions] = None,
     ) -> EvalServiceHandlersUpdateDocumentResponse:
         """
@@ -167,13 +177,9 @@ class DocumentsClient:
 
         document_id : str
 
-        id : typing.Optional[str]
+        table_id : str
 
-        columns : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
-
-        display_name : typing.Optional[str]
-
-        content : typing.Optional[DocumentDataInputContent]
+        request : typing.Dict[str, DocumentsUpdateRequestValue]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -193,17 +199,14 @@ class DocumentsClient:
         client.documents.update(
             collection_id="collection_id",
             document_id="document_id",
+            table_id="table_id",
+            request={"key": True},
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/documents/{jsonable_encoder(document_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
             method="PUT",
-            json={
-                "id": id,
-                "columns": columns,
-                "display_name": display_name,
-                "content": content,
-            },
+            json=request,
             request_options=request_options,
             omit=OMIT,
         )
@@ -232,7 +235,12 @@ class DocumentsClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def delete(
-        self, collection_id: str, document_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        collection_id: str,
+        table_id: str,
+        document_id: str,
+        *,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> EvalServiceHandlersDeleteDocumentResponse:
         """
         Delete a document given a document_id.
@@ -240,6 +248,8 @@ class DocumentsClient:
         Parameters
         ----------
         collection_id : str
+
+        table_id : str
 
         document_id : str
 
@@ -260,11 +270,12 @@ class DocumentsClient:
         )
         client.documents.delete(
             collection_id="collection_id",
+            table_id="table_id",
             document_id="document_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/documents/{jsonable_encoder(document_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -298,12 +309,19 @@ class AsyncDocumentsClient:
         self._client_wrapper = client_wrapper
 
     async def get(
-        self, collection_id: str, document_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        collection_id: str,
+        table_id: str,
+        document_id: str,
+        *,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> EvalServiceHandlersGetDocumentResponse:
         """
         Parameters
         ----------
         collection_id : str
+
+        table_id : str
 
         document_id : str
 
@@ -329,6 +347,7 @@ class AsyncDocumentsClient:
         async def main() -> None:
             await client.documents.get(
                 collection_id="collection_id",
+                table_id="table_id",
                 document_id="document_id",
             )
 
@@ -336,7 +355,7 @@ class AsyncDocumentsClient:
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/documents/{jsonable_encoder(document_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -367,6 +386,7 @@ class AsyncDocumentsClient:
     async def create(
         self,
         collection_id: str,
+        table_id: str,
         *,
         request: DocumentsCreateRequest,
         request_options: typing.Optional[RequestOptions] = None,
@@ -375,6 +395,8 @@ class AsyncDocumentsClient:
         Parameters
         ----------
         collection_id : str
+
+        table_id : str
 
         request : DocumentsCreateRequest
 
@@ -390,7 +412,7 @@ class AsyncDocumentsClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScout, DocumentDataInput
+        from scoutos import AsyncScout
 
         client = AsyncScout(
             api_key="YOUR_API_KEY",
@@ -400,14 +422,15 @@ class AsyncDocumentsClient:
         async def main() -> None:
             await client.documents.create(
                 collection_id="collection_id",
-                request=DocumentDataInput(),
+                table_id="table_id",
+                request={"key": True},
             )
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/documents",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents",
             method="POST",
             json=request,
             request_options=request_options,
@@ -441,11 +464,9 @@ class AsyncDocumentsClient:
         self,
         collection_id: str,
         document_id: str,
+        table_id: str,
         *,
-        id: typing.Optional[str] = OMIT,
-        columns: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
-        display_name: typing.Optional[str] = OMIT,
-        content: typing.Optional[DocumentDataInputContent] = OMIT,
+        request: typing.Dict[str, DocumentsUpdateRequestValue],
         request_options: typing.Optional[RequestOptions] = None,
     ) -> EvalServiceHandlersUpdateDocumentResponse:
         """
@@ -455,13 +476,9 @@ class AsyncDocumentsClient:
 
         document_id : str
 
-        id : typing.Optional[str]
+        table_id : str
 
-        columns : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
-
-        display_name : typing.Optional[str]
-
-        content : typing.Optional[DocumentDataInputContent]
+        request : typing.Dict[str, DocumentsUpdateRequestValue]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -486,20 +503,17 @@ class AsyncDocumentsClient:
             await client.documents.update(
                 collection_id="collection_id",
                 document_id="document_id",
+                table_id="table_id",
+                request={"key": True},
             )
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/documents/{jsonable_encoder(document_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
             method="PUT",
-            json={
-                "id": id,
-                "columns": columns,
-                "display_name": display_name,
-                "content": content,
-            },
+            json=request,
             request_options=request_options,
             omit=OMIT,
         )
@@ -528,7 +542,12 @@ class AsyncDocumentsClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     async def delete(
-        self, collection_id: str, document_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        collection_id: str,
+        table_id: str,
+        document_id: str,
+        *,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> EvalServiceHandlersDeleteDocumentResponse:
         """
         Delete a document given a document_id.
@@ -536,6 +555,8 @@ class AsyncDocumentsClient:
         Parameters
         ----------
         collection_id : str
+
+        table_id : str
 
         document_id : str
 
@@ -561,6 +582,7 @@ class AsyncDocumentsClient:
         async def main() -> None:
             await client.documents.delete(
                 collection_id="collection_id",
+                table_id="table_id",
                 document_id="document_id",
             )
 
@@ -568,7 +590,7 @@ class AsyncDocumentsClient:
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/documents/{jsonable_encoder(document_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
             method="DELETE",
             request_options=request_options,
         )

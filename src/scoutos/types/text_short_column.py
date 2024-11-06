@@ -2,17 +2,17 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .number_config import NumberConfig
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class ColumnTypeItemNumber(UncheckedBaseModel):
+class TextShortColumn(UncheckedBaseModel):
     column_id: typing.Optional[str] = None
     column_display_name: typing.Optional[str] = None
-    column_type: typing.Literal["number"] = "number"
-    number: NumberConfig
-    data_type: typing.Optional[typing.Literal["number"]] = None
+    column_type: typing.Literal["text-short"] = "text-short"
+    data_type: typing.Optional[typing.Literal["string"]] = None
+    hidden: typing.Optional[bool] = None
+    default: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

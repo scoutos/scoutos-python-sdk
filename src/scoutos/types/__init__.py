@@ -50,30 +50,16 @@ from .block_state_updated import BlockStateUpdated
 from .block_state_updated_data import BlockStateUpdatedData
 from .block_state_updated_data_update_type import BlockStateUpdatedDataUpdateType
 from .block_state_updated_environment import BlockStateUpdatedEnvironment
+from .check_box_column import CheckBoxColumn
 from .collection import Collection
-from .collection_config_input import CollectionConfigInput
-from .collection_config_input_columns_item import CollectionConfigInputColumnsItem
-from .collection_config_output import CollectionConfigOutput
-from .collection_config_output_columns_item import CollectionConfigOutputColumnsItem
-from .column_type_item_check_box import ColumnTypeItemCheckBox
-from .column_type_item_json import ColumnTypeItemJson
-from .column_type_item_number import ColumnTypeItemNumber
-from .column_type_item_select import ColumnTypeItemSelect
-from .column_type_item_text_long import ColumnTypeItemTextLong
-from .column_type_item_text_short import ColumnTypeItemTextShort
-from .column_type_item_url import ColumnTypeItemUrl
-from .content_type import ContentType
+from .collection_config import CollectionConfig
 from .copilot import Copilot
 from .copilot_config import CopilotConfig
 from .copilot_config_fab_value import CopilotConfigFabValue
 from .copilot_config_mode import CopilotConfigMode
 from .dependency import Dependency
 from .document import Document
-from .document_content import DocumentContent
-from .document_data_input import DocumentDataInput
-from .document_data_input_content import DocumentDataInputContent
-from .document_data_output import DocumentDataOutput
-from .document_data_output_content import DocumentDataOutputContent
+from .document_data_value import DocumentDataValue
 from .edge_ui import EdgeUi
 from .environment import Environment
 from .environment_config import EnvironmentConfig
@@ -82,32 +68,50 @@ from .environment_deployment_config_revision_lookup import EnvironmentDeployment
 from .environment_deployment_document import EnvironmentDeploymentDocument
 from .eval_service_handlers_create_collection_response import EvalServiceHandlersCreateCollectionResponse
 from .eval_service_handlers_create_document_response import EvalServiceHandlersCreateDocumentResponse
+from .eval_service_handlers_create_table_response import EvalServiceHandlersCreateTableResponse
 from .eval_service_handlers_delete_collection_response import EvalServiceHandlersDeleteCollectionResponse
 from .eval_service_handlers_delete_document_response import EvalServiceHandlersDeleteDocumentResponse
+from .eval_service_handlers_delete_table_response import EvalServiceHandlersDeleteTableResponse
 from .eval_service_handlers_get_collection_response import EvalServiceHandlersGetCollectionResponse
 from .eval_service_handlers_get_collections_response import EvalServiceHandlersGetCollectionsResponse
 from .eval_service_handlers_get_document_response import EvalServiceHandlersGetDocumentResponse
 from .eval_service_handlers_get_documents_response import EvalServiceHandlersGetDocumentsResponse
+from .eval_service_handlers_get_table_response import EvalServiceHandlersGetTableResponse
+from .eval_service_handlers_get_tables_response import EvalServiceHandlersGetTablesResponse
 from .eval_service_handlers_update_collection_response import EvalServiceHandlersUpdateCollectionResponse
 from .eval_service_handlers_update_document_response import EvalServiceHandlersUpdateDocumentResponse
+from .eval_service_handlers_update_table_response import EvalServiceHandlersUpdateTableResponse
 from .event_name import EventName
 from .event_version import EventVersion
 from .http_validation_error import HttpValidationError
 from .identity import Identity
 from .identity_details import IdentityDetails
 from .identity_types import IdentityTypes
+from .json_column import JsonColumn
+from .markdown_column import MarkdownColumn
 from .message import Message
 from .message_chunk import MessageChunk
 from .node_ui import NodeUi
-from .number_config import NumberConfig
-from .number_config_default_value import NumberConfigDefaultValue
-from .number_config_max_value import NumberConfigMaxValue
-from .number_config_min_value import NumberConfigMinValue
+from .number_column import NumberColumn
+from .number_column_default import NumberColumnDefault
+from .number_column_max_value import NumberColumnMaxValue
+from .number_column_min_value import NumberColumnMinValue
 from .position import Position
 from .prompt import Prompt
 from .prompt_role import PromptRole
+from .response_model import ResponseModel
 from .response_model_usage import ResponseModelUsage
+from .select_column import SelectColumn
 from .select_option_item import SelectOptionItem
+from .source_archetype import SourceArchetype
+from .table import Table
+from .table_config_input import TableConfigInput
+from .table_config_input_schema_item import TableConfigInputSchemaItem
+from .table_config_output import TableConfigOutput
+from .table_config_output_schema_item import TableConfigOutputSchemaItem
+from .text_long_column import TextLongColumn
+from .text_short_column import TextShortColumn
+from .url_column import UrlColumn
 from .usage import Usage
 from .user_identity import UserIdentity
 from .validation_error import ValidationError
@@ -181,30 +185,16 @@ __all__ = [
     "BlockStateUpdatedData",
     "BlockStateUpdatedDataUpdateType",
     "BlockStateUpdatedEnvironment",
+    "CheckBoxColumn",
     "Collection",
-    "CollectionConfigInput",
-    "CollectionConfigInputColumnsItem",
-    "CollectionConfigOutput",
-    "CollectionConfigOutputColumnsItem",
-    "ColumnTypeItemCheckBox",
-    "ColumnTypeItemJson",
-    "ColumnTypeItemNumber",
-    "ColumnTypeItemSelect",
-    "ColumnTypeItemTextLong",
-    "ColumnTypeItemTextShort",
-    "ColumnTypeItemUrl",
-    "ContentType",
+    "CollectionConfig",
     "Copilot",
     "CopilotConfig",
     "CopilotConfigFabValue",
     "CopilotConfigMode",
     "Dependency",
     "Document",
-    "DocumentContent",
-    "DocumentDataInput",
-    "DocumentDataInputContent",
-    "DocumentDataOutput",
-    "DocumentDataOutputContent",
+    "DocumentDataValue",
     "EdgeUi",
     "Environment",
     "EnvironmentConfig",
@@ -213,32 +203,50 @@ __all__ = [
     "EnvironmentDeploymentDocument",
     "EvalServiceHandlersCreateCollectionResponse",
     "EvalServiceHandlersCreateDocumentResponse",
+    "EvalServiceHandlersCreateTableResponse",
     "EvalServiceHandlersDeleteCollectionResponse",
     "EvalServiceHandlersDeleteDocumentResponse",
+    "EvalServiceHandlersDeleteTableResponse",
     "EvalServiceHandlersGetCollectionResponse",
     "EvalServiceHandlersGetCollectionsResponse",
     "EvalServiceHandlersGetDocumentResponse",
     "EvalServiceHandlersGetDocumentsResponse",
+    "EvalServiceHandlersGetTableResponse",
+    "EvalServiceHandlersGetTablesResponse",
     "EvalServiceHandlersUpdateCollectionResponse",
     "EvalServiceHandlersUpdateDocumentResponse",
+    "EvalServiceHandlersUpdateTableResponse",
     "EventName",
     "EventVersion",
     "HttpValidationError",
     "Identity",
     "IdentityDetails",
     "IdentityTypes",
+    "JsonColumn",
+    "MarkdownColumn",
     "Message",
     "MessageChunk",
     "NodeUi",
-    "NumberConfig",
-    "NumberConfigDefaultValue",
-    "NumberConfigMaxValue",
-    "NumberConfigMinValue",
+    "NumberColumn",
+    "NumberColumnDefault",
+    "NumberColumnMaxValue",
+    "NumberColumnMinValue",
     "Position",
     "Prompt",
     "PromptRole",
+    "ResponseModel",
     "ResponseModelUsage",
+    "SelectColumn",
     "SelectOptionItem",
+    "SourceArchetype",
+    "Table",
+    "TableConfigInput",
+    "TableConfigInputSchemaItem",
+    "TableConfigOutput",
+    "TableConfigOutputSchemaItem",
+    "TextLongColumn",
+    "TextShortColumn",
+    "UrlColumn",
     "Usage",
     "UserIdentity",
     "ValidationError",

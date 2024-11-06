@@ -2,4 +2,4 @@
 
 import typing
 
-NumberConfigMaxValue = typing.Union[int, float]
+DocumentsUpdateRequestValue = typing.Union[bool, float, int, str]

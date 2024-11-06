@@ -2,21 +2,13 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .document_data_value import DocumentDataValue
-import datetime as dt
-from .identity import Identity
+from .table import Table
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class Document(UncheckedBaseModel):
-    document_id: typing.Optional[str] = None
-    data: typing.Optional[typing.Dict[str, DocumentDataValue]] = None
-    created_at: typing.Optional[dt.datetime] = None
-    last_updated_at: typing.Optional[dt.datetime] = None
-    created_by: Identity
-    last_updated_by: Identity
-    revision_id: typing.Optional[str] = None
+class EvalServiceHandlersCreateTableResponse(UncheckedBaseModel):
+    data: typing.Optional[Table] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

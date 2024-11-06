@@ -6,12 +6,13 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class ColumnTypeItemTextShort(UncheckedBaseModel):
+class JsonColumn(UncheckedBaseModel):
     column_id: typing.Optional[str] = None
     column_display_name: typing.Optional[str] = None
-    column_type: typing.Literal["text-short"] = "text-short"
-    default_value: typing.Optional[str] = None
-    data_type: typing.Optional[typing.Literal["string"]] = None
+    column_type: typing.Literal["json"] = "json"
+    data_type: typing.Optional[typing.Literal["json"]] = None
+    hidden: typing.Optional[bool] = None
+    default: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

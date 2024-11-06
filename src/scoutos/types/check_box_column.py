@@ -2,16 +2,17 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .collection_config_output_columns_item import CollectionConfigOutputColumnsItem
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class CollectionConfigOutput(UncheckedBaseModel):
-    collection_display_name: typing.Optional[str] = None
-    collection_img_url: typing.Optional[str] = None
-    collection_description: typing.Optional[str] = None
-    columns: typing.Optional[typing.List[CollectionConfigOutputColumnsItem]] = None
+class CheckBoxColumn(UncheckedBaseModel):
+    column_id: typing.Optional[str] = None
+    column_display_name: typing.Optional[str] = None
+    column_type: typing.Literal["checkbox"] = "checkbox"
+    data_type: typing.Optional[typing.Literal["boolean"]] = None
+    hidden: typing.Optional[bool] = None
+    default: typing.Optional[bool] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

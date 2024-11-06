@@ -3,40 +3,43 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.eval_service_handlers_get_collection_response import EvalServiceHandlersGetCollectionResponse
+from ..types.eval_service_handlers_get_table_response import EvalServiceHandlersGetTableResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
-from ..types.eval_service_handlers_create_collection_response import EvalServiceHandlersCreateCollectionResponse
-from ..types.eval_service_handlers_update_collection_response import EvalServiceHandlersUpdateCollectionResponse
-from ..types.eval_service_handlers_delete_collection_response import EvalServiceHandlersDeleteCollectionResponse
+from ..types.table_config_input_schema_item import TableConfigInputSchemaItem
+from ..types.eval_service_handlers_create_table_response import EvalServiceHandlersCreateTableResponse
+from ..types.eval_service_handlers_update_table_response import EvalServiceHandlersUpdateTableResponse
+from ..types.eval_service_handlers_delete_table_response import EvalServiceHandlersDeleteTableResponse
 from ..core.client_wrapper import AsyncClientWrapper
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
 
-class CollectionsClient:
+class TablesClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
     def get(
-        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersGetCollectionResponse:
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> EvalServiceHandlersGetTableResponse:
         """
         Parameters
         ----------
         collection_id : str
+
+        table_id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        EvalServiceHandlersGetCollectionResponse
+        EvalServiceHandlersGetTableResponse
             Successful Response
 
         Examples
@@ -46,21 +49,22 @@ class CollectionsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.collections.get(
+        client.tables.get(
             collection_id="collection_id",
+            table_id="table_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetCollectionResponse,
+                    EvalServiceHandlersGetTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetCollectionResponse,  # type: ignore
+                        type_=EvalServiceHandlersGetTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -81,27 +85,33 @@ class CollectionsClient:
 
     def create(
         self,
+        collection_id: str,
         *,
-        collection_display_name: typing.Optional[str] = OMIT,
-        collection_img_url: typing.Optional[str] = OMIT,
-        collection_description: typing.Optional[str] = OMIT,
+        table_display_name: typing.Optional[str] = OMIT,
+        table_img_url: typing.Optional[str] = OMIT,
+        table_description: typing.Optional[str] = OMIT,
+        schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersCreateCollectionResponse:
+    ) -> EvalServiceHandlersCreateTableResponse:
         """
         Parameters
         ----------
-        collection_display_name : typing.Optional[str]
+        collection_id : str
 
-        collection_img_url : typing.Optional[str]
+        table_display_name : typing.Optional[str]
 
-        collection_description : typing.Optional[str]
+        table_img_url : typing.Optional[str]
+
+        table_description : typing.Optional[str]
+
+        schema : typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        EvalServiceHandlersCreateCollectionResponse
+        EvalServiceHandlersCreateTableResponse
             Successful Response
 
         Examples
@@ -111,15 +121,18 @@ class CollectionsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.collections.create()
+        client.tables.create(
+            collection_id="collection_id",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "v2/collections",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables",
             method="POST",
             json={
-                "collection_display_name": collection_display_name,
-                "collection_img_url": collection_img_url,
-                "collection_description": collection_description,
+                "table_display_name": table_display_name,
+                "table_img_url": table_img_url,
+                "table_description": table_description,
+                "schema": schema,
             },
             request_options=request_options,
             omit=OMIT,
@@ -127,9 +140,9 @@ class CollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersCreateCollectionResponse,
+                    EvalServiceHandlersCreateTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersCreateCollectionResponse,  # type: ignore
+                        type_=EvalServiceHandlersCreateTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -151,29 +164,35 @@ class CollectionsClient:
     def update(
         self,
         collection_id: str,
+        table_id: str,
         *,
-        collection_display_name: typing.Optional[str] = OMIT,
-        collection_img_url: typing.Optional[str] = OMIT,
-        collection_description: typing.Optional[str] = OMIT,
+        table_display_name: typing.Optional[str] = OMIT,
+        table_img_url: typing.Optional[str] = OMIT,
+        table_description: typing.Optional[str] = OMIT,
+        schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersUpdateCollectionResponse:
+    ) -> EvalServiceHandlersUpdateTableResponse:
         """
         Parameters
         ----------
         collection_id : str
 
-        collection_display_name : typing.Optional[str]
+        table_id : str
 
-        collection_img_url : typing.Optional[str]
+        table_display_name : typing.Optional[str]
 
-        collection_description : typing.Optional[str]
+        table_img_url : typing.Optional[str]
+
+        table_description : typing.Optional[str]
+
+        schema : typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        EvalServiceHandlersUpdateCollectionResponse
+        EvalServiceHandlersUpdateTableResponse
             Successful Response
 
         Examples
@@ -183,17 +202,19 @@ class CollectionsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.collections.update(
+        client.tables.update(
             collection_id="collection_id",
+            table_id="table_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}",
             method="PUT",
             json={
-                "collection_display_name": collection_display_name,
-                "collection_img_url": collection_img_url,
-                "collection_description": collection_description,
+                "table_display_name": table_display_name,
+                "table_img_url": table_img_url,
+                "table_description": table_description,
+                "schema": schema,
             },
             request_options=request_options,
             omit=OMIT,
@@ -201,9 +222,9 @@ class CollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersUpdateCollectionResponse,
+                    EvalServiceHandlersUpdateTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersUpdateCollectionResponse,  # type: ignore
+                        type_=EvalServiceHandlersUpdateTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -223,21 +244,23 @@ class CollectionsClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def delete(
-        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersDeleteCollectionResponse:
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> EvalServiceHandlersDeleteTableResponse:
         """
-        Delete a collection given a collection_id.
+        Delete a table given a table_id.
 
         Parameters
         ----------
         collection_id : str
+
+        table_id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        EvalServiceHandlersDeleteCollectionResponse
+        EvalServiceHandlersDeleteTableResponse
             Successful Response
 
         Examples
@@ -247,21 +270,22 @@ class CollectionsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.collections.delete(
+        client.tables.delete(
             collection_id="collection_id",
+            table_id="table_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}",
             method="DELETE",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersDeleteCollectionResponse,
+                    EvalServiceHandlersDeleteTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersDeleteCollectionResponse,  # type: ignore
+                        type_=EvalServiceHandlersDeleteTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -281,24 +305,26 @@ class CollectionsClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
 
-class AsyncCollectionsClient:
+class AsyncTablesClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
     async def get(
-        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersGetCollectionResponse:
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> EvalServiceHandlersGetTableResponse:
         """
         Parameters
         ----------
         collection_id : str
+
+        table_id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        EvalServiceHandlersGetCollectionResponse
+        EvalServiceHandlersGetTableResponse
             Successful Response
 
         Examples
@@ -313,24 +339,25 @@ class AsyncCollectionsClient:
 
 
         async def main() -> None:
-            await client.collections.get(
+            await client.tables.get(
                 collection_id="collection_id",
+                table_id="table_id",
             )
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetCollectionResponse,
+                    EvalServiceHandlersGetTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetCollectionResponse,  # type: ignore
+                        type_=EvalServiceHandlersGetTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -351,27 +378,33 @@ class AsyncCollectionsClient:
 
     async def create(
         self,
+        collection_id: str,
         *,
-        collection_display_name: typing.Optional[str] = OMIT,
-        collection_img_url: typing.Optional[str] = OMIT,
-        collection_description: typing.Optional[str] = OMIT,
+        table_display_name: typing.Optional[str] = OMIT,
+        table_img_url: typing.Optional[str] = OMIT,
+        table_description: typing.Optional[str] = OMIT,
+        schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersCreateCollectionResponse:
+    ) -> EvalServiceHandlersCreateTableResponse:
         """
         Parameters
         ----------
-        collection_display_name : typing.Optional[str]
+        collection_id : str
 
-        collection_img_url : typing.Optional[str]
+        table_display_name : typing.Optional[str]
 
-        collection_description : typing.Optional[str]
+        table_img_url : typing.Optional[str]
+
+        table_description : typing.Optional[str]
+
+        schema : typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        EvalServiceHandlersCreateCollectionResponse
+        EvalServiceHandlersCreateTableResponse
             Successful Response
 
         Examples
@@ -386,18 +419,21 @@ class AsyncCollectionsClient:
 
 
         async def main() -> None:
-            await client.collections.create()
+            await client.tables.create(
+                collection_id="collection_id",
+            )
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "v2/collections",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables",
             method="POST",
             json={
-                "collection_display_name": collection_display_name,
-                "collection_img_url": collection_img_url,
-                "collection_description": collection_description,
+                "table_display_name": table_display_name,
+                "table_img_url": table_img_url,
+                "table_description": table_description,
+                "schema": schema,
             },
             request_options=request_options,
             omit=OMIT,
@@ -405,9 +441,9 @@ class AsyncCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersCreateCollectionResponse,
+                    EvalServiceHandlersCreateTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersCreateCollectionResponse,  # type: ignore
+                        type_=EvalServiceHandlersCreateTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -429,29 +465,35 @@ class AsyncCollectionsClient:
     async def update(
         self,
         collection_id: str,
+        table_id: str,
         *,
-        collection_display_name: typing.Optional[str] = OMIT,
-        collection_img_url: typing.Optional[str] = OMIT,
-        collection_description: typing.Optional[str] = OMIT,
+        table_display_name: typing.Optional[str] = OMIT,
+        table_img_url: typing.Optional[str] = OMIT,
+        table_description: typing.Optional[str] = OMIT,
+        schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersUpdateCollectionResponse:
+    ) -> EvalServiceHandlersUpdateTableResponse:
         """
         Parameters
         ----------
         collection_id : str
 
-        collection_display_name : typing.Optional[str]
+        table_id : str
 
-        collection_img_url : typing.Optional[str]
+        table_display_name : typing.Optional[str]
 
-        collection_description : typing.Optional[str]
+        table_img_url : typing.Optional[str]
+
+        table_description : typing.Optional[str]
+
+        schema : typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        EvalServiceHandlersUpdateCollectionResponse
+        EvalServiceHandlersUpdateTableResponse
             Successful Response
 
         Examples
@@ -466,20 +508,22 @@ class AsyncCollectionsClient:
 
 
         async def main() -> None:
-            await client.collections.update(
+            await client.tables.update(
                 collection_id="collection_id",
+                table_id="table_id",
             )
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}",
             method="PUT",
             json={
-                "collection_display_name": collection_display_name,
-                "collection_img_url": collection_img_url,
-                "collection_description": collection_description,
+                "table_display_name": table_display_name,
+                "table_img_url": table_img_url,
+                "table_description": table_description,
+                "schema": schema,
             },
             request_options=request_options,
             omit=OMIT,
@@ -487,9 +531,9 @@ class AsyncCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersUpdateCollectionResponse,
+                    EvalServiceHandlersUpdateTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersUpdateCollectionResponse,  # type: ignore
+                        type_=EvalServiceHandlersUpdateTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -509,21 +553,23 @@ class AsyncCollectionsClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     async def delete(
-        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersDeleteCollectionResponse:
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> EvalServiceHandlersDeleteTableResponse:
         """
-        Delete a collection given a collection_id.
+        Delete a table given a table_id.
 
         Parameters
         ----------
         collection_id : str
+
+        table_id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        EvalServiceHandlersDeleteCollectionResponse
+        EvalServiceHandlersDeleteTableResponse
             Successful Response
 
         Examples
@@ -538,24 +584,25 @@ class AsyncCollectionsClient:
 
 
         async def main() -> None:
-            await client.collections.delete(
+            await client.tables.delete(
                 collection_id="collection_id",
+                table_id="table_id",
             )
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}",
             method="DELETE",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersDeleteCollectionResponse,
+                    EvalServiceHandlersDeleteTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersDeleteCollectionResponse,  # type: ignore
+                        type_=EvalServiceHandlersDeleteTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

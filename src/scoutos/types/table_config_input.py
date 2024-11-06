@@ -2,16 +2,16 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from .table_config_input_schema_item import TableConfigInputSchemaItem
 import pydantic
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
-class ColumnTypeItemUrl(UncheckedBaseModel):
-    column_id: typing.Optional[str] = None
-    column_display_name: typing.Optional[str] = None
-    column_type: typing.Literal["url"] = "url"
-    url: typing.Optional[str] = None
-    data_type: typing.Optional[typing.Literal["string"]] = None
+class TableConfigInput(UncheckedBaseModel):
+    table_display_name: typing.Optional[str] = None
+    table_img_url: typing.Optional[str] = None
+    table_description: typing.Optional[str] = None
+    schema_: typing.Optional[typing.List[TableConfigInputSchemaItem]] = pydantic.Field(alias="schema", default=None)
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
