@@ -99,11 +99,9 @@ from .number_column_min_value import NumberColumnMinValue
 from .position import Position
 from .prompt import Prompt
 from .prompt_role import PromptRole
-from .response_model import ResponseModel
 from .response_model_usage import ResponseModelUsage
 from .select_column import SelectColumn
 from .select_option_item import SelectOptionItem
-from .source_archetype import SourceArchetype
 from .table import Table
 from .table_config_input import TableConfigInput
 from .table_config_input_schema_item import TableConfigInputSchemaItem
@@ -234,11 +232,9 @@ __all__ = [
     "Position",
     "Prompt",
     "PromptRole",
-    "ResponseModel",
     "ResponseModelUsage",
     "SelectColumn",
     "SelectOptionItem",
-    "SourceArchetype",
     "Table",
     "TableConfigInput",
     "TableConfigInputSchemaItem",

@@ -15,10 +15,6 @@ from .copilots.client import CopilotsClient
 from .collections.client import CollectionsClient
 from .tables.client import TablesClient
 from .documents.client import DocumentsClient
-from .core.request_options import RequestOptions
-from .types.response_model import ResponseModel
-from .core.unchecked_base_model import construct_type
-from json.decoder import JSONDecodeError
 from .core.client_wrapper import AsyncClientWrapper
 from .workflows.client import AsyncWorkflowsClient
 from .environments.client import AsyncEnvironmentsClient
@@ -101,48 +97,6 @@ class Scout:
         self.tables = TablesClient(client_wrapper=self._client_wrapper)
         self.documents = DocumentsClient(client_wrapper=self._client_wrapper)
 
-    def list_source_archetypes_v_2_sources_get(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> ResponseModel:
-        """
-        Parameters
-        ----------
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        ResponseModel
-            Successful Response
-
-        Examples
-        --------
-        from scoutos import Scout
-
-        client = Scout(
-            api_key="YOUR_API_KEY",
-        )
-        client.list_source_archetypes_v_2_sources_get()
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            "v2/sources",
-            method="GET",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    ResponseModel,
-                    construct_type(
-                        type_=ResponseModel,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
-
 
 class AsyncScout:
     """
@@ -213,56 +167,6 @@ class AsyncScout:
         self.collections = AsyncCollectionsClient(client_wrapper=self._client_wrapper)
         self.tables = AsyncTablesClient(client_wrapper=self._client_wrapper)
         self.documents = AsyncDocumentsClient(client_wrapper=self._client_wrapper)
-
-    async def list_source_archetypes_v_2_sources_get(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> ResponseModel:
-        """
-        Parameters
-        ----------
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        ResponseModel
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from scoutos import AsyncScout
-
-        client = AsyncScout(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.list_source_archetypes_v_2_sources_get()
-
-
-        asyncio.run(main())
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            "v2/sources",
-            method="GET",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    ResponseModel,
-                    construct_type(
-                        type_=ResponseModel,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: ScoutEnvironment) -> str:
