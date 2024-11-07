@@ -3,7 +3,7 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.eval_service_handlers_get_document_response import EvalServiceHandlersGetDocumentResponse
+from ..types.eval_service_handlers_get_documents_response import EvalServiceHandlersGetDocumentsResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
@@ -12,6 +12,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from .types.documents_create_request import DocumentsCreateRequest
 from ..types.eval_service_handlers_create_document_response import EvalServiceHandlersCreateDocumentResponse
+from ..types.eval_service_handlers_get_document_response import EvalServiceHandlersGetDocumentResponse
 from .types.documents_update_request_value import DocumentsUpdateRequestValue
 from ..types.eval_service_handlers_update_document_response import EvalServiceHandlersUpdateDocumentResponse
 from ..types.eval_service_handlers_delete_document_response import EvalServiceHandlersDeleteDocumentResponse
@@ -25,14 +26,9 @@ class DocumentsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def get(
-        self,
-        collection_id: str,
-        table_id: str,
-        document_id: str,
-        *,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersGetDocumentResponse:
+    def list(
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> EvalServiceHandlersGetDocumentsResponse:
         """
         Parameters
         ----------
@@ -40,14 +36,12 @@ class DocumentsClient:
 
         table_id : str
 
-        document_id : str
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        EvalServiceHandlersGetDocumentResponse
+        EvalServiceHandlersGetDocumentsResponse
             Successful Response
 
         Examples
@@ -57,23 +51,22 @@ class DocumentsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.documents.get(
+        client.documents.list(
             collection_id="collection_id",
             table_id="table_id",
-            document_id="document_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetDocumentResponse,
+                    EvalServiceHandlersGetDocumentsResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetDocumentResponse,  # type: ignore
+                        type_=EvalServiceHandlersGetDocumentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -143,6 +136,73 @@ class DocumentsClient:
                     EvalServiceHandlersCreateDocumentResponse,
                     construct_type(
                         type_=EvalServiceHandlersCreateDocumentResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def get(
+        self,
+        collection_id: str,
+        table_id: str,
+        document_id: str,
+        *,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> EvalServiceHandlersGetDocumentResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        document_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        EvalServiceHandlersGetDocumentResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.documents.get(
+            collection_id="collection_id",
+            table_id="table_id",
+            document_id="document_id",
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    EvalServiceHandlersGetDocumentResponse,
+                    construct_type(
+                        type_=EvalServiceHandlersGetDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -308,14 +368,9 @@ class AsyncDocumentsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def get(
-        self,
-        collection_id: str,
-        table_id: str,
-        document_id: str,
-        *,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersGetDocumentResponse:
+    async def list(
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> EvalServiceHandlersGetDocumentsResponse:
         """
         Parameters
         ----------
@@ -323,14 +378,12 @@ class AsyncDocumentsClient:
 
         table_id : str
 
-        document_id : str
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        EvalServiceHandlersGetDocumentResponse
+        EvalServiceHandlersGetDocumentsResponse
             Successful Response
 
         Examples
@@ -345,26 +398,25 @@ class AsyncDocumentsClient:
 
 
         async def main() -> None:
-            await client.documents.get(
+            await client.documents.list(
                 collection_id="collection_id",
                 table_id="table_id",
-                document_id="document_id",
             )
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetDocumentResponse,
+                    EvalServiceHandlersGetDocumentsResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetDocumentResponse,  # type: ignore
+                        type_=EvalServiceHandlersGetDocumentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -442,6 +494,81 @@ class AsyncDocumentsClient:
                     EvalServiceHandlersCreateDocumentResponse,
                     construct_type(
                         type_=EvalServiceHandlersCreateDocumentResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def get(
+        self,
+        collection_id: str,
+        table_id: str,
+        document_id: str,
+        *,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> EvalServiceHandlersGetDocumentResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        document_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        EvalServiceHandlersGetDocumentResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.documents.get(
+                collection_id="collection_id",
+                table_id="table_id",
+                document_id="document_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    EvalServiceHandlersGetDocumentResponse,
+                    construct_type(
+                        type_=EvalServiceHandlersGetDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

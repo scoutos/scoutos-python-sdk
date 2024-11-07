@@ -1628,7 +1628,7 @@ client.copilots.delete(
 </details>
 
 ## Collections
-<details><summary><code>client.collections.<a href="src/scoutos/collections/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.collections.<a href="src/scoutos/collections/client.py">list</a>()</code></summary>
 <dl>
 <dd>
 
@@ -1646,9 +1646,7 @@ from scoutos import Scout
 client = Scout(
     api_key="YOUR_API_KEY",
 )
-client.collections.get(
-    collection_id="collection_id",
-)
+client.collections.list()
 
 ```
 </dd>
@@ -1660,14 +1658,6 @@ client.collections.get(
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**collection_id:** `str` 
-    
-</dd>
-</dl>
 
 <dl>
 <dd>
@@ -1735,6 +1725,62 @@ client.collections.create()
 <dd>
 
 **collection_description:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.collections.<a href="src/scoutos/collections/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.collections.get(
+    collection_id="collection_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `str` 
     
 </dd>
 </dl>
@@ -1905,7 +1951,7 @@ client.collections.delete(
 </details>
 
 ## Tables
-<details><summary><code>client.tables.<a href="src/scoutos/tables/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.tables.<a href="src/scoutos/tables/client.py">list</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1923,9 +1969,8 @@ from scoutos import Scout
 client = Scout(
     api_key="YOUR_API_KEY",
 )
-client.tables.get(
+client.tables.list(
     collection_id="collection_id",
-    table_id="table_id",
 )
 
 ```
@@ -1943,14 +1988,6 @@ client.tables.get(
 <dd>
 
 **collection_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**table_id:** `str` 
     
 </dd>
 </dl>
@@ -2039,6 +2076,71 @@ client.tables.create(
 <dd>
 
 **schema:** `typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tables.<a href="src/scoutos/tables/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.tables.get(
+    collection_id="collection_id",
+    table_id="table_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `str` 
     
 </dd>
 </dl>
@@ -2235,7 +2337,7 @@ client.tables.delete(
 </details>
 
 ## Documents
-<details><summary><code>client.documents.<a href="src/scoutos/documents/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.documents.<a href="src/scoutos/documents/client.py">list</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2253,10 +2355,9 @@ from scoutos import Scout
 client = Scout(
     api_key="YOUR_API_KEY",
 )
-client.documents.get(
+client.documents.list(
     collection_id="collection_id",
     table_id="table_id",
-    document_id="document_id",
 )
 
 ```
@@ -2282,14 +2383,6 @@ client.documents.get(
 <dd>
 
 **table_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**document_id:** `str` 
     
 </dd>
 </dl>
@@ -2364,6 +2457,80 @@ client.documents.create(
 <dd>
 
 **request:** `DocumentsCreateRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.documents.<a href="src/scoutos/documents/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.documents.get(
+    collection_id="collection_id",
+    table_id="table_id",
+    document_id="document_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**document_id:** `str` 
     
 </dd>
 </dl>

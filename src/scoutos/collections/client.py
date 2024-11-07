@@ -3,14 +3,15 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.eval_service_handlers_get_collection_response import EvalServiceHandlersGetCollectionResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..types.eval_service_handlers_get_collections_response import EvalServiceHandlersGetCollectionsResponse
 from ..core.unchecked_base_model import construct_type
-from ..errors.unprocessable_entity_error import UnprocessableEntityError
-from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..types.eval_service_handlers_create_collection_response import EvalServiceHandlersCreateCollectionResponse
+from ..errors.unprocessable_entity_error import UnprocessableEntityError
+from ..types.http_validation_error import HttpValidationError
+from ..types.eval_service_handlers_get_collection_response import EvalServiceHandlersGetCollectionResponse
+from ..core.jsonable_encoder import jsonable_encoder
 from ..types.eval_service_handlers_update_collection_response import EvalServiceHandlersUpdateCollectionResponse
 from ..types.eval_service_handlers_delete_collection_response import EvalServiceHandlersDeleteCollectionResponse
 from ..core.client_wrapper import AsyncClientWrapper
@@ -23,20 +24,18 @@ class CollectionsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def get(
-        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersGetCollectionResponse:
+    def list(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> EvalServiceHandlersGetCollectionsResponse:
         """
         Parameters
         ----------
-        collection_id : str
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        EvalServiceHandlersGetCollectionResponse
+        EvalServiceHandlersGetCollectionsResponse
             Successful Response
 
         Examples
@@ -46,33 +45,21 @@ class CollectionsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.collections.get(
-            collection_id="collection_id",
-        )
+        client.collections.list()
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}",
+            "v2/collections",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetCollectionResponse,
+                    EvalServiceHandlersGetCollectionsResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetCollectionResponse,  # type: ignore
+                        type_=EvalServiceHandlersGetCollectionsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
-                )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    typing.cast(
-                        HttpValidationError,
-                        construct_type(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
                 )
             _response_json = _response.json()
         except JSONDecodeError:
@@ -130,6 +117,62 @@ class CollectionsClient:
                     EvalServiceHandlersCreateCollectionResponse,
                     construct_type(
                         type_=EvalServiceHandlersCreateCollectionResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def get(
+        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> EvalServiceHandlersGetCollectionResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        EvalServiceHandlersGetCollectionResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.collections.get(
+            collection_id="collection_id",
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    EvalServiceHandlersGetCollectionResponse,
+                    construct_type(
+                        type_=EvalServiceHandlersGetCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -285,20 +328,18 @@ class AsyncCollectionsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def get(
-        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersGetCollectionResponse:
+    async def list(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> EvalServiceHandlersGetCollectionsResponse:
         """
         Parameters
         ----------
-        collection_id : str
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        EvalServiceHandlersGetCollectionResponse
+        EvalServiceHandlersGetCollectionsResponse
             Successful Response
 
         Examples
@@ -313,36 +354,24 @@ class AsyncCollectionsClient:
 
 
         async def main() -> None:
-            await client.collections.get(
-                collection_id="collection_id",
-            )
+            await client.collections.list()
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}",
+            "v2/collections",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetCollectionResponse,
+                    EvalServiceHandlersGetCollectionsResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetCollectionResponse,  # type: ignore
+                        type_=EvalServiceHandlersGetCollectionsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
-                )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    typing.cast(
-                        HttpValidationError,
-                        construct_type(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
                 )
             _response_json = _response.json()
         except JSONDecodeError:
@@ -408,6 +437,70 @@ class AsyncCollectionsClient:
                     EvalServiceHandlersCreateCollectionResponse,
                     construct_type(
                         type_=EvalServiceHandlersCreateCollectionResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def get(
+        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> EvalServiceHandlersGetCollectionResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        EvalServiceHandlersGetCollectionResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.collections.get(
+                collection_id="collection_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    EvalServiceHandlersGetCollectionResponse,
+                    construct_type(
+                        type_=EvalServiceHandlersGetCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
