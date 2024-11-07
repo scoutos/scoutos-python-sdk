@@ -21,7 +21,7 @@ class BlockStateUpdated(UncheckedBaseModel):
     Identifies the root cause of the event. If not set, it defaults to the event id.
     """
 
-    name: typing.Literal["block_state_updated"] = "block_state_updated"
+    name: typing.Optional[typing.Literal["block_state_updated"]] = None
     version: typing.Optional[EventVersion] = None
     environment: BlockStateUpdatedEnvironment
     timestamp: typing.Optional[str] = pydantic.Field(default=None)
