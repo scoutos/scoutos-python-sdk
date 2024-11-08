@@ -128,6 +128,7 @@ from .types import (
     WorkflowRunStartedEnvironment,
     WorkflowRunStateValue,
     WorkflowRunStopReason,
+    WorkflowRunStreamResponse,
 )
 from .errors import UnprocessableEntityError
 from . import collections, copilots, documents, environments, revisions, tables, usage, workflow_logs, workflows
@@ -278,6 +279,7 @@ __all__ = [
     "WorkflowRunStartedEnvironment",
     "WorkflowRunStateValue",
     "WorkflowRunStopReason",
+    "WorkflowRunStreamResponse",
     "WorkflowsRunRequestInputsValue",
     "WorkflowsRunStreamRequestInputsValue",
     "__version__",

@@ -129,6 +129,7 @@ from .workflow_run_started_data import WorkflowRunStartedData
 from .workflow_run_started_environment import WorkflowRunStartedEnvironment
 from .workflow_run_state_value import WorkflowRunStateValue
 from .workflow_run_stop_reason import WorkflowRunStopReason
+from .workflow_run_stream_response import WorkflowRunStreamResponse
 
 __all__ = [
     "Actor",
@@ -258,4 +259,5 @@ __all__ = [
     "WorkflowRunStartedEnvironment",
     "WorkflowRunStateValue",
     "WorkflowRunStopReason",
+    "WorkflowRunStreamResponse",
 ]

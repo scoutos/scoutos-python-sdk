@@ -16,6 +16,7 @@ from ..core.jsonable_encoder import jsonable_encoder
 from ..types.apps_service_handlers_update_workflow_response import AppsServiceHandlersUpdateWorkflowResponse
 from ..types.apps_service_handlers_delete_workflow_response import AppsServiceHandlersDeleteWorkflowResponse
 from .types.workflows_run_stream_request_inputs_value import WorkflowsRunStreamRequestInputsValue
+from ..types.workflow_run_stream_response import WorkflowRunStreamResponse
 import httpx_sse
 import json
 from .types.workflows_run_request_inputs_value import WorkflowsRunRequestInputsValue
@@ -395,7 +396,7 @@ class WorkflowsClient:
         session_id: typing.Optional[str] = None,
         inputs: typing.Optional[typing.Dict[str, WorkflowsRunStreamRequestInputsValue]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Iterator[typing.Optional[typing.Any]]:
+    ) -> typing.Iterator[WorkflowRunStreamResponse]:
         """
         Parameters
         ----------
@@ -420,7 +421,7 @@ class WorkflowsClient:
 
         Yields
         ------
-        typing.Iterator[typing.Optional[typing.Any]]
+        typing.Iterator[WorkflowRunStreamResponse]
 
 
         Examples
@@ -461,9 +462,9 @@ class WorkflowsClient:
                     for _sse in _event_source.iter_sse():
                         try:
                             yield typing.cast(
-                                typing.Optional[typing.Any],
+                                WorkflowRunStreamResponse,
                                 construct_type(
-                                    type_=typing.Optional[typing.Any],  # type: ignore
+                                    type_=WorkflowRunStreamResponse,  # type: ignore
                                     object_=json.loads(_sse.data),
                                 ),
                             )
@@ -983,7 +984,7 @@ class AsyncWorkflowsClient:
         session_id: typing.Optional[str] = None,
         inputs: typing.Optional[typing.Dict[str, WorkflowsRunStreamRequestInputsValue]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.AsyncIterator[typing.Optional[typing.Any]]:
+    ) -> typing.AsyncIterator[WorkflowRunStreamResponse]:
         """
         Parameters
         ----------
@@ -1008,7 +1009,7 @@ class AsyncWorkflowsClient:
 
         Yields
         ------
-        typing.AsyncIterator[typing.Optional[typing.Any]]
+        typing.AsyncIterator[WorkflowRunStreamResponse]
 
 
         Examples
@@ -1057,9 +1058,9 @@ class AsyncWorkflowsClient:
                     async for _sse in _event_source.aiter_sse():
                         try:
                             yield typing.cast(
-                                typing.Optional[typing.Any],
+                                WorkflowRunStreamResponse,
                                 construct_type(
-                                    type_=typing.Optional[typing.Any],  # type: ignore
+                                    type_=WorkflowRunStreamResponse,  # type: ignore
                                     object_=json.loads(_sse.data),
                                 ),
                             )
