@@ -3,18 +3,18 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.apps_service_handlers_list_workflows_response import AppsServiceHandlersListWorkflowsResponse
+from ..types.src_handlers_list_workflows_response import SrcHandlersListWorkflowsResponse
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..types.block_input import BlockInput
-from ..types.apps_service_handlers_create_workflow_response import AppsServiceHandlersCreateWorkflowResponse
-from ..types.apps_service_handlers_get_workflow_response import AppsServiceHandlersGetWorkflowResponse
+from ..types.src_handlers_create_workflow_response import SrcHandlersCreateWorkflowResponse
+from ..types.src_handlers_get_workflow_response import SrcHandlersGetWorkflowResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..types.apps_service_handlers_update_workflow_response import AppsServiceHandlersUpdateWorkflowResponse
-from ..types.apps_service_handlers_delete_workflow_response import AppsServiceHandlersDeleteWorkflowResponse
+from ..types.src_handlers_update_workflow_response import SrcHandlersUpdateWorkflowResponse
+from ..types.src_handlers_delete_workflow_response import SrcHandlersDeleteWorkflowResponse
 from .types.workflows_run_stream_request_inputs_value import WorkflowsRunStreamRequestInputsValue
 from ..types.workflow_run_stream_response import WorkflowRunStreamResponse
 import httpx_sse
@@ -40,7 +40,7 @@ class WorkflowsClient:
         limit: typing.Optional[int] = None,
         query: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersListWorkflowsResponse:
+    ) -> SrcHandlersListWorkflowsResponse:
         """
         List all workflows in the organization
 
@@ -66,7 +66,7 @@ class WorkflowsClient:
 
         Returns
         -------
-        AppsServiceHandlersListWorkflowsResponse
+        SrcHandlersListWorkflowsResponse
             Successful Response
 
         Examples
@@ -93,9 +93,9 @@ class WorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersListWorkflowsResponse,
+                    SrcHandlersListWorkflowsResponse,
                     construct_type(
-                        type_=AppsServiceHandlersListWorkflowsResponse,  # type: ignore
+                        type_=SrcHandlersListWorkflowsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -123,7 +123,7 @@ class WorkflowsClient:
         workflow_description: typing.Optional[str] = OMIT,
         blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersCreateWorkflowResponse:
+    ) -> SrcHandlersCreateWorkflowResponse:
         """
         Parameters
         ----------
@@ -142,7 +142,7 @@ class WorkflowsClient:
 
         Returns
         -------
-        AppsServiceHandlersCreateWorkflowResponse
+        SrcHandlersCreateWorkflowResponse
             Successful Response
 
         Examples
@@ -170,9 +170,9 @@ class WorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersCreateWorkflowResponse,
+                    SrcHandlersCreateWorkflowResponse,
                     construct_type(
-                        type_=AppsServiceHandlersCreateWorkflowResponse,  # type: ignore
+                        type_=SrcHandlersCreateWorkflowResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -193,7 +193,7 @@ class WorkflowsClient:
 
     def get(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersGetWorkflowResponse:
+    ) -> SrcHandlersGetWorkflowResponse:
         """
         Fetch app configuration by ID.
 
@@ -206,7 +206,7 @@ class WorkflowsClient:
 
         Returns
         -------
-        AppsServiceHandlersGetWorkflowResponse
+        SrcHandlersGetWorkflowResponse
             Successful Response
 
         Examples
@@ -228,9 +228,9 @@ class WorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersGetWorkflowResponse,
+                    SrcHandlersGetWorkflowResponse,
                     construct_type(
-                        type_=AppsServiceHandlersGetWorkflowResponse,  # type: ignore
+                        type_=SrcHandlersGetWorkflowResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -259,7 +259,7 @@ class WorkflowsClient:
         workflow_description: typing.Optional[str] = OMIT,
         blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersUpdateWorkflowResponse:
+    ) -> SrcHandlersUpdateWorkflowResponse:
         """
         Parameters
         ----------
@@ -280,7 +280,7 @@ class WorkflowsClient:
 
         Returns
         -------
-        AppsServiceHandlersUpdateWorkflowResponse
+        SrcHandlersUpdateWorkflowResponse
             Successful Response
 
         Examples
@@ -310,9 +310,9 @@ class WorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersUpdateWorkflowResponse,
+                    SrcHandlersUpdateWorkflowResponse,
                     construct_type(
-                        type_=AppsServiceHandlersUpdateWorkflowResponse,  # type: ignore
+                        type_=SrcHandlersUpdateWorkflowResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -333,7 +333,7 @@ class WorkflowsClient:
 
     def delete(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersDeleteWorkflowResponse:
+    ) -> SrcHandlersDeleteWorkflowResponse:
         """
         Parameters
         ----------
@@ -344,7 +344,7 @@ class WorkflowsClient:
 
         Returns
         -------
-        AppsServiceHandlersDeleteWorkflowResponse
+        SrcHandlersDeleteWorkflowResponse
             Successful Response
 
         Examples
@@ -366,9 +366,9 @@ class WorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersDeleteWorkflowResponse,
+                    SrcHandlersDeleteWorkflowResponse,
                     construct_type(
-                        type_=AppsServiceHandlersDeleteWorkflowResponse,  # type: ignore
+                        type_=SrcHandlersDeleteWorkflowResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -588,7 +588,7 @@ class AsyncWorkflowsClient:
         limit: typing.Optional[int] = None,
         query: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersListWorkflowsResponse:
+    ) -> SrcHandlersListWorkflowsResponse:
         """
         List all workflows in the organization
 
@@ -614,7 +614,7 @@ class AsyncWorkflowsClient:
 
         Returns
         -------
-        AppsServiceHandlersListWorkflowsResponse
+        SrcHandlersListWorkflowsResponse
             Successful Response
 
         Examples
@@ -649,9 +649,9 @@ class AsyncWorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersListWorkflowsResponse,
+                    SrcHandlersListWorkflowsResponse,
                     construct_type(
-                        type_=AppsServiceHandlersListWorkflowsResponse,  # type: ignore
+                        type_=SrcHandlersListWorkflowsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -679,7 +679,7 @@ class AsyncWorkflowsClient:
         workflow_description: typing.Optional[str] = OMIT,
         blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersCreateWorkflowResponse:
+    ) -> SrcHandlersCreateWorkflowResponse:
         """
         Parameters
         ----------
@@ -698,7 +698,7 @@ class AsyncWorkflowsClient:
 
         Returns
         -------
-        AppsServiceHandlersCreateWorkflowResponse
+        SrcHandlersCreateWorkflowResponse
             Successful Response
 
         Examples
@@ -734,9 +734,9 @@ class AsyncWorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersCreateWorkflowResponse,
+                    SrcHandlersCreateWorkflowResponse,
                     construct_type(
-                        type_=AppsServiceHandlersCreateWorkflowResponse,  # type: ignore
+                        type_=SrcHandlersCreateWorkflowResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -757,7 +757,7 @@ class AsyncWorkflowsClient:
 
     async def get(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersGetWorkflowResponse:
+    ) -> SrcHandlersGetWorkflowResponse:
         """
         Fetch app configuration by ID.
 
@@ -770,7 +770,7 @@ class AsyncWorkflowsClient:
 
         Returns
         -------
-        AppsServiceHandlersGetWorkflowResponse
+        SrcHandlersGetWorkflowResponse
             Successful Response
 
         Examples
@@ -800,9 +800,9 @@ class AsyncWorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersGetWorkflowResponse,
+                    SrcHandlersGetWorkflowResponse,
                     construct_type(
-                        type_=AppsServiceHandlersGetWorkflowResponse,  # type: ignore
+                        type_=SrcHandlersGetWorkflowResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -831,7 +831,7 @@ class AsyncWorkflowsClient:
         workflow_description: typing.Optional[str] = OMIT,
         blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersUpdateWorkflowResponse:
+    ) -> SrcHandlersUpdateWorkflowResponse:
         """
         Parameters
         ----------
@@ -852,7 +852,7 @@ class AsyncWorkflowsClient:
 
         Returns
         -------
-        AppsServiceHandlersUpdateWorkflowResponse
+        SrcHandlersUpdateWorkflowResponse
             Successful Response
 
         Examples
@@ -890,9 +890,9 @@ class AsyncWorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersUpdateWorkflowResponse,
+                    SrcHandlersUpdateWorkflowResponse,
                     construct_type(
-                        type_=AppsServiceHandlersUpdateWorkflowResponse,  # type: ignore
+                        type_=SrcHandlersUpdateWorkflowResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -913,7 +913,7 @@ class AsyncWorkflowsClient:
 
     async def delete(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersDeleteWorkflowResponse:
+    ) -> SrcHandlersDeleteWorkflowResponse:
         """
         Parameters
         ----------
@@ -924,7 +924,7 @@ class AsyncWorkflowsClient:
 
         Returns
         -------
-        AppsServiceHandlersDeleteWorkflowResponse
+        SrcHandlersDeleteWorkflowResponse
             Successful Response
 
         Examples
@@ -954,9 +954,9 @@ class AsyncWorkflowsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersDeleteWorkflowResponse,
+                    SrcHandlersDeleteWorkflowResponse,
                     construct_type(
-                        type_=AppsServiceHandlersDeleteWorkflowResponse,  # type: ignore
+                        type_=SrcHandlersDeleteWorkflowResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

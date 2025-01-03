@@ -15,6 +15,7 @@ class WorkflowRunStartedData(UncheckedBaseModel):
     session_id: typing.Optional[str] = None
     state: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
     workflow_config: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
+    price: float
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

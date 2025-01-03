@@ -3,9 +3,7 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.apps_service_handlers_get_workflow_environments_response import (
-    AppsServiceHandlersGetWorkflowEnvironmentsResponse,
-)
+from ..types.src_handlers_get_workflow_environments_response import SrcHandlersGetWorkflowEnvironmentsResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
@@ -13,9 +11,7 @@ from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..types.environment_deployment_config import EnvironmentDeploymentConfig
-from ..types.apps_service_handlers_update_workflow_environment_response import (
-    AppsServiceHandlersUpdateWorkflowEnvironmentResponse,
-)
+from ..types.src_handlers_update_workflow_environment_response import SrcHandlersUpdateWorkflowEnvironmentResponse
 from ..core.client_wrapper import AsyncClientWrapper
 
 # this is used as the default value for optional parameters
@@ -28,7 +24,7 @@ class EnvironmentsClient:
 
     def list(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersGetWorkflowEnvironmentsResponse:
+    ) -> SrcHandlersGetWorkflowEnvironmentsResponse:
         """
         List all environments for a workflow in the organization
 
@@ -41,7 +37,7 @@ class EnvironmentsClient:
 
         Returns
         -------
-        AppsServiceHandlersGetWorkflowEnvironmentsResponse
+        SrcHandlersGetWorkflowEnvironmentsResponse
             Successful Response
 
         Examples
@@ -63,9 +59,9 @@ class EnvironmentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersGetWorkflowEnvironmentsResponse,
+                    SrcHandlersGetWorkflowEnvironmentsResponse,
                     construct_type(
-                        type_=AppsServiceHandlersGetWorkflowEnvironmentsResponse,  # type: ignore
+                        type_=SrcHandlersGetWorkflowEnvironmentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -93,7 +89,7 @@ class EnvironmentsClient:
         description: str,
         deployments: typing.Sequence[EnvironmentDeploymentConfig],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersUpdateWorkflowEnvironmentResponse:
+    ) -> SrcHandlersUpdateWorkflowEnvironmentResponse:
         """
         Update deployments within a workflow environment
 
@@ -114,7 +110,7 @@ class EnvironmentsClient:
 
         Returns
         -------
-        AppsServiceHandlersUpdateWorkflowEnvironmentResponse
+        SrcHandlersUpdateWorkflowEnvironmentResponse
             Successful Response
 
         Examples
@@ -150,9 +146,9 @@ class EnvironmentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersUpdateWorkflowEnvironmentResponse,
+                    SrcHandlersUpdateWorkflowEnvironmentResponse,
                     construct_type(
-                        type_=AppsServiceHandlersUpdateWorkflowEnvironmentResponse,  # type: ignore
+                        type_=SrcHandlersUpdateWorkflowEnvironmentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -178,7 +174,7 @@ class AsyncEnvironmentsClient:
 
     async def list(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersGetWorkflowEnvironmentsResponse:
+    ) -> SrcHandlersGetWorkflowEnvironmentsResponse:
         """
         List all environments for a workflow in the organization
 
@@ -191,7 +187,7 @@ class AsyncEnvironmentsClient:
 
         Returns
         -------
-        AppsServiceHandlersGetWorkflowEnvironmentsResponse
+        SrcHandlersGetWorkflowEnvironmentsResponse
             Successful Response
 
         Examples
@@ -221,9 +217,9 @@ class AsyncEnvironmentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersGetWorkflowEnvironmentsResponse,
+                    SrcHandlersGetWorkflowEnvironmentsResponse,
                     construct_type(
-                        type_=AppsServiceHandlersGetWorkflowEnvironmentsResponse,  # type: ignore
+                        type_=SrcHandlersGetWorkflowEnvironmentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -251,7 +247,7 @@ class AsyncEnvironmentsClient:
         description: str,
         deployments: typing.Sequence[EnvironmentDeploymentConfig],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersUpdateWorkflowEnvironmentResponse:
+    ) -> SrcHandlersUpdateWorkflowEnvironmentResponse:
         """
         Update deployments within a workflow environment
 
@@ -272,7 +268,7 @@ class AsyncEnvironmentsClient:
 
         Returns
         -------
-        AppsServiceHandlersUpdateWorkflowEnvironmentResponse
+        SrcHandlersUpdateWorkflowEnvironmentResponse
             Successful Response
 
         Examples
@@ -316,9 +312,9 @@ class AsyncEnvironmentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersUpdateWorkflowEnvironmentResponse,
+                    SrcHandlersUpdateWorkflowEnvironmentResponse,
                     construct_type(
-                        type_=AppsServiceHandlersUpdateWorkflowEnvironmentResponse,  # type: ignore
+                        type_=SrcHandlersUpdateWorkflowEnvironmentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -6,7 +6,7 @@ import typing
 import pydantic
 
 
-class AppsServiceHandlersDeleteWorkflowResponse(UncheckedBaseModel):
+class SrcHandlersDeleteWorkflowResponse(UncheckedBaseModel):
     detail: str
 
     if IS_PYDANTIC_V2:

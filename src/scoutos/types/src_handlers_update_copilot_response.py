@@ -2,13 +2,13 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .workflow import Workflow
+from .copilot import Copilot
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class AppsServiceHandlersListWorkflowRevisionsResponse(UncheckedBaseModel):
-    data: typing.List[Workflow]
+class SrcHandlersUpdateCopilotResponse(UncheckedBaseModel):
+    data: typing.Optional[Copilot] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

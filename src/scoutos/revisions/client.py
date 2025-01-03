@@ -3,21 +3,15 @@
 from ..core.client_wrapper import SyncClientWrapper
 import typing
 from ..core.request_options import RequestOptions
-from ..types.apps_service_handlers_list_workflow_revisions_response import (
-    AppsServiceHandlersListWorkflowRevisionsResponse,
-)
+from ..types.src_handlers_list_workflow_revisions_response import SrcHandlersListWorkflowRevisionsResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
-from ..types.apps_service_handlers_promote_workflow_revision_response import (
-    AppsServiceHandlersPromoteWorkflowRevisionResponse,
-)
-from ..types.apps_service_handlers_delete_workflow_revision_response import (
-    AppsServiceHandlersDeleteWorkflowRevisionResponse,
-)
+from ..types.src_handlers_promote_workflow_revision_response import SrcHandlersPromoteWorkflowRevisionResponse
+from ..types.src_handlers_delete_workflow_revision_response import SrcHandlersDeleteWorkflowRevisionResponse
 from ..core.client_wrapper import AsyncClientWrapper
 
 
@@ -27,7 +21,7 @@ class RevisionsClient:
 
     def list(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersListWorkflowRevisionsResponse:
+    ) -> SrcHandlersListWorkflowRevisionsResponse:
         """
         List all app revisions in the organization
 
@@ -40,7 +34,7 @@ class RevisionsClient:
 
         Returns
         -------
-        AppsServiceHandlersListWorkflowRevisionsResponse
+        SrcHandlersListWorkflowRevisionsResponse
             Successful Response
 
         Examples
@@ -62,9 +56,9 @@ class RevisionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersListWorkflowRevisionsResponse,
+                    SrcHandlersListWorkflowRevisionsResponse,
                     construct_type(
-                        type_=AppsServiceHandlersListWorkflowRevisionsResponse,  # type: ignore
+                        type_=SrcHandlersListWorkflowRevisionsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -85,7 +79,7 @@ class RevisionsClient:
 
     def update(
         self, workflow_id: str, revision_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersPromoteWorkflowRevisionResponse:
+    ) -> SrcHandlersPromoteWorkflowRevisionResponse:
         """
         Parameters
         ----------
@@ -98,7 +92,7 @@ class RevisionsClient:
 
         Returns
         -------
-        AppsServiceHandlersPromoteWorkflowRevisionResponse
+        SrcHandlersPromoteWorkflowRevisionResponse
             Successful Response
 
         Examples
@@ -121,9 +115,9 @@ class RevisionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersPromoteWorkflowRevisionResponse,
+                    SrcHandlersPromoteWorkflowRevisionResponse,
                     construct_type(
-                        type_=AppsServiceHandlersPromoteWorkflowRevisionResponse,  # type: ignore
+                        type_=SrcHandlersPromoteWorkflowRevisionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -144,7 +138,7 @@ class RevisionsClient:
 
     def delete(
         self, workflow_id: str, revision_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersDeleteWorkflowRevisionResponse:
+    ) -> SrcHandlersDeleteWorkflowRevisionResponse:
         """
         Parameters
         ----------
@@ -157,7 +151,7 @@ class RevisionsClient:
 
         Returns
         -------
-        AppsServiceHandlersDeleteWorkflowRevisionResponse
+        SrcHandlersDeleteWorkflowRevisionResponse
             Successful Response
 
         Examples
@@ -180,9 +174,9 @@ class RevisionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersDeleteWorkflowRevisionResponse,
+                    SrcHandlersDeleteWorkflowRevisionResponse,
                     construct_type(
-                        type_=AppsServiceHandlersDeleteWorkflowRevisionResponse,  # type: ignore
+                        type_=SrcHandlersDeleteWorkflowRevisionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -208,7 +202,7 @@ class AsyncRevisionsClient:
 
     async def list(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersListWorkflowRevisionsResponse:
+    ) -> SrcHandlersListWorkflowRevisionsResponse:
         """
         List all app revisions in the organization
 
@@ -221,7 +215,7 @@ class AsyncRevisionsClient:
 
         Returns
         -------
-        AppsServiceHandlersListWorkflowRevisionsResponse
+        SrcHandlersListWorkflowRevisionsResponse
             Successful Response
 
         Examples
@@ -251,9 +245,9 @@ class AsyncRevisionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersListWorkflowRevisionsResponse,
+                    SrcHandlersListWorkflowRevisionsResponse,
                     construct_type(
-                        type_=AppsServiceHandlersListWorkflowRevisionsResponse,  # type: ignore
+                        type_=SrcHandlersListWorkflowRevisionsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -274,7 +268,7 @@ class AsyncRevisionsClient:
 
     async def update(
         self, workflow_id: str, revision_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersPromoteWorkflowRevisionResponse:
+    ) -> SrcHandlersPromoteWorkflowRevisionResponse:
         """
         Parameters
         ----------
@@ -287,7 +281,7 @@ class AsyncRevisionsClient:
 
         Returns
         -------
-        AppsServiceHandlersPromoteWorkflowRevisionResponse
+        SrcHandlersPromoteWorkflowRevisionResponse
             Successful Response
 
         Examples
@@ -318,9 +312,9 @@ class AsyncRevisionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersPromoteWorkflowRevisionResponse,
+                    SrcHandlersPromoteWorkflowRevisionResponse,
                     construct_type(
-                        type_=AppsServiceHandlersPromoteWorkflowRevisionResponse,  # type: ignore
+                        type_=SrcHandlersPromoteWorkflowRevisionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -341,7 +335,7 @@ class AsyncRevisionsClient:
 
     async def delete(
         self, workflow_id: str, revision_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersDeleteWorkflowRevisionResponse:
+    ) -> SrcHandlersDeleteWorkflowRevisionResponse:
         """
         Parameters
         ----------
@@ -354,7 +348,7 @@ class AsyncRevisionsClient:
 
         Returns
         -------
-        AppsServiceHandlersDeleteWorkflowRevisionResponse
+        SrcHandlersDeleteWorkflowRevisionResponse
             Successful Response
 
         Examples
@@ -385,9 +379,9 @@ class AsyncRevisionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersDeleteWorkflowRevisionResponse,
+                    SrcHandlersDeleteWorkflowRevisionResponse,
                     construct_type(
-                        type_=AppsServiceHandlersDeleteWorkflowRevisionResponse,  # type: ignore
+                        type_=SrcHandlersDeleteWorkflowRevisionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

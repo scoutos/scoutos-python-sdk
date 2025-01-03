@@ -3,15 +3,12 @@
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
 from .copilot import Copilot
-import datetime as dt
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class AppsServiceHandlersListCopilotsResponse(UncheckedBaseModel):
-    data: typing.List[Copilot]
-    next_cursor: typing.Optional[dt.datetime] = None
-    has_more: bool
+class SrcHandlersCreateCopilotResponse(UncheckedBaseModel):
+    data: typing.Optional[Copilot] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

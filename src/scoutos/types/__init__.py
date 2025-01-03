@@ -3,23 +3,6 @@
 from .actor import Actor
 from .actor_type import ActorType
 from .api_key_identity import ApiKeyIdentity
-from .apps_service_handlers_create_copilot_response import AppsServiceHandlersCreateCopilotResponse
-from .apps_service_handlers_create_workflow_response import AppsServiceHandlersCreateWorkflowResponse
-from .apps_service_handlers_delete_copilot_response import AppsServiceHandlersDeleteCopilotResponse
-from .apps_service_handlers_delete_workflow_response import AppsServiceHandlersDeleteWorkflowResponse
-from .apps_service_handlers_delete_workflow_revision_response import AppsServiceHandlersDeleteWorkflowRevisionResponse
-from .apps_service_handlers_get_copilot_response import AppsServiceHandlersGetCopilotResponse
-from .apps_service_handlers_get_workflow_environments_response import AppsServiceHandlersGetWorkflowEnvironmentsResponse
-from .apps_service_handlers_get_workflow_response import AppsServiceHandlersGetWorkflowResponse
-from .apps_service_handlers_list_copilots_response import AppsServiceHandlersListCopilotsResponse
-from .apps_service_handlers_list_workflow_revisions_response import AppsServiceHandlersListWorkflowRevisionsResponse
-from .apps_service_handlers_list_workflows_response import AppsServiceHandlersListWorkflowsResponse
-from .apps_service_handlers_promote_workflow_revision_response import AppsServiceHandlersPromoteWorkflowRevisionResponse
-from .apps_service_handlers_update_copilot_response import AppsServiceHandlersUpdateCopilotResponse
-from .apps_service_handlers_update_workflow_environment_response import (
-    AppsServiceHandlersUpdateWorkflowEnvironmentResponse,
-)
-from .apps_service_handlers_update_workflow_response import AppsServiceHandlersUpdateWorkflowResponse
 from .block_config_item_boolean import BlockConfigItemBoolean
 from .block_config_item_json import BlockConfigItemJson
 from .block_config_item_llm import BlockConfigItemLlm
@@ -101,6 +84,21 @@ from .prompt_role import PromptRole
 from .response_model_usage import ResponseModelUsage
 from .select_column import SelectColumn
 from .select_option_item import SelectOptionItem
+from .src_handlers_create_copilot_response import SrcHandlersCreateCopilotResponse
+from .src_handlers_create_workflow_response import SrcHandlersCreateWorkflowResponse
+from .src_handlers_delete_copilot_response import SrcHandlersDeleteCopilotResponse
+from .src_handlers_delete_workflow_response import SrcHandlersDeleteWorkflowResponse
+from .src_handlers_delete_workflow_revision_response import SrcHandlersDeleteWorkflowRevisionResponse
+from .src_handlers_get_copilot_response import SrcHandlersGetCopilotResponse
+from .src_handlers_get_workflow_environments_response import SrcHandlersGetWorkflowEnvironmentsResponse
+from .src_handlers_get_workflow_response import SrcHandlersGetWorkflowResponse
+from .src_handlers_list_copilots_response import SrcHandlersListCopilotsResponse
+from .src_handlers_list_workflow_revisions_response import SrcHandlersListWorkflowRevisionsResponse
+from .src_handlers_list_workflows_response import SrcHandlersListWorkflowsResponse
+from .src_handlers_promote_workflow_revision_response import SrcHandlersPromoteWorkflowRevisionResponse
+from .src_handlers_update_copilot_response import SrcHandlersUpdateCopilotResponse
+from .src_handlers_update_workflow_environment_response import SrcHandlersUpdateWorkflowEnvironmentResponse
+from .src_handlers_update_workflow_response import SrcHandlersUpdateWorkflowResponse
 from .table import Table
 from .table_config_input import TableConfigInput
 from .table_config_input_schema_item import TableConfigInputSchemaItem
@@ -135,21 +133,6 @@ __all__ = [
     "Actor",
     "ActorType",
     "ApiKeyIdentity",
-    "AppsServiceHandlersCreateCopilotResponse",
-    "AppsServiceHandlersCreateWorkflowResponse",
-    "AppsServiceHandlersDeleteCopilotResponse",
-    "AppsServiceHandlersDeleteWorkflowResponse",
-    "AppsServiceHandlersDeleteWorkflowRevisionResponse",
-    "AppsServiceHandlersGetCopilotResponse",
-    "AppsServiceHandlersGetWorkflowEnvironmentsResponse",
-    "AppsServiceHandlersGetWorkflowResponse",
-    "AppsServiceHandlersListCopilotsResponse",
-    "AppsServiceHandlersListWorkflowRevisionsResponse",
-    "AppsServiceHandlersListWorkflowsResponse",
-    "AppsServiceHandlersPromoteWorkflowRevisionResponse",
-    "AppsServiceHandlersUpdateCopilotResponse",
-    "AppsServiceHandlersUpdateWorkflowEnvironmentResponse",
-    "AppsServiceHandlersUpdateWorkflowResponse",
     "BlockConfigItemBoolean",
     "BlockConfigItemJson",
     "BlockConfigItemLlm",
@@ -231,6 +214,21 @@ __all__ = [
     "ResponseModelUsage",
     "SelectColumn",
     "SelectOptionItem",
+    "SrcHandlersCreateCopilotResponse",
+    "SrcHandlersCreateWorkflowResponse",
+    "SrcHandlersDeleteCopilotResponse",
+    "SrcHandlersDeleteWorkflowResponse",
+    "SrcHandlersDeleteWorkflowRevisionResponse",
+    "SrcHandlersGetCopilotResponse",
+    "SrcHandlersGetWorkflowEnvironmentsResponse",
+    "SrcHandlersGetWorkflowResponse",
+    "SrcHandlersListCopilotsResponse",
+    "SrcHandlersListWorkflowRevisionsResponse",
+    "SrcHandlersListWorkflowsResponse",
+    "SrcHandlersPromoteWorkflowRevisionResponse",
+    "SrcHandlersUpdateCopilotResponse",
+    "SrcHandlersUpdateWorkflowEnvironmentResponse",
+    "SrcHandlersUpdateWorkflowResponse",
     "Table",
     "TableConfigInput",
     "TableConfigInputSchemaItem",

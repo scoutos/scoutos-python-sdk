@@ -3,7 +3,7 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.apps_service_handlers_list_copilots_response import AppsServiceHandlersListCopilotsResponse
+from ..types.src_handlers_list_copilots_response import SrcHandlersListCopilotsResponse
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
@@ -11,11 +11,11 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..types.copilot_config_mode import CopilotConfigMode
 from ..types.copilot_config_fab_value import CopilotConfigFabValue
-from ..types.apps_service_handlers_create_copilot_response import AppsServiceHandlersCreateCopilotResponse
-from ..types.apps_service_handlers_get_copilot_response import AppsServiceHandlersGetCopilotResponse
+from ..types.src_handlers_create_copilot_response import SrcHandlersCreateCopilotResponse
+from ..types.src_handlers_get_copilot_response import SrcHandlersGetCopilotResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..types.apps_service_handlers_update_copilot_response import AppsServiceHandlersUpdateCopilotResponse
-from ..types.apps_service_handlers_delete_copilot_response import AppsServiceHandlersDeleteCopilotResponse
+from ..types.src_handlers_update_copilot_response import SrcHandlersUpdateCopilotResponse
+from ..types.src_handlers_delete_copilot_response import SrcHandlersDeleteCopilotResponse
 from ..core.client_wrapper import AsyncClientWrapper
 
 # this is used as the default value for optional parameters
@@ -35,7 +35,7 @@ class CopilotsClient:
         limit: typing.Optional[int] = None,
         query: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersListCopilotsResponse:
+    ) -> SrcHandlersListCopilotsResponse:
         """
         List all copilots in the organization
 
@@ -61,7 +61,7 @@ class CopilotsClient:
 
         Returns
         -------
-        AppsServiceHandlersListCopilotsResponse
+        SrcHandlersListCopilotsResponse
             Successful Response
 
         Examples
@@ -88,9 +88,9 @@ class CopilotsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersListCopilotsResponse,
+                    SrcHandlersListCopilotsResponse,
                     construct_type(
-                        type_=AppsServiceHandlersListCopilotsResponse,  # type: ignore
+                        type_=SrcHandlersListCopilotsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -122,7 +122,7 @@ class CopilotsClient:
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersCreateCopilotResponse:
+    ) -> SrcHandlersCreateCopilotResponse:
         """
         Parameters
         ----------
@@ -149,7 +149,7 @@ class CopilotsClient:
 
         Returns
         -------
-        AppsServiceHandlersCreateCopilotResponse
+        SrcHandlersCreateCopilotResponse
             Successful Response
 
         Examples
@@ -181,9 +181,9 @@ class CopilotsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersCreateCopilotResponse,
+                    SrcHandlersCreateCopilotResponse,
                     construct_type(
-                        type_=AppsServiceHandlersCreateCopilotResponse,  # type: ignore
+                        type_=SrcHandlersCreateCopilotResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -204,7 +204,7 @@ class CopilotsClient:
 
     def get(
         self, copilot_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersGetCopilotResponse:
+    ) -> SrcHandlersGetCopilotResponse:
         """
         Fetch app configuration by ID.
 
@@ -217,7 +217,7 @@ class CopilotsClient:
 
         Returns
         -------
-        AppsServiceHandlersGetCopilotResponse
+        SrcHandlersGetCopilotResponse
             Successful Response
 
         Examples
@@ -239,9 +239,9 @@ class CopilotsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersGetCopilotResponse,
+                    SrcHandlersGetCopilotResponse,
                     construct_type(
-                        type_=AppsServiceHandlersGetCopilotResponse,  # type: ignore
+                        type_=SrcHandlersGetCopilotResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -274,7 +274,7 @@ class CopilotsClient:
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersUpdateCopilotResponse:
+    ) -> SrcHandlersUpdateCopilotResponse:
         """
         Parameters
         ----------
@@ -303,7 +303,7 @@ class CopilotsClient:
 
         Returns
         -------
-        AppsServiceHandlersUpdateCopilotResponse
+        SrcHandlersUpdateCopilotResponse
             Successful Response
 
         Examples
@@ -337,9 +337,9 @@ class CopilotsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersUpdateCopilotResponse,
+                    SrcHandlersUpdateCopilotResponse,
                     construct_type(
-                        type_=AppsServiceHandlersUpdateCopilotResponse,  # type: ignore
+                        type_=SrcHandlersUpdateCopilotResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -360,7 +360,7 @@ class CopilotsClient:
 
     def delete(
         self, copilot_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersDeleteCopilotResponse:
+    ) -> SrcHandlersDeleteCopilotResponse:
         """
         Parameters
         ----------
@@ -371,7 +371,7 @@ class CopilotsClient:
 
         Returns
         -------
-        AppsServiceHandlersDeleteCopilotResponse
+        SrcHandlersDeleteCopilotResponse
             Successful Response
 
         Examples
@@ -393,9 +393,9 @@ class CopilotsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersDeleteCopilotResponse,
+                    SrcHandlersDeleteCopilotResponse,
                     construct_type(
-                        type_=AppsServiceHandlersDeleteCopilotResponse,  # type: ignore
+                        type_=SrcHandlersDeleteCopilotResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -428,7 +428,7 @@ class AsyncCopilotsClient:
         limit: typing.Optional[int] = None,
         query: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersListCopilotsResponse:
+    ) -> SrcHandlersListCopilotsResponse:
         """
         List all copilots in the organization
 
@@ -454,7 +454,7 @@ class AsyncCopilotsClient:
 
         Returns
         -------
-        AppsServiceHandlersListCopilotsResponse
+        SrcHandlersListCopilotsResponse
             Successful Response
 
         Examples
@@ -489,9 +489,9 @@ class AsyncCopilotsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersListCopilotsResponse,
+                    SrcHandlersListCopilotsResponse,
                     construct_type(
-                        type_=AppsServiceHandlersListCopilotsResponse,  # type: ignore
+                        type_=SrcHandlersListCopilotsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -523,7 +523,7 @@ class AsyncCopilotsClient:
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersCreateCopilotResponse:
+    ) -> SrcHandlersCreateCopilotResponse:
         """
         Parameters
         ----------
@@ -550,7 +550,7 @@ class AsyncCopilotsClient:
 
         Returns
         -------
-        AppsServiceHandlersCreateCopilotResponse
+        SrcHandlersCreateCopilotResponse
             Successful Response
 
         Examples
@@ -590,9 +590,9 @@ class AsyncCopilotsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersCreateCopilotResponse,
+                    SrcHandlersCreateCopilotResponse,
                     construct_type(
-                        type_=AppsServiceHandlersCreateCopilotResponse,  # type: ignore
+                        type_=SrcHandlersCreateCopilotResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -613,7 +613,7 @@ class AsyncCopilotsClient:
 
     async def get(
         self, copilot_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersGetCopilotResponse:
+    ) -> SrcHandlersGetCopilotResponse:
         """
         Fetch app configuration by ID.
 
@@ -626,7 +626,7 @@ class AsyncCopilotsClient:
 
         Returns
         -------
-        AppsServiceHandlersGetCopilotResponse
+        SrcHandlersGetCopilotResponse
             Successful Response
 
         Examples
@@ -656,9 +656,9 @@ class AsyncCopilotsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersGetCopilotResponse,
+                    SrcHandlersGetCopilotResponse,
                     construct_type(
-                        type_=AppsServiceHandlersGetCopilotResponse,  # type: ignore
+                        type_=SrcHandlersGetCopilotResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -691,7 +691,7 @@ class AsyncCopilotsClient:
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AppsServiceHandlersUpdateCopilotResponse:
+    ) -> SrcHandlersUpdateCopilotResponse:
         """
         Parameters
         ----------
@@ -720,7 +720,7 @@ class AsyncCopilotsClient:
 
         Returns
         -------
-        AppsServiceHandlersUpdateCopilotResponse
+        SrcHandlersUpdateCopilotResponse
             Successful Response
 
         Examples
@@ -762,9 +762,9 @@ class AsyncCopilotsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersUpdateCopilotResponse,
+                    SrcHandlersUpdateCopilotResponse,
                     construct_type(
-                        type_=AppsServiceHandlersUpdateCopilotResponse,  # type: ignore
+                        type_=SrcHandlersUpdateCopilotResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -785,7 +785,7 @@ class AsyncCopilotsClient:
 
     async def delete(
         self, copilot_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AppsServiceHandlersDeleteCopilotResponse:
+    ) -> SrcHandlersDeleteCopilotResponse:
         """
         Parameters
         ----------
@@ -796,7 +796,7 @@ class AsyncCopilotsClient:
 
         Returns
         -------
-        AppsServiceHandlersDeleteCopilotResponse
+        SrcHandlersDeleteCopilotResponse
             Successful Response
 
         Examples
@@ -826,9 +826,9 @@ class AsyncCopilotsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    AppsServiceHandlersDeleteCopilotResponse,
+                    SrcHandlersDeleteCopilotResponse,
                     construct_type(
-                        type_=AppsServiceHandlersDeleteCopilotResponse,  # type: ignore
+                        type_=SrcHandlersDeleteCopilotResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

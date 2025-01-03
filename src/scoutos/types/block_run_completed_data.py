@@ -15,6 +15,7 @@ class BlockRunCompletedData(UncheckedBaseModel):
     metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
     state: typing.Dict[str, typing.Optional[typing.Any]]
     session_id: str
+    price: float
     block_type: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:

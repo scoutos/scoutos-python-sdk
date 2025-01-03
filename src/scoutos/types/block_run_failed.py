@@ -3,9 +3,9 @@
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
 import pydantic
-from .event_version import EventVersion
 from .block_run_failed_environment import BlockRunFailedEnvironment
 from .block_run_failed_data import BlockRunFailedData
+from .event_version import EventVersion
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
@@ -22,7 +22,6 @@ class BlockRunFailed(UncheckedBaseModel):
     """
 
     name: typing.Optional[typing.Literal["block_run_failed"]] = None
-    version: typing.Optional[EventVersion] = None
     environment: BlockRunFailedEnvironment
     timestamp: typing.Optional[str] = pydantic.Field(default=None)
     """
@@ -30,6 +29,9 @@ class BlockRunFailed(UncheckedBaseModel):
     """
 
     data: BlockRunFailedData
+    price: str
+    event_type: str
+    version: EventVersion
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

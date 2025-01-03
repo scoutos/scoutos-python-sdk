@@ -3,9 +3,9 @@
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
 import pydantic
-from .event_version import EventVersion
 from .workflow_run_completed_environment import WorkflowRunCompletedEnvironment
 from .workflow_run_completed_data import WorkflowRunCompletedData
+from .event_version import EventVersion
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
@@ -22,7 +22,6 @@ class WorkflowRunCompleted(UncheckedBaseModel):
     """
 
     name: typing.Optional[typing.Literal["workflow_run_completed"]] = None
-    version: typing.Optional[EventVersion] = None
     environment: WorkflowRunCompletedEnvironment
     timestamp: typing.Optional[str] = pydantic.Field(default=None)
     """
@@ -30,6 +29,9 @@ class WorkflowRunCompleted(UncheckedBaseModel):
     """
 
     data: WorkflowRunCompletedData
+    price: str
+    event_type: str
+    version: EventVersion
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

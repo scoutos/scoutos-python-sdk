@@ -3,9 +3,9 @@
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
 import pydantic
-from .event_version import EventVersion
 from .block_state_updated_environment import BlockStateUpdatedEnvironment
 from .block_state_updated_data import BlockStateUpdatedData
+from .event_version import EventVersion
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
@@ -22,7 +22,6 @@ class BlockStateUpdated(UncheckedBaseModel):
     """
 
     name: typing.Optional[typing.Literal["block_state_updated"]] = None
-    version: typing.Optional[EventVersion] = None
     environment: BlockStateUpdatedEnvironment
     timestamp: typing.Optional[str] = pydantic.Field(default=None)
     """
@@ -30,6 +29,9 @@ class BlockStateUpdated(UncheckedBaseModel):
     """
 
     data: BlockStateUpdatedData
+    price: str
+    event_type: str
+    version: EventVersion
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

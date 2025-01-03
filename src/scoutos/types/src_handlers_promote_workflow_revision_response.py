@@ -7,7 +7,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class AppsServiceHandlersCreateWorkflowResponse(UncheckedBaseModel):
+class SrcHandlersPromoteWorkflowRevisionResponse(UncheckedBaseModel):
     data: typing.Optional[Workflow] = None
 
     if IS_PYDANTIC_V2:

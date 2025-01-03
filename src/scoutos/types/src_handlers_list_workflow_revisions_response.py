@@ -7,8 +7,8 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class AppsServiceHandlersUpdateWorkflowResponse(UncheckedBaseModel):
-    data: typing.Optional[Workflow] = None
+class SrcHandlersListWorkflowRevisionsResponse(UncheckedBaseModel):
+    data: typing.List[Workflow]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -3,9 +3,9 @@
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
 import pydantic
-from .event_version import EventVersion
 from .workflow_run_started_environment import WorkflowRunStartedEnvironment
 from .workflow_run_started_data import WorkflowRunStartedData
+from .event_version import EventVersion
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
@@ -22,7 +22,6 @@ class WorkflowRunStarted(UncheckedBaseModel):
     """
 
     name: typing.Optional[typing.Literal["workflow_run_started"]] = None
-    version: typing.Optional[EventVersion] = None
     environment: WorkflowRunStartedEnvironment
     timestamp: typing.Optional[str] = pydantic.Field(default=None)
     """
@@ -30,6 +29,9 @@ class WorkflowRunStarted(UncheckedBaseModel):
     """
 
     data: WorkflowRunStartedData
+    price: str
+    event_type: str
+    version: EventVersion
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
