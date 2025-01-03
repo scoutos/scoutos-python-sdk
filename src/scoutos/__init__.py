@@ -20,6 +20,7 @@ from .types import (
     BlockInputBlockConfigItem,
     BlockOutput,
     BlockOutputBlockConfigItem,
+    BlockRun,
     BlockRunCompleted,
     BlockRunCompletedData,
     BlockRunCompletedEnvironment,
@@ -83,6 +84,8 @@ from .types import (
     Prompt,
     PromptRole,
     ResponseModelUsage,
+    RunLog,
+    RunLogPagination,
     SelectColumn,
     SelectOptionItem,
     SrcHandlersCreateCopilotResponse,
@@ -141,6 +144,7 @@ from .documents import (
 )
 from .environment import ScoutEnvironment
 from .version import __version__
+from .workflow_logs import WorkflowLogsListLogsResponse
 from .workflows import WorkflowsRunRequestInputsValue, WorkflowsRunStreamRequestInputsValue
 
 __all__ = [
@@ -164,6 +168,7 @@ __all__ = [
     "BlockInputBlockConfigItem",
     "BlockOutput",
     "BlockOutputBlockConfigItem",
+    "BlockRun",
     "BlockRunCompleted",
     "BlockRunCompletedData",
     "BlockRunCompletedEnvironment",
@@ -231,6 +236,8 @@ __all__ = [
     "Prompt",
     "PromptRole",
     "ResponseModelUsage",
+    "RunLog",
+    "RunLogPagination",
     "Scout",
     "ScoutEnvironment",
     "SelectColumn",
@@ -266,6 +273,7 @@ __all__ = [
     "Workflow",
     "WorkflowConfigInput",
     "WorkflowConfigOutput",
+    "WorkflowLogsListLogsResponse",
     "WorkflowRun",
     "WorkflowRunCompleted",
     "WorkflowRunCompletedData",

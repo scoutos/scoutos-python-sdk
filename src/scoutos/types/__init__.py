@@ -19,6 +19,7 @@ from .block_input import BlockInput
 from .block_input_block_config_item import BlockInputBlockConfigItem
 from .block_output import BlockOutput
 from .block_output_block_config_item import BlockOutputBlockConfigItem
+from .block_run import BlockRun
 from .block_run_completed import BlockRunCompleted
 from .block_run_completed_data import BlockRunCompletedData
 from .block_run_completed_environment import BlockRunCompletedEnvironment
@@ -82,6 +83,8 @@ from .position import Position
 from .prompt import Prompt
 from .prompt_role import PromptRole
 from .response_model_usage import ResponseModelUsage
+from .run_log import RunLog
+from .run_log_pagination import RunLogPagination
 from .select_column import SelectColumn
 from .select_option_item import SelectOptionItem
 from .src_handlers_create_copilot_response import SrcHandlersCreateCopilotResponse
@@ -149,6 +152,7 @@ __all__ = [
     "BlockInputBlockConfigItem",
     "BlockOutput",
     "BlockOutputBlockConfigItem",
+    "BlockRun",
     "BlockRunCompleted",
     "BlockRunCompletedData",
     "BlockRunCompletedEnvironment",
@@ -212,6 +216,8 @@ __all__ = [
     "Prompt",
     "PromptRole",
     "ResponseModelUsage",
+    "RunLog",
+    "RunLogPagination",
     "SelectColumn",
     "SelectOptionItem",
     "SrcHandlersCreateCopilotResponse",

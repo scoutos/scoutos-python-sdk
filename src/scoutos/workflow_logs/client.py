@@ -3,7 +3,10 @@
 from ..core.client_wrapper import SyncClientWrapper
 import typing
 from ..core.request_options import RequestOptions
+from .types.workflow_logs_list_logs_response import WorkflowLogsListLogsResponse
+import httpx_sse
 from ..core.unchecked_base_model import construct_type
+import json
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
@@ -15,7 +18,7 @@ class WorkflowLogsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def get(
+    def list_logs(
         self,
         *,
         workflow_id: str,
@@ -26,7 +29,7 @@ class WorkflowLogsClient:
         status: typing.Optional[str] = None,
         cursor: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Optional[typing.Any]:
+    ) -> typing.Iterator[WorkflowLogsListLogsResponse]:
         """
         Parameters
         ----------
@@ -47,9 +50,9 @@ class WorkflowLogsClient:
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
-        Returns
-        -------
-        typing.Optional[typing.Any]
+        Yields
+        ------
+        typing.Iterator[WorkflowLogsListLogsResponse]
             Successful Response
 
         Examples
@@ -59,11 +62,19 @@ class WorkflowLogsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.workflow_logs.get(
-            workflow_id="workflow_id",
+        response = client.workflow_logs.list_logs(
+            workflow_id="string",
+            start_date="string",
+            end_date="string",
+            limit=1,
+            session_id="string",
+            status="string",
+            cursor="string",
         )
+        for chunk in response:
+            yield chunk
         """
-        _response = self._client_wrapper.httpx_client.request(
+        with self._client_wrapper.httpx_client.stream(
             "v2/run_logs",
             method="GET",
             params={
@@ -76,37 +87,44 @@ class WorkflowLogsClient:
                 "cursor": cursor,
             },
             request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    typing.Optional[typing.Any],
-                    construct_type(
-                        type_=typing.Optional[typing.Any],  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    typing.cast(
-                        HttpValidationError,
-                        construct_type(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
+        ) as _response:
+            try:
+                if 200 <= _response.status_code < 300:
+                    _event_source = httpx_sse.EventSource(_response)
+                    for _sse in _event_source.iter_sse():
+                        try:
+                            yield typing.cast(
+                                WorkflowLogsListLogsResponse,
+                                construct_type(
+                                    type_=WorkflowLogsListLogsResponse,  # type: ignore
+                                    object_=json.loads(_sse.data),
+                                ),
+                            )
+                        except:
+                            pass
+                    return
+                _response.read()
+                if _response.status_code == 422:
+                    raise UnprocessableEntityError(
+                        typing.cast(
+                            HttpValidationError,
+                            construct_type(
+                                type_=HttpValidationError,  # type: ignore
+                                object_=_response.json(),
+                            ),
+                        )
                     )
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
+                _response_json = _response.json()
+            except JSONDecodeError:
+                raise ApiError(status_code=_response.status_code, body=_response.text)
+            raise ApiError(status_code=_response.status_code, body=_response_json)
 
 
 class AsyncWorkflowLogsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def get(
+    async def list_logs(
         self,
         *,
         workflow_id: str,
@@ -117,7 +135,7 @@ class AsyncWorkflowLogsClient:
         status: typing.Optional[str] = None,
         cursor: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Optional[typing.Any]:
+    ) -> typing.AsyncIterator[WorkflowLogsListLogsResponse]:
         """
         Parameters
         ----------
@@ -138,9 +156,9 @@ class AsyncWorkflowLogsClient:
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
-        Returns
-        -------
-        typing.Optional[typing.Any]
+        Yields
+        ------
+        typing.AsyncIterator[WorkflowLogsListLogsResponse]
             Successful Response
 
         Examples
@@ -155,14 +173,22 @@ class AsyncWorkflowLogsClient:
 
 
         async def main() -> None:
-            await client.workflow_logs.get(
-                workflow_id="workflow_id",
+            response = await client.workflow_logs.list_logs(
+                workflow_id="string",
+                start_date="string",
+                end_date="string",
+                limit=1,
+                session_id="string",
+                status="string",
+                cursor="string",
             )
+            async for chunk in response:
+                yield chunk
 
 
         asyncio.run(main())
         """
-        _response = await self._client_wrapper.httpx_client.request(
+        async with self._client_wrapper.httpx_client.stream(
             "v2/run_logs",
             method="GET",
             params={
@@ -175,27 +201,34 @@ class AsyncWorkflowLogsClient:
                 "cursor": cursor,
             },
             request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    typing.Optional[typing.Any],
-                    construct_type(
-                        type_=typing.Optional[typing.Any],  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    typing.cast(
-                        HttpValidationError,
-                        construct_type(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
+        ) as _response:
+            try:
+                if 200 <= _response.status_code < 300:
+                    _event_source = httpx_sse.EventSource(_response)
+                    async for _sse in _event_source.aiter_sse():
+                        try:
+                            yield typing.cast(
+                                WorkflowLogsListLogsResponse,
+                                construct_type(
+                                    type_=WorkflowLogsListLogsResponse,  # type: ignore
+                                    object_=json.loads(_sse.data),
+                                ),
+                            )
+                        except:
+                            pass
+                    return
+                await _response.aread()
+                if _response.status_code == 422:
+                    raise UnprocessableEntityError(
+                        typing.cast(
+                            HttpValidationError,
+                            construct_type(
+                                type_=HttpValidationError,  # type: ignore
+                                object_=_response.json(),
+                            ),
+                        )
                     )
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
+                _response_json = _response.json()
+            except JSONDecodeError:
+                raise ApiError(status_code=_response.status_code, body=_response.text)
+            raise ApiError(status_code=_response.status_code, body=_response_json)

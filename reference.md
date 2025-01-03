@@ -1050,7 +1050,7 @@ client.usage.get()
 </details>
 
 ## WorkflowLogs
-<details><summary><code>client.workflow_logs.<a href="src/scoutos/workflow_logs/client.py">get</a>(...)</code></summary>
+<details><summary><code>client.workflow_logs.<a href="src/scoutos/workflow_logs/client.py">list_logs</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1068,9 +1068,17 @@ from scoutos import Scout
 client = Scout(
     api_key="YOUR_API_KEY",
 )
-client.workflow_logs.get(
-    workflow_id="workflow_id",
+response = client.workflow_logs.list_logs(
+    workflow_id="string",
+    start_date="string",
+    end_date="string",
+    limit=1,
+    session_id="string",
+    status="string",
+    cursor="string",
 )
+for chunk in response:
+    yield chunk
 
 ```
 </dd>
