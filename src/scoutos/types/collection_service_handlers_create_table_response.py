@@ -2,13 +2,13 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .collection import Collection
+from .table import Table
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class EvalServiceHandlersUpdateCollectionResponse(UncheckedBaseModel):
-    data: typing.Optional[Collection] = None
+class CollectionServiceHandlersCreateTableResponse(UncheckedBaseModel):
+    data: typing.Optional[Table] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

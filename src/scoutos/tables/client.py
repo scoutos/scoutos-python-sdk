@@ -3,7 +3,7 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.eval_service_handlers_get_tables_response import EvalServiceHandlersGetTablesResponse
+from ..types.collection_service_handlers_get_tables_response import CollectionServiceHandlersGetTablesResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
@@ -11,10 +11,11 @@ from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..types.table_config_input_schema_item import TableConfigInputSchemaItem
-from ..types.eval_service_handlers_create_table_response import EvalServiceHandlersCreateTableResponse
-from ..types.eval_service_handlers_get_table_response import EvalServiceHandlersGetTableResponse
-from ..types.eval_service_handlers_update_table_response import EvalServiceHandlersUpdateTableResponse
-from ..types.eval_service_handlers_delete_table_response import EvalServiceHandlersDeleteTableResponse
+from ..types.collection_service_handlers_create_table_response import CollectionServiceHandlersCreateTableResponse
+from ..types.collection_service_handlers_get_table_response import CollectionServiceHandlersGetTableResponse
+from ..types.collection_service_handlers_update_table_response import CollectionServiceHandlersUpdateTableResponse
+from ..types.collection_service_handlers_delete_table_response import CollectionServiceHandlersDeleteTableResponse
+from ..types.collection_service_handlers_table_sync_response import CollectionServiceHandlersTableSyncResponse
 from ..core.client_wrapper import AsyncClientWrapper
 
 # this is used as the default value for optional parameters
@@ -27,7 +28,7 @@ class TablesClient:
 
     def list(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersGetTablesResponse:
+    ) -> CollectionServiceHandlersGetTablesResponse:
         """
         Parameters
         ----------
@@ -38,7 +39,7 @@ class TablesClient:
 
         Returns
         -------
-        EvalServiceHandlersGetTablesResponse
+        CollectionServiceHandlersGetTablesResponse
             Successful Response
 
         Examples
@@ -60,9 +61,9 @@ class TablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetTablesResponse,
+                    CollectionServiceHandlersGetTablesResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetTablesResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetTablesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -90,7 +91,7 @@ class TablesClient:
         table_description: typing.Optional[str] = OMIT,
         schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersCreateTableResponse:
+    ) -> CollectionServiceHandlersCreateTableResponse:
         """
         Parameters
         ----------
@@ -109,7 +110,7 @@ class TablesClient:
 
         Returns
         -------
-        EvalServiceHandlersCreateTableResponse
+        CollectionServiceHandlersCreateTableResponse
             Successful Response
 
         Examples
@@ -138,9 +139,9 @@ class TablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersCreateTableResponse,
+                    CollectionServiceHandlersCreateTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersCreateTableResponse,  # type: ignore
+                        type_=CollectionServiceHandlersCreateTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -161,7 +162,7 @@ class TablesClient:
 
     def get(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersGetTableResponse:
+    ) -> CollectionServiceHandlersGetTableResponse:
         """
         Parameters
         ----------
@@ -174,7 +175,7 @@ class TablesClient:
 
         Returns
         -------
-        EvalServiceHandlersGetTableResponse
+        CollectionServiceHandlersGetTableResponse
             Successful Response
 
         Examples
@@ -197,9 +198,9 @@ class TablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetTableResponse,
+                    CollectionServiceHandlersGetTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetTableResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -228,7 +229,7 @@ class TablesClient:
         table_description: typing.Optional[str] = OMIT,
         schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersUpdateTableResponse:
+    ) -> CollectionServiceHandlersUpdateTableResponse:
         """
         Parameters
         ----------
@@ -249,7 +250,7 @@ class TablesClient:
 
         Returns
         -------
-        EvalServiceHandlersUpdateTableResponse
+        CollectionServiceHandlersUpdateTableResponse
             Successful Response
 
         Examples
@@ -279,9 +280,9 @@ class TablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersUpdateTableResponse,
+                    CollectionServiceHandlersUpdateTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersUpdateTableResponse,  # type: ignore
+                        type_=CollectionServiceHandlersUpdateTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -302,7 +303,7 @@ class TablesClient:
 
     def delete(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersDeleteTableResponse:
+    ) -> CollectionServiceHandlersDeleteTableResponse:
         """
         Delete a table given a table_id.
 
@@ -317,7 +318,7 @@ class TablesClient:
 
         Returns
         -------
-        EvalServiceHandlersDeleteTableResponse
+        CollectionServiceHandlersDeleteTableResponse
             Successful Response
 
         Examples
@@ -340,9 +341,80 @@ class TablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersDeleteTableResponse,
+                    CollectionServiceHandlersDeleteTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersDeleteTableResponse,  # type: ignore
+                        type_=CollectionServiceHandlersDeleteTableResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def sync(
+        self,
+        collection_id: str,
+        table_id: str,
+        *,
+        request: typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> CollectionServiceHandlersTableSyncResponse:
+        """
+        Sync a table with a list of documents.
+
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request : typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CollectionServiceHandlersTableSyncResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.tables.sync(
+            collection_id="collection_id",
+            table_id="table_id",
+            request=[{"key": "value"}],
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/sync",
+            method="POST",
+            json=request,
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    CollectionServiceHandlersTableSyncResponse,
+                    construct_type(
+                        type_=CollectionServiceHandlersTableSyncResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -368,7 +440,7 @@ class AsyncTablesClient:
 
     async def list(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersGetTablesResponse:
+    ) -> CollectionServiceHandlersGetTablesResponse:
         """
         Parameters
         ----------
@@ -379,7 +451,7 @@ class AsyncTablesClient:
 
         Returns
         -------
-        EvalServiceHandlersGetTablesResponse
+        CollectionServiceHandlersGetTablesResponse
             Successful Response
 
         Examples
@@ -409,9 +481,9 @@ class AsyncTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetTablesResponse,
+                    CollectionServiceHandlersGetTablesResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetTablesResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetTablesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -439,7 +511,7 @@ class AsyncTablesClient:
         table_description: typing.Optional[str] = OMIT,
         schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersCreateTableResponse:
+    ) -> CollectionServiceHandlersCreateTableResponse:
         """
         Parameters
         ----------
@@ -458,7 +530,7 @@ class AsyncTablesClient:
 
         Returns
         -------
-        EvalServiceHandlersCreateTableResponse
+        CollectionServiceHandlersCreateTableResponse
             Successful Response
 
         Examples
@@ -495,9 +567,9 @@ class AsyncTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersCreateTableResponse,
+                    CollectionServiceHandlersCreateTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersCreateTableResponse,  # type: ignore
+                        type_=CollectionServiceHandlersCreateTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -518,7 +590,7 @@ class AsyncTablesClient:
 
     async def get(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersGetTableResponse:
+    ) -> CollectionServiceHandlersGetTableResponse:
         """
         Parameters
         ----------
@@ -531,7 +603,7 @@ class AsyncTablesClient:
 
         Returns
         -------
-        EvalServiceHandlersGetTableResponse
+        CollectionServiceHandlersGetTableResponse
             Successful Response
 
         Examples
@@ -562,9 +634,9 @@ class AsyncTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetTableResponse,
+                    CollectionServiceHandlersGetTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetTableResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -593,7 +665,7 @@ class AsyncTablesClient:
         table_description: typing.Optional[str] = OMIT,
         schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersUpdateTableResponse:
+    ) -> CollectionServiceHandlersUpdateTableResponse:
         """
         Parameters
         ----------
@@ -614,7 +686,7 @@ class AsyncTablesClient:
 
         Returns
         -------
-        EvalServiceHandlersUpdateTableResponse
+        CollectionServiceHandlersUpdateTableResponse
             Successful Response
 
         Examples
@@ -652,9 +724,9 @@ class AsyncTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersUpdateTableResponse,
+                    CollectionServiceHandlersUpdateTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersUpdateTableResponse,  # type: ignore
+                        type_=CollectionServiceHandlersUpdateTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -675,7 +747,7 @@ class AsyncTablesClient:
 
     async def delete(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersDeleteTableResponse:
+    ) -> CollectionServiceHandlersDeleteTableResponse:
         """
         Delete a table given a table_id.
 
@@ -690,7 +762,7 @@ class AsyncTablesClient:
 
         Returns
         -------
-        EvalServiceHandlersDeleteTableResponse
+        CollectionServiceHandlersDeleteTableResponse
             Successful Response
 
         Examples
@@ -721,9 +793,88 @@ class AsyncTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersDeleteTableResponse,
+                    CollectionServiceHandlersDeleteTableResponse,
                     construct_type(
-                        type_=EvalServiceHandlersDeleteTableResponse,  # type: ignore
+                        type_=CollectionServiceHandlersDeleteTableResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def sync(
+        self,
+        collection_id: str,
+        table_id: str,
+        *,
+        request: typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> CollectionServiceHandlersTableSyncResponse:
+        """
+        Sync a table with a list of documents.
+
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request : typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CollectionServiceHandlersTableSyncResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.tables.sync(
+                collection_id="collection_id",
+                table_id="table_id",
+                request=[{"key": "value"}],
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/sync",
+            method="POST",
+            json=request,
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    CollectionServiceHandlersTableSyncResponse,
+                    construct_type(
+                        type_=CollectionServiceHandlersTableSyncResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

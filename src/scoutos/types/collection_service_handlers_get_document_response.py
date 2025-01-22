@@ -7,7 +7,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class EvalServiceHandlersUpdateDocumentResponse(UncheckedBaseModel):
+class CollectionServiceHandlersGetDocumentResponse(UncheckedBaseModel):
     data: typing.Optional[Document] = None
 
     if IS_PYDANTIC_V2:

@@ -3,8 +3,8 @@
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
 from .select_option_item import SelectOptionItem
-from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
 class SelectColumn(UncheckedBaseModel):
@@ -13,7 +13,11 @@ class SelectColumn(UncheckedBaseModel):
     column_type: typing.Literal["select"] = "select"
     data_type: typing.Optional[typing.Literal["string"]] = None
     hidden: typing.Optional[bool] = None
-    options: typing.List[SelectOptionItem]
+    options: typing.Optional[typing.List[SelectOptionItem]] = pydantic.Field(default=None)
+    """
+    Available options for selection
+    """
+
     selected_option: typing.Optional[int] = None
 
     if IS_PYDANTIC_V2:

@@ -3,7 +3,7 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.eval_service_handlers_get_documents_response import EvalServiceHandlersGetDocumentsResponse
+from ..types.collection_service_handlers_get_documents_response import CollectionServiceHandlersGetDocumentsResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
@@ -11,11 +11,13 @@ from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from .types.documents_create_request import DocumentsCreateRequest
-from ..types.eval_service_handlers_create_document_response import EvalServiceHandlersCreateDocumentResponse
-from ..types.eval_service_handlers_get_document_response import EvalServiceHandlersGetDocumentResponse
+from ..types.collection_service_handlers_create_document_response import CollectionServiceHandlersCreateDocumentResponse
+from ..types.collection_service_handlers_get_document_response import CollectionServiceHandlersGetDocumentResponse
 from .types.documents_update_request_value import DocumentsUpdateRequestValue
-from ..types.eval_service_handlers_update_document_response import EvalServiceHandlersUpdateDocumentResponse
-from ..types.eval_service_handlers_delete_document_response import EvalServiceHandlersDeleteDocumentResponse
+from ..types.collection_service_handlers_update_document_response import CollectionServiceHandlersUpdateDocumentResponse
+from ..types.collection_service_handlers_delete_documents_response import (
+    CollectionServiceHandlersDeleteDocumentsResponse,
+)
 from ..core.client_wrapper import AsyncClientWrapper
 
 # this is used as the default value for optional parameters
@@ -28,7 +30,7 @@ class DocumentsClient:
 
     def list(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersGetDocumentsResponse:
+    ) -> CollectionServiceHandlersGetDocumentsResponse:
         """
         Parameters
         ----------
@@ -41,7 +43,7 @@ class DocumentsClient:
 
         Returns
         -------
-        EvalServiceHandlersGetDocumentsResponse
+        CollectionServiceHandlersGetDocumentsResponse
             Successful Response
 
         Examples
@@ -64,9 +66,9 @@ class DocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetDocumentsResponse,
+                    CollectionServiceHandlersGetDocumentsResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetDocumentsResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetDocumentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -92,7 +94,7 @@ class DocumentsClient:
         *,
         request: DocumentsCreateRequest,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersCreateDocumentResponse:
+    ) -> CollectionServiceHandlersCreateDocumentResponse:
         """
         Parameters
         ----------
@@ -107,7 +109,7 @@ class DocumentsClient:
 
         Returns
         -------
-        EvalServiceHandlersCreateDocumentResponse
+        CollectionServiceHandlersCreateDocumentResponse
             Successful Response
 
         Examples
@@ -133,9 +135,9 @@ class DocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersCreateDocumentResponse,
+                    CollectionServiceHandlersCreateDocumentResponse,
                     construct_type(
-                        type_=EvalServiceHandlersCreateDocumentResponse,  # type: ignore
+                        type_=CollectionServiceHandlersCreateDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -161,7 +163,7 @@ class DocumentsClient:
         document_id: str,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersGetDocumentResponse:
+    ) -> CollectionServiceHandlersGetDocumentResponse:
         """
         Parameters
         ----------
@@ -176,7 +178,7 @@ class DocumentsClient:
 
         Returns
         -------
-        EvalServiceHandlersGetDocumentResponse
+        CollectionServiceHandlersGetDocumentResponse
             Successful Response
 
         Examples
@@ -200,9 +202,9 @@ class DocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetDocumentResponse,
+                    CollectionServiceHandlersGetDocumentResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetDocumentResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -229,7 +231,7 @@ class DocumentsClient:
         *,
         request: typing.Dict[str, DocumentsUpdateRequestValue],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersUpdateDocumentResponse:
+    ) -> CollectionServiceHandlersUpdateDocumentResponse:
         """
         Parameters
         ----------
@@ -246,7 +248,7 @@ class DocumentsClient:
 
         Returns
         -------
-        EvalServiceHandlersUpdateDocumentResponse
+        CollectionServiceHandlersUpdateDocumentResponse
             Successful Response
 
         Examples
@@ -273,9 +275,9 @@ class DocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersUpdateDocumentResponse,
+                    CollectionServiceHandlersUpdateDocumentResponse,
                     construct_type(
-                        type_=EvalServiceHandlersUpdateDocumentResponse,  # type: ignore
+                        type_=CollectionServiceHandlersUpdateDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -301,10 +303,8 @@ class DocumentsClient:
         document_id: str,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersDeleteDocumentResponse:
+    ) -> CollectionServiceHandlersDeleteDocumentsResponse:
         """
-        Delete a document given a document_id.
-
         Parameters
         ----------
         collection_id : str
@@ -318,7 +318,7 @@ class DocumentsClient:
 
         Returns
         -------
-        EvalServiceHandlersDeleteDocumentResponse
+        CollectionServiceHandlersDeleteDocumentsResponse
             Successful Response
 
         Examples
@@ -342,9 +342,80 @@ class DocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersDeleteDocumentResponse,
+                    CollectionServiceHandlersDeleteDocumentsResponse,
                     construct_type(
-                        type_=EvalServiceHandlersDeleteDocumentResponse,  # type: ignore
+                        type_=CollectionServiceHandlersDeleteDocumentsResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def delete_batch(
+        self,
+        collection_id: str,
+        table_id: str,
+        *,
+        request: typing.Sequence[str],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> CollectionServiceHandlersDeleteDocumentsResponse:
+        """
+        Delete documents given a list of document ids.
+
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request : typing.Sequence[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CollectionServiceHandlersDeleteDocumentsResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.documents.delete_batch(
+            collection_id="collection_id",
+            table_id="table_id",
+            request=["string"],
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/delete",
+            method="POST",
+            json=request,
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    CollectionServiceHandlersDeleteDocumentsResponse,
+                    construct_type(
+                        type_=CollectionServiceHandlersDeleteDocumentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -370,7 +441,7 @@ class AsyncDocumentsClient:
 
     async def list(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersGetDocumentsResponse:
+    ) -> CollectionServiceHandlersGetDocumentsResponse:
         """
         Parameters
         ----------
@@ -383,7 +454,7 @@ class AsyncDocumentsClient:
 
         Returns
         -------
-        EvalServiceHandlersGetDocumentsResponse
+        CollectionServiceHandlersGetDocumentsResponse
             Successful Response
 
         Examples
@@ -414,9 +485,9 @@ class AsyncDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetDocumentsResponse,
+                    CollectionServiceHandlersGetDocumentsResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetDocumentsResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetDocumentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -442,7 +513,7 @@ class AsyncDocumentsClient:
         *,
         request: DocumentsCreateRequest,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersCreateDocumentResponse:
+    ) -> CollectionServiceHandlersCreateDocumentResponse:
         """
         Parameters
         ----------
@@ -457,7 +528,7 @@ class AsyncDocumentsClient:
 
         Returns
         -------
-        EvalServiceHandlersCreateDocumentResponse
+        CollectionServiceHandlersCreateDocumentResponse
             Successful Response
 
         Examples
@@ -491,9 +562,9 @@ class AsyncDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersCreateDocumentResponse,
+                    CollectionServiceHandlersCreateDocumentResponse,
                     construct_type(
-                        type_=EvalServiceHandlersCreateDocumentResponse,  # type: ignore
+                        type_=CollectionServiceHandlersCreateDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -519,7 +590,7 @@ class AsyncDocumentsClient:
         document_id: str,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersGetDocumentResponse:
+    ) -> CollectionServiceHandlersGetDocumentResponse:
         """
         Parameters
         ----------
@@ -534,7 +605,7 @@ class AsyncDocumentsClient:
 
         Returns
         -------
-        EvalServiceHandlersGetDocumentResponse
+        CollectionServiceHandlersGetDocumentResponse
             Successful Response
 
         Examples
@@ -566,9 +637,9 @@ class AsyncDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetDocumentResponse,
+                    CollectionServiceHandlersGetDocumentResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetDocumentResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -595,7 +666,7 @@ class AsyncDocumentsClient:
         *,
         request: typing.Dict[str, DocumentsUpdateRequestValue],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersUpdateDocumentResponse:
+    ) -> CollectionServiceHandlersUpdateDocumentResponse:
         """
         Parameters
         ----------
@@ -612,7 +683,7 @@ class AsyncDocumentsClient:
 
         Returns
         -------
-        EvalServiceHandlersUpdateDocumentResponse
+        CollectionServiceHandlersUpdateDocumentResponse
             Successful Response
 
         Examples
@@ -647,9 +718,9 @@ class AsyncDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersUpdateDocumentResponse,
+                    CollectionServiceHandlersUpdateDocumentResponse,
                     construct_type(
-                        type_=EvalServiceHandlersUpdateDocumentResponse,  # type: ignore
+                        type_=CollectionServiceHandlersUpdateDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -675,10 +746,8 @@ class AsyncDocumentsClient:
         document_id: str,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersDeleteDocumentResponse:
+    ) -> CollectionServiceHandlersDeleteDocumentsResponse:
         """
-        Delete a document given a document_id.
-
         Parameters
         ----------
         collection_id : str
@@ -692,7 +761,7 @@ class AsyncDocumentsClient:
 
         Returns
         -------
-        EvalServiceHandlersDeleteDocumentResponse
+        CollectionServiceHandlersDeleteDocumentsResponse
             Successful Response
 
         Examples
@@ -724,9 +793,88 @@ class AsyncDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersDeleteDocumentResponse,
+                    CollectionServiceHandlersDeleteDocumentsResponse,
                     construct_type(
-                        type_=EvalServiceHandlersDeleteDocumentResponse,  # type: ignore
+                        type_=CollectionServiceHandlersDeleteDocumentsResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def delete_batch(
+        self,
+        collection_id: str,
+        table_id: str,
+        *,
+        request: typing.Sequence[str],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> CollectionServiceHandlersDeleteDocumentsResponse:
+        """
+        Delete documents given a list of document ids.
+
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request : typing.Sequence[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CollectionServiceHandlersDeleteDocumentsResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.documents.delete_batch(
+                collection_id="collection_id",
+                table_id="table_id",
+                request=["string"],
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/delete",
+            method="POST",
+            json=request,
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    CollectionServiceHandlersDeleteDocumentsResponse,
+                    construct_type(
+                        type_=CollectionServiceHandlersDeleteDocumentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

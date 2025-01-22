@@ -3,17 +3,23 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.eval_service_handlers_get_collections_response import EvalServiceHandlersGetCollectionsResponse
+from ..types.collection_service_handlers_get_collections_response import CollectionServiceHandlersGetCollectionsResponse
 from ..core.unchecked_base_model import construct_type
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
-from ..types.eval_service_handlers_create_collection_response import EvalServiceHandlersCreateCollectionResponse
+from ..types.collection_service_handlers_create_collection_response import (
+    CollectionServiceHandlersCreateCollectionResponse,
+)
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
-from ..types.eval_service_handlers_get_collection_response import EvalServiceHandlersGetCollectionResponse
+from ..types.collection_service_handlers_get_collection_response import CollectionServiceHandlersGetCollectionResponse
 from ..core.jsonable_encoder import jsonable_encoder
-from ..types.eval_service_handlers_update_collection_response import EvalServiceHandlersUpdateCollectionResponse
-from ..types.eval_service_handlers_delete_collection_response import EvalServiceHandlersDeleteCollectionResponse
+from ..types.collection_service_handlers_update_collection_response import (
+    CollectionServiceHandlersUpdateCollectionResponse,
+)
+from ..types.collection_service_handlers_delete_collection_response import (
+    CollectionServiceHandlersDeleteCollectionResponse,
+)
 from ..core.client_wrapper import AsyncClientWrapper
 
 # this is used as the default value for optional parameters
@@ -26,7 +32,7 @@ class CollectionsClient:
 
     def list(
         self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersGetCollectionsResponse:
+    ) -> CollectionServiceHandlersGetCollectionsResponse:
         """
         Parameters
         ----------
@@ -35,7 +41,7 @@ class CollectionsClient:
 
         Returns
         -------
-        EvalServiceHandlersGetCollectionsResponse
+        CollectionServiceHandlersGetCollectionsResponse
             Successful Response
 
         Examples
@@ -55,9 +61,9 @@ class CollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetCollectionsResponse,
+                    CollectionServiceHandlersGetCollectionsResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetCollectionsResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetCollectionsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -73,7 +79,7 @@ class CollectionsClient:
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersCreateCollectionResponse:
+    ) -> CollectionServiceHandlersCreateCollectionResponse:
         """
         Parameters
         ----------
@@ -88,7 +94,7 @@ class CollectionsClient:
 
         Returns
         -------
-        EvalServiceHandlersCreateCollectionResponse
+        CollectionServiceHandlersCreateCollectionResponse
             Successful Response
 
         Examples
@@ -114,9 +120,9 @@ class CollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersCreateCollectionResponse,
+                    CollectionServiceHandlersCreateCollectionResponse,
                     construct_type(
-                        type_=EvalServiceHandlersCreateCollectionResponse,  # type: ignore
+                        type_=CollectionServiceHandlersCreateCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -137,7 +143,7 @@ class CollectionsClient:
 
     def get(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersGetCollectionResponse:
+    ) -> CollectionServiceHandlersGetCollectionResponse:
         """
         Parameters
         ----------
@@ -148,7 +154,7 @@ class CollectionsClient:
 
         Returns
         -------
-        EvalServiceHandlersGetCollectionResponse
+        CollectionServiceHandlersGetCollectionResponse
             Successful Response
 
         Examples
@@ -170,9 +176,9 @@ class CollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetCollectionResponse,
+                    CollectionServiceHandlersGetCollectionResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetCollectionResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -199,7 +205,7 @@ class CollectionsClient:
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersUpdateCollectionResponse:
+    ) -> CollectionServiceHandlersUpdateCollectionResponse:
         """
         Parameters
         ----------
@@ -216,7 +222,7 @@ class CollectionsClient:
 
         Returns
         -------
-        EvalServiceHandlersUpdateCollectionResponse
+        CollectionServiceHandlersUpdateCollectionResponse
             Successful Response
 
         Examples
@@ -244,9 +250,9 @@ class CollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersUpdateCollectionResponse,
+                    CollectionServiceHandlersUpdateCollectionResponse,
                     construct_type(
-                        type_=EvalServiceHandlersUpdateCollectionResponse,  # type: ignore
+                        type_=CollectionServiceHandlersUpdateCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -267,7 +273,7 @@ class CollectionsClient:
 
     def delete(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersDeleteCollectionResponse:
+    ) -> CollectionServiceHandlersDeleteCollectionResponse:
         """
         Delete a collection given a collection_id.
 
@@ -280,7 +286,7 @@ class CollectionsClient:
 
         Returns
         -------
-        EvalServiceHandlersDeleteCollectionResponse
+        CollectionServiceHandlersDeleteCollectionResponse
             Successful Response
 
         Examples
@@ -302,9 +308,9 @@ class CollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersDeleteCollectionResponse,
+                    CollectionServiceHandlersDeleteCollectionResponse,
                     construct_type(
-                        type_=EvalServiceHandlersDeleteCollectionResponse,  # type: ignore
+                        type_=CollectionServiceHandlersDeleteCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -330,7 +336,7 @@ class AsyncCollectionsClient:
 
     async def list(
         self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersGetCollectionsResponse:
+    ) -> CollectionServiceHandlersGetCollectionsResponse:
         """
         Parameters
         ----------
@@ -339,7 +345,7 @@ class AsyncCollectionsClient:
 
         Returns
         -------
-        EvalServiceHandlersGetCollectionsResponse
+        CollectionServiceHandlersGetCollectionsResponse
             Successful Response
 
         Examples
@@ -367,9 +373,9 @@ class AsyncCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetCollectionsResponse,
+                    CollectionServiceHandlersGetCollectionsResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetCollectionsResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetCollectionsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -385,7 +391,7 @@ class AsyncCollectionsClient:
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersCreateCollectionResponse:
+    ) -> CollectionServiceHandlersCreateCollectionResponse:
         """
         Parameters
         ----------
@@ -400,7 +406,7 @@ class AsyncCollectionsClient:
 
         Returns
         -------
-        EvalServiceHandlersCreateCollectionResponse
+        CollectionServiceHandlersCreateCollectionResponse
             Successful Response
 
         Examples
@@ -434,9 +440,9 @@ class AsyncCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersCreateCollectionResponse,
+                    CollectionServiceHandlersCreateCollectionResponse,
                     construct_type(
-                        type_=EvalServiceHandlersCreateCollectionResponse,  # type: ignore
+                        type_=CollectionServiceHandlersCreateCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -457,7 +463,7 @@ class AsyncCollectionsClient:
 
     async def get(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersGetCollectionResponse:
+    ) -> CollectionServiceHandlersGetCollectionResponse:
         """
         Parameters
         ----------
@@ -468,7 +474,7 @@ class AsyncCollectionsClient:
 
         Returns
         -------
-        EvalServiceHandlersGetCollectionResponse
+        CollectionServiceHandlersGetCollectionResponse
             Successful Response
 
         Examples
@@ -498,9 +504,9 @@ class AsyncCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersGetCollectionResponse,
+                    CollectionServiceHandlersGetCollectionResponse,
                     construct_type(
-                        type_=EvalServiceHandlersGetCollectionResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -527,7 +533,7 @@ class AsyncCollectionsClient:
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> EvalServiceHandlersUpdateCollectionResponse:
+    ) -> CollectionServiceHandlersUpdateCollectionResponse:
         """
         Parameters
         ----------
@@ -544,7 +550,7 @@ class AsyncCollectionsClient:
 
         Returns
         -------
-        EvalServiceHandlersUpdateCollectionResponse
+        CollectionServiceHandlersUpdateCollectionResponse
             Successful Response
 
         Examples
@@ -580,9 +586,9 @@ class AsyncCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersUpdateCollectionResponse,
+                    CollectionServiceHandlersUpdateCollectionResponse,
                     construct_type(
-                        type_=EvalServiceHandlersUpdateCollectionResponse,  # type: ignore
+                        type_=CollectionServiceHandlersUpdateCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -603,7 +609,7 @@ class AsyncCollectionsClient:
 
     async def delete(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> EvalServiceHandlersDeleteCollectionResponse:
+    ) -> CollectionServiceHandlersDeleteCollectionResponse:
         """
         Delete a collection given a collection_id.
 
@@ -616,7 +622,7 @@ class AsyncCollectionsClient:
 
         Returns
         -------
-        EvalServiceHandlersDeleteCollectionResponse
+        CollectionServiceHandlersDeleteCollectionResponse
             Successful Response
 
         Examples
@@ -646,9 +652,9 @@ class AsyncCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    EvalServiceHandlersDeleteCollectionResponse,
+                    CollectionServiceHandlersDeleteCollectionResponse,
                     construct_type(
-                        type_=EvalServiceHandlersDeleteCollectionResponse,  # type: ignore
+                        type_=CollectionServiceHandlersDeleteCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

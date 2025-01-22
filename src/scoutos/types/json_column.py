@@ -10,7 +10,7 @@ class JsonColumn(UncheckedBaseModel):
     column_id: typing.Optional[str] = None
     column_display_name: typing.Optional[str] = None
     column_type: typing.Literal["json"] = "json"
-    data_type: typing.Optional[typing.Literal["json"]] = None
+    data_type: typing.Optional[typing.Literal["string"]] = None
     hidden: typing.Optional[bool] = None
     default: typing.Optional[str] = None
 

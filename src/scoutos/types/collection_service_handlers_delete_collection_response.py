@@ -6,7 +6,7 @@ import typing
 import pydantic
 
 
-class EvalServiceHandlersDeleteDocumentResponse(UncheckedBaseModel):
+class CollectionServiceHandlersDeleteCollectionResponse(UncheckedBaseModel):
     detail: str
 
     if IS_PYDANTIC_V2:

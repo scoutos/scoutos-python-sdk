@@ -37,6 +37,22 @@ from .block_state_updated_environment import BlockStateUpdatedEnvironment
 from .check_box_column import CheckBoxColumn
 from .collection import Collection
 from .collection_config import CollectionConfig
+from .collection_service_handlers_create_collection_response import CollectionServiceHandlersCreateCollectionResponse
+from .collection_service_handlers_create_document_response import CollectionServiceHandlersCreateDocumentResponse
+from .collection_service_handlers_create_table_response import CollectionServiceHandlersCreateTableResponse
+from .collection_service_handlers_delete_collection_response import CollectionServiceHandlersDeleteCollectionResponse
+from .collection_service_handlers_delete_documents_response import CollectionServiceHandlersDeleteDocumentsResponse
+from .collection_service_handlers_delete_table_response import CollectionServiceHandlersDeleteTableResponse
+from .collection_service_handlers_get_collection_response import CollectionServiceHandlersGetCollectionResponse
+from .collection_service_handlers_get_collections_response import CollectionServiceHandlersGetCollectionsResponse
+from .collection_service_handlers_get_document_response import CollectionServiceHandlersGetDocumentResponse
+from .collection_service_handlers_get_documents_response import CollectionServiceHandlersGetDocumentsResponse
+from .collection_service_handlers_get_table_response import CollectionServiceHandlersGetTableResponse
+from .collection_service_handlers_get_tables_response import CollectionServiceHandlersGetTablesResponse
+from .collection_service_handlers_table_sync_response import CollectionServiceHandlersTableSyncResponse
+from .collection_service_handlers_update_collection_response import CollectionServiceHandlersUpdateCollectionResponse
+from .collection_service_handlers_update_document_response import CollectionServiceHandlersUpdateDocumentResponse
+from .collection_service_handlers_update_table_response import CollectionServiceHandlersUpdateTableResponse
 from .copilot import Copilot
 from .copilot_config import CopilotConfig
 from .copilot_config_fab_value import CopilotConfigFabValue
@@ -50,21 +66,6 @@ from .environment_config import EnvironmentConfig
 from .environment_deployment_config import EnvironmentDeploymentConfig
 from .environment_deployment_config_revision_lookup import EnvironmentDeploymentConfigRevisionLookup
 from .environment_deployment_document import EnvironmentDeploymentDocument
-from .eval_service_handlers_create_collection_response import EvalServiceHandlersCreateCollectionResponse
-from .eval_service_handlers_create_document_response import EvalServiceHandlersCreateDocumentResponse
-from .eval_service_handlers_create_table_response import EvalServiceHandlersCreateTableResponse
-from .eval_service_handlers_delete_collection_response import EvalServiceHandlersDeleteCollectionResponse
-from .eval_service_handlers_delete_document_response import EvalServiceHandlersDeleteDocumentResponse
-from .eval_service_handlers_delete_table_response import EvalServiceHandlersDeleteTableResponse
-from .eval_service_handlers_get_collection_response import EvalServiceHandlersGetCollectionResponse
-from .eval_service_handlers_get_collections_response import EvalServiceHandlersGetCollectionsResponse
-from .eval_service_handlers_get_document_response import EvalServiceHandlersGetDocumentResponse
-from .eval_service_handlers_get_documents_response import EvalServiceHandlersGetDocumentsResponse
-from .eval_service_handlers_get_table_response import EvalServiceHandlersGetTableResponse
-from .eval_service_handlers_get_tables_response import EvalServiceHandlersGetTablesResponse
-from .eval_service_handlers_update_collection_response import EvalServiceHandlersUpdateCollectionResponse
-from .eval_service_handlers_update_document_response import EvalServiceHandlersUpdateDocumentResponse
-from .eval_service_handlers_update_table_response import EvalServiceHandlersUpdateTableResponse
 from .event_version import EventVersion
 from .http_validation_error import HttpValidationError
 from .identity import Identity
@@ -170,6 +171,22 @@ __all__ = [
     "CheckBoxColumn",
     "Collection",
     "CollectionConfig",
+    "CollectionServiceHandlersCreateCollectionResponse",
+    "CollectionServiceHandlersCreateDocumentResponse",
+    "CollectionServiceHandlersCreateTableResponse",
+    "CollectionServiceHandlersDeleteCollectionResponse",
+    "CollectionServiceHandlersDeleteDocumentsResponse",
+    "CollectionServiceHandlersDeleteTableResponse",
+    "CollectionServiceHandlersGetCollectionResponse",
+    "CollectionServiceHandlersGetCollectionsResponse",
+    "CollectionServiceHandlersGetDocumentResponse",
+    "CollectionServiceHandlersGetDocumentsResponse",
+    "CollectionServiceHandlersGetTableResponse",
+    "CollectionServiceHandlersGetTablesResponse",
+    "CollectionServiceHandlersTableSyncResponse",
+    "CollectionServiceHandlersUpdateCollectionResponse",
+    "CollectionServiceHandlersUpdateDocumentResponse",
+    "CollectionServiceHandlersUpdateTableResponse",
     "Copilot",
     "CopilotConfig",
     "CopilotConfigFabValue",
@@ -183,21 +200,6 @@ __all__ = [
     "EnvironmentDeploymentConfig",
     "EnvironmentDeploymentConfigRevisionLookup",
     "EnvironmentDeploymentDocument",
-    "EvalServiceHandlersCreateCollectionResponse",
-    "EvalServiceHandlersCreateDocumentResponse",
-    "EvalServiceHandlersCreateTableResponse",
-    "EvalServiceHandlersDeleteCollectionResponse",
-    "EvalServiceHandlersDeleteDocumentResponse",
-    "EvalServiceHandlersDeleteTableResponse",
-    "EvalServiceHandlersGetCollectionResponse",
-    "EvalServiceHandlersGetCollectionsResponse",
-    "EvalServiceHandlersGetDocumentResponse",
-    "EvalServiceHandlersGetDocumentsResponse",
-    "EvalServiceHandlersGetTableResponse",
-    "EvalServiceHandlersGetTablesResponse",
-    "EvalServiceHandlersUpdateCollectionResponse",
-    "EvalServiceHandlersUpdateDocumentResponse",
-    "EvalServiceHandlersUpdateTableResponse",
     "EventVersion",
     "HttpValidationError",
     "Identity",
