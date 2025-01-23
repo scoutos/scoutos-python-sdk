@@ -2,4 +2,4 @@
 
 import typing
 
-DocumentDataValue = typing.Union[bool, typing.Dict[str, typing.Optional[typing.Any]], float, int, str]
+DocumentDataValue = typing.Union[str, float, int, bool, typing.Dict[str, typing.Optional[typing.Any]]]
