@@ -10,9 +10,10 @@ from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
-from ..types.table_config_input_schema_item import TableConfigInputSchemaItem
+from .types.table_config_input_schema_item import TableConfigInputSchemaItem
 from ..types.collection_service_handlers_create_table_response import CollectionServiceHandlersCreateTableResponse
 from ..types.collection_service_handlers_get_table_response import CollectionServiceHandlersGetTableResponse
+from .types.table_data_schema_item import TableDataSchemaItem
 from ..types.collection_service_handlers_update_table_response import CollectionServiceHandlersUpdateTableResponse
 from ..types.collection_service_handlers_delete_table_response import CollectionServiceHandlersDeleteTableResponse
 from ..types.collection_service_handlers_table_sync_response import CollectionServiceHandlersTableSyncResponse
@@ -227,7 +228,8 @@ class TablesClient:
         table_display_name: typing.Optional[str] = OMIT,
         table_img_url: typing.Optional[str] = OMIT,
         table_description: typing.Optional[str] = OMIT,
-        schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
+        schema: typing.Optional[typing.Sequence[TableDataSchemaItem]] = OMIT,
+        index_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CollectionServiceHandlersUpdateTableResponse:
         """
@@ -243,7 +245,9 @@ class TablesClient:
 
         table_description : typing.Optional[str]
 
-        schema : typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]
+        schema : typing.Optional[typing.Sequence[TableDataSchemaItem]]
+
+        index_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -273,6 +277,7 @@ class TablesClient:
                 "table_img_url": table_img_url,
                 "table_description": table_description,
                 "schema": schema,
+                "index_id": index_id,
             },
             request_options=request_options,
             omit=OMIT,
@@ -663,7 +668,8 @@ class AsyncTablesClient:
         table_display_name: typing.Optional[str] = OMIT,
         table_img_url: typing.Optional[str] = OMIT,
         table_description: typing.Optional[str] = OMIT,
-        schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
+        schema: typing.Optional[typing.Sequence[TableDataSchemaItem]] = OMIT,
+        index_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CollectionServiceHandlersUpdateTableResponse:
         """
@@ -679,7 +685,9 @@ class AsyncTablesClient:
 
         table_description : typing.Optional[str]
 
-        schema : typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]
+        schema : typing.Optional[typing.Sequence[TableDataSchemaItem]]
+
+        index_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -717,6 +725,7 @@ class AsyncTablesClient:
                 "table_img_url": table_img_url,
                 "table_description": table_description,
                 "schema": schema,
+                "index_id": index_id,
             },
             request_options=request_options,
             omit=OMIT,

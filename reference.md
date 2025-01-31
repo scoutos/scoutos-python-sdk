@@ -2245,7 +2245,15 @@ client.tables.update(
 <dl>
 <dd>
 
-**schema:** `typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]` 
+**schema:** `typing.Optional[typing.Sequence[TableDataSchemaItem]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**index_id:** `typing.Optional[str]` 
     
 </dd>
 </dl>

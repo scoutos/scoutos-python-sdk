@@ -105,8 +105,6 @@ from .types import (
     SrcHandlersUpdateWorkflowEnvironmentResponse,
     SrcHandlersUpdateWorkflowResponse,
     Table,
-    TableConfigInput,
-    TableConfigInputSchemaItem,
     TableConfigOutput,
     TableConfigOutputSchemaItem,
     TextLongColumn,
@@ -144,6 +142,7 @@ from .documents import (
     DocumentsUpdateRequestValue,
 )
 from .environment import ScoutEnvironment
+from .tables import TableConfigInputSchemaItem, TableDataSchemaItem
 from .version import __version__
 from .workflow_logs import WorkflowLogsListLogsResponse
 from .workflows import WorkflowsRunRequestInputsValue, WorkflowsRunStreamRequestInputsValue
@@ -260,10 +259,10 @@ __all__ = [
     "SrcHandlersUpdateWorkflowEnvironmentResponse",
     "SrcHandlersUpdateWorkflowResponse",
     "Table",
-    "TableConfigInput",
     "TableConfigInputSchemaItem",
     "TableConfigOutput",
     "TableConfigOutputSchemaItem",
+    "TableDataSchemaItem",
     "TextLongColumn",
     "TextShortColumn",
     "UnprocessableEntityError",

@@ -104,8 +104,6 @@ from .src_handlers_update_copilot_response import SrcHandlersUpdateCopilotRespon
 from .src_handlers_update_workflow_environment_response import SrcHandlersUpdateWorkflowEnvironmentResponse
 from .src_handlers_update_workflow_response import SrcHandlersUpdateWorkflowResponse
 from .table import Table
-from .table_config_input import TableConfigInput
-from .table_config_input_schema_item import TableConfigInputSchemaItem
 from .table_config_output import TableConfigOutput
 from .table_config_output_schema_item import TableConfigOutputSchemaItem
 from .text_long_column import TextLongColumn
@@ -238,8 +236,6 @@ __all__ = [
     "SrcHandlersUpdateWorkflowEnvironmentResponse",
     "SrcHandlersUpdateWorkflowResponse",
     "Table",
-    "TableConfigInput",
-    "TableConfigInputSchemaItem",
     "TableConfigOutput",
     "TableConfigOutputSchemaItem",
     "TextLongColumn",
