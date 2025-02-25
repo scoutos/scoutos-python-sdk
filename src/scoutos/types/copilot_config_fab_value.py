@@ -2,4 +2,4 @@
 
 import typing
 
-CopilotConfigFabValue = typing.Union[int, str]
+CopilotConfigFabValue = typing.Union[str, int]

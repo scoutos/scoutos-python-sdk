@@ -21,7 +21,7 @@ class BlockRunCompleted(UncheckedBaseModel):
     Identifies the root cause of the event. If not set, it defaults to the event id.
     """
 
-    name: typing.Optional[typing.Literal["block_run_completed"]] = None
+    name: typing.Literal["block_run_completed"] = "block_run_completed"
     environment: BlockRunCompletedEnvironment
     timestamp: typing.Optional[str] = pydantic.Field(default=None)
     """

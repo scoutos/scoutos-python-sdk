@@ -21,7 +21,7 @@ class BlockRunStarted(UncheckedBaseModel):
     Identifies the root cause of the event. If not set, it defaults to the event id.
     """
 
-    name: typing.Optional[typing.Literal["block_run_started"]] = None
+    name: typing.Literal["block_run_started"] = "block_run_started"
     environment: BlockRunStartedEnvironment
     timestamp: typing.Optional[str] = pydantic.Field(default=None)
     """

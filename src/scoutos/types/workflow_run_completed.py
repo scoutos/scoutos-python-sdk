@@ -21,7 +21,7 @@ class WorkflowRunCompleted(UncheckedBaseModel):
     Identifies the root cause of the event. If not set, it defaults to the event id.
     """
 
-    name: typing.Optional[typing.Literal["workflow_run_completed"]] = None
+    name: typing.Literal["workflow_run_completed"] = "workflow_run_completed"
     environment: WorkflowRunCompletedEnvironment
     timestamp: typing.Optional[str] = pydantic.Field(default=None)
     """

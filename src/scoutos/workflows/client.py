@@ -2,14 +2,15 @@
 
 import typing
 from ..core.client_wrapper import SyncClientWrapper
+from ..types.block_input import BlockInput
 from ..core.request_options import RequestOptions
-from ..types.src_handlers_list_workflows_response import SrcHandlersListWorkflowsResponse
+from ..types.src_handlers_create_workflow_revision_response import SrcHandlersCreateWorkflowRevisionResponse
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
-from ..types.block_input import BlockInput
+from ..types.src_handlers_list_workflows_response import SrcHandlersListWorkflowsResponse
 from ..types.src_handlers_create_workflow_response import SrcHandlersCreateWorkflowResponse
 from ..types.src_handlers_get_workflow_response import SrcHandlersGetWorkflowResponse
 from ..core.jsonable_encoder import jsonable_encoder
@@ -21,6 +22,11 @@ import httpx_sse
 import json
 from .types.workflows_run_request_inputs_value import WorkflowsRunRequestInputsValue
 from ..types.workflow_run_response import WorkflowRunResponse
+from ..types.workflow_config_input import WorkflowConfigInput
+from .types.src_handlers_workflows_execute_with_config_req_body_inputs_value import (
+    SrcHandlersWorkflowsExecuteWithConfigReqBodyInputsValue,
+)
+from .types.workflows_run_with_config_response import WorkflowsRunWithConfigResponse
 from ..core.client_wrapper import AsyncClientWrapper
 
 # this is used as the default value for optional parameters
@@ -30,6 +36,93 @@ OMIT = typing.cast(typing.Any, ...)
 class WorkflowsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
+
+    def create_revision(
+        self,
+        *,
+        workflow_id: typing.Optional[str] = None,
+        workflow_key: typing.Optional[str] = None,
+        workflow_display_name: typing.Optional[str] = OMIT,
+        workflow_schema_version: typing.Optional[str] = OMIT,
+        workflow_img_url: typing.Optional[str] = OMIT,
+        workflow_description: typing.Optional[str] = OMIT,
+        blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> SrcHandlersCreateWorkflowRevisionResponse:
+        """
+        Parameters
+        ----------
+        workflow_id : typing.Optional[str]
+
+        workflow_key : typing.Optional[str]
+
+        workflow_display_name : typing.Optional[str]
+
+        workflow_schema_version : typing.Optional[str]
+
+        workflow_img_url : typing.Optional[str]
+
+        workflow_description : typing.Optional[str]
+
+        blocks : typing.Optional[typing.Sequence[BlockInput]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcHandlersCreateWorkflowRevisionResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.workflows.create_revision()
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "v2/workflows/revisions",
+            method="POST",
+            params={
+                "workflow_id": workflow_id,
+                "workflow_key": workflow_key,
+            },
+            json={
+                "workflow_display_name": workflow_display_name,
+                "workflow_schema_version": workflow_schema_version,
+                "workflow_img_url": workflow_img_url,
+                "workflow_description": workflow_description,
+                "blocks": blocks,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    SrcHandlersCreateWorkflowRevisionResponse,
+                    construct_type(
+                        type_=SrcHandlersCreateWorkflowRevisionResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def list(
         self,
@@ -117,6 +210,7 @@ class WorkflowsClient:
     def create(
         self,
         *,
+        workflow_key: typing.Optional[str] = None,
         workflow_display_name: typing.Optional[str] = OMIT,
         workflow_schema_version: typing.Optional[str] = OMIT,
         workflow_img_url: typing.Optional[str] = OMIT,
@@ -127,6 +221,9 @@ class WorkflowsClient:
         """
         Parameters
         ----------
+        workflow_key : typing.Optional[str]
+            A unique key to identify the workflow
+
         workflow_display_name : typing.Optional[str]
 
         workflow_schema_version : typing.Optional[str]
@@ -157,6 +254,9 @@ class WorkflowsClient:
         _response = self._client_wrapper.httpx_client.request(
             "v2/workflows",
             method="POST",
+            params={
+                "workflow_key": workflow_key,
+            },
             json={
                 "workflow_display_name": workflow_display_name,
                 "workflow_schema_version": workflow_schema_version,
@@ -574,10 +674,200 @@ class WorkflowsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
+    def run_with_config(
+        self,
+        *,
+        workflow_config: WorkflowConfigInput,
+        environment: typing.Optional[str] = None,
+        revision_id: typing.Optional[str] = None,
+        session_id: typing.Optional[str] = None,
+        workflow_key: typing.Optional[str] = OMIT,
+        inputs: typing.Optional[typing.Dict[str, SrcHandlersWorkflowsExecuteWithConfigReqBodyInputsValue]] = OMIT,
+        streaming: typing.Optional[bool] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> WorkflowsRunWithConfigResponse:
+        """
+        Parameters
+        ----------
+        workflow_config : WorkflowConfigInput
+
+        environment : typing.Optional[str]
+            Specifies the execution environment for the workflow. The available environments include:
+
+            - `production`: The production environment, where workflows are executed under live conditions.
+            - `staging`: A staging environment used for testing prior to production deployment.
+            - `development`: A development environment used for testing new changes.
+            - `console`: The console environment, runs latest changes on a workflow.
+
+        revision_id : typing.Optional[str]
+
+        session_id : typing.Optional[str]
+
+        workflow_key : typing.Optional[str]
+
+        inputs : typing.Optional[typing.Dict[str, SrcHandlersWorkflowsExecuteWithConfigReqBodyInputsValue]]
+
+        streaming : typing.Optional[bool]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        WorkflowsRunWithConfigResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout, WorkflowConfigInput
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.workflows.run_with_config(
+            workflow_config=WorkflowConfigInput(),
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "v2/workflows/execute",
+            method="POST",
+            params={
+                "environment": environment,
+                "revision_id": revision_id,
+                "session_id": session_id,
+            },
+            json={
+                "workflow_key": workflow_key,
+                "inputs": inputs,
+                "streaming": streaming,
+                "workflow_config": workflow_config,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    WorkflowsRunWithConfigResponse,
+                    construct_type(
+                        type_=WorkflowsRunWithConfigResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
 
 class AsyncWorkflowsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
+
+    async def create_revision(
+        self,
+        *,
+        workflow_id: typing.Optional[str] = None,
+        workflow_key: typing.Optional[str] = None,
+        workflow_display_name: typing.Optional[str] = OMIT,
+        workflow_schema_version: typing.Optional[str] = OMIT,
+        workflow_img_url: typing.Optional[str] = OMIT,
+        workflow_description: typing.Optional[str] = OMIT,
+        blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> SrcHandlersCreateWorkflowRevisionResponse:
+        """
+        Parameters
+        ----------
+        workflow_id : typing.Optional[str]
+
+        workflow_key : typing.Optional[str]
+
+        workflow_display_name : typing.Optional[str]
+
+        workflow_schema_version : typing.Optional[str]
+
+        workflow_img_url : typing.Optional[str]
+
+        workflow_description : typing.Optional[str]
+
+        blocks : typing.Optional[typing.Sequence[BlockInput]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcHandlersCreateWorkflowRevisionResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.workflows.create_revision()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "v2/workflows/revisions",
+            method="POST",
+            params={
+                "workflow_id": workflow_id,
+                "workflow_key": workflow_key,
+            },
+            json={
+                "workflow_display_name": workflow_display_name,
+                "workflow_schema_version": workflow_schema_version,
+                "workflow_img_url": workflow_img_url,
+                "workflow_description": workflow_description,
+                "blocks": blocks,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    SrcHandlersCreateWorkflowRevisionResponse,
+                    construct_type(
+                        type_=SrcHandlersCreateWorkflowRevisionResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
 
     async def list(
         self,
@@ -673,6 +963,7 @@ class AsyncWorkflowsClient:
     async def create(
         self,
         *,
+        workflow_key: typing.Optional[str] = None,
         workflow_display_name: typing.Optional[str] = OMIT,
         workflow_schema_version: typing.Optional[str] = OMIT,
         workflow_img_url: typing.Optional[str] = OMIT,
@@ -683,6 +974,9 @@ class AsyncWorkflowsClient:
         """
         Parameters
         ----------
+        workflow_key : typing.Optional[str]
+            A unique key to identify the workflow
+
         workflow_display_name : typing.Optional[str]
 
         workflow_schema_version : typing.Optional[str]
@@ -721,6 +1015,9 @@ class AsyncWorkflowsClient:
         _response = await self._client_wrapper.httpx_client.request(
             "v2/workflows",
             method="POST",
+            params={
+                "workflow_key": workflow_key,
+            },
             json={
                 "workflow_display_name": workflow_display_name,
                 "workflow_schema_version": workflow_schema_version,
@@ -1160,6 +1457,109 @@ class AsyncWorkflowsClient:
                     WorkflowRunResponse,
                     construct_type(
                         type_=WorkflowRunResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def run_with_config(
+        self,
+        *,
+        workflow_config: WorkflowConfigInput,
+        environment: typing.Optional[str] = None,
+        revision_id: typing.Optional[str] = None,
+        session_id: typing.Optional[str] = None,
+        workflow_key: typing.Optional[str] = OMIT,
+        inputs: typing.Optional[typing.Dict[str, SrcHandlersWorkflowsExecuteWithConfigReqBodyInputsValue]] = OMIT,
+        streaming: typing.Optional[bool] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> WorkflowsRunWithConfigResponse:
+        """
+        Parameters
+        ----------
+        workflow_config : WorkflowConfigInput
+
+        environment : typing.Optional[str]
+            Specifies the execution environment for the workflow. The available environments include:
+
+            - `production`: The production environment, where workflows are executed under live conditions.
+            - `staging`: A staging environment used for testing prior to production deployment.
+            - `development`: A development environment used for testing new changes.
+            - `console`: The console environment, runs latest changes on a workflow.
+
+        revision_id : typing.Optional[str]
+
+        session_id : typing.Optional[str]
+
+        workflow_key : typing.Optional[str]
+
+        inputs : typing.Optional[typing.Dict[str, SrcHandlersWorkflowsExecuteWithConfigReqBodyInputsValue]]
+
+        streaming : typing.Optional[bool]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        WorkflowsRunWithConfigResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout, WorkflowConfigInput
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.workflows.run_with_config(
+                workflow_config=WorkflowConfigInput(),
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "v2/workflows/execute",
+            method="POST",
+            params={
+                "environment": environment,
+                "revision_id": revision_id,
+                "session_id": session_id,
+            },
+            json={
+                "workflow_key": workflow_key,
+                "inputs": inputs,
+                "streaming": streaming,
+                "workflow_config": workflow_config,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    WorkflowsRunWithConfigResponse,
+                    construct_type(
+                        type_=WorkflowsRunWithConfigResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

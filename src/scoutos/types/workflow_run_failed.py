@@ -21,7 +21,7 @@ class WorkflowRunFailed(UncheckedBaseModel):
     Identifies the root cause of the event. If not set, it defaults to the event id.
     """
 
-    name: typing.Optional[typing.Literal["workflow_run_failed"]] = None
+    name: typing.Literal["workflow_run_failed"] = "workflow_run_failed"
     environment: WorkflowRunFailedEnvironment
     timestamp: typing.Optional[str] = pydantic.Field(default=None)
     """

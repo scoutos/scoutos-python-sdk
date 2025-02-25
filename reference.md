@@ -1,5 +1,107 @@
 # Reference
 ## Workflows
+<details><summary><code>client.workflows.<a href="src/scoutos/workflows/client.py">create_revision</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.workflows.create_revision()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workflow_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workflow_key:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workflow_display_name:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workflow_schema_version:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workflow_img_url:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workflow_description:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**blocks:** `typing.Optional[typing.Sequence[BlockInput]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.workflows.<a href="src/scoutos/workflows/client.py">list</a>(...)</code></summary>
 <dl>
 <dd>
@@ -130,6 +232,14 @@ client.workflows.create()
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**workflow_key:** `typing.Optional[str]` — A unique key to identify the workflow
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -585,6 +695,119 @@ Specifies the execution environment for the workflow. The available environments
 <dd>
 
 **inputs:** `typing.Optional[typing.Dict[str, WorkflowsRunRequestInputsValue]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workflows.<a href="src/scoutos/workflows/client.py">run_with_config</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout, WorkflowConfigInput
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.workflows.run_with_config(
+    workflow_config=WorkflowConfigInput(),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workflow_config:** `WorkflowConfigInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment:** `typing.Optional[str]` 
+
+Specifies the execution environment for the workflow. The available environments include:
+
+- `production`: The production environment, where workflows are executed under live conditions.
+- `staging`: A staging environment used for testing prior to production deployment.
+- `development`: A development environment used for testing new changes.
+- `console`: The console environment, runs latest changes on a workflow.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**revision_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workflow_key:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**inputs:** `typing.Optional[
+    typing.Dict[str, SrcHandlersWorkflowsExecuteWithConfigReqBodyInputsValue]
+]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**streaming:** `typing.Optional[bool]` 
     
 </dd>
 </dl>
@@ -1329,6 +1552,14 @@ client.copilots.create()
 <dl>
 <dd>
 
+**code_theme:** `typing.Optional[CopilotConfigCodeTheme]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **colors:** `typing.Optional[typing.Dict[str, str]]` 
     
 </dd>
@@ -1338,6 +1569,14 @@ client.copilots.create()
 <dd>
 
 **fab:** `typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**loading_text:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -1527,6 +1766,14 @@ client.copilots.update(
 <dl>
 <dd>
 
+**code_theme:** `typing.Optional[CopilotConfigCodeTheme]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **colors:** `typing.Optional[typing.Dict[str, str]]` 
     
 </dd>
@@ -1536,6 +1783,14 @@ client.copilots.update(
 <dd>
 
 **fab:** `typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**loading_text:** `typing.Optional[str]` 
     
 </dd>
 </dl>

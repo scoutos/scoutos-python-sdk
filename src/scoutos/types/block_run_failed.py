@@ -21,7 +21,7 @@ class BlockRunFailed(UncheckedBaseModel):
     Identifies the root cause of the event. If not set, it defaults to the event id.
     """
 
-    name: typing.Optional[typing.Literal["block_run_failed"]] = None
+    name: typing.Literal["block_run_failed"] = "block_run_failed"
     environment: BlockRunFailedEnvironment
     timestamp: typing.Optional[str] = pydantic.Field(default=None)
     """

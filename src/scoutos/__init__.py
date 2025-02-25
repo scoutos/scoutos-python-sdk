@@ -56,6 +56,7 @@ from .types import (
     CollectionServiceHandlersUpdateTableResponse,
     Copilot,
     CopilotConfig,
+    CopilotConfigCodeTheme,
     CopilotConfigFabValue,
     CopilotConfigMode,
     Dependency,
@@ -84,6 +85,7 @@ from .types import (
     Position,
     Prompt,
     PromptRole,
+    ReqBody,
     ResponseModelUsage,
     RunLog,
     RunLogPagination,
@@ -91,6 +93,7 @@ from .types import (
     SelectOptionItem,
     SrcHandlersCreateCopilotResponse,
     SrcHandlersCreateWorkflowResponse,
+    SrcHandlersCreateWorkflowRevisionResponse,
     SrcHandlersDeleteCopilotResponse,
     SrcHandlersDeleteWorkflowResponse,
     SrcHandlersDeleteWorkflowRevisionResponse,
@@ -145,7 +148,13 @@ from .environment import ScoutEnvironment
 from .tables import TableConfigInputSchemaItem, TableDataSchemaItem
 from .version import __version__
 from .workflow_logs import WorkflowLogsListLogsResponse
-from .workflows import WorkflowsRunRequestInputsValue, WorkflowsRunStreamRequestInputsValue
+from .workflows import (
+    SrcHandlersWorkflowsExecuteWithConfigReqBodyInputsValue,
+    WorkflowsRunRequestInputsValue,
+    WorkflowsRunStreamRequestInputsValue,
+    WorkflowsRunWithConfigResponse,
+    WorkflowsRunWithConfigResponseZero,
+)
 
 __all__ = [
     "Actor",
@@ -204,6 +213,7 @@ __all__ = [
     "CollectionServiceHandlersUpdateTableResponse",
     "Copilot",
     "CopilotConfig",
+    "CopilotConfigCodeTheme",
     "CopilotConfigFabValue",
     "CopilotConfigMode",
     "Dependency",
@@ -236,6 +246,7 @@ __all__ = [
     "Position",
     "Prompt",
     "PromptRole",
+    "ReqBody",
     "ResponseModelUsage",
     "RunLog",
     "RunLogPagination",
@@ -245,6 +256,7 @@ __all__ = [
     "SelectOptionItem",
     "SrcHandlersCreateCopilotResponse",
     "SrcHandlersCreateWorkflowResponse",
+    "SrcHandlersCreateWorkflowRevisionResponse",
     "SrcHandlersDeleteCopilotResponse",
     "SrcHandlersDeleteWorkflowResponse",
     "SrcHandlersDeleteWorkflowRevisionResponse",
@@ -258,6 +270,7 @@ __all__ = [
     "SrcHandlersUpdateCopilotResponse",
     "SrcHandlersUpdateWorkflowEnvironmentResponse",
     "SrcHandlersUpdateWorkflowResponse",
+    "SrcHandlersWorkflowsExecuteWithConfigReqBodyInputsValue",
     "Table",
     "TableConfigInputSchemaItem",
     "TableConfigOutput",
@@ -291,6 +304,8 @@ __all__ = [
     "WorkflowRunStreamResponse",
     "WorkflowsRunRequestInputsValue",
     "WorkflowsRunStreamRequestInputsValue",
+    "WorkflowsRunWithConfigResponse",
+    "WorkflowsRunWithConfigResponseZero",
     "__version__",
     "collections",
     "copilots",

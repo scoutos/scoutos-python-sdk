@@ -21,7 +21,7 @@ class WorkflowRunStarted(UncheckedBaseModel):
     Identifies the root cause of the event. If not set, it defaults to the event id.
     """
 
-    name: typing.Optional[typing.Literal["workflow_run_started"]] = None
+    name: typing.Literal["workflow_run_started"] = "workflow_run_started"
     environment: WorkflowRunStartedEnvironment
     timestamp: typing.Optional[str] = pydantic.Field(default=None)
     """

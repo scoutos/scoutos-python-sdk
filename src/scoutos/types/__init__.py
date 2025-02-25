@@ -55,6 +55,7 @@ from .collection_service_handlers_update_document_response import CollectionServ
 from .collection_service_handlers_update_table_response import CollectionServiceHandlersUpdateTableResponse
 from .copilot import Copilot
 from .copilot_config import CopilotConfig
+from .copilot_config_code_theme import CopilotConfigCodeTheme
 from .copilot_config_fab_value import CopilotConfigFabValue
 from .copilot_config_mode import CopilotConfigMode
 from .dependency import Dependency
@@ -83,6 +84,7 @@ from .number_column_min_value import NumberColumnMinValue
 from .position import Position
 from .prompt import Prompt
 from .prompt_role import PromptRole
+from .req_body import ReqBody
 from .response_model_usage import ResponseModelUsage
 from .run_log import RunLog
 from .run_log_pagination import RunLogPagination
@@ -90,6 +92,7 @@ from .select_column import SelectColumn
 from .select_option_item import SelectOptionItem
 from .src_handlers_create_copilot_response import SrcHandlersCreateCopilotResponse
 from .src_handlers_create_workflow_response import SrcHandlersCreateWorkflowResponse
+from .src_handlers_create_workflow_revision_response import SrcHandlersCreateWorkflowRevisionResponse
 from .src_handlers_delete_copilot_response import SrcHandlersDeleteCopilotResponse
 from .src_handlers_delete_workflow_response import SrcHandlersDeleteWorkflowResponse
 from .src_handlers_delete_workflow_revision_response import SrcHandlersDeleteWorkflowRevisionResponse
@@ -187,6 +190,7 @@ __all__ = [
     "CollectionServiceHandlersUpdateTableResponse",
     "Copilot",
     "CopilotConfig",
+    "CopilotConfigCodeTheme",
     "CopilotConfigFabValue",
     "CopilotConfigMode",
     "Dependency",
@@ -215,6 +219,7 @@ __all__ = [
     "Position",
     "Prompt",
     "PromptRole",
+    "ReqBody",
     "ResponseModelUsage",
     "RunLog",
     "RunLogPagination",
@@ -222,6 +227,7 @@ __all__ = [
     "SelectOptionItem",
     "SrcHandlersCreateCopilotResponse",
     "SrcHandlersCreateWorkflowResponse",
+    "SrcHandlersCreateWorkflowRevisionResponse",
     "SrcHandlersDeleteCopilotResponse",
     "SrcHandlersDeleteWorkflowResponse",
     "SrcHandlersDeleteWorkflowRevisionResponse",

@@ -3,6 +3,7 @@
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
 from .copilot_config_mode import CopilotConfigMode
+from .copilot_config_code_theme import CopilotConfigCodeTheme
 from .copilot_config_fab_value import CopilotConfigFabValue
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
@@ -13,8 +14,10 @@ class CopilotConfig(UncheckedBaseModel):
     img_url: typing.Optional[str] = None
     display_name: typing.Optional[str] = None
     mode: typing.Optional[CopilotConfigMode] = None
+    code_theme: typing.Optional[CopilotConfigCodeTheme] = None
     colors: typing.Optional[typing.Dict[str, str]] = None
     fab: typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]] = None
+    loading_text: typing.Optional[str] = None
     message_placeholder: typing.Optional[str] = None
     initial_activity: typing.Optional[typing.List[typing.Optional[typing.Any]]] = None
     allowed_origins: typing.Optional[str] = None

@@ -5,8 +5,8 @@ import typing
 from .block_input_block_config_item import BlockInputBlockConfigItem
 from .dependency import Dependency
 from .node_ui import NodeUi
-from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
 class BlockInput(UncheckedBaseModel):
@@ -21,6 +21,10 @@ class BlockInput(UncheckedBaseModel):
     output_schema: typing.Optional[typing.List[typing.Optional[typing.Any]]] = None
     ui: typing.Optional[NodeUi] = None
     trigger_config: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
+    ignore_error: typing.Optional[bool] = pydantic.Field(default=None)
+    """
+    If true, will continue down the branch of the failed block
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

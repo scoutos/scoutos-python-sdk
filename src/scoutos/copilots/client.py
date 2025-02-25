@@ -10,6 +10,7 @@ from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..types.copilot_config_mode import CopilotConfigMode
+from ..types.copilot_config_code_theme import CopilotConfigCodeTheme
 from ..types.copilot_config_fab_value import CopilotConfigFabValue
 from ..types.src_handlers_create_copilot_response import SrcHandlersCreateCopilotResponse
 from ..types.src_handlers_get_copilot_response import SrcHandlersGetCopilotResponse
@@ -116,8 +117,10 @@ class CopilotsClient:
         img_url: typing.Optional[str] = OMIT,
         display_name: typing.Optional[str] = OMIT,
         mode: typing.Optional[CopilotConfigMode] = OMIT,
+        code_theme: typing.Optional[CopilotConfigCodeTheme] = OMIT,
         colors: typing.Optional[typing.Dict[str, str]] = OMIT,
         fab: typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]] = OMIT,
+        loading_text: typing.Optional[str] = OMIT,
         message_placeholder: typing.Optional[str] = OMIT,
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
@@ -134,9 +137,13 @@ class CopilotsClient:
 
         mode : typing.Optional[CopilotConfigMode]
 
+        code_theme : typing.Optional[CopilotConfigCodeTheme]
+
         colors : typing.Optional[typing.Dict[str, str]]
 
         fab : typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]]
+
+        loading_text : typing.Optional[str]
 
         message_placeholder : typing.Optional[str]
 
@@ -169,8 +176,10 @@ class CopilotsClient:
                 "img_url": img_url,
                 "display_name": display_name,
                 "mode": mode,
+                "code_theme": code_theme,
                 "colors": colors,
                 "fab": fab,
+                "loading_text": loading_text,
                 "message_placeholder": message_placeholder,
                 "initial_activity": initial_activity,
                 "allowed_origins": allowed_origins,
@@ -268,8 +277,10 @@ class CopilotsClient:
         img_url: typing.Optional[str] = OMIT,
         display_name: typing.Optional[str] = OMIT,
         mode: typing.Optional[CopilotConfigMode] = OMIT,
+        code_theme: typing.Optional[CopilotConfigCodeTheme] = OMIT,
         colors: typing.Optional[typing.Dict[str, str]] = OMIT,
         fab: typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]] = OMIT,
+        loading_text: typing.Optional[str] = OMIT,
         message_placeholder: typing.Optional[str] = OMIT,
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
@@ -288,9 +299,13 @@ class CopilotsClient:
 
         mode : typing.Optional[CopilotConfigMode]
 
+        code_theme : typing.Optional[CopilotConfigCodeTheme]
+
         colors : typing.Optional[typing.Dict[str, str]]
 
         fab : typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]]
+
+        loading_text : typing.Optional[str]
 
         message_placeholder : typing.Optional[str]
 
@@ -325,8 +340,10 @@ class CopilotsClient:
                 "img_url": img_url,
                 "display_name": display_name,
                 "mode": mode,
+                "code_theme": code_theme,
                 "colors": colors,
                 "fab": fab,
+                "loading_text": loading_text,
                 "message_placeholder": message_placeholder,
                 "initial_activity": initial_activity,
                 "allowed_origins": allowed_origins,
@@ -517,8 +534,10 @@ class AsyncCopilotsClient:
         img_url: typing.Optional[str] = OMIT,
         display_name: typing.Optional[str] = OMIT,
         mode: typing.Optional[CopilotConfigMode] = OMIT,
+        code_theme: typing.Optional[CopilotConfigCodeTheme] = OMIT,
         colors: typing.Optional[typing.Dict[str, str]] = OMIT,
         fab: typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]] = OMIT,
+        loading_text: typing.Optional[str] = OMIT,
         message_placeholder: typing.Optional[str] = OMIT,
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
@@ -535,9 +554,13 @@ class AsyncCopilotsClient:
 
         mode : typing.Optional[CopilotConfigMode]
 
+        code_theme : typing.Optional[CopilotConfigCodeTheme]
+
         colors : typing.Optional[typing.Dict[str, str]]
 
         fab : typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]]
+
+        loading_text : typing.Optional[str]
 
         message_placeholder : typing.Optional[str]
 
@@ -578,8 +601,10 @@ class AsyncCopilotsClient:
                 "img_url": img_url,
                 "display_name": display_name,
                 "mode": mode,
+                "code_theme": code_theme,
                 "colors": colors,
                 "fab": fab,
+                "loading_text": loading_text,
                 "message_placeholder": message_placeholder,
                 "initial_activity": initial_activity,
                 "allowed_origins": allowed_origins,
@@ -685,8 +710,10 @@ class AsyncCopilotsClient:
         img_url: typing.Optional[str] = OMIT,
         display_name: typing.Optional[str] = OMIT,
         mode: typing.Optional[CopilotConfigMode] = OMIT,
+        code_theme: typing.Optional[CopilotConfigCodeTheme] = OMIT,
         colors: typing.Optional[typing.Dict[str, str]] = OMIT,
         fab: typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]] = OMIT,
+        loading_text: typing.Optional[str] = OMIT,
         message_placeholder: typing.Optional[str] = OMIT,
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
@@ -705,9 +732,13 @@ class AsyncCopilotsClient:
 
         mode : typing.Optional[CopilotConfigMode]
 
+        code_theme : typing.Optional[CopilotConfigCodeTheme]
+
         colors : typing.Optional[typing.Dict[str, str]]
 
         fab : typing.Optional[typing.Dict[str, typing.Optional[CopilotConfigFabValue]]]
+
+        loading_text : typing.Optional[str]
 
         message_placeholder : typing.Optional[str]
 
@@ -750,8 +781,10 @@ class AsyncCopilotsClient:
                 "img_url": img_url,
                 "display_name": display_name,
                 "mode": mode,
+                "code_theme": code_theme,
                 "colors": colors,
                 "fab": fab,
+                "loading_text": loading_text,
                 "message_placeholder": message_placeholder,
                 "initial_activity": initial_activity,
                 "allowed_origins": allowed_origins,
