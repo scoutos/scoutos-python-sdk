@@ -2,16 +2,13 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .collection import Collection
-import datetime as dt
+from .column_type_base import ColumnTypeBase
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class CollectionServiceHandlersGetCollectionsResponse(UncheckedBaseModel):
-    data: typing.Optional[typing.List[Collection]] = None
-    has_more: typing.Optional[bool] = None
-    next_cursor: typing.Optional[dt.datetime] = None
+class SchemaResponse(UncheckedBaseModel):
+    data: typing.List[ColumnTypeBase]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

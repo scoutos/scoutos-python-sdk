@@ -5,13 +5,13 @@ from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.collection_service_handlers_get_collections_response import CollectionServiceHandlersGetCollectionsResponse
 from ..core.unchecked_base_model import construct_type
+from ..errors.unprocessable_entity_error import UnprocessableEntityError
+from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..types.collection_service_handlers_create_collection_response import (
     CollectionServiceHandlersCreateCollectionResponse,
 )
-from ..errors.unprocessable_entity_error import UnprocessableEntityError
-from ..types.http_validation_error import HttpValidationError
 from ..types.collection_service_handlers_get_collection_response import CollectionServiceHandlersGetCollectionResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..types.collection_service_handlers_update_collection_response import (
@@ -31,11 +31,21 @@ class CollectionsClient:
         self._client_wrapper = client_wrapper
 
     def list(
-        self, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        start_at: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> CollectionServiceHandlersGetCollectionsResponse:
         """
         Parameters
         ----------
+        start_at : typing.Optional[str]
+            created_at to start at
+
+        limit : typing.Optional[int]
+            Limit of records to return
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -56,6 +66,10 @@ class CollectionsClient:
         _response = self._client_wrapper.httpx_client.request(
             "v2/collections",
             method="GET",
+            params={
+                "start_at": start_at,
+                "limit": limit,
+            },
             request_options=request_options,
         )
         try:
@@ -66,6 +80,16 @@ class CollectionsClient:
                         type_=CollectionServiceHandlersGetCollectionsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
                 )
             _response_json = _response.json()
         except JSONDecodeError:
@@ -335,11 +359,21 @@ class AsyncCollectionsClient:
         self._client_wrapper = client_wrapper
 
     async def list(
-        self, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        start_at: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> CollectionServiceHandlersGetCollectionsResponse:
         """
         Parameters
         ----------
+        start_at : typing.Optional[str]
+            created_at to start at
+
+        limit : typing.Optional[int]
+            Limit of records to return
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -368,6 +402,10 @@ class AsyncCollectionsClient:
         _response = await self._client_wrapper.httpx_client.request(
             "v2/collections",
             method="GET",
+            params={
+                "start_at": start_at,
+                "limit": limit,
+            },
             request_options=request_options,
         )
         try:
@@ -378,6 +416,16 @@ class AsyncCollectionsClient:
                         type_=CollectionServiceHandlersGetCollectionsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
                 )
             _response_json = _response.json()
         except JSONDecodeError:

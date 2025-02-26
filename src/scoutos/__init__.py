@@ -54,11 +54,14 @@ from .types import (
     CollectionServiceHandlersUpdateCollectionResponse,
     CollectionServiceHandlersUpdateDocumentResponse,
     CollectionServiceHandlersUpdateTableResponse,
+    ColumnType,
+    ColumnTypeBase,
     Copilot,
     CopilotConfig,
     CopilotConfigCodeTheme,
     CopilotConfigFabValue,
     CopilotConfigMode,
+    DataType,
     Dependency,
     Document,
     DocumentDataValue,
@@ -89,6 +92,7 @@ from .types import (
     ResponseModelUsage,
     RunLog,
     RunLogPagination,
+    SchemaResponse,
     SelectColumn,
     SelectOptionItem,
     SrcHandlersCreateCopilotResponse,
@@ -145,7 +149,7 @@ from .documents import (
     DocumentsUpdateRequestValue,
 )
 from .environment import ScoutEnvironment
-from .tables import TableConfigInputSchemaItem, TableDataSchemaItem
+from .tables import TableConfigInputSchemaItem, TableDataSchemaItem, TablesGetResponse
 from .version import __version__
 from .workflow_logs import WorkflowLogsListLogsResponse
 from .workflows import (
@@ -211,11 +215,14 @@ __all__ = [
     "CollectionServiceHandlersUpdateCollectionResponse",
     "CollectionServiceHandlersUpdateDocumentResponse",
     "CollectionServiceHandlersUpdateTableResponse",
+    "ColumnType",
+    "ColumnTypeBase",
     "Copilot",
     "CopilotConfig",
     "CopilotConfigCodeTheme",
     "CopilotConfigFabValue",
     "CopilotConfigMode",
+    "DataType",
     "Dependency",
     "Document",
     "DocumentDataValue",
@@ -250,6 +257,7 @@ __all__ = [
     "ResponseModelUsage",
     "RunLog",
     "RunLogPagination",
+    "SchemaResponse",
     "Scout",
     "ScoutEnvironment",
     "SelectColumn",
@@ -276,6 +284,7 @@ __all__ = [
     "TableConfigOutput",
     "TableConfigOutputSchemaItem",
     "TableDataSchemaItem",
+    "TablesGetResponse",
     "TextLongColumn",
     "TextShortColumn",
     "UnprocessableEntityError",

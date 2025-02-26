@@ -12,7 +12,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from .types.table_config_input_schema_item import TableConfigInputSchemaItem
 from ..types.collection_service_handlers_create_table_response import CollectionServiceHandlersCreateTableResponse
-from ..types.collection_service_handlers_get_table_response import CollectionServiceHandlersGetTableResponse
+from .types.tables_get_response import TablesGetResponse
 from .types.table_data_schema_item import TableDataSchemaItem
 from ..types.collection_service_handlers_update_table_response import CollectionServiceHandlersUpdateTableResponse
 from ..types.collection_service_handlers_delete_table_response import CollectionServiceHandlersDeleteTableResponse
@@ -163,7 +163,7 @@ class TablesClient:
 
     def get(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersGetTableResponse:
+    ) -> TablesGetResponse:
         """
         Parameters
         ----------
@@ -176,7 +176,7 @@ class TablesClient:
 
         Returns
         -------
-        CollectionServiceHandlersGetTableResponse
+        TablesGetResponse
             Successful Response
 
         Examples
@@ -192,16 +192,16 @@ class TablesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/schema",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    CollectionServiceHandlersGetTableResponse,
+                    TablesGetResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetTableResponse,  # type: ignore
+                        type_=TablesGetResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -310,7 +310,7 @@ class TablesClient:
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> CollectionServiceHandlersDeleteTableResponse:
         """
-        Delete a table given a table_id.
+        Delete a table given a collection_id and table_id.
 
         Parameters
         ----------
@@ -595,7 +595,7 @@ class AsyncTablesClient:
 
     async def get(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersGetTableResponse:
+    ) -> TablesGetResponse:
         """
         Parameters
         ----------
@@ -608,7 +608,7 @@ class AsyncTablesClient:
 
         Returns
         -------
-        CollectionServiceHandlersGetTableResponse
+        TablesGetResponse
             Successful Response
 
         Examples
@@ -632,16 +632,16 @@ class AsyncTablesClient:
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/schema",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    CollectionServiceHandlersGetTableResponse,
+                    TablesGetResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetTableResponse,  # type: ignore
+                        type_=TablesGetResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -758,7 +758,7 @@ class AsyncTablesClient:
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> CollectionServiceHandlersDeleteTableResponse:
         """
-        Delete a table given a table_id.
+        Delete a table given a collection_id and table_id.
 
         Parameters
         ----------

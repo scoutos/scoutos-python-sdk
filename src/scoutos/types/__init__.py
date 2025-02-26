@@ -53,11 +53,14 @@ from .collection_service_handlers_table_sync_response import CollectionServiceHa
 from .collection_service_handlers_update_collection_response import CollectionServiceHandlersUpdateCollectionResponse
 from .collection_service_handlers_update_document_response import CollectionServiceHandlersUpdateDocumentResponse
 from .collection_service_handlers_update_table_response import CollectionServiceHandlersUpdateTableResponse
+from .column_type import ColumnType
+from .column_type_base import ColumnTypeBase
 from .copilot import Copilot
 from .copilot_config import CopilotConfig
 from .copilot_config_code_theme import CopilotConfigCodeTheme
 from .copilot_config_fab_value import CopilotConfigFabValue
 from .copilot_config_mode import CopilotConfigMode
+from .data_type import DataType
 from .dependency import Dependency
 from .document import Document
 from .document_data_value import DocumentDataValue
@@ -88,6 +91,7 @@ from .req_body import ReqBody
 from .response_model_usage import ResponseModelUsage
 from .run_log import RunLog
 from .run_log_pagination import RunLogPagination
+from .schema_response import SchemaResponse
 from .select_column import SelectColumn
 from .select_option_item import SelectOptionItem
 from .src_handlers_create_copilot_response import SrcHandlersCreateCopilotResponse
@@ -188,11 +192,14 @@ __all__ = [
     "CollectionServiceHandlersUpdateCollectionResponse",
     "CollectionServiceHandlersUpdateDocumentResponse",
     "CollectionServiceHandlersUpdateTableResponse",
+    "ColumnType",
+    "ColumnTypeBase",
     "Copilot",
     "CopilotConfig",
     "CopilotConfigCodeTheme",
     "CopilotConfigFabValue",
     "CopilotConfigMode",
+    "DataType",
     "Dependency",
     "Document",
     "DocumentDataValue",
@@ -223,6 +230,7 @@ __all__ = [
     "ResponseModelUsage",
     "RunLog",
     "RunLogPagination",
+    "SchemaResponse",
     "SelectColumn",
     "SelectOptionItem",
     "SrcHandlersCreateCopilotResponse",

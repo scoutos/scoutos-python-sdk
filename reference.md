@@ -1891,7 +1891,7 @@ client.copilots.delete(
 </details>
 
 ## Collections
-<details><summary><code>client.collections.<a href="src/scoutos/collections/client.py">list</a>()</code></summary>
+<details><summary><code>client.collections.<a href="src/scoutos/collections/client.py">list</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1921,6 +1921,22 @@ client.collections.list()
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**start_at:** `typing.Optional[str]` — created_at to start at
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Limit of records to return
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -2540,7 +2556,7 @@ client.tables.update(
 <dl>
 <dd>
 
-Delete a table given a table_id.
+Delete a table given a collection_id and table_id.
 </dd>
 </dl>
 </dd>
