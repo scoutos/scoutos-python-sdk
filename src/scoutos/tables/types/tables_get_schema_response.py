@@ -4,4 +4,4 @@ import typing
 from ...types.collection_service_handlers_get_table_response import CollectionServiceHandlersGetTableResponse
 from ...types.schema_response import SchemaResponse
 
-TablesGetResponse = typing.Union[CollectionServiceHandlersGetTableResponse, SchemaResponse]
+TablesGetSchemaResponse = typing.Union[CollectionServiceHandlersGetTableResponse, SchemaResponse]

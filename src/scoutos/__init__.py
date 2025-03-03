@@ -149,7 +149,7 @@ from .documents import (
     DocumentsUpdateRequestValue,
 )
 from .environment import ScoutEnvironment
-from .tables import TableConfigInputSchemaItem, TableDataSchemaItem, TablesGetResponse
+from .tables import TableConfigInputSchemaItem, TableDataSchemaItem, TablesGetSchemaResponse
 from .version import __version__
 from .workflow_logs import WorkflowLogsListLogsResponse
 from .workflows import (
@@ -284,7 +284,7 @@ __all__ = [
     "TableConfigOutput",
     "TableConfigOutputSchemaItem",
     "TableDataSchemaItem",
-    "TablesGetResponse",
+    "TablesGetSchemaResponse",
     "TextLongColumn",
     "TextShortColumn",
     "UnprocessableEntityError",

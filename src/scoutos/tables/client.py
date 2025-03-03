@@ -12,10 +12,11 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from .types.table_config_input_schema_item import TableConfigInputSchemaItem
 from ..types.collection_service_handlers_create_table_response import CollectionServiceHandlersCreateTableResponse
-from .types.tables_get_response import TablesGetResponse
+from ..types.collection_service_handlers_get_table_response import CollectionServiceHandlersGetTableResponse
 from .types.table_data_schema_item import TableDataSchemaItem
 from ..types.collection_service_handlers_update_table_response import CollectionServiceHandlersUpdateTableResponse
 from ..types.collection_service_handlers_delete_table_response import CollectionServiceHandlersDeleteTableResponse
+from .types.tables_get_schema_response import TablesGetSchemaResponse
 from ..types.collection_service_handlers_table_sync_response import CollectionServiceHandlersTableSyncResponse
 from ..core.client_wrapper import AsyncClientWrapper
 
@@ -163,7 +164,7 @@ class TablesClient:
 
     def get(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> TablesGetResponse:
+    ) -> CollectionServiceHandlersGetTableResponse:
         """
         Parameters
         ----------
@@ -176,7 +177,7 @@ class TablesClient:
 
         Returns
         -------
-        TablesGetResponse
+        CollectionServiceHandlersGetTableResponse
             Successful Response
 
         Examples
@@ -192,16 +193,16 @@ class TablesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/schema",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    TablesGetResponse,
+                    CollectionServiceHandlersGetTableResponse,
                     construct_type(
-                        type_=TablesGetResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -349,6 +350,65 @@ class TablesClient:
                     CollectionServiceHandlersDeleteTableResponse,
                     construct_type(
                         type_=CollectionServiceHandlersDeleteTableResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def get_schema(
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> TablesGetSchemaResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        TablesGetSchemaResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.tables.get_schema(
+            collection_id="collection_id",
+            table_id="table_id",
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/schema",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    TablesGetSchemaResponse,
+                    construct_type(
+                        type_=TablesGetSchemaResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -595,7 +655,7 @@ class AsyncTablesClient:
 
     async def get(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> TablesGetResponse:
+    ) -> CollectionServiceHandlersGetTableResponse:
         """
         Parameters
         ----------
@@ -608,7 +668,7 @@ class AsyncTablesClient:
 
         Returns
         -------
-        TablesGetResponse
+        CollectionServiceHandlersGetTableResponse
             Successful Response
 
         Examples
@@ -632,16 +692,16 @@ class AsyncTablesClient:
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/schema",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    TablesGetResponse,
+                    CollectionServiceHandlersGetTableResponse,
                     construct_type(
-                        type_=TablesGetResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -805,6 +865,73 @@ class AsyncTablesClient:
                     CollectionServiceHandlersDeleteTableResponse,
                     construct_type(
                         type_=CollectionServiceHandlersDeleteTableResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def get_schema(
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> TablesGetSchemaResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        TablesGetSchemaResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.tables.get_schema(
+                collection_id="collection_id",
+                table_id="table_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/schema",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    TablesGetSchemaResponse,
+                    construct_type(
+                        type_=TablesGetSchemaResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
