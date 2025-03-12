@@ -11,7 +11,7 @@ import pydantic
 
 class Document(UncheckedBaseModel):
     document_id: typing.Optional[str] = None
-    data: typing.Optional[typing.Dict[str, DocumentDataValue]] = None
+    data: typing.Optional[typing.Dict[str, typing.Optional[DocumentDataValue]]] = None
     document_data_id: typing.Optional[str] = None
     created_at: typing.Optional[dt.datetime] = None
     last_updated_at: typing.Optional[dt.datetime] = None

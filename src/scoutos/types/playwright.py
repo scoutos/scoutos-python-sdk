@@ -2,16 +2,17 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .document import Document
-from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from .playwright_wait_for_load_state import PlaywrightWaitForLoadState
 import pydantic
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
-class CollectionServiceHandlersGetDocumentsResponse(UncheckedBaseModel):
-    data: typing.Optional[typing.List[Document]] = None
-    next_cursor: typing.Optional[str] = None
-    has_more: typing.Optional[bool] = None
-    total_count: typing.Optional[int] = None
+class Playwright(UncheckedBaseModel):
+    scraper_type: typing.Literal["playwright"] = "playwright"
+    wait_for_load_state: typing.Optional[PlaywrightWaitForLoadState] = pydantic.Field(default=None)
+    """
+    Determines when the scraper considers navigation to be finished.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

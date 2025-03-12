@@ -15,6 +15,8 @@ from .copilots.client import CopilotsClient
 from .collections.client import CollectionsClient
 from .tables.client import TablesClient
 from .documents.client import DocumentsClient
+from .sources.client import SourcesClient
+from .syncs.client import SyncsClient
 from .core.client_wrapper import AsyncClientWrapper
 from .workflows.client import AsyncWorkflowsClient
 from .environments.client import AsyncEnvironmentsClient
@@ -25,6 +27,8 @@ from .copilots.client import AsyncCopilotsClient
 from .collections.client import AsyncCollectionsClient
 from .tables.client import AsyncTablesClient
 from .documents.client import AsyncDocumentsClient
+from .sources.client import AsyncSourcesClient
+from .syncs.client import AsyncSyncsClient
 
 
 class Scout:
@@ -96,6 +100,8 @@ class Scout:
         self.collections = CollectionsClient(client_wrapper=self._client_wrapper)
         self.tables = TablesClient(client_wrapper=self._client_wrapper)
         self.documents = DocumentsClient(client_wrapper=self._client_wrapper)
+        self.sources = SourcesClient(client_wrapper=self._client_wrapper)
+        self.syncs = SyncsClient(client_wrapper=self._client_wrapper)
 
 
 class AsyncScout:
@@ -167,6 +173,8 @@ class AsyncScout:
         self.collections = AsyncCollectionsClient(client_wrapper=self._client_wrapper)
         self.tables = AsyncTablesClient(client_wrapper=self._client_wrapper)
         self.documents = AsyncDocumentsClient(client_wrapper=self._client_wrapper)
+        self.sources = AsyncSourcesClient(client_wrapper=self._client_wrapper)
+        self.syncs = AsyncSyncsClient(client_wrapper=self._client_wrapper)
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: ScoutEnvironment) -> str:

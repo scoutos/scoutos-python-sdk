@@ -2,16 +2,13 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .document import Document
+from .sync import Sync
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
-class CollectionServiceHandlersGetDocumentsResponse(UncheckedBaseModel):
-    data: typing.Optional[typing.List[Document]] = None
-    next_cursor: typing.Optional[str] = None
-    has_more: typing.Optional[bool] = None
-    total_count: typing.Optional[int] = None
+class CollectionServiceHandlersUpdateSyncResponse(UncheckedBaseModel):
+    data: typing.Optional[Sync] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

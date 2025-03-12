@@ -2,16 +2,16 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .document import Document
-from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
-class CollectionServiceHandlersGetDocumentsResponse(UncheckedBaseModel):
-    data: typing.Optional[typing.List[Document]] = None
-    next_cursor: typing.Optional[str] = None
-    has_more: typing.Optional[bool] = None
-    total_count: typing.Optional[int] = None
+class SourceSyncNotionSettings(UncheckedBaseModel):
+    source_archetype_id: typing.Literal["com.notion.notion"] = "com.notion.notion"
+    api_key: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    The API key used for authentication with Notion.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

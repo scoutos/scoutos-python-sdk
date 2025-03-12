@@ -3,205 +3,44 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.collection_service_handlers_get_documents_response import CollectionServiceHandlersGetDocumentsResponse
+from ..types.collection_service_handlers_get_sync_response import CollectionServiceHandlersGetSyncResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
-from .types.documents_create_request_body import DocumentsCreateRequestBody
-from ..types.document_response import DocumentResponse
-from ..types.collection_service_handlers_get_document_response import CollectionServiceHandlersGetDocumentResponse
-from .types.documents_update_request_value import DocumentsUpdateRequestValue
-from ..types.collection_service_handlers_update_document_response import CollectionServiceHandlersUpdateDocumentResponse
-from ..types.collection_service_handlers_delete_documents_response import (
-    CollectionServiceHandlersDeleteDocumentsResponse,
+from ..types.sync_config_input import SyncConfigInput
+from ..types.collection_service_handlers_update_sync_response import CollectionServiceHandlersUpdateSyncResponse
+from ..types.collection_service_handlers_delete_sync_response import CollectionServiceHandlersDeleteSyncResponse
+from ..types.collection_service_handlers_list_collection_syncs_response_model import (
+    CollectionServiceHandlersListCollectionSyncsResponseModel,
 )
+from ..types.collection_service_handlers_create_sync_response import CollectionServiceHandlersCreateSyncResponse
 from ..core.client_wrapper import AsyncClientWrapper
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
 
-class DocumentsClient:
+class SyncsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def list(
-        self,
-        collection_id: str,
-        table_id: str,
-        *,
-        limit: typing.Optional[int] = None,
-        cursor: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersGetDocumentsResponse:
-        """
-        Parameters
-        ----------
-        collection_id : str
-
-        table_id : str
-
-        limit : typing.Optional[int]
-            Limit of records to return
-
-        cursor : typing.Optional[str]
-            Cursor to fetch next set of records
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        CollectionServiceHandlersGetDocumentsResponse
-            Successful Response
-
-        Examples
-        --------
-        from scoutos import Scout
-
-        client = Scout(
-            api_key="YOUR_API_KEY",
-        )
-        client.documents.list(
-            collection_id="collection_id",
-            table_id="table_id",
-        )
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents",
-            method="GET",
-            params={
-                "limit": limit,
-                "cursor": cursor,
-            },
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    CollectionServiceHandlersGetDocumentsResponse,
-                    construct_type(
-                        type_=CollectionServiceHandlersGetDocumentsResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    typing.cast(
-                        HttpValidationError,
-                        construct_type(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
-
-    def create(
-        self,
-        collection_id: str,
-        table_id: str,
-        *,
-        request: DocumentsCreateRequestBody,
-        await_completion: typing.Optional[bool] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> DocumentResponse:
-        """
-        Parameters
-        ----------
-        collection_id : str
-
-        table_id : str
-
-        request : DocumentsCreateRequestBody
-
-        await_completion : typing.Optional[bool]
-            Whether to wait for document creation to complete
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        DocumentResponse
-            Successful Response
-
-        Examples
-        --------
-        from scoutos import Scout
-
-        client = Scout(
-            api_key="YOUR_API_KEY",
-        )
-        client.documents.create(
-            collection_id="collection_id",
-            table_id="table_id",
-            request={"key": True},
-        )
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents",
-            method="POST",
-            params={
-                "await_completion": await_completion,
-            },
-            json=request,
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    DocumentResponse,
-                    construct_type(
-                        type_=DocumentResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    typing.cast(
-                        HttpValidationError,
-                        construct_type(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
-
     def get(
-        self,
-        collection_id: str,
-        table_id: str,
-        document_id: str,
-        *,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersGetDocumentResponse:
+        self, sync_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> CollectionServiceHandlersGetSyncResponse:
         """
         Parameters
         ----------
-        collection_id : str
-
-        table_id : str
-
-        document_id : str
+        sync_id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersGetDocumentResponse
+        CollectionServiceHandlersGetSyncResponse
             Successful Response
 
         Examples
@@ -211,23 +50,21 @@ class DocumentsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.documents.get(
-            collection_id="collection_id",
-            table_id="table_id",
-            document_id="document_id",
+        client.syncs.get(
+            sync_id="sync_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
+            f"v2/syncs/{jsonable_encoder(sync_id)}",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    CollectionServiceHandlersGetDocumentResponse,
+                    CollectionServiceHandlersGetSyncResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetDocumentResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetSyncResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -247,60 +84,63 @@ class DocumentsClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def update(
-        self,
-        collection_id: str,
-        document_id: str,
-        table_id: str,
-        *,
-        request: typing.Dict[str, DocumentsUpdateRequestValue],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersUpdateDocumentResponse:
+        self, sync_id: str, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
+    ) -> CollectionServiceHandlersUpdateSyncResponse:
         """
         Parameters
         ----------
-        collection_id : str
+        sync_id : str
 
-        document_id : str
-
-        table_id : str
-
-        request : typing.Dict[str, DocumentsUpdateRequestValue]
+        sync_config : SyncConfigInput
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersUpdateDocumentResponse
+        CollectionServiceHandlersUpdateSyncResponse
             Successful Response
 
         Examples
         --------
-        from scoutos import Scout
+        from scoutos import (
+            CollectionDestination,
+            Mapping,
+            Scout,
+            SourceSyncNotionSettings,
+            SyncConfigInput,
+        )
 
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.documents.update(
-            collection_id="collection_id",
-            document_id="document_id",
-            table_id="table_id",
-            request={"key": True},
+        client.syncs.update(
+            sync_id="sync_id",
+            sync_config=SyncConfigInput(
+                source_settings=SourceSyncNotionSettings(),
+                destination=CollectionDestination(
+                    collection_id="collection_id",
+                    table_id="table_id",
+                ),
+                mapping=Mapping(),
+            ),
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
+            f"v2/syncs/{jsonable_encoder(sync_id)}",
             method="PUT",
-            json=request,
+            json={
+                "sync_config": sync_config,
+            },
             request_options=request_options,
             omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    CollectionServiceHandlersUpdateDocumentResponse,
+                    CollectionServiceHandlersUpdateSyncResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersUpdateDocumentResponse,  # type: ignore
+                        type_=CollectionServiceHandlersUpdateSyncResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -320,28 +160,19 @@ class DocumentsClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def delete(
-        self,
-        collection_id: str,
-        table_id: str,
-        document_id: str,
-        *,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersDeleteDocumentsResponse:
+        self, sync_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> CollectionServiceHandlersDeleteSyncResponse:
         """
         Parameters
         ----------
-        collection_id : str
-
-        table_id : str
-
-        document_id : str
+        sync_id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersDeleteDocumentsResponse
+        CollectionServiceHandlersDeleteSyncResponse
             Successful Response
 
         Examples
@@ -351,23 +182,21 @@ class DocumentsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.documents.delete(
-            collection_id="collection_id",
-            table_id="table_id",
-            document_id="document_id",
+        client.syncs.delete(
+            sync_id="sync_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
+            f"v2/syncs/{jsonable_encoder(sync_id)}",
             method="DELETE",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    CollectionServiceHandlersDeleteDocumentsResponse,
+                    CollectionServiceHandlersDeleteSyncResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersDeleteDocumentsResponse,  # type: ignore
+                        type_=CollectionServiceHandlersDeleteSyncResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -386,16 +215,11 @@ class DocumentsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def delete_batch(
-        self,
-        collection_id: str,
-        table_id: str,
-        *,
-        request: typing.Sequence[str],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersDeleteDocumentsResponse:
+    def list(
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> CollectionServiceHandlersListCollectionSyncsResponseModel:
         """
-        Delete documents given a list of document ids.
+        List Sources by Destination, specifically given a collection and table
 
         Parameters
         ----------
@@ -403,14 +227,12 @@ class DocumentsClient:
 
         table_id : str
 
-        request : typing.Sequence[str]
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersDeleteDocumentsResponse
+        CollectionServiceHandlersListCollectionSyncsResponseModel
             Successful Response
 
         Examples
@@ -420,25 +242,151 @@ class DocumentsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.documents.delete_batch(
+        client.syncs.list(
             collection_id="collection_id",
             table_id="table_id",
-            request=["string"],
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/delete",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/syncs",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    CollectionServiceHandlersListCollectionSyncsResponseModel,
+                    construct_type(
+                        type_=CollectionServiceHandlersListCollectionSyncsResponseModel,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def create(
+        self, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
+    ) -> CollectionServiceHandlersCreateSyncResponse:
+        """
+        Parameters
+        ----------
+        sync_config : SyncConfigInput
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CollectionServiceHandlersCreateSyncResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import (
+            CollectionDestination,
+            Mapping,
+            Scout,
+            SourceSyncNotionSettings,
+            SyncConfigInput,
+        )
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.syncs.create(
+            sync_config=SyncConfigInput(
+                source_settings=SourceSyncNotionSettings(),
+                destination=CollectionDestination(
+                    collection_id="collection_id",
+                    table_id="table_id",
+                ),
+                mapping=Mapping(),
+            ),
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "v2/syncs",
             method="POST",
-            json=request,
+            json={
+                "sync_config": sync_config,
+            },
             request_options=request_options,
             omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    CollectionServiceHandlersDeleteDocumentsResponse,
+                    CollectionServiceHandlersCreateSyncResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersDeleteDocumentsResponse,  # type: ignore
+                        type_=CollectionServiceHandlersCreateSyncResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def execute(
+        self, sync_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        sync_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.syncs.execute(
+            sync_id="sync_id",
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/syncs/{jsonable_encoder(sync_id)}/execute",
+            method="POST",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    typing.Optional[typing.Any],
+                    construct_type(
+                        type_=typing.Optional[typing.Any],  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -458,200 +406,24 @@ class DocumentsClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
 
-class AsyncDocumentsClient:
+class AsyncSyncsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def list(
-        self,
-        collection_id: str,
-        table_id: str,
-        *,
-        limit: typing.Optional[int] = None,
-        cursor: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersGetDocumentsResponse:
-        """
-        Parameters
-        ----------
-        collection_id : str
-
-        table_id : str
-
-        limit : typing.Optional[int]
-            Limit of records to return
-
-        cursor : typing.Optional[str]
-            Cursor to fetch next set of records
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        CollectionServiceHandlersGetDocumentsResponse
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from scoutos import AsyncScout
-
-        client = AsyncScout(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.documents.list(
-                collection_id="collection_id",
-                table_id="table_id",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents",
-            method="GET",
-            params={
-                "limit": limit,
-                "cursor": cursor,
-            },
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    CollectionServiceHandlersGetDocumentsResponse,
-                    construct_type(
-                        type_=CollectionServiceHandlersGetDocumentsResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    typing.cast(
-                        HttpValidationError,
-                        construct_type(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
-
-    async def create(
-        self,
-        collection_id: str,
-        table_id: str,
-        *,
-        request: DocumentsCreateRequestBody,
-        await_completion: typing.Optional[bool] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> DocumentResponse:
-        """
-        Parameters
-        ----------
-        collection_id : str
-
-        table_id : str
-
-        request : DocumentsCreateRequestBody
-
-        await_completion : typing.Optional[bool]
-            Whether to wait for document creation to complete
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        DocumentResponse
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from scoutos import AsyncScout
-
-        client = AsyncScout(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.documents.create(
-                collection_id="collection_id",
-                table_id="table_id",
-                request={"key": True},
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents",
-            method="POST",
-            params={
-                "await_completion": await_completion,
-            },
-            json=request,
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return typing.cast(
-                    DocumentResponse,
-                    construct_type(
-                        type_=DocumentResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    typing.cast(
-                        HttpValidationError,
-                        construct_type(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    )
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
-
     async def get(
-        self,
-        collection_id: str,
-        table_id: str,
-        document_id: str,
-        *,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersGetDocumentResponse:
+        self, sync_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> CollectionServiceHandlersGetSyncResponse:
         """
         Parameters
         ----------
-        collection_id : str
-
-        table_id : str
-
-        document_id : str
+        sync_id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersGetDocumentResponse
+        CollectionServiceHandlersGetSyncResponse
             Successful Response
 
         Examples
@@ -666,26 +438,24 @@ class AsyncDocumentsClient:
 
 
         async def main() -> None:
-            await client.documents.get(
-                collection_id="collection_id",
-                table_id="table_id",
-                document_id="document_id",
+            await client.syncs.get(
+                sync_id="sync_id",
             )
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
+            f"v2/syncs/{jsonable_encoder(sync_id)}",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    CollectionServiceHandlersGetDocumentResponse,
+                    CollectionServiceHandlersGetSyncResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetDocumentResponse,  # type: ignore
+                        type_=CollectionServiceHandlersGetSyncResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -705,38 +475,34 @@ class AsyncDocumentsClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     async def update(
-        self,
-        collection_id: str,
-        document_id: str,
-        table_id: str,
-        *,
-        request: typing.Dict[str, DocumentsUpdateRequestValue],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersUpdateDocumentResponse:
+        self, sync_id: str, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
+    ) -> CollectionServiceHandlersUpdateSyncResponse:
         """
         Parameters
         ----------
-        collection_id : str
+        sync_id : str
 
-        document_id : str
-
-        table_id : str
-
-        request : typing.Dict[str, DocumentsUpdateRequestValue]
+        sync_config : SyncConfigInput
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersUpdateDocumentResponse
+        CollectionServiceHandlersUpdateSyncResponse
             Successful Response
 
         Examples
         --------
         import asyncio
 
-        from scoutos import AsyncScout
+        from scoutos import (
+            AsyncScout,
+            CollectionDestination,
+            Mapping,
+            SourceSyncNotionSettings,
+            SyncConfigInput,
+        )
 
         client = AsyncScout(
             api_key="YOUR_API_KEY",
@@ -744,29 +510,36 @@ class AsyncDocumentsClient:
 
 
         async def main() -> None:
-            await client.documents.update(
-                collection_id="collection_id",
-                document_id="document_id",
-                table_id="table_id",
-                request={"key": True},
+            await client.syncs.update(
+                sync_id="sync_id",
+                sync_config=SyncConfigInput(
+                    source_settings=SourceSyncNotionSettings(),
+                    destination=CollectionDestination(
+                        collection_id="collection_id",
+                        table_id="table_id",
+                    ),
+                    mapping=Mapping(),
+                ),
             )
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
+            f"v2/syncs/{jsonable_encoder(sync_id)}",
             method="PUT",
-            json=request,
+            json={
+                "sync_config": sync_config,
+            },
             request_options=request_options,
             omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    CollectionServiceHandlersUpdateDocumentResponse,
+                    CollectionServiceHandlersUpdateSyncResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersUpdateDocumentResponse,  # type: ignore
+                        type_=CollectionServiceHandlersUpdateSyncResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -786,28 +559,19 @@ class AsyncDocumentsClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     async def delete(
-        self,
-        collection_id: str,
-        table_id: str,
-        document_id: str,
-        *,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersDeleteDocumentsResponse:
+        self, sync_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> CollectionServiceHandlersDeleteSyncResponse:
         """
         Parameters
         ----------
-        collection_id : str
-
-        table_id : str
-
-        document_id : str
+        sync_id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersDeleteDocumentsResponse
+        CollectionServiceHandlersDeleteSyncResponse
             Successful Response
 
         Examples
@@ -822,26 +586,24 @@ class AsyncDocumentsClient:
 
 
         async def main() -> None:
-            await client.documents.delete(
-                collection_id="collection_id",
-                table_id="table_id",
-                document_id="document_id",
+            await client.syncs.delete(
+                sync_id="sync_id",
             )
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
+            f"v2/syncs/{jsonable_encoder(sync_id)}",
             method="DELETE",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    CollectionServiceHandlersDeleteDocumentsResponse,
+                    CollectionServiceHandlersDeleteSyncResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersDeleteDocumentsResponse,  # type: ignore
+                        type_=CollectionServiceHandlersDeleteSyncResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -860,16 +622,11 @@ class AsyncDocumentsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def delete_batch(
-        self,
-        collection_id: str,
-        table_id: str,
-        *,
-        request: typing.Sequence[str],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersDeleteDocumentsResponse:
+    async def list(
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> CollectionServiceHandlersListCollectionSyncsResponseModel:
         """
-        Delete documents given a list of document ids.
+        List Sources by Destination, specifically given a collection and table
 
         Parameters
         ----------
@@ -877,14 +634,12 @@ class AsyncDocumentsClient:
 
         table_id : str
 
-        request : typing.Sequence[str]
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersDeleteDocumentsResponse
+        CollectionServiceHandlersListCollectionSyncsResponseModel
             Successful Response
 
         Examples
@@ -899,28 +654,170 @@ class AsyncDocumentsClient:
 
 
         async def main() -> None:
-            await client.documents.delete_batch(
+            await client.syncs.list(
                 collection_id="collection_id",
                 table_id="table_id",
-                request=["string"],
             )
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/delete",
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/syncs",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    CollectionServiceHandlersListCollectionSyncsResponseModel,
+                    construct_type(
+                        type_=CollectionServiceHandlersListCollectionSyncsResponseModel,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def create(
+        self, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
+    ) -> CollectionServiceHandlersCreateSyncResponse:
+        """
+        Parameters
+        ----------
+        sync_config : SyncConfigInput
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CollectionServiceHandlersCreateSyncResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import (
+            AsyncScout,
+            CollectionDestination,
+            Mapping,
+            SourceSyncNotionSettings,
+            SyncConfigInput,
+        )
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.syncs.create(
+                sync_config=SyncConfigInput(
+                    source_settings=SourceSyncNotionSettings(),
+                    destination=CollectionDestination(
+                        collection_id="collection_id",
+                        table_id="table_id",
+                    ),
+                    mapping=Mapping(),
+                ),
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "v2/syncs",
             method="POST",
-            json=request,
+            json={
+                "sync_config": sync_config,
+            },
             request_options=request_options,
             omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    CollectionServiceHandlersDeleteDocumentsResponse,
+                    CollectionServiceHandlersCreateSyncResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersDeleteDocumentsResponse,  # type: ignore
+                        type_=CollectionServiceHandlersCreateSyncResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    )
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def execute(
+        self, sync_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        sync_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.syncs.execute(
+                sync_id="sync_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/syncs/{jsonable_encoder(sync_id)}/execute",
+            method="POST",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(
+                    typing.Optional[typing.Any],
+                    construct_type(
+                        type_=typing.Optional[typing.Any],  # type: ignore
                         object_=_response.json(),
                     ),
                 )

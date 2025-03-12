@@ -3,6 +3,9 @@
 from .actor import Actor
 from .actor_type import ActorType
 from .api_key_identity import ApiKeyIdentity
+from .bare_input import BareInput
+from .bare_output import BareOutput
+from .baseline import Baseline
 from .block_config_item_boolean import BlockConfigItemBoolean
 from .block_config_item_json import BlockConfigItemJson
 from .block_config_item_llm import BlockConfigItemLlm
@@ -37,21 +40,31 @@ from .block_state_updated_environment import BlockStateUpdatedEnvironment
 from .check_box_column import CheckBoxColumn
 from .collection import Collection
 from .collection_config import CollectionConfig
+from .collection_destination import CollectionDestination
 from .collection_service_handlers_create_collection_response import CollectionServiceHandlersCreateCollectionResponse
-from .collection_service_handlers_create_document_response import CollectionServiceHandlersCreateDocumentResponse
+from .collection_service_handlers_create_sync_response import CollectionServiceHandlersCreateSyncResponse
 from .collection_service_handlers_create_table_response import CollectionServiceHandlersCreateTableResponse
 from .collection_service_handlers_delete_collection_response import CollectionServiceHandlersDeleteCollectionResponse
 from .collection_service_handlers_delete_documents_response import CollectionServiceHandlersDeleteDocumentsResponse
+from .collection_service_handlers_delete_sync_response import CollectionServiceHandlersDeleteSyncResponse
 from .collection_service_handlers_delete_table_response import CollectionServiceHandlersDeleteTableResponse
 from .collection_service_handlers_get_collection_response import CollectionServiceHandlersGetCollectionResponse
 from .collection_service_handlers_get_collections_response import CollectionServiceHandlersGetCollectionsResponse
 from .collection_service_handlers_get_document_response import CollectionServiceHandlersGetDocumentResponse
 from .collection_service_handlers_get_documents_response import CollectionServiceHandlersGetDocumentsResponse
+from .collection_service_handlers_get_sync_response import CollectionServiceHandlersGetSyncResponse
 from .collection_service_handlers_get_table_response import CollectionServiceHandlersGetTableResponse
 from .collection_service_handlers_get_tables_response import CollectionServiceHandlersGetTablesResponse
+from .collection_service_handlers_list_collection_syncs_response_model import (
+    CollectionServiceHandlersListCollectionSyncsResponseModel,
+)
+from .collection_service_handlers_list_source_archetypes_response_model import (
+    CollectionServiceHandlersListSourceArchetypesResponseModel,
+)
 from .collection_service_handlers_table_sync_response import CollectionServiceHandlersTableSyncResponse
 from .collection_service_handlers_update_collection_response import CollectionServiceHandlersUpdateCollectionResponse
 from .collection_service_handlers_update_document_response import CollectionServiceHandlersUpdateDocumentResponse
+from .collection_service_handlers_update_sync_response import CollectionServiceHandlersUpdateSyncResponse
 from .collection_service_handlers_update_table_response import CollectionServiceHandlersUpdateTableResponse
 from .column_type import ColumnType
 from .column_type_base import ColumnTypeBase
@@ -60,10 +73,14 @@ from .copilot_config import CopilotConfig
 from .copilot_config_code_theme import CopilotConfigCodeTheme
 from .copilot_config_fab_value import CopilotConfigFabValue
 from .copilot_config_mode import CopilotConfigMode
+from .custom import Custom
 from .data_type import DataType
+from .default_input import DefaultInput
+from .default_output import DefaultOutput
 from .dependency import Dependency
 from .document import Document
 from .document_data_value import DocumentDataValue
+from .document_response import DocumentResponse
 from .edge_ui import EdgeUi
 from .environment import Environment
 from .environment_config import EnvironmentConfig
@@ -71,29 +88,71 @@ from .environment_deployment_config import EnvironmentDeploymentConfig
 from .environment_deployment_config_revision_lookup import EnvironmentDeploymentConfigRevisionLookup
 from .environment_deployment_document import EnvironmentDeploymentDocument
 from .event_version import EventVersion
+from .favor import Favor
+from .html_2_text import Html2Text
+from .http import Http
 from .http_validation_error import HttpValidationError
 from .identity import Identity
 from .identity_details import IdentityDetails
 from .identity_types import IdentityTypes
 from .json_column import JsonColumn
+from .mapping import Mapping
+from .mark_down_with_context import MarkDownWithContext
 from .markdown_column import MarkdownColumn
+from .markdown_splitter_config import MarkdownSplitterConfig
 from .message import Message
 from .message_chunk import MessageChunk
+from .multi_page_crawler_settings_input import MultiPageCrawlerSettingsInput
+from .multi_page_crawler_settings_input_scraper import MultiPageCrawlerSettingsInputScraper
+from .multi_page_crawler_settings_input_text_extractor import MultiPageCrawlerSettingsInputTextExtractor
+from .multi_page_crawler_settings_output import MultiPageCrawlerSettingsOutput
+from .multi_page_crawler_settings_output_scraper import MultiPageCrawlerSettingsOutputScraper
+from .multi_page_crawler_settings_output_text_extractor import MultiPageCrawlerSettingsOutputTextExtractor
 from .node_ui import NodeUi
 from .number_column import NumberColumn
 from .number_column_default import NumberColumnDefault
 from .number_column_max_value import NumberColumnMaxValue
 from .number_column_min_value import NumberColumnMinValue
+from .paragraph_splitter_config import ParagraphSplitterConfig
+from .playwright import Playwright
+from .playwright_wait_for_load_state import PlaywrightWaitForLoadState
 from .position import Position
 from .prompt import Prompt
 from .prompt_role import PromptRole
+from .readability import Readability
+from .recursive_splitter_config import RecursiveSplitterConfig
 from .req_body import ReqBody
+from .request_body import RequestBody
 from .response_model_usage import ResponseModelUsage
 from .run_log import RunLog
 from .run_log_pagination import RunLogPagination
+from .schedule import Schedule
 from .schema_response import SchemaResponse
 from .select_column import SelectColumn
 from .select_option_item import SelectOptionItem
+from .sentence_splitter_config import SentenceSplitterConfig
+from .single_page_crawler_settings_input import SinglePageCrawlerSettingsInput
+from .single_page_crawler_settings_input_scraper import SinglePageCrawlerSettingsInputScraper
+from .single_page_crawler_settings_input_text_extractor import SinglePageCrawlerSettingsInputTextExtractor
+from .single_page_crawler_settings_output import SinglePageCrawlerSettingsOutput
+from .single_page_crawler_settings_output_scraper import SinglePageCrawlerSettingsOutputScraper
+from .single_page_crawler_settings_output_text_extractor import SinglePageCrawlerSettingsOutputTextExtractor
+from .sitemap_crawler_settings_input import SitemapCrawlerSettingsInput
+from .sitemap_crawler_settings_input_scraper import SitemapCrawlerSettingsInputScraper
+from .sitemap_crawler_settings_input_text_extractor import SitemapCrawlerSettingsInputTextExtractor
+from .sitemap_crawler_settings_output import SitemapCrawlerSettingsOutput
+from .sitemap_crawler_settings_output_scraper import SitemapCrawlerSettingsOutputScraper
+from .sitemap_crawler_settings_output_text_extractor import SitemapCrawlerSettingsOutputTextExtractor
+from .source_archetype import SourceArchetype
+from .source_sync_crawl_settings_input import SourceSyncCrawlSettingsInput
+from .source_sync_crawl_settings_output import SourceSyncCrawlSettingsOutput
+from .source_sync_notion_settings import SourceSyncNotionSettings
+from .source_sync_page_crawl_settings_input import SourceSyncPageCrawlSettingsInput
+from .source_sync_page_crawl_settings_output import SourceSyncPageCrawlSettingsOutput
+from .source_sync_sitemap_settings_input import SourceSyncSitemapSettingsInput
+from .source_sync_sitemap_settings_output import SourceSyncSitemapSettingsOutput
+from .source_sync_website_settings import SourceSyncWebsiteSettings
+from .source_sync_website_settings_splitter import SourceSyncWebsiteSettingsSplitter
 from .src_handlers_create_copilot_response import SrcHandlersCreateCopilotResponse
 from .src_handlers_create_workflow_response import SrcHandlersCreateWorkflowResponse
 from .src_handlers_create_workflow_revision_response import SrcHandlersCreateWorkflowRevisionResponse
@@ -110,11 +169,22 @@ from .src_handlers_promote_workflow_revision_response import SrcHandlersPromoteW
 from .src_handlers_update_copilot_response import SrcHandlersUpdateCopilotResponse
 from .src_handlers_update_workflow_environment_response import SrcHandlersUpdateWorkflowEnvironmentResponse
 from .src_handlers_update_workflow_response import SrcHandlersUpdateWorkflowResponse
+from .sync import Sync
+from .sync_config_input import SyncConfigInput
+from .sync_config_input_source_settings import SyncConfigInputSourceSettings
+from .sync_config_output import SyncConfigOutput
+from .sync_config_output_source_settings import SyncConfigOutputSourceSettings
 from .table import Table
 from .table_config_output import TableConfigOutput
 from .table_config_output_schema_item import TableConfigOutputSchemaItem
+from .text_extractor import TextExtractor
+from .text_extractor_config import TextExtractorConfig
 from .text_long_column import TextLongColumn
 from .text_short_column import TextShortColumn
+from .trafilatura_input import TrafilaturaInput
+from .trafilatura_input_trafilatura_type import TrafilaturaInputTrafilaturaType
+from .trafilatura_output import TrafilaturaOutput
+from .trafilatura_output_trafilatura_type import TrafilaturaOutputTrafilaturaType
 from .url_column import UrlColumn
 from .usage import Usage
 from .user_identity import UserIdentity
@@ -142,6 +212,9 @@ __all__ = [
     "Actor",
     "ActorType",
     "ApiKeyIdentity",
+    "BareInput",
+    "BareOutput",
+    "Baseline",
     "BlockConfigItemBoolean",
     "BlockConfigItemJson",
     "BlockConfigItemLlm",
@@ -176,21 +249,27 @@ __all__ = [
     "CheckBoxColumn",
     "Collection",
     "CollectionConfig",
+    "CollectionDestination",
     "CollectionServiceHandlersCreateCollectionResponse",
-    "CollectionServiceHandlersCreateDocumentResponse",
+    "CollectionServiceHandlersCreateSyncResponse",
     "CollectionServiceHandlersCreateTableResponse",
     "CollectionServiceHandlersDeleteCollectionResponse",
     "CollectionServiceHandlersDeleteDocumentsResponse",
+    "CollectionServiceHandlersDeleteSyncResponse",
     "CollectionServiceHandlersDeleteTableResponse",
     "CollectionServiceHandlersGetCollectionResponse",
     "CollectionServiceHandlersGetCollectionsResponse",
     "CollectionServiceHandlersGetDocumentResponse",
     "CollectionServiceHandlersGetDocumentsResponse",
+    "CollectionServiceHandlersGetSyncResponse",
     "CollectionServiceHandlersGetTableResponse",
     "CollectionServiceHandlersGetTablesResponse",
+    "CollectionServiceHandlersListCollectionSyncsResponseModel",
+    "CollectionServiceHandlersListSourceArchetypesResponseModel",
     "CollectionServiceHandlersTableSyncResponse",
     "CollectionServiceHandlersUpdateCollectionResponse",
     "CollectionServiceHandlersUpdateDocumentResponse",
+    "CollectionServiceHandlersUpdateSyncResponse",
     "CollectionServiceHandlersUpdateTableResponse",
     "ColumnType",
     "ColumnTypeBase",
@@ -199,10 +278,14 @@ __all__ = [
     "CopilotConfigCodeTheme",
     "CopilotConfigFabValue",
     "CopilotConfigMode",
+    "Custom",
     "DataType",
+    "DefaultInput",
+    "DefaultOutput",
     "Dependency",
     "Document",
     "DocumentDataValue",
+    "DocumentResponse",
     "EdgeUi",
     "Environment",
     "EnvironmentConfig",
@@ -210,29 +293,71 @@ __all__ = [
     "EnvironmentDeploymentConfigRevisionLookup",
     "EnvironmentDeploymentDocument",
     "EventVersion",
+    "Favor",
+    "Html2Text",
+    "Http",
     "HttpValidationError",
     "Identity",
     "IdentityDetails",
     "IdentityTypes",
     "JsonColumn",
+    "Mapping",
+    "MarkDownWithContext",
     "MarkdownColumn",
+    "MarkdownSplitterConfig",
     "Message",
     "MessageChunk",
+    "MultiPageCrawlerSettingsInput",
+    "MultiPageCrawlerSettingsInputScraper",
+    "MultiPageCrawlerSettingsInputTextExtractor",
+    "MultiPageCrawlerSettingsOutput",
+    "MultiPageCrawlerSettingsOutputScraper",
+    "MultiPageCrawlerSettingsOutputTextExtractor",
     "NodeUi",
     "NumberColumn",
     "NumberColumnDefault",
     "NumberColumnMaxValue",
     "NumberColumnMinValue",
+    "ParagraphSplitterConfig",
+    "Playwright",
+    "PlaywrightWaitForLoadState",
     "Position",
     "Prompt",
     "PromptRole",
+    "Readability",
+    "RecursiveSplitterConfig",
     "ReqBody",
+    "RequestBody",
     "ResponseModelUsage",
     "RunLog",
     "RunLogPagination",
+    "Schedule",
     "SchemaResponse",
     "SelectColumn",
     "SelectOptionItem",
+    "SentenceSplitterConfig",
+    "SinglePageCrawlerSettingsInput",
+    "SinglePageCrawlerSettingsInputScraper",
+    "SinglePageCrawlerSettingsInputTextExtractor",
+    "SinglePageCrawlerSettingsOutput",
+    "SinglePageCrawlerSettingsOutputScraper",
+    "SinglePageCrawlerSettingsOutputTextExtractor",
+    "SitemapCrawlerSettingsInput",
+    "SitemapCrawlerSettingsInputScraper",
+    "SitemapCrawlerSettingsInputTextExtractor",
+    "SitemapCrawlerSettingsOutput",
+    "SitemapCrawlerSettingsOutputScraper",
+    "SitemapCrawlerSettingsOutputTextExtractor",
+    "SourceArchetype",
+    "SourceSyncCrawlSettingsInput",
+    "SourceSyncCrawlSettingsOutput",
+    "SourceSyncNotionSettings",
+    "SourceSyncPageCrawlSettingsInput",
+    "SourceSyncPageCrawlSettingsOutput",
+    "SourceSyncSitemapSettingsInput",
+    "SourceSyncSitemapSettingsOutput",
+    "SourceSyncWebsiteSettings",
+    "SourceSyncWebsiteSettingsSplitter",
     "SrcHandlersCreateCopilotResponse",
     "SrcHandlersCreateWorkflowResponse",
     "SrcHandlersCreateWorkflowRevisionResponse",
@@ -249,11 +374,22 @@ __all__ = [
     "SrcHandlersUpdateCopilotResponse",
     "SrcHandlersUpdateWorkflowEnvironmentResponse",
     "SrcHandlersUpdateWorkflowResponse",
+    "Sync",
+    "SyncConfigInput",
+    "SyncConfigInputSourceSettings",
+    "SyncConfigOutput",
+    "SyncConfigOutputSourceSettings",
     "Table",
     "TableConfigOutput",
     "TableConfigOutputSchemaItem",
+    "TextExtractor",
+    "TextExtractorConfig",
     "TextLongColumn",
     "TextShortColumn",
+    "TrafilaturaInput",
+    "TrafilaturaInputTrafilaturaType",
+    "TrafilaturaOutput",
+    "TrafilaturaOutputTrafilaturaType",
     "UrlColumn",
     "Usage",
     "UserIdentity",

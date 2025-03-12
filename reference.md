@@ -2830,6 +2830,22 @@ client.documents.list(
 <dl>
 <dd>
 
+**limit:** `typing.Optional[int]` — Limit of records to return
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cursor:** `typing.Optional[str]` — Cursor to fetch next set of records
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -2896,7 +2912,15 @@ client.documents.create(
 <dl>
 <dd>
 
-**request:** `DocumentsCreateRequest` 
+**request:** `DocumentsCreateRequestBody` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**await_completion:** `typing.Optional[bool]` — Whether to wait for document creation to complete
     
 </dd>
 </dl>
@@ -3216,6 +3240,448 @@ client.documents.delete_batch(
 <dd>
 
 **request:** `typing.Sequence[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Sources
+<details><summary><code>client.sources.<a href="src/scoutos/sources/client.py">list</a>()</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.sources.list()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Syncs
+<details><summary><code>client.syncs.<a href="src/scoutos/syncs/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.syncs.get(
+    sync_id="sync_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sync_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.syncs.<a href="src/scoutos/syncs/client.py">update</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import (
+    CollectionDestination,
+    Mapping,
+    Scout,
+    SourceSyncNotionSettings,
+    SyncConfigInput,
+)
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.syncs.update(
+    sync_id="sync_id",
+    sync_config=SyncConfigInput(
+        source_settings=SourceSyncNotionSettings(),
+        destination=CollectionDestination(
+            collection_id="collection_id",
+            table_id="table_id",
+        ),
+        mapping=Mapping(),
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sync_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sync_config:** `SyncConfigInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.syncs.<a href="src/scoutos/syncs/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.syncs.delete(
+    sync_id="sync_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sync_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.syncs.<a href="src/scoutos/syncs/client.py">list</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List Sources by Destination, specifically given a collection and table
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.syncs.list(
+    collection_id="collection_id",
+    table_id="table_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.syncs.<a href="src/scoutos/syncs/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import (
+    CollectionDestination,
+    Mapping,
+    Scout,
+    SourceSyncNotionSettings,
+    SyncConfigInput,
+)
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.syncs.create(
+    sync_config=SyncConfigInput(
+        source_settings=SourceSyncNotionSettings(),
+        destination=CollectionDestination(
+            collection_id="collection_id",
+            table_id="table_id",
+        ),
+        mapping=Mapping(),
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sync_config:** `SyncConfigInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.syncs.<a href="src/scoutos/syncs/client.py">execute</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.syncs.execute(
+    sync_id="sync_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sync_id:** `str` 
     
 </dd>
 </dl>

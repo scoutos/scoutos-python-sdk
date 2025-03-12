@@ -2,16 +2,19 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .document import Document
-from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
+from .multi_page_crawler_settings_input import MultiPageCrawlerSettingsInput
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
-class CollectionServiceHandlersGetDocumentsResponse(UncheckedBaseModel):
-    data: typing.Optional[typing.List[Document]] = None
-    next_cursor: typing.Optional[str] = None
-    has_more: typing.Optional[bool] = None
-    total_count: typing.Optional[int] = None
+class SourceSyncCrawlSettingsInput(UncheckedBaseModel):
+    source_archetype_id: typing.Literal["com.scoutos.crawl"] = "com.scoutos.crawl"
+    start_urls: str = pydantic.Field()
+    """
+    The starting URL for the crawl process.
+    """
+
+    crawler_settings: typing.Optional[MultiPageCrawlerSettingsInput] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

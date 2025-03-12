@@ -2,16 +2,17 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .document import Document
-from ..core.pydantic_utilities import IS_PYDANTIC_V2
+from .trafilatura_output_trafilatura_type import TrafilaturaOutputTrafilaturaType
 import pydantic
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
-class CollectionServiceHandlersGetDocumentsResponse(UncheckedBaseModel):
-    data: typing.Optional[typing.List[Document]] = None
-    next_cursor: typing.Optional[str] = None
-    has_more: typing.Optional[bool] = None
-    total_count: typing.Optional[int] = None
+class TrafilaturaOutput(UncheckedBaseModel):
+    text_extractor_type: typing.Literal["trafilatura"] = "trafilatura"
+    trafilatura_type: TrafilaturaOutputTrafilaturaType = pydantic.Field()
+    """
+    Choose the Trafilatura extraction algorithm to use.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
