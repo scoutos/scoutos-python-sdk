@@ -1941,6 +1941,14 @@ client.collections.list()
 <dl>
 <dd>
 
+**query:** `typing.Optional[str]` — Search query
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -2839,6 +2847,14 @@ client.documents.list(
 <dd>
 
 **cursor:** `typing.Optional[str]` — Cursor to fetch next set of records
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**query:** `typing.Optional[str]` — Search query
     
 </dd>
 </dl>

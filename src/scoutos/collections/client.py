@@ -35,6 +35,7 @@ class CollectionsClient:
         *,
         start_at: typing.Optional[str] = None,
         limit: typing.Optional[int] = None,
+        query: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CollectionServiceHandlersGetCollectionsResponse:
         """
@@ -45,6 +46,9 @@ class CollectionsClient:
 
         limit : typing.Optional[int]
             Limit of records to return
+
+        query : typing.Optional[str]
+            Search query
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -69,6 +73,7 @@ class CollectionsClient:
             params={
                 "start_at": start_at,
                 "limit": limit,
+                "query": query,
             },
             request_options=request_options,
         )
@@ -363,6 +368,7 @@ class AsyncCollectionsClient:
         *,
         start_at: typing.Optional[str] = None,
         limit: typing.Optional[int] = None,
+        query: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CollectionServiceHandlersGetCollectionsResponse:
         """
@@ -373,6 +379,9 @@ class AsyncCollectionsClient:
 
         limit : typing.Optional[int]
             Limit of records to return
+
+        query : typing.Optional[str]
+            Search query
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -405,6 +414,7 @@ class AsyncCollectionsClient:
             params={
                 "start_at": start_at,
                 "limit": limit,
+                "query": query,
             },
             request_options=request_options,
         )

@@ -35,6 +35,7 @@ class DocumentsClient:
         *,
         limit: typing.Optional[int] = None,
         cursor: typing.Optional[str] = None,
+        query: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CollectionServiceHandlersGetDocumentsResponse:
         """
@@ -49,6 +50,9 @@ class DocumentsClient:
 
         cursor : typing.Optional[str]
             Cursor to fetch next set of records
+
+        query : typing.Optional[str]
+            Search query
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -76,6 +80,7 @@ class DocumentsClient:
             params={
                 "limit": limit,
                 "cursor": cursor,
+                "query": query,
             },
             request_options=request_options,
         )
@@ -469,6 +474,7 @@ class AsyncDocumentsClient:
         *,
         limit: typing.Optional[int] = None,
         cursor: typing.Optional[str] = None,
+        query: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CollectionServiceHandlersGetDocumentsResponse:
         """
@@ -483,6 +489,9 @@ class AsyncDocumentsClient:
 
         cursor : typing.Optional[str]
             Cursor to fetch next set of records
+
+        query : typing.Optional[str]
+            Search query
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -518,6 +527,7 @@ class AsyncDocumentsClient:
             params={
                 "limit": limit,
                 "cursor": cursor,
+                "query": query,
             },
             request_options=request_options,
         )
