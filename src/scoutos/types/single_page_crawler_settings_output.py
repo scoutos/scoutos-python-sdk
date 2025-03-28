@@ -18,12 +18,7 @@ class SinglePageCrawlerSettingsOutput(UncheckedBaseModel):
 
     deny: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Comma-separated list of URL patterns to exclude. URLs matching these patterns will be skipped.
-    """
-
-    exclude_patterns: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Comma-separated list of regex patterns to exclude. URLs matching any of these patterns will be skipped. For example: '/private/, login\.html$' will skip URLs containing '/private/' and ending with 'login.html'
+    Comma-separated list of URL patterns to exclude. URLs matching these patterns will be skipped. Supports both simple substrings (like '/admin') and regex patterns (like 'login\.html$').
     """
 
     strip: typing.Optional[str] = pydantic.Field(default=None)
