@@ -11,6 +11,10 @@ The Scoutos Python library provides convenient access to the Scoutos API from Py
 pip install scoutos
 ```
 
+## Reference
+
+A full reference for this library is available [here](./reference.md).
+
 ## Usage
 
 Instantiate and use the client with the following:
@@ -73,19 +77,39 @@ client = Scout(
 response = client.workflows.run_stream(
     workflow_id="workflow_id",
 )
-for chunk in response:
+for chunk in response.data:
     yield chunk
 ```
 
 ## Advanced
 
+### Access Raw Response Data
+
+The SDK provides access to raw response data, including headers, through the `.with_raw_response` property.
+The `.with_raw_response` property returns a "raw" client that can be used to access the `.headers` and `.data` attributes.
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    ...,
+)
+response = client.workflows.with_raw_response.create_revision(...)
+print(response.headers)  # access the response headers
+print(response.data)  # access the underlying object
+with client.workflows.with_raw_response.run_stream(...) as response:
+    print(response.headers)  # access the response headers
+    for chunk in response.data:
+        print(chunk)  # access the underlying object(s)
+```
+
 ### Retries
 
 The SDK is instrumented with automatic retries with exponential backoff. A request will be retried as long
-as the request is deemed retriable and the number of retry attempts has not grown larger than the configured
+as the request is deemed retryable and the number of retry attempts has not grown larger than the configured
 retry limit (default: 2).
 
-A request is deemed retriable when any of the following HTTP status codes is returned:
+A request is deemed retryable when any of the following HTTP status codes is returned:
 
 - [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
 - [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
@@ -94,7 +118,7 @@ A request is deemed retriable when any of the following HTTP status codes is ret
 Use the `max_retries` request option to configure this behavior.
 
 ```python
-client.workflows.create_revision(..., {
+client.workflows.create_revision(..., request_options={
     "max_retries": 1
 })
 ```
@@ -114,7 +138,7 @@ client = Scout(
 
 
 # Override timeout for a specific method
-client.workflows.create_revision(..., {
+client.workflows.create_revision(..., request_options={
     "timeout_in_seconds": 1
 })
 ```
@@ -123,6 +147,7 @@ client.workflows.create_revision(..., {
 
 You can override the `httpx` client to customize it for your use-case. Some common use-cases include support for proxies
 and transports.
+
 ```python
 import httpx
 from scoutos import Scout

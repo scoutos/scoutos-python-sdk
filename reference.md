@@ -643,7 +643,7 @@ client = Scout(
 response = client.workflows.run_stream(
     workflow_id="workflow_id",
 )
-for chunk in response:
+for chunk in response.data:
     yield chunk
 
 ```
@@ -1391,7 +1391,7 @@ client = Scout(
 response = client.workflow_logs.list_logs(
     workflow_id="workflow_id",
 )
-for chunk in response:
+for chunk in response.data:
     yield chunk
 
 ```
