@@ -3,6 +3,8 @@
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
 from .block_output import BlockOutput
+from .workflow_note_output import WorkflowNoteOutput
+from .placeholder_output import PlaceholderOutput
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
@@ -13,6 +15,10 @@ class WorkflowConfigOutput(UncheckedBaseModel):
     workflow_img_url: typing.Optional[str] = None
     workflow_description: typing.Optional[str] = None
     blocks: typing.Optional[typing.List[BlockOutput]] = None
+    notes: typing.Optional[typing.List[WorkflowNoteOutput]] = None
+    placeholders: typing.Optional[typing.List[PlaceholderOutput]] = None
+    tags: typing.Optional[typing.List[str]] = None
+    is_tool: typing.Optional[bool] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

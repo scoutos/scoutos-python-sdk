@@ -71,11 +71,7 @@ client = Scout(
     api_key="YOUR_API_KEY",
 )
 response = client.workflows.run_stream(
-    workflow_id="string",
-    environment="string",
-    revision_id="string",
-    session_id="string",
-    inputs={"string": True},
+    workflow_id="workflow_id",
 )
 for chunk in response:
     yield chunk

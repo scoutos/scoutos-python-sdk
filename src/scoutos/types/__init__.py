@@ -78,6 +78,7 @@ from .data_type import DataType
 from .default_input import DefaultInput
 from .default_output import DefaultOutput
 from .dependency import Dependency
+from .dimensions import Dimensions
 from .document import Document
 from .document_data_value import DocumentDataValue
 from .document_response import DocumentResponse
@@ -114,6 +115,10 @@ from .number_column_default import NumberColumnDefault
 from .number_column_max_value import NumberColumnMaxValue
 from .number_column_min_value import NumberColumnMinValue
 from .paragraph_splitter_config import ParagraphSplitterConfig
+from .placeholder_input import PlaceholderInput
+from .placeholder_input_type import PlaceholderInputType
+from .placeholder_output import PlaceholderOutput
+from .placeholder_output_type import PlaceholderOutputType
 from .playwright import Playwright
 from .playwright_wait_for_load_state import PlaywrightWaitForLoadState
 from .position import Position
@@ -193,6 +198,8 @@ from .validation_error_loc_item import ValidationErrorLocItem
 from .workflow import Workflow
 from .workflow_config_input import WorkflowConfigInput
 from .workflow_config_output import WorkflowConfigOutput
+from .workflow_note_input import WorkflowNoteInput
+from .workflow_note_output import WorkflowNoteOutput
 from .workflow_run import WorkflowRun
 from .workflow_run_completed import WorkflowRunCompleted
 from .workflow_run_completed_data import WorkflowRunCompletedData
@@ -283,6 +290,7 @@ __all__ = [
     "DefaultInput",
     "DefaultOutput",
     "Dependency",
+    "Dimensions",
     "Document",
     "DocumentDataValue",
     "DocumentResponse",
@@ -319,6 +327,10 @@ __all__ = [
     "NumberColumnMaxValue",
     "NumberColumnMinValue",
     "ParagraphSplitterConfig",
+    "PlaceholderInput",
+    "PlaceholderInputType",
+    "PlaceholderOutput",
+    "PlaceholderOutputType",
     "Playwright",
     "PlaywrightWaitForLoadState",
     "Position",
@@ -398,6 +410,8 @@ __all__ = [
     "Workflow",
     "WorkflowConfigInput",
     "WorkflowConfigOutput",
+    "WorkflowNoteInput",
+    "WorkflowNoteOutput",
     "WorkflowRun",
     "WorkflowRunCompleted",
     "WorkflowRunCompletedData",

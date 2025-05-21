@@ -3,6 +3,8 @@
 import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..types.block_input import BlockInput
+from ..types.workflow_note_input import WorkflowNoteInput
+from ..types.placeholder_input import PlaceholderInput
 from ..core.request_options import RequestOptions
 from ..types.src_handlers_create_workflow_revision_response import SrcHandlersCreateWorkflowRevisionResponse
 from ..core.unchecked_base_model import construct_type
@@ -47,6 +49,10 @@ class WorkflowsClient:
         workflow_img_url: typing.Optional[str] = OMIT,
         workflow_description: typing.Optional[str] = OMIT,
         blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
+        notes: typing.Optional[typing.Sequence[WorkflowNoteInput]] = OMIT,
+        placeholders: typing.Optional[typing.Sequence[PlaceholderInput]] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
+        is_tool: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcHandlersCreateWorkflowRevisionResponse:
         """
@@ -65,6 +71,14 @@ class WorkflowsClient:
         workflow_description : typing.Optional[str]
 
         blocks : typing.Optional[typing.Sequence[BlockInput]]
+
+        notes : typing.Optional[typing.Sequence[WorkflowNoteInput]]
+
+        placeholders : typing.Optional[typing.Sequence[PlaceholderInput]]
+
+        tags : typing.Optional[typing.Sequence[str]]
+
+        is_tool : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -96,6 +110,10 @@ class WorkflowsClient:
                 "workflow_img_url": workflow_img_url,
                 "workflow_description": workflow_description,
                 "blocks": blocks,
+                "notes": notes,
+                "placeholders": placeholders,
+                "tags": tags,
+                "is_tool": is_tool,
             },
             request_options=request_options,
             omit=OMIT,
@@ -132,6 +150,7 @@ class WorkflowsClient:
         start_at: typing.Optional[str] = None,
         limit: typing.Optional[int] = None,
         query: typing.Optional[str] = None,
+        tags: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcHandlersListWorkflowsResponse:
         """
@@ -153,6 +172,9 @@ class WorkflowsClient:
 
         query : typing.Optional[str]
             Search query
+
+        tags : typing.Optional[str]
+            Filter by tags
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -180,6 +202,7 @@ class WorkflowsClient:
                 "start_at": start_at,
                 "limit": limit,
                 "query": query,
+                "tags": tags,
             },
             request_options=request_options,
         )
@@ -216,6 +239,10 @@ class WorkflowsClient:
         workflow_img_url: typing.Optional[str] = OMIT,
         workflow_description: typing.Optional[str] = OMIT,
         blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
+        notes: typing.Optional[typing.Sequence[WorkflowNoteInput]] = OMIT,
+        placeholders: typing.Optional[typing.Sequence[PlaceholderInput]] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
+        is_tool: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcHandlersCreateWorkflowResponse:
         """
@@ -233,6 +260,14 @@ class WorkflowsClient:
         workflow_description : typing.Optional[str]
 
         blocks : typing.Optional[typing.Sequence[BlockInput]]
+
+        notes : typing.Optional[typing.Sequence[WorkflowNoteInput]]
+
+        placeholders : typing.Optional[typing.Sequence[PlaceholderInput]]
+
+        tags : typing.Optional[typing.Sequence[str]]
+
+        is_tool : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -263,6 +298,10 @@ class WorkflowsClient:
                 "workflow_img_url": workflow_img_url,
                 "workflow_description": workflow_description,
                 "blocks": blocks,
+                "notes": notes,
+                "placeholders": placeholders,
+                "tags": tags,
+                "is_tool": is_tool,
             },
             request_options=request_options,
             omit=OMIT,
@@ -358,6 +397,10 @@ class WorkflowsClient:
         workflow_img_url: typing.Optional[str] = OMIT,
         workflow_description: typing.Optional[str] = OMIT,
         blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
+        notes: typing.Optional[typing.Sequence[WorkflowNoteInput]] = OMIT,
+        placeholders: typing.Optional[typing.Sequence[PlaceholderInput]] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
+        is_tool: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcHandlersUpdateWorkflowResponse:
         """
@@ -374,6 +417,14 @@ class WorkflowsClient:
         workflow_description : typing.Optional[str]
 
         blocks : typing.Optional[typing.Sequence[BlockInput]]
+
+        notes : typing.Optional[typing.Sequence[WorkflowNoteInput]]
+
+        placeholders : typing.Optional[typing.Sequence[PlaceholderInput]]
+
+        tags : typing.Optional[typing.Sequence[str]]
+
+        is_tool : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -403,6 +454,10 @@ class WorkflowsClient:
                 "workflow_img_url": workflow_img_url,
                 "workflow_description": workflow_description,
                 "blocks": blocks,
+                "notes": notes,
+                "placeholders": placeholders,
+                "tags": tags,
+                "is_tool": is_tool,
             },
             request_options=request_options,
             omit=OMIT,
@@ -504,7 +559,6 @@ class WorkflowsClient:
 
         environment : typing.Optional[str]
             Specifies the execution environment for the workflow. The available environments include:
-
             - `production`: The production environment, where workflows are executed under live conditions.
             - `staging`: A staging environment used for testing prior to production deployment.
             - `development`: A development environment used for testing new changes.
@@ -532,11 +586,7 @@ class WorkflowsClient:
             api_key="YOUR_API_KEY",
         )
         response = client.workflows.run_stream(
-            workflow_id="string",
-            environment="string",
-            revision_id="string",
-            session_id="string",
-            inputs={"string": True},
+            workflow_id="workflow_id",
         )
         for chunk in response:
             yield chunk
@@ -604,7 +654,6 @@ class WorkflowsClient:
 
         environment : typing.Optional[str]
             Specifies the execution environment for the workflow. The available environments include:
-
             - `production`: The production environment, where workflows are executed under live conditions.
             - `staging`: A staging environment used for testing prior to production deployment.
             - `development`: A development environment used for testing new changes.
@@ -693,7 +742,6 @@ class WorkflowsClient:
 
         environment : typing.Optional[str]
             Specifies the execution environment for the workflow. The available environments include:
-
             - `production`: The production environment, where workflows are executed under live conditions.
             - `staging`: A staging environment used for testing prior to production deployment.
             - `development`: A development environment used for testing new changes.
@@ -784,6 +832,10 @@ class AsyncWorkflowsClient:
         workflow_img_url: typing.Optional[str] = OMIT,
         workflow_description: typing.Optional[str] = OMIT,
         blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
+        notes: typing.Optional[typing.Sequence[WorkflowNoteInput]] = OMIT,
+        placeholders: typing.Optional[typing.Sequence[PlaceholderInput]] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
+        is_tool: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcHandlersCreateWorkflowRevisionResponse:
         """
@@ -802,6 +854,14 @@ class AsyncWorkflowsClient:
         workflow_description : typing.Optional[str]
 
         blocks : typing.Optional[typing.Sequence[BlockInput]]
+
+        notes : typing.Optional[typing.Sequence[WorkflowNoteInput]]
+
+        placeholders : typing.Optional[typing.Sequence[PlaceholderInput]]
+
+        tags : typing.Optional[typing.Sequence[str]]
+
+        is_tool : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -841,6 +901,10 @@ class AsyncWorkflowsClient:
                 "workflow_img_url": workflow_img_url,
                 "workflow_description": workflow_description,
                 "blocks": blocks,
+                "notes": notes,
+                "placeholders": placeholders,
+                "tags": tags,
+                "is_tool": is_tool,
             },
             request_options=request_options,
             omit=OMIT,
@@ -877,6 +941,7 @@ class AsyncWorkflowsClient:
         start_at: typing.Optional[str] = None,
         limit: typing.Optional[int] = None,
         query: typing.Optional[str] = None,
+        tags: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcHandlersListWorkflowsResponse:
         """
@@ -898,6 +963,9 @@ class AsyncWorkflowsClient:
 
         query : typing.Optional[str]
             Search query
+
+        tags : typing.Optional[str]
+            Filter by tags
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -933,6 +1001,7 @@ class AsyncWorkflowsClient:
                 "start_at": start_at,
                 "limit": limit,
                 "query": query,
+                "tags": tags,
             },
             request_options=request_options,
         )
@@ -969,6 +1038,10 @@ class AsyncWorkflowsClient:
         workflow_img_url: typing.Optional[str] = OMIT,
         workflow_description: typing.Optional[str] = OMIT,
         blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
+        notes: typing.Optional[typing.Sequence[WorkflowNoteInput]] = OMIT,
+        placeholders: typing.Optional[typing.Sequence[PlaceholderInput]] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
+        is_tool: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcHandlersCreateWorkflowResponse:
         """
@@ -986,6 +1059,14 @@ class AsyncWorkflowsClient:
         workflow_description : typing.Optional[str]
 
         blocks : typing.Optional[typing.Sequence[BlockInput]]
+
+        notes : typing.Optional[typing.Sequence[WorkflowNoteInput]]
+
+        placeholders : typing.Optional[typing.Sequence[PlaceholderInput]]
+
+        tags : typing.Optional[typing.Sequence[str]]
+
+        is_tool : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1024,6 +1105,10 @@ class AsyncWorkflowsClient:
                 "workflow_img_url": workflow_img_url,
                 "workflow_description": workflow_description,
                 "blocks": blocks,
+                "notes": notes,
+                "placeholders": placeholders,
+                "tags": tags,
+                "is_tool": is_tool,
             },
             request_options=request_options,
             omit=OMIT,
@@ -1127,6 +1212,10 @@ class AsyncWorkflowsClient:
         workflow_img_url: typing.Optional[str] = OMIT,
         workflow_description: typing.Optional[str] = OMIT,
         blocks: typing.Optional[typing.Sequence[BlockInput]] = OMIT,
+        notes: typing.Optional[typing.Sequence[WorkflowNoteInput]] = OMIT,
+        placeholders: typing.Optional[typing.Sequence[PlaceholderInput]] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
+        is_tool: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcHandlersUpdateWorkflowResponse:
         """
@@ -1143,6 +1232,14 @@ class AsyncWorkflowsClient:
         workflow_description : typing.Optional[str]
 
         blocks : typing.Optional[typing.Sequence[BlockInput]]
+
+        notes : typing.Optional[typing.Sequence[WorkflowNoteInput]]
+
+        placeholders : typing.Optional[typing.Sequence[PlaceholderInput]]
+
+        tags : typing.Optional[typing.Sequence[str]]
+
+        is_tool : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1180,6 +1277,10 @@ class AsyncWorkflowsClient:
                 "workflow_img_url": workflow_img_url,
                 "workflow_description": workflow_description,
                 "blocks": blocks,
+                "notes": notes,
+                "placeholders": placeholders,
+                "tags": tags,
+                "is_tool": is_tool,
             },
             request_options=request_options,
             omit=OMIT,
@@ -1289,7 +1390,6 @@ class AsyncWorkflowsClient:
 
         environment : typing.Optional[str]
             Specifies the execution environment for the workflow. The available environments include:
-
             - `production`: The production environment, where workflows are executed under live conditions.
             - `staging`: A staging environment used for testing prior to production deployment.
             - `development`: A development environment used for testing new changes.
@@ -1322,11 +1422,7 @@ class AsyncWorkflowsClient:
 
         async def main() -> None:
             response = await client.workflows.run_stream(
-                workflow_id="string",
-                environment="string",
-                revision_id="string",
-                session_id="string",
-                inputs={"string": True},
+                workflow_id="workflow_id",
             )
             async for chunk in response:
                 yield chunk
@@ -1397,7 +1493,6 @@ class AsyncWorkflowsClient:
 
         environment : typing.Optional[str]
             Specifies the execution environment for the workflow. The available environments include:
-
             - `production`: The production environment, where workflows are executed under live conditions.
             - `staging`: A staging environment used for testing prior to production deployment.
             - `development`: A development environment used for testing new changes.
@@ -1494,7 +1589,6 @@ class AsyncWorkflowsClient:
 
         environment : typing.Optional[str]
             Specifies the execution environment for the workflow. The available environments include:
-
             - `production`: The production environment, where workflows are executed under live conditions.
             - `staging`: A staging environment used for testing prior to production deployment.
             - `development`: A development environment used for testing new changes.

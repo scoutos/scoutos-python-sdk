@@ -90,6 +90,38 @@ client.workflows.create_revision()
 <dl>
 <dd>
 
+**notes:** `typing.Optional[typing.Sequence[WorkflowNoteInput]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**placeholders:** `typing.Optional[typing.Sequence[PlaceholderInput]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[typing.Sequence[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_tool:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -190,6 +222,14 @@ client.workflows.list()
 <dl>
 <dd>
 
+**tags:** `typing.Optional[str]` — Filter by tags
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -277,6 +317,38 @@ client.workflows.create()
 <dd>
 
 **blocks:** `typing.Optional[typing.Sequence[BlockInput]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `typing.Optional[typing.Sequence[WorkflowNoteInput]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**placeholders:** `typing.Optional[typing.Sequence[PlaceholderInput]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[typing.Sequence[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_tool:** `typing.Optional[bool]` 
     
 </dd>
 </dl>
@@ -450,6 +522,38 @@ client.workflows.update(
 <dl>
 <dd>
 
+**notes:** `typing.Optional[typing.Sequence[WorkflowNoteInput]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**placeholders:** `typing.Optional[typing.Sequence[PlaceholderInput]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[typing.Sequence[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_tool:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -537,11 +641,7 @@ client = Scout(
     api_key="YOUR_API_KEY",
 )
 response = client.workflows.run_stream(
-    workflow_id="string",
-    environment="string",
-    revision_id="string",
-    session_id="string",
-    inputs={"string": True},
+    workflow_id="workflow_id",
 )
 for chunk in response:
     yield chunk
@@ -571,7 +671,6 @@ for chunk in response:
 **environment:** `typing.Optional[str]` 
 
 Specifies the execution environment for the workflow. The available environments include:
-
 - `production`: The production environment, where workflows are executed under live conditions.
 - `staging`: A staging environment used for testing prior to production deployment.
 - `development`: A development environment used for testing new changes.
@@ -666,7 +765,6 @@ client.workflows.run(
 **environment:** `typing.Optional[str]` 
 
 Specifies the execution environment for the workflow. The available environments include:
-
 - `production`: The production environment, where workflows are executed under live conditions.
 - `staging`: A staging environment used for testing prior to production deployment.
 - `development`: A development environment used for testing new changes.
@@ -761,7 +859,6 @@ client.workflows.run_with_config(
 **environment:** `typing.Optional[str]` 
 
 Specifies the execution environment for the workflow. The available environments include:
-
 - `production`: The production environment, where workflows are executed under live conditions.
 - `staging`: A staging environment used for testing prior to production deployment.
 - `development`: A development environment used for testing new changes.
@@ -1292,13 +1389,7 @@ client = Scout(
     api_key="YOUR_API_KEY",
 )
 response = client.workflow_logs.list_logs(
-    workflow_id="string",
-    start_date="string",
-    end_date="string",
-    limit=1,
-    session_id="string",
-    status="string",
-    cursor="string",
+    workflow_id="workflow_id",
 )
 for chunk in response:
     yield chunk

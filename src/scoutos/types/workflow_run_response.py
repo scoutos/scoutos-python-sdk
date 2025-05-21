@@ -2,14 +2,15 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .workflow_run import WorkflowRun
-from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import typing
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
 
 
 class WorkflowRunResponse(UncheckedBaseModel):
     run: WorkflowRun
     workflow_id: str
+    output_block_id: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

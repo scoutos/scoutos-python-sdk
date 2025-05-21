@@ -63,13 +63,7 @@ class WorkflowLogsClient:
             api_key="YOUR_API_KEY",
         )
         response = client.workflow_logs.list_logs(
-            workflow_id="string",
-            start_date="string",
-            end_date="string",
-            limit=1,
-            session_id="string",
-            status="string",
-            cursor="string",
+            workflow_id="workflow_id",
         )
         for chunk in response:
             yield chunk
@@ -174,13 +168,7 @@ class AsyncWorkflowLogsClient:
 
         async def main() -> None:
             response = await client.workflow_logs.list_logs(
-                workflow_id="string",
-                start_date="string",
-                end_date="string",
-                limit=1,
-                session_id="string",
-                status="string",
-                cursor="string",
+                workflow_id="workflow_id",
             )
             async for chunk in response:
                 yield chunk

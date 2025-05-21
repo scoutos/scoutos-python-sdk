@@ -15,7 +15,7 @@ class BlockInput(UncheckedBaseModel):
     block_display_name: str
     block_id: str
     block_inputs: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
-    block_is_output: typing.Optional[bool] = None
+    is_output: typing.Optional[bool] = None
     dependencies: typing.Optional[typing.List[Dependency]] = None
     input_schema: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
     output_schema: typing.Optional[typing.List[typing.Optional[typing.Any]]] = None
