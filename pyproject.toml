@@ -3,7 +3,7 @@ name = "scoutos"
 
 [tool.poetry]
 name = "scoutos"
-version = "3.0.4"
+version = "0.10.6"
 description = ""
 readme = "README.md"
 authors = []
