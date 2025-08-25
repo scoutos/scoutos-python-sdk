@@ -2,3 +2,6 @@
 
 # isort: skip_file
 
+from .types import CreateViewRequestSettings, CreateViewRequestType, UpdateViewRequestSettings, UpdateViewRequestType
+
+__all__ = ["CreateViewRequestSettings", "CreateViewRequestType", "UpdateViewRequestSettings", "UpdateViewRequestType"]

@@ -11,15 +11,18 @@ from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
-from ..types.collection_service_handlers_delete_documents_response import (
-    CollectionServiceHandlersDeleteDocumentsResponse,
-)
-from ..types.collection_service_handlers_get_document_response import CollectionServiceHandlersGetDocumentResponse
-from ..types.collection_service_handlers_get_documents_response import CollectionServiceHandlersGetDocumentsResponse
-from ..types.collection_service_handlers_update_document_response import CollectionServiceHandlersUpdateDocumentResponse
 from ..types.document_response import DocumentResponse
 from ..types.http_validation_error import HttpValidationError
+from ..types.src_app_http_routes_collection_delete_documents_response import (
+    SrcAppHttpRoutesCollectionDeleteDocumentsResponse,
+)
+from ..types.src_app_http_routes_collection_get_document_response import SrcAppHttpRoutesCollectionGetDocumentResponse
+from ..types.src_app_http_routes_collection_get_documents_response import SrcAppHttpRoutesCollectionGetDocumentsResponse
+from ..types.src_app_http_routes_collection_update_document_response import (
+    SrcAppHttpRoutesCollectionUpdateDocumentResponse,
+)
 from .types.documents_create_request_body import DocumentsCreateRequestBody
+from .types.documents_update_batch_request_body import DocumentsUpdateBatchRequestBody
 from .types.documents_update_request_value import DocumentsUpdateRequestValue
 
 # this is used as the default value for optional parameters
@@ -39,7 +42,7 @@ class RawDocumentsClient:
         cursor: typing.Optional[str] = None,
         query: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CollectionServiceHandlersGetDocumentsResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionGetDocumentsResponse]:
         """
         Parameters
         ----------
@@ -61,7 +64,7 @@ class RawDocumentsClient:
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersGetDocumentsResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionGetDocumentsResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -77,9 +80,9 @@ class RawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersGetDocumentsResponse,
+                    SrcAppHttpRoutesCollectionGetDocumentsResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetDocumentsResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetDocumentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -106,6 +109,7 @@ class RawDocumentsClient:
         table_id: str,
         *,
         request: DocumentsCreateRequestBody,
+        job_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[DocumentResponse]:
@@ -118,8 +122,11 @@ class RawDocumentsClient:
 
         request : DocumentsCreateRequestBody
 
+        job_id : typing.Optional[str]
+            The job id responsible for the document creation/update
+
         await_completion : typing.Optional[bool]
-            Whether to wait for document creation to complete
+            Whether to wait for document creation/update to complete
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -133,10 +140,86 @@ class RawDocumentsClient:
             f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents",
             method="POST",
             params={
+                "job_id": job_id,
                 "await_completion": await_completion,
             },
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=DocumentsCreateRequestBody, direction="write"
+            ),
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DocumentResponse,
+                    construct_type(
+                        type_=DocumentResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def update_batch(
+        self,
+        collection_id: str,
+        table_id: str,
+        *,
+        request: DocumentsUpdateBatchRequestBody,
+        job_id: typing.Optional[str] = None,
+        await_completion: typing.Optional[bool] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[DocumentResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request : DocumentsUpdateBatchRequestBody
+
+        job_id : typing.Optional[str]
+            The job id responsible for the document creation/update
+
+        await_completion : typing.Optional[bool]
+            Whether to wait for document creation/update to complete
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DocumentResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/update",
+            method="POST",
+            params={
+                "job_id": job_id,
+                "await_completion": await_completion,
+            },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=DocumentsUpdateBatchRequestBody, direction="write"
             ),
             headers={
                 "content-type": "application/json",
@@ -177,7 +260,7 @@ class RawDocumentsClient:
         document_id: str,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CollectionServiceHandlersGetDocumentResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionGetDocumentResponse]:
         """
         Parameters
         ----------
@@ -192,7 +275,7 @@ class RawDocumentsClient:
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersGetDocumentResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionGetDocumentResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -203,9 +286,9 @@ class RawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersGetDocumentResponse,
+                    SrcAppHttpRoutesCollectionGetDocumentResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetDocumentResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -232,9 +315,9 @@ class RawDocumentsClient:
         document_id: str,
         table_id: str,
         *,
-        request: typing.Dict[str, DocumentsUpdateRequestValue],
+        request: typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CollectionServiceHandlersUpdateDocumentResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionUpdateDocumentResponse]:
         """
         Parameters
         ----------
@@ -244,21 +327,23 @@ class RawDocumentsClient:
 
         table_id : str
 
-        request : typing.Dict[str, DocumentsUpdateRequestValue]
+        request : typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersUpdateDocumentResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionUpdateDocumentResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
             f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
             method="PUT",
             json=convert_and_respect_annotation_metadata(
-                object_=request, annotation=typing.Dict[str, DocumentsUpdateRequestValue], direction="write"
+                object_=request,
+                annotation=typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
+                direction="write",
             ),
             headers={
                 "content-type": "application/json",
@@ -269,9 +354,9 @@ class RawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersUpdateDocumentResponse,
+                    SrcAppHttpRoutesCollectionUpdateDocumentResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersUpdateDocumentResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionUpdateDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -299,7 +384,7 @@ class RawDocumentsClient:
         document_id: str,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CollectionServiceHandlersDeleteDocumentsResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionDeleteDocumentsResponse]:
         """
         Parameters
         ----------
@@ -314,7 +399,7 @@ class RawDocumentsClient:
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersDeleteDocumentsResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionDeleteDocumentsResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -325,9 +410,9 @@ class RawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersDeleteDocumentsResponse,
+                    SrcAppHttpRoutesCollectionDeleteDocumentsResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersDeleteDocumentsResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionDeleteDocumentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -355,7 +440,7 @@ class RawDocumentsClient:
         *,
         request: typing.Sequence[str],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CollectionServiceHandlersDeleteDocumentsResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionDeleteDocumentsResponse]:
         """
         Delete documents given a list of document ids.
 
@@ -372,7 +457,7 @@ class RawDocumentsClient:
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersDeleteDocumentsResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionDeleteDocumentsResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -388,9 +473,9 @@ class RawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersDeleteDocumentsResponse,
+                    SrcAppHttpRoutesCollectionDeleteDocumentsResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersDeleteDocumentsResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionDeleteDocumentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -425,7 +510,7 @@ class AsyncRawDocumentsClient:
         cursor: typing.Optional[str] = None,
         query: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CollectionServiceHandlersGetDocumentsResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionGetDocumentsResponse]:
         """
         Parameters
         ----------
@@ -447,7 +532,7 @@ class AsyncRawDocumentsClient:
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersGetDocumentsResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionGetDocumentsResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -463,9 +548,9 @@ class AsyncRawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersGetDocumentsResponse,
+                    SrcAppHttpRoutesCollectionGetDocumentsResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetDocumentsResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetDocumentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -492,6 +577,7 @@ class AsyncRawDocumentsClient:
         table_id: str,
         *,
         request: DocumentsCreateRequestBody,
+        job_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[DocumentResponse]:
@@ -504,8 +590,11 @@ class AsyncRawDocumentsClient:
 
         request : DocumentsCreateRequestBody
 
+        job_id : typing.Optional[str]
+            The job id responsible for the document creation/update
+
         await_completion : typing.Optional[bool]
-            Whether to wait for document creation to complete
+            Whether to wait for document creation/update to complete
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -519,10 +608,86 @@ class AsyncRawDocumentsClient:
             f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents",
             method="POST",
             params={
+                "job_id": job_id,
                 "await_completion": await_completion,
             },
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=DocumentsCreateRequestBody, direction="write"
+            ),
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DocumentResponse,
+                    construct_type(
+                        type_=DocumentResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def update_batch(
+        self,
+        collection_id: str,
+        table_id: str,
+        *,
+        request: DocumentsUpdateBatchRequestBody,
+        job_id: typing.Optional[str] = None,
+        await_completion: typing.Optional[bool] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[DocumentResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request : DocumentsUpdateBatchRequestBody
+
+        job_id : typing.Optional[str]
+            The job id responsible for the document creation/update
+
+        await_completion : typing.Optional[bool]
+            Whether to wait for document creation/update to complete
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DocumentResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/update",
+            method="POST",
+            params={
+                "job_id": job_id,
+                "await_completion": await_completion,
+            },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=DocumentsUpdateBatchRequestBody, direction="write"
             ),
             headers={
                 "content-type": "application/json",
@@ -563,7 +728,7 @@ class AsyncRawDocumentsClient:
         document_id: str,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CollectionServiceHandlersGetDocumentResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionGetDocumentResponse]:
         """
         Parameters
         ----------
@@ -578,7 +743,7 @@ class AsyncRawDocumentsClient:
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersGetDocumentResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionGetDocumentResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -589,9 +754,9 @@ class AsyncRawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersGetDocumentResponse,
+                    SrcAppHttpRoutesCollectionGetDocumentResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetDocumentResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -618,9 +783,9 @@ class AsyncRawDocumentsClient:
         document_id: str,
         table_id: str,
         *,
-        request: typing.Dict[str, DocumentsUpdateRequestValue],
+        request: typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CollectionServiceHandlersUpdateDocumentResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionUpdateDocumentResponse]:
         """
         Parameters
         ----------
@@ -630,21 +795,23 @@ class AsyncRawDocumentsClient:
 
         table_id : str
 
-        request : typing.Dict[str, DocumentsUpdateRequestValue]
+        request : typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersUpdateDocumentResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionUpdateDocumentResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
             method="PUT",
             json=convert_and_respect_annotation_metadata(
-                object_=request, annotation=typing.Dict[str, DocumentsUpdateRequestValue], direction="write"
+                object_=request,
+                annotation=typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
+                direction="write",
             ),
             headers={
                 "content-type": "application/json",
@@ -655,9 +822,9 @@ class AsyncRawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersUpdateDocumentResponse,
+                    SrcAppHttpRoutesCollectionUpdateDocumentResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersUpdateDocumentResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionUpdateDocumentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -685,7 +852,7 @@ class AsyncRawDocumentsClient:
         document_id: str,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CollectionServiceHandlersDeleteDocumentsResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionDeleteDocumentsResponse]:
         """
         Parameters
         ----------
@@ -700,7 +867,7 @@ class AsyncRawDocumentsClient:
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersDeleteDocumentsResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionDeleteDocumentsResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -711,9 +878,9 @@ class AsyncRawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersDeleteDocumentsResponse,
+                    SrcAppHttpRoutesCollectionDeleteDocumentsResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersDeleteDocumentsResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionDeleteDocumentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -741,7 +908,7 @@ class AsyncRawDocumentsClient:
         *,
         request: typing.Sequence[str],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CollectionServiceHandlersDeleteDocumentsResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionDeleteDocumentsResponse]:
         """
         Delete documents given a list of document ids.
 
@@ -758,7 +925,7 @@ class AsyncRawDocumentsClient:
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersDeleteDocumentsResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionDeleteDocumentsResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -774,9 +941,9 @@ class AsyncRawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersDeleteDocumentsResponse,
+                    SrcAppHttpRoutesCollectionDeleteDocumentsResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersDeleteDocumentsResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionDeleteDocumentsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

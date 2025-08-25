@@ -4,15 +4,18 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.collection_service_handlers_delete_documents_response import (
-    CollectionServiceHandlersDeleteDocumentsResponse,
-)
-from ..types.collection_service_handlers_get_document_response import CollectionServiceHandlersGetDocumentResponse
-from ..types.collection_service_handlers_get_documents_response import CollectionServiceHandlersGetDocumentsResponse
-from ..types.collection_service_handlers_update_document_response import CollectionServiceHandlersUpdateDocumentResponse
 from ..types.document_response import DocumentResponse
+from ..types.src_app_http_routes_collection_delete_documents_response import (
+    SrcAppHttpRoutesCollectionDeleteDocumentsResponse,
+)
+from ..types.src_app_http_routes_collection_get_document_response import SrcAppHttpRoutesCollectionGetDocumentResponse
+from ..types.src_app_http_routes_collection_get_documents_response import SrcAppHttpRoutesCollectionGetDocumentsResponse
+from ..types.src_app_http_routes_collection_update_document_response import (
+    SrcAppHttpRoutesCollectionUpdateDocumentResponse,
+)
 from .raw_client import AsyncRawDocumentsClient, RawDocumentsClient
 from .types.documents_create_request_body import DocumentsCreateRequestBody
+from .types.documents_update_batch_request_body import DocumentsUpdateBatchRequestBody
 from .types.documents_update_request_value import DocumentsUpdateRequestValue
 
 # this is used as the default value for optional parameters
@@ -43,7 +46,7 @@ class DocumentsClient:
         cursor: typing.Optional[str] = None,
         query: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersGetDocumentsResponse:
+    ) -> SrcAppHttpRoutesCollectionGetDocumentsResponse:
         """
         Parameters
         ----------
@@ -65,7 +68,7 @@ class DocumentsClient:
 
         Returns
         -------
-        CollectionServiceHandlersGetDocumentsResponse
+        SrcAppHttpRoutesCollectionGetDocumentsResponse
             Successful Response
 
         Examples
@@ -91,6 +94,7 @@ class DocumentsClient:
         table_id: str,
         *,
         request: DocumentsCreateRequestBody,
+        job_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DocumentResponse:
@@ -103,8 +107,11 @@ class DocumentsClient:
 
         request : DocumentsCreateRequestBody
 
+        job_id : typing.Optional[str]
+            The job id responsible for the document creation/update
+
         await_completion : typing.Optional[bool]
-            Whether to wait for document creation to complete
+            Whether to wait for document creation/update to complete
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -128,7 +135,68 @@ class DocumentsClient:
         )
         """
         _response = self._raw_client.create(
-            collection_id, table_id, request=request, await_completion=await_completion, request_options=request_options
+            collection_id,
+            table_id,
+            request=request,
+            job_id=job_id,
+            await_completion=await_completion,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def update_batch(
+        self,
+        collection_id: str,
+        table_id: str,
+        *,
+        request: DocumentsUpdateBatchRequestBody,
+        job_id: typing.Optional[str] = None,
+        await_completion: typing.Optional[bool] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> DocumentResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request : DocumentsUpdateBatchRequestBody
+
+        job_id : typing.Optional[str]
+            The job id responsible for the document creation/update
+
+        await_completion : typing.Optional[bool]
+            Whether to wait for document creation/update to complete
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DocumentResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.documents.update_batch(
+            collection_id="collection_id",
+            table_id="table_id",
+            request={"key": True},
+        )
+        """
+        _response = self._raw_client.update_batch(
+            collection_id,
+            table_id,
+            request=request,
+            job_id=job_id,
+            await_completion=await_completion,
+            request_options=request_options,
         )
         return _response.data
 
@@ -139,7 +207,7 @@ class DocumentsClient:
         document_id: str,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersGetDocumentResponse:
+    ) -> SrcAppHttpRoutesCollectionGetDocumentResponse:
         """
         Parameters
         ----------
@@ -154,7 +222,7 @@ class DocumentsClient:
 
         Returns
         -------
-        CollectionServiceHandlersGetDocumentResponse
+        SrcAppHttpRoutesCollectionGetDocumentResponse
             Successful Response
 
         Examples
@@ -179,9 +247,9 @@ class DocumentsClient:
         document_id: str,
         table_id: str,
         *,
-        request: typing.Dict[str, DocumentsUpdateRequestValue],
+        request: typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersUpdateDocumentResponse:
+    ) -> SrcAppHttpRoutesCollectionUpdateDocumentResponse:
         """
         Parameters
         ----------
@@ -191,14 +259,14 @@ class DocumentsClient:
 
         table_id : str
 
-        request : typing.Dict[str, DocumentsUpdateRequestValue]
+        request : typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersUpdateDocumentResponse
+        SrcAppHttpRoutesCollectionUpdateDocumentResponse
             Successful Response
 
         Examples
@@ -212,7 +280,7 @@ class DocumentsClient:
             collection_id="collection_id",
             document_id="document_id",
             table_id="table_id",
-            request={"key": True},
+            request={},
         )
         """
         _response = self._raw_client.update(
@@ -227,7 +295,7 @@ class DocumentsClient:
         document_id: str,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersDeleteDocumentsResponse:
+    ) -> SrcAppHttpRoutesCollectionDeleteDocumentsResponse:
         """
         Parameters
         ----------
@@ -242,7 +310,7 @@ class DocumentsClient:
 
         Returns
         -------
-        CollectionServiceHandlersDeleteDocumentsResponse
+        SrcAppHttpRoutesCollectionDeleteDocumentsResponse
             Successful Response
 
         Examples
@@ -268,7 +336,7 @@ class DocumentsClient:
         *,
         request: typing.Sequence[str],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersDeleteDocumentsResponse:
+    ) -> SrcAppHttpRoutesCollectionDeleteDocumentsResponse:
         """
         Delete documents given a list of document ids.
 
@@ -285,7 +353,7 @@ class DocumentsClient:
 
         Returns
         -------
-        CollectionServiceHandlersDeleteDocumentsResponse
+        SrcAppHttpRoutesCollectionDeleteDocumentsResponse
             Successful Response
 
         Examples
@@ -331,7 +399,7 @@ class AsyncDocumentsClient:
         cursor: typing.Optional[str] = None,
         query: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersGetDocumentsResponse:
+    ) -> SrcAppHttpRoutesCollectionGetDocumentsResponse:
         """
         Parameters
         ----------
@@ -353,7 +421,7 @@ class AsyncDocumentsClient:
 
         Returns
         -------
-        CollectionServiceHandlersGetDocumentsResponse
+        SrcAppHttpRoutesCollectionGetDocumentsResponse
             Successful Response
 
         Examples
@@ -387,6 +455,7 @@ class AsyncDocumentsClient:
         table_id: str,
         *,
         request: DocumentsCreateRequestBody,
+        job_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DocumentResponse:
@@ -399,8 +468,11 @@ class AsyncDocumentsClient:
 
         request : DocumentsCreateRequestBody
 
+        job_id : typing.Optional[str]
+            The job id responsible for the document creation/update
+
         await_completion : typing.Optional[bool]
-            Whether to wait for document creation to complete
+            Whether to wait for document creation/update to complete
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -432,7 +504,76 @@ class AsyncDocumentsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.create(
-            collection_id, table_id, request=request, await_completion=await_completion, request_options=request_options
+            collection_id,
+            table_id,
+            request=request,
+            job_id=job_id,
+            await_completion=await_completion,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def update_batch(
+        self,
+        collection_id: str,
+        table_id: str,
+        *,
+        request: DocumentsUpdateBatchRequestBody,
+        job_id: typing.Optional[str] = None,
+        await_completion: typing.Optional[bool] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> DocumentResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request : DocumentsUpdateBatchRequestBody
+
+        job_id : typing.Optional[str]
+            The job id responsible for the document creation/update
+
+        await_completion : typing.Optional[bool]
+            Whether to wait for document creation/update to complete
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DocumentResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.documents.update_batch(
+                collection_id="collection_id",
+                table_id="table_id",
+                request={"key": True},
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.update_batch(
+            collection_id,
+            table_id,
+            request=request,
+            job_id=job_id,
+            await_completion=await_completion,
+            request_options=request_options,
         )
         return _response.data
 
@@ -443,7 +584,7 @@ class AsyncDocumentsClient:
         document_id: str,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersGetDocumentResponse:
+    ) -> SrcAppHttpRoutesCollectionGetDocumentResponse:
         """
         Parameters
         ----------
@@ -458,7 +599,7 @@ class AsyncDocumentsClient:
 
         Returns
         -------
-        CollectionServiceHandlersGetDocumentResponse
+        SrcAppHttpRoutesCollectionGetDocumentResponse
             Successful Response
 
         Examples
@@ -491,9 +632,9 @@ class AsyncDocumentsClient:
         document_id: str,
         table_id: str,
         *,
-        request: typing.Dict[str, DocumentsUpdateRequestValue],
+        request: typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersUpdateDocumentResponse:
+    ) -> SrcAppHttpRoutesCollectionUpdateDocumentResponse:
         """
         Parameters
         ----------
@@ -503,14 +644,14 @@ class AsyncDocumentsClient:
 
         table_id : str
 
-        request : typing.Dict[str, DocumentsUpdateRequestValue]
+        request : typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersUpdateDocumentResponse
+        SrcAppHttpRoutesCollectionUpdateDocumentResponse
             Successful Response
 
         Examples
@@ -529,7 +670,7 @@ class AsyncDocumentsClient:
                 collection_id="collection_id",
                 document_id="document_id",
                 table_id="table_id",
-                request={"key": True},
+                request={},
             )
 
 
@@ -547,7 +688,7 @@ class AsyncDocumentsClient:
         document_id: str,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersDeleteDocumentsResponse:
+    ) -> SrcAppHttpRoutesCollectionDeleteDocumentsResponse:
         """
         Parameters
         ----------
@@ -562,7 +703,7 @@ class AsyncDocumentsClient:
 
         Returns
         -------
-        CollectionServiceHandlersDeleteDocumentsResponse
+        SrcAppHttpRoutesCollectionDeleteDocumentsResponse
             Successful Response
 
         Examples
@@ -596,7 +737,7 @@ class AsyncDocumentsClient:
         *,
         request: typing.Sequence[str],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersDeleteDocumentsResponse:
+    ) -> SrcAppHttpRoutesCollectionDeleteDocumentsResponse:
         """
         Delete documents given a list of document ids.
 
@@ -613,7 +754,7 @@ class AsyncDocumentsClient:
 
         Returns
         -------
-        CollectionServiceHandlersDeleteDocumentsResponse
+        SrcAppHttpRoutesCollectionDeleteDocumentsResponse
             Successful Response
 
         Examples

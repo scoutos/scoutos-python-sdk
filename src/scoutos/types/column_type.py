@@ -3,5 +3,18 @@
 import typing
 
 ColumnType = typing.Union[
-    typing.Literal["checkbox", "json", "number", "select", "text-long", "text-short", "url", "markdown"], typing.Any
+    typing.Literal[
+        "checkbox",
+        "json",
+        "number",
+        "select",
+        "multi-select",
+        "text-long",
+        "text-short",
+        "datetime",
+        "url",
+        "markdown",
+        "relation",
+    ],
+    typing.Any,
 ]

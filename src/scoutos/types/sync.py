@@ -6,7 +6,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .identity import Identity
+from .legacy_identity import LegacyIdentity
 from .sync_config_output import SyncConfigOutput
 
 
@@ -16,8 +16,8 @@ class Sync(UncheckedBaseModel):
     trigger_id: typing.Optional[str] = None
     last_updated_at: dt.datetime
     created_at: dt.datetime
-    created_by: Identity
-    last_updated_by: Identity
+    created_by: LegacyIdentity
+    last_updated_by: LegacyIdentity
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

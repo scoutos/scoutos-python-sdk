@@ -2,4 +2,4 @@
 
 import typing
 
-DocumentsUpdateRequestValue = typing.Union[bool, float, int, str]
+DocumentsUpdateRequestValue = typing.Union[bool, float, int, str, typing.List[typing.Optional[typing.Any]]]

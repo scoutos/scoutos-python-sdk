@@ -5,11 +5,11 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .actor import Actor
+from .workflow_actor import WorkflowActor
 
 
 class WorkflowRunStartedData(UncheckedBaseModel):
-    actor: typing.Optional[Actor] = None
+    actor: typing.Optional[WorkflowActor] = None
     workflow_id: str
     workflow_run_id: typing.Optional[str] = None
     inputs: typing.Dict[str, typing.Optional[typing.Any]]

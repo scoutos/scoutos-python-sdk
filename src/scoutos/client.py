@@ -4,20 +4,77 @@ import os
 import typing
 
 import httpx
+from . import core
 from .collections.client import AsyncCollectionsClient, CollectionsClient
 from .copilots.client import AsyncCopilotsClient, CopilotsClient
 from .core.api_error import ApiError
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from .core.request_options import RequestOptions
 from .documents.client import AsyncDocumentsClient, DocumentsClient
 from .environment import ScoutEnvironment
 from .environments.client import AsyncEnvironmentsClient, EnvironmentsClient
+from .integrations.client import AsyncIntegrationsClient, IntegrationsClient
+from .organizations.client import AsyncOrganizationsClient, OrganizationsClient
+from .raw_client import AsyncRawScout, RawScout
 from .revisions.client import AsyncRevisionsClient, RevisionsClient
 from .sources.client import AsyncSourcesClient, SourcesClient
 from .syncs.client import AsyncSyncsClient, SyncsClient
 from .tables.client import AsyncTablesClient, TablesClient
+from .triggers.client import AsyncTriggersClient, TriggersClient
+from .types.agent_revision import AgentRevision
+from .types.cancel_response import CancelResponse
+from .types.connect_integration_request_auth_type import ConnectIntegrationRequestAuthType
+from .types.create_integrations_response import CreateIntegrationsResponse
+from .types.create_tag_response import CreateTagResponse
+from .types.files_attribute import FilesAttribute
+from .types.files_response import FilesResponse
+from .types.followup_email_request import FollowupEmailRequest
+from .types.integration_connection import IntegrationConnection
+from .types.integration_with_connections import IntegrationWithConnections
+from .types.list_tags_response import ListTagsResponse
+from .types.participant import Participant
+from .types.plan_types import PlanTypes
+from .types.result import Result
+from .types.src_app_http_routes_billing_billing_hourly_response import SrcAppHttpRoutesBillingBillingHourlyResponse
+from .types.src_app_http_routes_billing_change_billing_plan_response import (
+    SrcAppHttpRoutesBillingChangeBillingPlanResponse,
+)
+from .types.src_app_http_routes_billing_create_portal_session_response import (
+    SrcAppHttpRoutesBillingCreatePortalSessionResponse,
+)
+from .types.src_app_http_routes_billing_free_plan_usage_response import SrcAppHttpRoutesBillingFreePlanUsageResponse
+from .types.src_app_http_routes_billing_get_billing_response import SrcAppHttpRoutesBillingGetBillingResponse
+from .types.src_app_http_routes_billing_get_info_get_info_response import SrcAppHttpRoutesBillingGetInfoGetInfoResponse
+from .types.src_app_http_routes_billing_get_invoices_response import SrcAppHttpRoutesBillingGetInvoicesResponse
+from .types.src_app_http_routes_billing_get_notifications_response import (
+    SrcAppHttpRoutesBillingGetNotificationsResponse,
+)
+from .types.src_app_http_routes_billing_renew_plans_response import SrcAppHttpRoutesBillingRenewPlansResponse
+from .types.src_app_http_routes_collection_parse_file_response import SrcAppHttpRoutesCollectionParseFileResponse
+from .types.src_app_http_routes_inbox_handle_message_incoming_message import (
+    SrcAppHttpRoutesInboxHandleMessageIncomingMessage,
+)
+from .types.src_app_http_routes_inbox_handle_message_interaction_request_participants_item import (
+    SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem,
+)
+from .types.src_app_http_routes_onboarding_followup_emails_response import (
+    SrcAppHttpRoutesOnboardingFollowupEmailsResponse,
+)
+from .types.src_app_http_routes_onboarding_handle_get_me_response import SrcAppHttpRoutesOnboardingHandleGetMeResponse
+from .types.src_app_http_routes_onboarding_handle_update_me_response import (
+    SrcAppHttpRoutesOnboardingHandleUpdateMeResponse,
+)
+from .types.src_app_http_routes_root_get_info_response import SrcAppHttpRoutesRootGetInfoResponse
+from .types.src_app_http_routes_world_interact_incoming_message import SrcAppHttpRoutesWorldInteractIncomingMessage
+from .types.tag import Tag
+from .types.tools_response import ToolsResponse
+from .types.update_tag_response import UpdateTagResponse
 from .usage.client import AsyncUsageClient, UsageClient
 from .workflow_logs.client import AsyncWorkflowLogsClient, WorkflowLogsClient
 from .workflows.client import AsyncWorkflowsClient, WorkflowsClient
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
 
 
 class Scout:
@@ -82,17 +139,2161 @@ class Scout:
             else httpx.Client(timeout=_defaulted_timeout),
             timeout=_defaulted_timeout,
         )
+        self._raw_client = RawScout(client_wrapper=self._client_wrapper)
         self.workflows = WorkflowsClient(client_wrapper=self._client_wrapper)
         self.environments = EnvironmentsClient(client_wrapper=self._client_wrapper)
         self.revisions = RevisionsClient(client_wrapper=self._client_wrapper)
         self.usage = UsageClient(client_wrapper=self._client_wrapper)
         self.workflow_logs = WorkflowLogsClient(client_wrapper=self._client_wrapper)
         self.copilots = CopilotsClient(client_wrapper=self._client_wrapper)
+        self.triggers = TriggersClient(client_wrapper=self._client_wrapper)
+        self.integrations = IntegrationsClient(client_wrapper=self._client_wrapper)
+        self.organizations = OrganizationsClient(client_wrapper=self._client_wrapper)
         self.collections = CollectionsClient(client_wrapper=self._client_wrapper)
         self.tables = TablesClient(client_wrapper=self._client_wrapper)
         self.documents = DocumentsClient(client_wrapper=self._client_wrapper)
         self.sources = SourcesClient(client_wrapper=self._client_wrapper)
         self.syncs = SyncsClient(client_wrapper=self._client_wrapper)
+
+    @property
+    def with_raw_response(self) -> RawScout:
+        """
+        Retrieves a raw implementation of this client that returns raw responses.
+
+        Returns
+        -------
+        RawScout
+        """
+        return self._raw_client
+
+    def info_handler_info_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesRootGetInfoResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesRootGetInfoResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.info_handler_info_get()
+        """
+        _response = self._raw_client.info_handler_info_get(request_options=request_options)
+        return _response.data
+
+    def get_info_v_2_triggers_info_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_info_v_2_triggers_info_get()
+        """
+        _response = self._raw_client.get_info_v_2_triggers_info_get(request_options=request_options)
+        return _response.data
+
+    def get_info_v_2_index_info_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_info_v_2_index_info_get()
+        """
+        _response = self._raw_client.get_info_v_2_index_info_get(request_options=request_options)
+        return _response.data
+
+    def get_info_v_2_workflows_info_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_info_v_2_workflows_info_get()
+        """
+        _response = self._raw_client.get_info_v_2_workflows_info_get(request_options=request_options)
+        return _response.data
+
+    def get_info_v_2_collections_info_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_info_v_2_collections_info_get()
+        """
+        _response = self._raw_client.get_info_v_2_collections_info_get(request_options=request_options)
+        return _response.data
+
+    def parse_file_v_2_files_parse_post(
+        self,
+        *,
+        file: core.File,
+        return_text: typing.Optional[bool] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> SrcAppHttpRoutesCollectionParseFileResponse:
+        """
+        Parameters
+        ----------
+        file : core.File
+            See core.File for more documentation
+
+        return_text : typing.Optional[bool]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesCollectionParseFileResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.parse_file_v_2_files_parse_post()
+        """
+        _response = self._raw_client.parse_file_v_2_files_parse_post(
+            file=file, return_text=return_text, request_options=request_options
+        )
+        return _response.data
+
+    def get_integrations_integrations_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.List[IntegrationWithConnections]:
+        """
+        Get all integrations for an organization
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.List[IntegrationWithConnections]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_integrations_integrations_get()
+        """
+        _response = self._raw_client.get_integrations_integrations_get(request_options=request_options)
+        return _response.data
+
+    def get_integration_integrations_integration_id_get(
+        self, integration_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> IntegrationWithConnections:
+        """
+        Get a specific integration for an organization by its ID.
+
+        Parameters
+        ----------
+        integration_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        IntegrationWithConnections
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_integration_integrations_integration_id_get(
+            integration_id="integration_id",
+        )
+        """
+        _response = self._raw_client.get_integration_integrations_integration_id_get(
+            integration_id, request_options=request_options
+        )
+        return _response.data
+
+    def get_integration_connections_integrations_integration_id_connections_get(
+        self, integration_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.List[IntegrationConnection]:
+        """
+        Get all integrations for an organization
+
+        Parameters
+        ----------
+        integration_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.List[IntegrationConnection]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_integration_connections_integrations_integration_id_connections_get(
+            integration_id="integration_id",
+        )
+        """
+        _response = self._raw_client.get_integration_connections_integrations_integration_id_connections_get(
+            integration_id, request_options=request_options
+        )
+        return _response.data
+
+    def connect_integration_integrations_integration_id_connect_post(
+        self,
+        integration_id: str,
+        *,
+        auth_type: ConnectIntegrationRequestAuthType,
+        api_key: typing.Optional[str] = OMIT,
+        code: typing.Optional[str] = OMIT,
+        state: typing.Optional[str] = OMIT,
+        scope: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> CreateIntegrationsResponse:
+        """
+        Parameters
+        ----------
+        integration_id : str
+
+        auth_type : ConnectIntegrationRequestAuthType
+
+        api_key : typing.Optional[str]
+
+        code : typing.Optional[str]
+
+        state : typing.Optional[str]
+
+        scope : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CreateIntegrationsResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.connect_integration_integrations_integration_id_connect_post(
+            integration_id="integration_id",
+            auth_type="api_key",
+        )
+        """
+        _response = self._raw_client.connect_integration_integrations_integration_id_connect_post(
+            integration_id,
+            auth_type=auth_type,
+            api_key=api_key,
+            code=code,
+            state=state,
+            scope=scope,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def handle_send_message_integrations_slack_send_post(
+        self,
+        *,
+        channel_id: str,
+        text: str,
+        thread_id: typing.Optional[str] = OMIT,
+        blocks: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        username: typing.Optional[str] = OMIT,
+        icon_url: typing.Optional[str] = OMIT,
+        integration_id: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        channel_id : str
+
+        text : str
+
+        thread_id : typing.Optional[str]
+
+        blocks : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+
+        username : typing.Optional[str]
+
+        icon_url : typing.Optional[str]
+
+        integration_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.handle_send_message_integrations_slack_send_post(
+            channel_id="channel_id",
+            text="text",
+        )
+        """
+        _response = self._raw_client.handle_send_message_integrations_slack_send_post(
+            channel_id=channel_id,
+            text=text,
+            thread_id=thread_id,
+            blocks=blocks,
+            username=username,
+            icon_url=icon_url,
+            integration_id=integration_id,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def handle_add_reaction_integrations_slack_react_post(
+        self,
+        *,
+        channel_id: str,
+        emoji_name: str,
+        thread_id: typing.Optional[str] = OMIT,
+        integration_id: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        channel_id : str
+
+        emoji_name : str
+
+        thread_id : typing.Optional[str]
+
+        integration_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.handle_add_reaction_integrations_slack_react_post(
+            channel_id="channel_id",
+            emoji_name="emoji_name",
+        )
+        """
+        _response = self._raw_client.handle_add_reaction_integrations_slack_react_post(
+            channel_id=channel_id,
+            emoji_name=emoji_name,
+            thread_id=thread_id,
+            integration_id=integration_id,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def handle_get_thread_integrations_slack_thread_get(
+        self,
+        *,
+        channel_id: str,
+        thread_id: str,
+        integration_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        channel_id : str
+
+        thread_id : str
+
+        integration_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.handle_get_thread_integrations_slack_thread_get(
+            channel_id="channel_id",
+            thread_id="thread_id",
+        )
+        """
+        _response = self._raw_client.handle_get_thread_integrations_slack_thread_get(
+            channel_id=channel_id, thread_id=thread_id, integration_id=integration_id, request_options=request_options
+        )
+        return _response.data
+
+    def handle_get_team_info_integrations_slack_team_get(
+        self, *, team_id: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Optional[typing.Any]]:
+        """
+        Handles the request to get Slack team info
+
+        Parameters
+        ----------
+        team_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.handle_get_team_info_integrations_slack_team_get(
+            team_id="team_id",
+        )
+        """
+        _response = self._raw_client.handle_get_team_info_integrations_slack_team_get(
+            team_id=team_id, request_options=request_options
+        )
+        return _response.data
+
+    def handle_list_channels_integrations_slack_channels_get(
+        self,
+        *,
+        team_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        team_id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.handle_list_channels_integrations_slack_channels_get()
+        """
+        _response = self._raw_client.handle_list_channels_integrations_slack_channels_get(
+            team_id=team_id, request_options=request_options
+        )
+        return _response.data
+
+    def handle_migrate_integrations_integrations_migrate_post(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Optional[typing.Any]]:
+        """
+        Migrate integration tokens from Neon to Firestore with KMS encryption.
+
+        This endpoint accepts a list of organization IDs and migrates their Slack and Notion tokens.
+        It fetches tokens from the Neon database and stores them in Firestore,
+        encrypting the tokens using KMS.
+
+        NOTE: Not a public endpoint - used for internal database migration
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.handle_migrate_integrations_integrations_migrate_post()
+        """
+        _response = self._raw_client.handle_migrate_integrations_integrations_migrate_post(
+            request_options=request_options
+        )
+        return _response.data
+
+    def handle_notion_oauth_integrations_notion_oauth_post(
+        self,
+        *,
+        access_token: str,
+        metadata: typing.Dict[str, typing.Optional[typing.Any]],
+        integrated_service_id: typing.Optional[str] = OMIT,
+        code: typing.Optional[str] = OMIT,
+        redirect_uri: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Handle Notion OAuth token upsert
+
+        Args:
+            request: The FastAPI request object
+            body: The request body containing the access token and metadata
+
+        Returns:
+            Response indicating success
+
+        Raises:
+            HTTPException: If there's an error during the process
+
+        Parameters
+        ----------
+        access_token : str
+
+        metadata : typing.Dict[str, typing.Optional[typing.Any]]
+
+        integrated_service_id : typing.Optional[str]
+
+        code : typing.Optional[str]
+
+        redirect_uri : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.handle_notion_oauth_integrations_notion_oauth_post(
+            access_token="access_token",
+            metadata={"key": "value"},
+        )
+        """
+        _response = self._raw_client.handle_notion_oauth_integrations_notion_oauth_post(
+            access_token=access_token,
+            metadata=metadata,
+            integrated_service_id=integrated_service_id,
+            code=code,
+            redirect_uri=redirect_uri,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def exchange_mcp_auth_mcp_authorization_post(
+        self,
+        *,
+        code: str,
+        state: str,
+        url: str,
+        name: str,
+        integration_id: str,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        code : str
+
+        state : str
+
+        url : str
+
+        name : str
+
+        integration_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.exchange_mcp_auth_mcp_authorization_post(
+            code="code",
+            state="state",
+            url="url",
+            name="name",
+            integration_id="integration_id",
+        )
+        """
+        _response = self._raw_client.exchange_mcp_auth_mcp_authorization_post(
+            code=code, state=state, url=url, name=name, integration_id=integration_id, request_options=request_options
+        )
+        return _response.data
+
+    def connect_mcp_mcp_connect_post(
+        self,
+        *,
+        url: str,
+        name: str,
+        integration_id: str,
+        headers: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        url : str
+
+        name : str
+
+        integration_id : str
+
+        headers : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.connect_mcp_mcp_connect_post(
+            url="url",
+            name="name",
+            integration_id="integration_id",
+        )
+        """
+        _response = self._raw_client.connect_mcp_mcp_connect_post(
+            url=url, name=name, integration_id=integration_id, headers=headers, request_options=request_options
+        )
+        return _response.data
+
+    def delete_mcp_connection_mcp_servers_connection_id_delete(
+        self, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        connection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.delete_mcp_connection_mcp_servers_connection_id_delete(
+            connection_id="connection_id",
+        )
+        """
+        _response = self._raw_client.delete_mcp_connection_mcp_servers_connection_id_delete(
+            connection_id, request_options=request_options
+        )
+        return _response.data
+
+    def get_mcp_servers_mcp_servers_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_mcp_servers_mcp_servers_get()
+        """
+        _response = self._raw_client.get_mcp_servers_mcp_servers_get(request_options=request_options)
+        return _response.data
+
+    def get_info_inbox_info_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_info_inbox_info_get()
+        """
+        _response = self._raw_client.get_info_inbox_info_get(request_options=request_options)
+        return _response.data
+
+    def handle_get_sessions_inbox_sessions_get(
+        self, *, search: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Process an interaction request through the environment.
+
+        Args:
+            request: The FastAPI request
+            session_id: The ID of the session
+            interaction_request: The interaction request data
+
+        Returns:
+            Span with the results of the interaction attached to its attributes
+
+        Parameters
+        ----------
+        search : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.handle_get_sessions_inbox_sessions_get()
+        """
+        _response = self._raw_client.handle_get_sessions_inbox_sessions_get(
+            search=search, request_options=request_options
+        )
+        return _response.data
+
+    def handle_get_notifications_inbox_notifications_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Process an interaction request through the environment.
+
+        Args:
+            request: The FastAPI request
+            session_id: The ID of the session
+            interaction_request: The interaction request data
+
+        Returns:
+            Span with the results of the interaction attached to its attributes
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.handle_get_notifications_inbox_notifications_get()
+        """
+        _response = self._raw_client.handle_get_notifications_inbox_notifications_get(request_options=request_options)
+        return _response.data
+
+    def handle_get_session_by_id_inbox_session_id_get(
+        self, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        session_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.handle_get_session_by_id_inbox_session_id_get(
+            session_id="session_id",
+        )
+        """
+        _response = self._raw_client.handle_get_session_by_id_inbox_session_id_get(
+            session_id, request_options=request_options
+        )
+        return _response.data
+
+    def handle_transcribe_inbox_session_id_transcribe_post(
+        self, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        session_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.handle_transcribe_inbox_session_id_transcribe_post(
+            session_id="session_id",
+        )
+        """
+        _response = self._raw_client.handle_transcribe_inbox_session_id_transcribe_post(
+            session_id, request_options=request_options
+        )
+        return _response.data
+
+    def upload_private_files_inbox_session_id_files_post(
+        self, session_id: str, *, files: typing.List[core.File], request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.List[FilesResponse]:
+        """
+        Parameters
+        ----------
+        session_id : str
+
+        files : typing.List[core.File]
+            See core.File for more documentation
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.List[FilesResponse]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.upload_private_files_inbox_session_id_files_post(
+            session_id="session_id",
+        )
+        """
+        _response = self._raw_client.upload_private_files_inbox_session_id_files_post(
+            session_id, files=files, request_options=request_options
+        )
+        return _response.data
+
+    def handle_get_session_messages_inbox_session_id_messages_get(
+        self, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Process an interaction request through the environment.
+
+        Args:
+            request: The FastAPI request
+            session_id: The ID of the session
+            interaction_request: The interaction request data
+
+        Returns:
+            Span with the results of the interaction attached to its attributes
+
+        Parameters
+        ----------
+        session_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.handle_get_session_messages_inbox_session_id_messages_get(
+            session_id="session_id",
+        )
+        """
+        _response = self._raw_client.handle_get_session_messages_inbox_session_id_messages_get(
+            session_id, request_options=request_options
+        )
+        return _response.data
+
+    def handle_message_inbox_session_id_messages_post(
+        self,
+        session_id: str,
+        *,
+        messages: typing.Sequence[SrcAppHttpRoutesInboxHandleMessageIncomingMessage],
+        participants: typing.Sequence[SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem],
+        history: typing.Optional[typing.Sequence[SrcAppHttpRoutesInboxHandleMessageIncomingMessage]] = OMIT,
+        files: typing.Optional[typing.Sequence[FilesAttribute]] = OMIT,
+        ephemeral_agent_revision: typing.Optional[AgentRevision] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Process an interaction request through the environment.
+
+        Args:
+            request: The FastAPI request
+            session_id: The ID of the session
+            interaction_request: The interaction request data
+
+        Returns:
+            Span with the results of the interaction attached to its attributes
+
+        Parameters
+        ----------
+        session_id : str
+
+        messages : typing.Sequence[SrcAppHttpRoutesInboxHandleMessageIncomingMessage]
+
+        participants : typing.Sequence[SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem]
+
+        history : typing.Optional[typing.Sequence[SrcAppHttpRoutesInboxHandleMessageIncomingMessage]]
+
+        files : typing.Optional[typing.Sequence[FilesAttribute]]
+
+        ephemeral_agent_revision : typing.Optional[AgentRevision]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import (
+            Scout,
+            ScoutUser,
+            SrcAppHttpRoutesInboxHandleMessageIncomingMessage,
+        )
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.handle_message_inbox_session_id_messages_post(
+            session_id="session_id",
+            messages=[
+                SrcAppHttpRoutesInboxHandleMessageIncomingMessage(
+                    content="content",
+                    content_type="text/plain",
+                )
+            ],
+            participants=[
+                ScoutUser(
+                    id="id",
+                )
+            ],
+        )
+        """
+        _response = self._raw_client.handle_message_inbox_session_id_messages_post(
+            session_id,
+            messages=messages,
+            participants=participants,
+            history=history,
+            files=files,
+            ephemeral_agent_revision=ephemeral_agent_revision,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def handle_post_session_participant_inbox_sessions_session_id_participants_post(
+        self,
+        session_id: str,
+        *,
+        request: typing.Sequence[Participant],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Process an interaction request through the environment.
+
+        Args:
+            request: The FastAPI request
+            session_id: The ID of the session
+            interaction_request: The interaction request data
+
+        Returns:
+            Span with the results of the interaction attached to its attributes
+
+        Parameters
+        ----------
+        session_id : str
+
+        request : typing.Sequence[Participant]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Participant, Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.handle_post_session_participant_inbox_sessions_session_id_participants_post(
+            session_id="session_id",
+            request=[
+                Participant(
+                    id="id",
+                    type="scout_user",
+                )
+            ],
+        )
+        """
+        _response = self._raw_client.handle_post_session_participant_inbox_sessions_session_id_participants_post(
+            session_id, request=request, request_options=request_options
+        )
+        return _response.data
+
+    def handle_cancel_session_inbox_session_id_cancel_post(
+        self, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> CancelResponse:
+        """
+        Cancel ongoing agent response for a session.
+
+        Args:
+            request: The FastAPI request
+            session_id: The ID of the session to cancel
+
+        Returns:
+            CancelResponse with cancellation status
+
+        Parameters
+        ----------
+        session_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CancelResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.handle_cancel_session_inbox_session_id_cancel_post(
+            session_id="session_id",
+        )
+        """
+        _response = self._raw_client.handle_cancel_session_inbox_session_id_cancel_post(
+            session_id, request_options=request_options
+        )
+        return _response.data
+
+    def get_info_money_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingGetInfoGetInfoResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingGetInfoGetInfoResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_info_money_get()
+        """
+        _response = self._raw_client.get_info_money_get(request_options=request_options)
+        return _response.data
+
+    def get_billing_accounts_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingGetBillingResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingGetBillingResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_billing_accounts_get()
+        """
+        _response = self._raw_client.get_billing_accounts_get(request_options=request_options)
+        return _response.data
+
+    def get_usage_accounts_usage_get(
+        self,
+        *,
+        start_date: typing.Optional[str] = None,
+        end_date: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> Result:
+        """
+        Parameters
+        ----------
+        start_date : typing.Optional[str]
+
+        end_date : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Result
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_usage_accounts_usage_get()
+        """
+        _response = self._raw_client.get_usage_accounts_usage_get(
+            start_date=start_date, end_date=end_date, request_options=request_options
+        )
+        return _response.data
+
+    def get_invoices_accounts_invoices_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingGetInvoicesResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingGetInvoicesResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_invoices_accounts_invoices_get()
+        """
+        _response = self._raw_client.get_invoices_accounts_invoices_get(request_options=request_options)
+        return _response.data
+
+    def create_portal_session_accounts_portal_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingCreatePortalSessionResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingCreatePortalSessionResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.create_portal_session_accounts_portal_get()
+        """
+        _response = self._raw_client.create_portal_session_accounts_portal_get(request_options=request_options)
+        return _response.data
+
+    def get_workflow_usage_accounts_usage_workflows_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_workflow_usage_accounts_usage_workflows_get()
+        """
+        _response = self._raw_client.get_workflow_usage_accounts_usage_workflows_get(request_options=request_options)
+        return _response.data
+
+    def get_notifications_notifications_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingGetNotificationsResponse:
+        """
+        This endpoint will pull any org facing notifications for the app to display
+        Mostly billing related so far
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingGetNotificationsResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_notifications_notifications_get()
+        """
+        _response = self._raw_client.get_notifications_notifications_get(request_options=request_options)
+        return _response.data
+
+    def change_billing_plan_accounts_plan_put(
+        self, *, name: PlanTypes, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingChangeBillingPlanResponse:
+        """
+        Parameters
+        ----------
+        name : PlanTypes
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingChangeBillingPlanResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.change_billing_plan_accounts_plan_put(
+            name="plan_1",
+        )
+        """
+        _response = self._raw_client.change_billing_plan_accounts_plan_put(name=name, request_options=request_options)
+        return _response.data
+
+    def stripe_webhook_hooks_stripe_post(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.stripe_webhook_hooks_stripe_post()
+        """
+        _response = self._raw_client.stripe_webhook_hooks_stripe_post(request_options=request_options)
+        return _response.data
+
+    def renew_plans_crons_renew_plans_post(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingRenewPlansResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingRenewPlansResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.renew_plans_crons_renew_plans_post()
+        """
+        _response = self._raw_client.renew_plans_crons_renew_plans_post(request_options=request_options)
+        return _response.data
+
+    def daily_billing_tasks_crons_free_plan_usage_post(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingFreePlanUsageResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingFreePlanUsageResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.daily_billing_tasks_crons_free_plan_usage_post()
+        """
+        _response = self._raw_client.daily_billing_tasks_crons_free_plan_usage_post(request_options=request_options)
+        return _response.data
+
+    def billing_hourly_crons_billing_hourly_post(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingBillingHourlyResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingBillingHourlyResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.billing_hourly_crons_billing_hourly_post()
+        """
+        _response = self._raw_client.billing_hourly_crons_billing_hourly_post(request_options=request_options)
+        return _response.data
+
+    def list_spans_traces_trace_id_spans_get(
+        self, trace_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        trace_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.list_spans_traces_trace_id_spans_get(
+            trace_id="trace_id",
+        )
+        """
+        _response = self._raw_client.list_spans_traces_trace_id_spans_get(trace_id, request_options=request_options)
+        return _response.data
+
+    def seed_agents_onboarding_seed_agents_post(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Manually seed default agent personas for a new organization.
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.seed_agents_onboarding_seed_agents_post()
+        """
+        _response = self._raw_client.seed_agents_onboarding_seed_agents_post(request_options=request_options)
+        return _response.data
+
+    def send_followup_emails_onboarding_followup_emails_post(
+        self,
+        *,
+        request: typing.Optional[FollowupEmailRequest] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> SrcAppHttpRoutesOnboardingFollowupEmailsResponse:
+        """
+        Send follow-up emails to users who registered on specific days.
+
+        This endpoint is designed to be called by cron jobs or manual triggers
+        to send onboarding follow-up emails.
+
+        Parameters
+        ----------
+        request : typing.Optional[FollowupEmailRequest]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesOnboardingFollowupEmailsResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.send_followup_emails_onboarding_followup_emails_post()
+        """
+        _response = self._raw_client.send_followup_emails_onboarding_followup_emails_post(
+            request=request, request_options=request_options
+        )
+        return _response.data
+
+    def find_me_me_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesOnboardingHandleGetMeResponse:
+        """
+        Get the current authenticated user's information.
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesOnboardingHandleGetMeResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.find_me_me_get()
+        """
+        _response = self._raw_client.find_me_me_get(request_options=request_options)
+        return _response.data
+
+    def update_me_me_put(
+        self,
+        *,
+        favorites: typing.Optional[typing.Sequence[typing.Dict[str, str]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> SrcAppHttpRoutesOnboardingHandleUpdateMeResponse:
+        """
+        Update the current authenticated user's information.
+
+        Parameters
+        ----------
+        favorites : typing.Optional[typing.Sequence[typing.Dict[str, str]]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesOnboardingHandleUpdateMeResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.update_me_me_put()
+        """
+        _response = self._raw_client.update_me_me_put(favorites=favorites, request_options=request_options)
+        return _response.data
+
+    def list_tags_tags_get(self, *, request_options: typing.Optional[RequestOptions] = None) -> ListTagsResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListTagsResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.list_tags_tags_get()
+        """
+        _response = self._raw_client.list_tags_tags_get(request_options=request_options)
+        return _response.data
+
+    def create_tag_tags_post(
+        self,
+        *,
+        name: str,
+        description: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> CreateTagResponse:
+        """
+        Parameters
+        ----------
+        name : str
+
+        description : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CreateTagResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.create_tag_tags_post(
+            name="name",
+        )
+        """
+        _response = self._raw_client.create_tag_tags_post(
+            name=name, description=description, request_options=request_options
+        )
+        return _response.data
+
+    def get_tag_tags_tag_id_get(self, tag_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Tag:
+        """
+        Parameters
+        ----------
+        tag_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Tag
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_tag_tags_tag_id_get(
+            tag_id="tag_id",
+        )
+        """
+        _response = self._raw_client.get_tag_tags_tag_id_get(tag_id, request_options=request_options)
+        return _response.data
+
+    def update_tag_tags_tag_id_put(
+        self,
+        tag_id: str,
+        *,
+        name: typing.Optional[str] = OMIT,
+        description: typing.Optional[str] = OMIT,
+        active: typing.Optional[bool] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> UpdateTagResponse:
+        """
+        Parameters
+        ----------
+        tag_id : str
+
+        name : typing.Optional[str]
+
+        description : typing.Optional[str]
+
+        active : typing.Optional[bool]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        UpdateTagResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.update_tag_tags_tag_id_put(
+            tag_id="tag_id",
+        )
+        """
+        _response = self._raw_client.update_tag_tags_tag_id_put(
+            tag_id, name=name, description=description, active=active, request_options=request_options
+        )
+        return _response.data
+
+    def interact_handler_world_agent_id_session_id_interact_post(
+        self,
+        agent_id: str,
+        session_id: typing.Optional[str],
+        *,
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        agent_id : str
+
+        session_id : typing.Optional[str]
+
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout, SrcAppHttpRoutesWorldInteractIncomingMessage
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.interact_handler_world_agent_id_session_id_interact_post(
+            agent_id="agent_id",
+            messages=[
+                SrcAppHttpRoutesWorldInteractIncomingMessage(
+                    content="content",
+                )
+            ],
+        )
+        """
+        _response = self._raw_client.interact_handler_world_agent_id_session_id_interact_post(
+            agent_id, session_id, messages=messages, request_options=request_options
+        )
+        return _response.data
+
+    def interact_handler_world_agent_id_interact_post(
+        self,
+        agent_id: str,
+        *,
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        session_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        agent_id : str
+
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+
+        session_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout, SrcAppHttpRoutesWorldInteractIncomingMessage
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.interact_handler_world_agent_id_interact_post(
+            agent_id="agent_id",
+            messages=[
+                SrcAppHttpRoutesWorldInteractIncomingMessage(
+                    content="content",
+                )
+            ],
+        )
+        """
+        _response = self._raw_client.interact_handler_world_agent_id_interact_post(
+            agent_id, messages=messages, session_id=session_id, request_options=request_options
+        )
+        return _response.data
+
+    def list_agents_agents_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.list_agents_agents_get()
+        """
+        _response = self._raw_client.list_agents_agents_get(request_options=request_options)
+        return _response.data
+
+    def upsert_agent_agents_post(
+        self,
+        *,
+        agent: str,
+        revision: str,
+        agent_id: typing.Optional[str] = OMIT,
+        activate: typing.Optional[bool] = OMIT,
+        agent_image: typing.Optional[core.File] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        agent : str
+
+        revision : str
+
+        agent_id : typing.Optional[str]
+
+        activate : typing.Optional[bool]
+
+        agent_image : typing.Optional[core.File]
+            See core.File for more documentation
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.upsert_agent_agents_post(
+            agent="agent",
+            revision="revision",
+        )
+        """
+        _response = self._raw_client.upsert_agent_agents_post(
+            agent=agent,
+            revision=revision,
+            agent_id=agent_id,
+            activate=activate,
+            agent_image=agent_image,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def get_active_agent_agents_agent_id_active_get(
+        self, agent_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Retrieve an agent and its active revision by agent_id.
+        Verifies that the agent belongs to the actor's organization.
+
+        Parameters
+        ----------
+        agent_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_active_agent_agents_agent_id_active_get(
+            agent_id="agent_id",
+        )
+        """
+        _response = self._raw_client.get_active_agent_agents_agent_id_active_get(
+            agent_id, request_options=request_options
+        )
+        return _response.data
+
+    def get_tools_agents_tools_get(self, *, request_options: typing.Optional[RequestOptions] = None) -> ToolsResponse:
+        """
+        Get available tools for the organization.
+
+        Args:
+            request: The FastAPI request
+
+        Returns:
+            Span with the list of available tools attached to its attributes
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ToolsResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.get_tools_agents_tools_get()
+        """
+        _response = self._raw_client.get_tools_agents_tools_get(request_options=request_options)
+        return _response.data
+
+    def delete_agent_agents_agent_id_delete(
+        self, agent_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        agent_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.delete_agent_agents_agent_id_delete(
+            agent_id="agent_id",
+        )
+        """
+        _response = self._raw_client.delete_agent_agents_agent_id_delete(agent_id, request_options=request_options)
+        return _response.data
+
+    def expire_blobs_expire_blobs_post(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.expire_blobs_expire_blobs_post()
+        """
+        _response = self._raw_client.expire_blobs_expire_blobs_post(request_options=request_options)
+        return _response.data
 
 
 class AsyncScout:
@@ -157,17 +2358,2657 @@ class AsyncScout:
             else httpx.AsyncClient(timeout=_defaulted_timeout),
             timeout=_defaulted_timeout,
         )
+        self._raw_client = AsyncRawScout(client_wrapper=self._client_wrapper)
         self.workflows = AsyncWorkflowsClient(client_wrapper=self._client_wrapper)
         self.environments = AsyncEnvironmentsClient(client_wrapper=self._client_wrapper)
         self.revisions = AsyncRevisionsClient(client_wrapper=self._client_wrapper)
         self.usage = AsyncUsageClient(client_wrapper=self._client_wrapper)
         self.workflow_logs = AsyncWorkflowLogsClient(client_wrapper=self._client_wrapper)
         self.copilots = AsyncCopilotsClient(client_wrapper=self._client_wrapper)
+        self.triggers = AsyncTriggersClient(client_wrapper=self._client_wrapper)
+        self.integrations = AsyncIntegrationsClient(client_wrapper=self._client_wrapper)
+        self.organizations = AsyncOrganizationsClient(client_wrapper=self._client_wrapper)
         self.collections = AsyncCollectionsClient(client_wrapper=self._client_wrapper)
         self.tables = AsyncTablesClient(client_wrapper=self._client_wrapper)
         self.documents = AsyncDocumentsClient(client_wrapper=self._client_wrapper)
         self.sources = AsyncSourcesClient(client_wrapper=self._client_wrapper)
         self.syncs = AsyncSyncsClient(client_wrapper=self._client_wrapper)
+
+    @property
+    def with_raw_response(self) -> AsyncRawScout:
+        """
+        Retrieves a raw implementation of this client that returns raw responses.
+
+        Returns
+        -------
+        AsyncRawScout
+        """
+        return self._raw_client
+
+    async def info_handler_info_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesRootGetInfoResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesRootGetInfoResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.info_handler_info_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.info_handler_info_get(request_options=request_options)
+        return _response.data
+
+    async def get_info_v_2_triggers_info_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_info_v_2_triggers_info_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_info_v_2_triggers_info_get(request_options=request_options)
+        return _response.data
+
+    async def get_info_v_2_index_info_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_info_v_2_index_info_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_info_v_2_index_info_get(request_options=request_options)
+        return _response.data
+
+    async def get_info_v_2_workflows_info_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_info_v_2_workflows_info_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_info_v_2_workflows_info_get(request_options=request_options)
+        return _response.data
+
+    async def get_info_v_2_collections_info_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_info_v_2_collections_info_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_info_v_2_collections_info_get(request_options=request_options)
+        return _response.data
+
+    async def parse_file_v_2_files_parse_post(
+        self,
+        *,
+        file: core.File,
+        return_text: typing.Optional[bool] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> SrcAppHttpRoutesCollectionParseFileResponse:
+        """
+        Parameters
+        ----------
+        file : core.File
+            See core.File for more documentation
+
+        return_text : typing.Optional[bool]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesCollectionParseFileResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.parse_file_v_2_files_parse_post()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.parse_file_v_2_files_parse_post(
+            file=file, return_text=return_text, request_options=request_options
+        )
+        return _response.data
+
+    async def get_integrations_integrations_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.List[IntegrationWithConnections]:
+        """
+        Get all integrations for an organization
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.List[IntegrationWithConnections]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_integrations_integrations_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_integrations_integrations_get(request_options=request_options)
+        return _response.data
+
+    async def get_integration_integrations_integration_id_get(
+        self, integration_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> IntegrationWithConnections:
+        """
+        Get a specific integration for an organization by its ID.
+
+        Parameters
+        ----------
+        integration_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        IntegrationWithConnections
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_integration_integrations_integration_id_get(
+                integration_id="integration_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_integration_integrations_integration_id_get(
+            integration_id, request_options=request_options
+        )
+        return _response.data
+
+    async def get_integration_connections_integrations_integration_id_connections_get(
+        self, integration_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.List[IntegrationConnection]:
+        """
+        Get all integrations for an organization
+
+        Parameters
+        ----------
+        integration_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.List[IntegrationConnection]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_integration_connections_integrations_integration_id_connections_get(
+                integration_id="integration_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_integration_connections_integrations_integration_id_connections_get(
+            integration_id, request_options=request_options
+        )
+        return _response.data
+
+    async def connect_integration_integrations_integration_id_connect_post(
+        self,
+        integration_id: str,
+        *,
+        auth_type: ConnectIntegrationRequestAuthType,
+        api_key: typing.Optional[str] = OMIT,
+        code: typing.Optional[str] = OMIT,
+        state: typing.Optional[str] = OMIT,
+        scope: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> CreateIntegrationsResponse:
+        """
+        Parameters
+        ----------
+        integration_id : str
+
+        auth_type : ConnectIntegrationRequestAuthType
+
+        api_key : typing.Optional[str]
+
+        code : typing.Optional[str]
+
+        state : typing.Optional[str]
+
+        scope : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CreateIntegrationsResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.connect_integration_integrations_integration_id_connect_post(
+                integration_id="integration_id",
+                auth_type="api_key",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.connect_integration_integrations_integration_id_connect_post(
+            integration_id,
+            auth_type=auth_type,
+            api_key=api_key,
+            code=code,
+            state=state,
+            scope=scope,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def handle_send_message_integrations_slack_send_post(
+        self,
+        *,
+        channel_id: str,
+        text: str,
+        thread_id: typing.Optional[str] = OMIT,
+        blocks: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        username: typing.Optional[str] = OMIT,
+        icon_url: typing.Optional[str] = OMIT,
+        integration_id: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        channel_id : str
+
+        text : str
+
+        thread_id : typing.Optional[str]
+
+        blocks : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+
+        username : typing.Optional[str]
+
+        icon_url : typing.Optional[str]
+
+        integration_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.handle_send_message_integrations_slack_send_post(
+                channel_id="channel_id",
+                text="text",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.handle_send_message_integrations_slack_send_post(
+            channel_id=channel_id,
+            text=text,
+            thread_id=thread_id,
+            blocks=blocks,
+            username=username,
+            icon_url=icon_url,
+            integration_id=integration_id,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def handle_add_reaction_integrations_slack_react_post(
+        self,
+        *,
+        channel_id: str,
+        emoji_name: str,
+        thread_id: typing.Optional[str] = OMIT,
+        integration_id: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        channel_id : str
+
+        emoji_name : str
+
+        thread_id : typing.Optional[str]
+
+        integration_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.handle_add_reaction_integrations_slack_react_post(
+                channel_id="channel_id",
+                emoji_name="emoji_name",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.handle_add_reaction_integrations_slack_react_post(
+            channel_id=channel_id,
+            emoji_name=emoji_name,
+            thread_id=thread_id,
+            integration_id=integration_id,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def handle_get_thread_integrations_slack_thread_get(
+        self,
+        *,
+        channel_id: str,
+        thread_id: str,
+        integration_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        channel_id : str
+
+        thread_id : str
+
+        integration_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.handle_get_thread_integrations_slack_thread_get(
+                channel_id="channel_id",
+                thread_id="thread_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.handle_get_thread_integrations_slack_thread_get(
+            channel_id=channel_id, thread_id=thread_id, integration_id=integration_id, request_options=request_options
+        )
+        return _response.data
+
+    async def handle_get_team_info_integrations_slack_team_get(
+        self, *, team_id: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Optional[typing.Any]]:
+        """
+        Handles the request to get Slack team info
+
+        Parameters
+        ----------
+        team_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.handle_get_team_info_integrations_slack_team_get(
+                team_id="team_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.handle_get_team_info_integrations_slack_team_get(
+            team_id=team_id, request_options=request_options
+        )
+        return _response.data
+
+    async def handle_list_channels_integrations_slack_channels_get(
+        self,
+        *,
+        team_id: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        team_id : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.handle_list_channels_integrations_slack_channels_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.handle_list_channels_integrations_slack_channels_get(
+            team_id=team_id, request_options=request_options
+        )
+        return _response.data
+
+    async def handle_migrate_integrations_integrations_migrate_post(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Optional[typing.Any]]:
+        """
+        Migrate integration tokens from Neon to Firestore with KMS encryption.
+
+        This endpoint accepts a list of organization IDs and migrates their Slack and Notion tokens.
+        It fetches tokens from the Neon database and stores them in Firestore,
+        encrypting the tokens using KMS.
+
+        NOTE: Not a public endpoint - used for internal database migration
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.handle_migrate_integrations_integrations_migrate_post()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.handle_migrate_integrations_integrations_migrate_post(
+            request_options=request_options
+        )
+        return _response.data
+
+    async def handle_notion_oauth_integrations_notion_oauth_post(
+        self,
+        *,
+        access_token: str,
+        metadata: typing.Dict[str, typing.Optional[typing.Any]],
+        integrated_service_id: typing.Optional[str] = OMIT,
+        code: typing.Optional[str] = OMIT,
+        redirect_uri: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Handle Notion OAuth token upsert
+
+        Args:
+            request: The FastAPI request object
+            body: The request body containing the access token and metadata
+
+        Returns:
+            Response indicating success
+
+        Raises:
+            HTTPException: If there's an error during the process
+
+        Parameters
+        ----------
+        access_token : str
+
+        metadata : typing.Dict[str, typing.Optional[typing.Any]]
+
+        integrated_service_id : typing.Optional[str]
+
+        code : typing.Optional[str]
+
+        redirect_uri : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.handle_notion_oauth_integrations_notion_oauth_post(
+                access_token="access_token",
+                metadata={"key": "value"},
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.handle_notion_oauth_integrations_notion_oauth_post(
+            access_token=access_token,
+            metadata=metadata,
+            integrated_service_id=integrated_service_id,
+            code=code,
+            redirect_uri=redirect_uri,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def exchange_mcp_auth_mcp_authorization_post(
+        self,
+        *,
+        code: str,
+        state: str,
+        url: str,
+        name: str,
+        integration_id: str,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        code : str
+
+        state : str
+
+        url : str
+
+        name : str
+
+        integration_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.exchange_mcp_auth_mcp_authorization_post(
+                code="code",
+                state="state",
+                url="url",
+                name="name",
+                integration_id="integration_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.exchange_mcp_auth_mcp_authorization_post(
+            code=code, state=state, url=url, name=name, integration_id=integration_id, request_options=request_options
+        )
+        return _response.data
+
+    async def connect_mcp_mcp_connect_post(
+        self,
+        *,
+        url: str,
+        name: str,
+        integration_id: str,
+        headers: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        url : str
+
+        name : str
+
+        integration_id : str
+
+        headers : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.connect_mcp_mcp_connect_post(
+                url="url",
+                name="name",
+                integration_id="integration_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.connect_mcp_mcp_connect_post(
+            url=url, name=name, integration_id=integration_id, headers=headers, request_options=request_options
+        )
+        return _response.data
+
+    async def delete_mcp_connection_mcp_servers_connection_id_delete(
+        self, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        connection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.delete_mcp_connection_mcp_servers_connection_id_delete(
+                connection_id="connection_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.delete_mcp_connection_mcp_servers_connection_id_delete(
+            connection_id, request_options=request_options
+        )
+        return _response.data
+
+    async def get_mcp_servers_mcp_servers_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_mcp_servers_mcp_servers_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_mcp_servers_mcp_servers_get(request_options=request_options)
+        return _response.data
+
+    async def get_info_inbox_info_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_info_inbox_info_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_info_inbox_info_get(request_options=request_options)
+        return _response.data
+
+    async def handle_get_sessions_inbox_sessions_get(
+        self, *, search: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Process an interaction request through the environment.
+
+        Args:
+            request: The FastAPI request
+            session_id: The ID of the session
+            interaction_request: The interaction request data
+
+        Returns:
+            Span with the results of the interaction attached to its attributes
+
+        Parameters
+        ----------
+        search : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.handle_get_sessions_inbox_sessions_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.handle_get_sessions_inbox_sessions_get(
+            search=search, request_options=request_options
+        )
+        return _response.data
+
+    async def handle_get_notifications_inbox_notifications_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Process an interaction request through the environment.
+
+        Args:
+            request: The FastAPI request
+            session_id: The ID of the session
+            interaction_request: The interaction request data
+
+        Returns:
+            Span with the results of the interaction attached to its attributes
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.handle_get_notifications_inbox_notifications_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.handle_get_notifications_inbox_notifications_get(
+            request_options=request_options
+        )
+        return _response.data
+
+    async def handle_get_session_by_id_inbox_session_id_get(
+        self, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        session_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.handle_get_session_by_id_inbox_session_id_get(
+                session_id="session_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.handle_get_session_by_id_inbox_session_id_get(
+            session_id, request_options=request_options
+        )
+        return _response.data
+
+    async def handle_transcribe_inbox_session_id_transcribe_post(
+        self, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        session_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.handle_transcribe_inbox_session_id_transcribe_post(
+                session_id="session_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.handle_transcribe_inbox_session_id_transcribe_post(
+            session_id, request_options=request_options
+        )
+        return _response.data
+
+    async def upload_private_files_inbox_session_id_files_post(
+        self, session_id: str, *, files: typing.List[core.File], request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.List[FilesResponse]:
+        """
+        Parameters
+        ----------
+        session_id : str
+
+        files : typing.List[core.File]
+            See core.File for more documentation
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.List[FilesResponse]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.upload_private_files_inbox_session_id_files_post(
+                session_id="session_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.upload_private_files_inbox_session_id_files_post(
+            session_id, files=files, request_options=request_options
+        )
+        return _response.data
+
+    async def handle_get_session_messages_inbox_session_id_messages_get(
+        self, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Process an interaction request through the environment.
+
+        Args:
+            request: The FastAPI request
+            session_id: The ID of the session
+            interaction_request: The interaction request data
+
+        Returns:
+            Span with the results of the interaction attached to its attributes
+
+        Parameters
+        ----------
+        session_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.handle_get_session_messages_inbox_session_id_messages_get(
+                session_id="session_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.handle_get_session_messages_inbox_session_id_messages_get(
+            session_id, request_options=request_options
+        )
+        return _response.data
+
+    async def handle_message_inbox_session_id_messages_post(
+        self,
+        session_id: str,
+        *,
+        messages: typing.Sequence[SrcAppHttpRoutesInboxHandleMessageIncomingMessage],
+        participants: typing.Sequence[SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem],
+        history: typing.Optional[typing.Sequence[SrcAppHttpRoutesInboxHandleMessageIncomingMessage]] = OMIT,
+        files: typing.Optional[typing.Sequence[FilesAttribute]] = OMIT,
+        ephemeral_agent_revision: typing.Optional[AgentRevision] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Process an interaction request through the environment.
+
+        Args:
+            request: The FastAPI request
+            session_id: The ID of the session
+            interaction_request: The interaction request data
+
+        Returns:
+            Span with the results of the interaction attached to its attributes
+
+        Parameters
+        ----------
+        session_id : str
+
+        messages : typing.Sequence[SrcAppHttpRoutesInboxHandleMessageIncomingMessage]
+
+        participants : typing.Sequence[SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem]
+
+        history : typing.Optional[typing.Sequence[SrcAppHttpRoutesInboxHandleMessageIncomingMessage]]
+
+        files : typing.Optional[typing.Sequence[FilesAttribute]]
+
+        ephemeral_agent_revision : typing.Optional[AgentRevision]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import (
+            AsyncScout,
+            ScoutUser,
+            SrcAppHttpRoutesInboxHandleMessageIncomingMessage,
+        )
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.handle_message_inbox_session_id_messages_post(
+                session_id="session_id",
+                messages=[
+                    SrcAppHttpRoutesInboxHandleMessageIncomingMessage(
+                        content="content",
+                        content_type="text/plain",
+                    )
+                ],
+                participants=[
+                    ScoutUser(
+                        id="id",
+                    )
+                ],
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.handle_message_inbox_session_id_messages_post(
+            session_id,
+            messages=messages,
+            participants=participants,
+            history=history,
+            files=files,
+            ephemeral_agent_revision=ephemeral_agent_revision,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def handle_post_session_participant_inbox_sessions_session_id_participants_post(
+        self,
+        session_id: str,
+        *,
+        request: typing.Sequence[Participant],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Process an interaction request through the environment.
+
+        Args:
+            request: The FastAPI request
+            session_id: The ID of the session
+            interaction_request: The interaction request data
+
+        Returns:
+            Span with the results of the interaction attached to its attributes
+
+        Parameters
+        ----------
+        session_id : str
+
+        request : typing.Sequence[Participant]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout, Participant
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.handle_post_session_participant_inbox_sessions_session_id_participants_post(
+                session_id="session_id",
+                request=[
+                    Participant(
+                        id="id",
+                        type="scout_user",
+                    )
+                ],
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.handle_post_session_participant_inbox_sessions_session_id_participants_post(
+            session_id, request=request, request_options=request_options
+        )
+        return _response.data
+
+    async def handle_cancel_session_inbox_session_id_cancel_post(
+        self, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> CancelResponse:
+        """
+        Cancel ongoing agent response for a session.
+
+        Args:
+            request: The FastAPI request
+            session_id: The ID of the session to cancel
+
+        Returns:
+            CancelResponse with cancellation status
+
+        Parameters
+        ----------
+        session_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CancelResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.handle_cancel_session_inbox_session_id_cancel_post(
+                session_id="session_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.handle_cancel_session_inbox_session_id_cancel_post(
+            session_id, request_options=request_options
+        )
+        return _response.data
+
+    async def get_info_money_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingGetInfoGetInfoResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingGetInfoGetInfoResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_info_money_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_info_money_get(request_options=request_options)
+        return _response.data
+
+    async def get_billing_accounts_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingGetBillingResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingGetBillingResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_billing_accounts_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_billing_accounts_get(request_options=request_options)
+        return _response.data
+
+    async def get_usage_accounts_usage_get(
+        self,
+        *,
+        start_date: typing.Optional[str] = None,
+        end_date: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> Result:
+        """
+        Parameters
+        ----------
+        start_date : typing.Optional[str]
+
+        end_date : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Result
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_usage_accounts_usage_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_usage_accounts_usage_get(
+            start_date=start_date, end_date=end_date, request_options=request_options
+        )
+        return _response.data
+
+    async def get_invoices_accounts_invoices_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingGetInvoicesResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingGetInvoicesResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_invoices_accounts_invoices_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_invoices_accounts_invoices_get(request_options=request_options)
+        return _response.data
+
+    async def create_portal_session_accounts_portal_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingCreatePortalSessionResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingCreatePortalSessionResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.create_portal_session_accounts_portal_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.create_portal_session_accounts_portal_get(request_options=request_options)
+        return _response.data
+
+    async def get_workflow_usage_accounts_usage_workflows_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_workflow_usage_accounts_usage_workflows_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_workflow_usage_accounts_usage_workflows_get(
+            request_options=request_options
+        )
+        return _response.data
+
+    async def get_notifications_notifications_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingGetNotificationsResponse:
+        """
+        This endpoint will pull any org facing notifications for the app to display
+        Mostly billing related so far
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingGetNotificationsResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_notifications_notifications_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_notifications_notifications_get(request_options=request_options)
+        return _response.data
+
+    async def change_billing_plan_accounts_plan_put(
+        self, *, name: PlanTypes, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingChangeBillingPlanResponse:
+        """
+        Parameters
+        ----------
+        name : PlanTypes
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingChangeBillingPlanResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.change_billing_plan_accounts_plan_put(
+                name="plan_1",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.change_billing_plan_accounts_plan_put(
+            name=name, request_options=request_options
+        )
+        return _response.data
+
+    async def stripe_webhook_hooks_stripe_post(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.stripe_webhook_hooks_stripe_post()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.stripe_webhook_hooks_stripe_post(request_options=request_options)
+        return _response.data
+
+    async def renew_plans_crons_renew_plans_post(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingRenewPlansResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingRenewPlansResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.renew_plans_crons_renew_plans_post()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.renew_plans_crons_renew_plans_post(request_options=request_options)
+        return _response.data
+
+    async def daily_billing_tasks_crons_free_plan_usage_post(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingFreePlanUsageResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingFreePlanUsageResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.daily_billing_tasks_crons_free_plan_usage_post()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.daily_billing_tasks_crons_free_plan_usage_post(
+            request_options=request_options
+        )
+        return _response.data
+
+    async def billing_hourly_crons_billing_hourly_post(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesBillingBillingHourlyResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesBillingBillingHourlyResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.billing_hourly_crons_billing_hourly_post()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.billing_hourly_crons_billing_hourly_post(request_options=request_options)
+        return _response.data
+
+    async def list_spans_traces_trace_id_spans_get(
+        self, trace_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        trace_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.list_spans_traces_trace_id_spans_get(
+                trace_id="trace_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list_spans_traces_trace_id_spans_get(
+            trace_id, request_options=request_options
+        )
+        return _response.data
+
+    async def seed_agents_onboarding_seed_agents_post(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Manually seed default agent personas for a new organization.
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.seed_agents_onboarding_seed_agents_post()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.seed_agents_onboarding_seed_agents_post(request_options=request_options)
+        return _response.data
+
+    async def send_followup_emails_onboarding_followup_emails_post(
+        self,
+        *,
+        request: typing.Optional[FollowupEmailRequest] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> SrcAppHttpRoutesOnboardingFollowupEmailsResponse:
+        """
+        Send follow-up emails to users who registered on specific days.
+
+        This endpoint is designed to be called by cron jobs or manual triggers
+        to send onboarding follow-up emails.
+
+        Parameters
+        ----------
+        request : typing.Optional[FollowupEmailRequest]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesOnboardingFollowupEmailsResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.send_followup_emails_onboarding_followup_emails_post()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.send_followup_emails_onboarding_followup_emails_post(
+            request=request, request_options=request_options
+        )
+        return _response.data
+
+    async def find_me_me_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesOnboardingHandleGetMeResponse:
+        """
+        Get the current authenticated user's information.
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesOnboardingHandleGetMeResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.find_me_me_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.find_me_me_get(request_options=request_options)
+        return _response.data
+
+    async def update_me_me_put(
+        self,
+        *,
+        favorites: typing.Optional[typing.Sequence[typing.Dict[str, str]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> SrcAppHttpRoutesOnboardingHandleUpdateMeResponse:
+        """
+        Update the current authenticated user's information.
+
+        Parameters
+        ----------
+        favorites : typing.Optional[typing.Sequence[typing.Dict[str, str]]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesOnboardingHandleUpdateMeResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.update_me_me_put()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.update_me_me_put(favorites=favorites, request_options=request_options)
+        return _response.data
+
+    async def list_tags_tags_get(self, *, request_options: typing.Optional[RequestOptions] = None) -> ListTagsResponse:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListTagsResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.list_tags_tags_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list_tags_tags_get(request_options=request_options)
+        return _response.data
+
+    async def create_tag_tags_post(
+        self,
+        *,
+        name: str,
+        description: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> CreateTagResponse:
+        """
+        Parameters
+        ----------
+        name : str
+
+        description : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CreateTagResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.create_tag_tags_post(
+                name="name",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.create_tag_tags_post(
+            name=name, description=description, request_options=request_options
+        )
+        return _response.data
+
+    async def get_tag_tags_tag_id_get(
+        self, tag_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> Tag:
+        """
+        Parameters
+        ----------
+        tag_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Tag
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_tag_tags_tag_id_get(
+                tag_id="tag_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_tag_tags_tag_id_get(tag_id, request_options=request_options)
+        return _response.data
+
+    async def update_tag_tags_tag_id_put(
+        self,
+        tag_id: str,
+        *,
+        name: typing.Optional[str] = OMIT,
+        description: typing.Optional[str] = OMIT,
+        active: typing.Optional[bool] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> UpdateTagResponse:
+        """
+        Parameters
+        ----------
+        tag_id : str
+
+        name : typing.Optional[str]
+
+        description : typing.Optional[str]
+
+        active : typing.Optional[bool]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        UpdateTagResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.update_tag_tags_tag_id_put(
+                tag_id="tag_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.update_tag_tags_tag_id_put(
+            tag_id, name=name, description=description, active=active, request_options=request_options
+        )
+        return _response.data
+
+    async def interact_handler_world_agent_id_session_id_interact_post(
+        self,
+        agent_id: str,
+        session_id: typing.Optional[str],
+        *,
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        agent_id : str
+
+        session_id : typing.Optional[str]
+
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout, SrcAppHttpRoutesWorldInteractIncomingMessage
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.interact_handler_world_agent_id_session_id_interact_post(
+                agent_id="agent_id",
+                messages=[
+                    SrcAppHttpRoutesWorldInteractIncomingMessage(
+                        content="content",
+                    )
+                ],
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.interact_handler_world_agent_id_session_id_interact_post(
+            agent_id, session_id, messages=messages, request_options=request_options
+        )
+        return _response.data
+
+    async def interact_handler_world_agent_id_interact_post(
+        self,
+        agent_id: str,
+        *,
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        session_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        agent_id : str
+
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+
+        session_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout, SrcAppHttpRoutesWorldInteractIncomingMessage
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.interact_handler_world_agent_id_interact_post(
+                agent_id="agent_id",
+                messages=[
+                    SrcAppHttpRoutesWorldInteractIncomingMessage(
+                        content="content",
+                    )
+                ],
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.interact_handler_world_agent_id_interact_post(
+            agent_id, messages=messages, session_id=session_id, request_options=request_options
+        )
+        return _response.data
+
+    async def list_agents_agents_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.list_agents_agents_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list_agents_agents_get(request_options=request_options)
+        return _response.data
+
+    async def upsert_agent_agents_post(
+        self,
+        *,
+        agent: str,
+        revision: str,
+        agent_id: typing.Optional[str] = OMIT,
+        activate: typing.Optional[bool] = OMIT,
+        agent_image: typing.Optional[core.File] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        agent : str
+
+        revision : str
+
+        agent_id : typing.Optional[str]
+
+        activate : typing.Optional[bool]
+
+        agent_image : typing.Optional[core.File]
+            See core.File for more documentation
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.upsert_agent_agents_post(
+                agent="agent",
+                revision="revision",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.upsert_agent_agents_post(
+            agent=agent,
+            revision=revision,
+            agent_id=agent_id,
+            activate=activate,
+            agent_image=agent_image,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def get_active_agent_agents_agent_id_active_get(
+        self, agent_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Retrieve an agent and its active revision by agent_id.
+        Verifies that the agent belongs to the actor's organization.
+
+        Parameters
+        ----------
+        agent_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_active_agent_agents_agent_id_active_get(
+                agent_id="agent_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_active_agent_agents_agent_id_active_get(
+            agent_id, request_options=request_options
+        )
+        return _response.data
+
+    async def get_tools_agents_tools_get(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ToolsResponse:
+        """
+        Get available tools for the organization.
+
+        Args:
+            request: The FastAPI request
+
+        Returns:
+            Span with the list of available tools attached to its attributes
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ToolsResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.get_tools_agents_tools_get()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_tools_agents_tools_get(request_options=request_options)
+        return _response.data
+
+    async def delete_agent_agents_agent_id_delete(
+        self, agent_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        agent_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.delete_agent_agents_agent_id_delete(
+                agent_id="agent_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.delete_agent_agents_agent_id_delete(
+            agent_id, request_options=request_options
+        )
+        return _response.data
+
+    async def expire_blobs_expire_blobs_post(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.expire_blobs_expire_blobs_post()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.expire_blobs_expire_blobs_post(request_options=request_options)
+        return _response.data
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: ScoutEnvironment) -> str:

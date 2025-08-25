@@ -8,20 +8,37 @@ from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.request_options import RequestOptions
+from ..core.serialization import convert_and_respect_annotation_metadata
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
-from ..types.collection_service_handlers_create_collection_response import (
-    CollectionServiceHandlersCreateCollectionResponse,
-)
-from ..types.collection_service_handlers_delete_collection_response import (
-    CollectionServiceHandlersDeleteCollectionResponse,
-)
-from ..types.collection_service_handlers_get_collection_response import CollectionServiceHandlersGetCollectionResponse
-from ..types.collection_service_handlers_get_collections_response import CollectionServiceHandlersGetCollectionsResponse
-from ..types.collection_service_handlers_update_collection_response import (
-    CollectionServiceHandlersUpdateCollectionResponse,
-)
+from ..types.collection_view_state_input import CollectionViewStateInput
+from ..types.delete_view_response import DeleteViewResponse
 from ..types.http_validation_error import HttpValidationError
+from ..types.src_app_http_routes_collection_create_collection_response import (
+    SrcAppHttpRoutesCollectionCreateCollectionResponse,
+)
+from ..types.src_app_http_routes_collection_delete_collection_response import (
+    SrcAppHttpRoutesCollectionDeleteCollectionResponse,
+)
+from ..types.src_app_http_routes_collection_get_collection_response import (
+    SrcAppHttpRoutesCollectionGetCollectionResponse,
+)
+from ..types.src_app_http_routes_collection_get_collections_response import (
+    SrcAppHttpRoutesCollectionGetCollectionsResponse,
+)
+from ..types.src_app_http_routes_collection_update_collection_response import (
+    SrcAppHttpRoutesCollectionUpdateCollectionResponse,
+)
+from ..types.view_filter import ViewFilter
+from ..types.view_list_response import ViewListResponse
+from ..types.view_query_input import ViewQueryInput
+from ..types.view_response import ViewResponse
+from ..types.view_state_response import ViewStateResponse
+from ..types.view_visibility import ViewVisibility
+from .types.create_view_request_settings import CreateViewRequestSettings
+from .types.create_view_request_type import CreateViewRequestType
+from .types.update_view_request_settings import UpdateViewRequestSettings
+from .types.update_view_request_type import UpdateViewRequestType
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -37,8 +54,10 @@ class RawCollectionsClient:
         start_at: typing.Optional[str] = None,
         limit: typing.Optional[int] = None,
         query: typing.Optional[str] = None,
+        tags: typing.Optional[str] = None,
+        sort: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CollectionServiceHandlersGetCollectionsResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionGetCollectionsResponse]:
         """
         Parameters
         ----------
@@ -51,12 +70,18 @@ class RawCollectionsClient:
         query : typing.Optional[str]
             Search query
 
+        tags : typing.Optional[str]
+            Filter by tags
+
+        sort : typing.Optional[str]
+            Sort
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersGetCollectionsResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionGetCollectionsResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -66,15 +91,17 @@ class RawCollectionsClient:
                 "start_at": start_at,
                 "limit": limit,
                 "query": query,
+                "tags": tags,
+                "sort": sort,
             },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersGetCollectionsResponse,
+                    SrcAppHttpRoutesCollectionGetCollectionsResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetCollectionsResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetCollectionsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -101,8 +128,9 @@ class RawCollectionsClient:
         collection_display_name: typing.Optional[str] = OMIT,
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CollectionServiceHandlersCreateCollectionResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionCreateCollectionResponse]:
         """
         Parameters
         ----------
@@ -112,12 +140,14 @@ class RawCollectionsClient:
 
         collection_description : typing.Optional[str]
 
+        tags : typing.Optional[typing.Sequence[str]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersCreateCollectionResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionCreateCollectionResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -127,6 +157,7 @@ class RawCollectionsClient:
                 "collection_display_name": collection_display_name,
                 "collection_img_url": collection_img_url,
                 "collection_description": collection_description,
+                "tags": tags,
             },
             headers={
                 "content-type": "application/json",
@@ -137,9 +168,9 @@ class RawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersCreateCollectionResponse,
+                    SrcAppHttpRoutesCollectionCreateCollectionResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersCreateCollectionResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionCreateCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -162,7 +193,7 @@ class RawCollectionsClient:
 
     def get(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[CollectionServiceHandlersGetCollectionResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionGetCollectionResponse]:
         """
         Parameters
         ----------
@@ -173,7 +204,7 @@ class RawCollectionsClient:
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersGetCollectionResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionGetCollectionResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -184,9 +215,9 @@ class RawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersGetCollectionResponse,
+                    SrcAppHttpRoutesCollectionGetCollectionResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetCollectionResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -214,8 +245,9 @@ class RawCollectionsClient:
         collection_display_name: typing.Optional[str] = OMIT,
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CollectionServiceHandlersUpdateCollectionResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionUpdateCollectionResponse]:
         """
         Parameters
         ----------
@@ -227,12 +259,14 @@ class RawCollectionsClient:
 
         collection_description : typing.Optional[str]
 
+        tags : typing.Optional[typing.Sequence[str]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersUpdateCollectionResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionUpdateCollectionResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -242,6 +276,7 @@ class RawCollectionsClient:
                 "collection_display_name": collection_display_name,
                 "collection_img_url": collection_img_url,
                 "collection_description": collection_description,
+                "tags": tags,
             },
             headers={
                 "content-type": "application/json",
@@ -252,9 +287,9 @@ class RawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersUpdateCollectionResponse,
+                    SrcAppHttpRoutesCollectionUpdateCollectionResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersUpdateCollectionResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionUpdateCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -277,7 +312,7 @@ class RawCollectionsClient:
 
     def delete(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[CollectionServiceHandlersDeleteCollectionResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionDeleteCollectionResponse]:
         """
         Delete a collection given a collection_id.
 
@@ -290,7 +325,7 @@ class RawCollectionsClient:
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersDeleteCollectionResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionDeleteCollectionResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -301,9 +336,444 @@ class RawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersDeleteCollectionResponse,
+                    SrcAppHttpRoutesCollectionDeleteCollectionResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersDeleteCollectionResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionDeleteCollectionResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def get_views(
+        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[ViewStateResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ViewStateResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/views",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ViewStateResponse,
+                    construct_type(
+                        type_=ViewStateResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def update_views(
+        self,
+        collection_id: str,
+        *,
+        view_state: CollectionViewStateInput,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[ViewStateResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        view_state : CollectionViewStateInput
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ViewStateResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/views",
+            method="PUT",
+            json={
+                "view_state": convert_and_respect_annotation_metadata(
+                    object_=view_state, annotation=CollectionViewStateInput, direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ViewStateResponse,
+                    construct_type(
+                        type_=ViewStateResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def delete_views(
+        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[ViewStateResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ViewStateResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/views",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ViewStateResponse,
+                    construct_type(
+                        type_=ViewStateResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def list_individual_views(
+        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[ViewListResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ViewListResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/views/list",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ViewListResponse,
+                    construct_type(
+                        type_=ViewListResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def create_view(
+        self,
+        collection_id: str,
+        *,
+        name: str,
+        type: typing.Optional[CreateViewRequestType] = OMIT,
+        emoji: typing.Optional[str] = OMIT,
+        table_id: typing.Optional[str] = OMIT,
+        settings: typing.Optional[CreateViewRequestSettings] = OMIT,
+        visibility: typing.Optional[ViewVisibility] = OMIT,
+        shared_with: typing.Optional[typing.Sequence[str]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[ViewResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        name : str
+
+        type : typing.Optional[CreateViewRequestType]
+
+        emoji : typing.Optional[str]
+
+        table_id : typing.Optional[str]
+
+        settings : typing.Optional[CreateViewRequestSettings]
+
+        visibility : typing.Optional[ViewVisibility]
+
+        shared_with : typing.Optional[typing.Sequence[str]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ViewResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/views/create",
+            method="POST",
+            json={
+                "name": name,
+                "type": type,
+                "emoji": emoji,
+                "table_id": table_id,
+                "settings": convert_and_respect_annotation_metadata(
+                    object_=settings, annotation=CreateViewRequestSettings, direction="write"
+                ),
+                "visibility": visibility,
+                "shared_with": shared_with,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ViewResponse,
+                    construct_type(
+                        type_=ViewResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def update_view(
+        self,
+        collection_id: str,
+        view_id: str,
+        *,
+        name: typing.Optional[str] = OMIT,
+        type: typing.Optional[UpdateViewRequestType] = OMIT,
+        emoji: typing.Optional[str] = OMIT,
+        settings: typing.Optional[UpdateViewRequestSettings] = OMIT,
+        visibility: typing.Optional[ViewVisibility] = OMIT,
+        shared_with: typing.Optional[typing.Sequence[str]] = OMIT,
+        filters: typing.Optional[typing.Sequence[ViewFilter]] = OMIT,
+        query: typing.Optional[ViewQueryInput] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[ViewResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        view_id : str
+
+        name : typing.Optional[str]
+
+        type : typing.Optional[UpdateViewRequestType]
+
+        emoji : typing.Optional[str]
+
+        settings : typing.Optional[UpdateViewRequestSettings]
+
+        visibility : typing.Optional[ViewVisibility]
+
+        shared_with : typing.Optional[typing.Sequence[str]]
+
+        filters : typing.Optional[typing.Sequence[ViewFilter]]
+
+        query : typing.Optional[ViewQueryInput]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ViewResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/views/{jsonable_encoder(view_id)}",
+            method="PUT",
+            json={
+                "name": name,
+                "type": type,
+                "emoji": emoji,
+                "settings": convert_and_respect_annotation_metadata(
+                    object_=settings, annotation=UpdateViewRequestSettings, direction="write"
+                ),
+                "visibility": visibility,
+                "shared_with": shared_with,
+                "filters": convert_and_respect_annotation_metadata(
+                    object_=filters, annotation=typing.Sequence[ViewFilter], direction="write"
+                ),
+                "query": convert_and_respect_annotation_metadata(
+                    object_=query, annotation=ViewQueryInput, direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ViewResponse,
+                    construct_type(
+                        type_=ViewResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def delete_view(
+        self, collection_id: str, view_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DeleteViewResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        view_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DeleteViewResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/views/{jsonable_encoder(view_id)}",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DeleteViewResponse,
+                    construct_type(
+                        type_=DeleteViewResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -335,8 +805,10 @@ class AsyncRawCollectionsClient:
         start_at: typing.Optional[str] = None,
         limit: typing.Optional[int] = None,
         query: typing.Optional[str] = None,
+        tags: typing.Optional[str] = None,
+        sort: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CollectionServiceHandlersGetCollectionsResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionGetCollectionsResponse]:
         """
         Parameters
         ----------
@@ -349,12 +821,18 @@ class AsyncRawCollectionsClient:
         query : typing.Optional[str]
             Search query
 
+        tags : typing.Optional[str]
+            Filter by tags
+
+        sort : typing.Optional[str]
+            Sort
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersGetCollectionsResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionGetCollectionsResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -364,15 +842,17 @@ class AsyncRawCollectionsClient:
                 "start_at": start_at,
                 "limit": limit,
                 "query": query,
+                "tags": tags,
+                "sort": sort,
             },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersGetCollectionsResponse,
+                    SrcAppHttpRoutesCollectionGetCollectionsResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetCollectionsResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetCollectionsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -399,8 +879,9 @@ class AsyncRawCollectionsClient:
         collection_display_name: typing.Optional[str] = OMIT,
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CollectionServiceHandlersCreateCollectionResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionCreateCollectionResponse]:
         """
         Parameters
         ----------
@@ -410,12 +891,14 @@ class AsyncRawCollectionsClient:
 
         collection_description : typing.Optional[str]
 
+        tags : typing.Optional[typing.Sequence[str]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersCreateCollectionResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionCreateCollectionResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -425,6 +908,7 @@ class AsyncRawCollectionsClient:
                 "collection_display_name": collection_display_name,
                 "collection_img_url": collection_img_url,
                 "collection_description": collection_description,
+                "tags": tags,
             },
             headers={
                 "content-type": "application/json",
@@ -435,9 +919,9 @@ class AsyncRawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersCreateCollectionResponse,
+                    SrcAppHttpRoutesCollectionCreateCollectionResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersCreateCollectionResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionCreateCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -460,7 +944,7 @@ class AsyncRawCollectionsClient:
 
     async def get(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[CollectionServiceHandlersGetCollectionResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionGetCollectionResponse]:
         """
         Parameters
         ----------
@@ -471,7 +955,7 @@ class AsyncRawCollectionsClient:
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersGetCollectionResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionGetCollectionResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -482,9 +966,9 @@ class AsyncRawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersGetCollectionResponse,
+                    SrcAppHttpRoutesCollectionGetCollectionResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetCollectionResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -512,8 +996,9 @@ class AsyncRawCollectionsClient:
         collection_display_name: typing.Optional[str] = OMIT,
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CollectionServiceHandlersUpdateCollectionResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionUpdateCollectionResponse]:
         """
         Parameters
         ----------
@@ -525,12 +1010,14 @@ class AsyncRawCollectionsClient:
 
         collection_description : typing.Optional[str]
 
+        tags : typing.Optional[typing.Sequence[str]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersUpdateCollectionResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionUpdateCollectionResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -540,6 +1027,7 @@ class AsyncRawCollectionsClient:
                 "collection_display_name": collection_display_name,
                 "collection_img_url": collection_img_url,
                 "collection_description": collection_description,
+                "tags": tags,
             },
             headers={
                 "content-type": "application/json",
@@ -550,9 +1038,9 @@ class AsyncRawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersUpdateCollectionResponse,
+                    SrcAppHttpRoutesCollectionUpdateCollectionResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersUpdateCollectionResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionUpdateCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -575,7 +1063,7 @@ class AsyncRawCollectionsClient:
 
     async def delete(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[CollectionServiceHandlersDeleteCollectionResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionDeleteCollectionResponse]:
         """
         Delete a collection given a collection_id.
 
@@ -588,7 +1076,7 @@ class AsyncRawCollectionsClient:
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersDeleteCollectionResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionDeleteCollectionResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -599,9 +1087,444 @@ class AsyncRawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersDeleteCollectionResponse,
+                    SrcAppHttpRoutesCollectionDeleteCollectionResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersDeleteCollectionResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionDeleteCollectionResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def get_views(
+        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[ViewStateResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ViewStateResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/views",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ViewStateResponse,
+                    construct_type(
+                        type_=ViewStateResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def update_views(
+        self,
+        collection_id: str,
+        *,
+        view_state: CollectionViewStateInput,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[ViewStateResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        view_state : CollectionViewStateInput
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ViewStateResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/views",
+            method="PUT",
+            json={
+                "view_state": convert_and_respect_annotation_metadata(
+                    object_=view_state, annotation=CollectionViewStateInput, direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ViewStateResponse,
+                    construct_type(
+                        type_=ViewStateResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def delete_views(
+        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[ViewStateResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ViewStateResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/views",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ViewStateResponse,
+                    construct_type(
+                        type_=ViewStateResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def list_individual_views(
+        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[ViewListResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ViewListResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/views/list",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ViewListResponse,
+                    construct_type(
+                        type_=ViewListResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def create_view(
+        self,
+        collection_id: str,
+        *,
+        name: str,
+        type: typing.Optional[CreateViewRequestType] = OMIT,
+        emoji: typing.Optional[str] = OMIT,
+        table_id: typing.Optional[str] = OMIT,
+        settings: typing.Optional[CreateViewRequestSettings] = OMIT,
+        visibility: typing.Optional[ViewVisibility] = OMIT,
+        shared_with: typing.Optional[typing.Sequence[str]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[ViewResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        name : str
+
+        type : typing.Optional[CreateViewRequestType]
+
+        emoji : typing.Optional[str]
+
+        table_id : typing.Optional[str]
+
+        settings : typing.Optional[CreateViewRequestSettings]
+
+        visibility : typing.Optional[ViewVisibility]
+
+        shared_with : typing.Optional[typing.Sequence[str]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ViewResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/views/create",
+            method="POST",
+            json={
+                "name": name,
+                "type": type,
+                "emoji": emoji,
+                "table_id": table_id,
+                "settings": convert_and_respect_annotation_metadata(
+                    object_=settings, annotation=CreateViewRequestSettings, direction="write"
+                ),
+                "visibility": visibility,
+                "shared_with": shared_with,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ViewResponse,
+                    construct_type(
+                        type_=ViewResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def update_view(
+        self,
+        collection_id: str,
+        view_id: str,
+        *,
+        name: typing.Optional[str] = OMIT,
+        type: typing.Optional[UpdateViewRequestType] = OMIT,
+        emoji: typing.Optional[str] = OMIT,
+        settings: typing.Optional[UpdateViewRequestSettings] = OMIT,
+        visibility: typing.Optional[ViewVisibility] = OMIT,
+        shared_with: typing.Optional[typing.Sequence[str]] = OMIT,
+        filters: typing.Optional[typing.Sequence[ViewFilter]] = OMIT,
+        query: typing.Optional[ViewQueryInput] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[ViewResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        view_id : str
+
+        name : typing.Optional[str]
+
+        type : typing.Optional[UpdateViewRequestType]
+
+        emoji : typing.Optional[str]
+
+        settings : typing.Optional[UpdateViewRequestSettings]
+
+        visibility : typing.Optional[ViewVisibility]
+
+        shared_with : typing.Optional[typing.Sequence[str]]
+
+        filters : typing.Optional[typing.Sequence[ViewFilter]]
+
+        query : typing.Optional[ViewQueryInput]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ViewResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/views/{jsonable_encoder(view_id)}",
+            method="PUT",
+            json={
+                "name": name,
+                "type": type,
+                "emoji": emoji,
+                "settings": convert_and_respect_annotation_metadata(
+                    object_=settings, annotation=UpdateViewRequestSettings, direction="write"
+                ),
+                "visibility": visibility,
+                "shared_with": shared_with,
+                "filters": convert_and_respect_annotation_metadata(
+                    object_=filters, annotation=typing.Sequence[ViewFilter], direction="write"
+                ),
+                "query": convert_and_respect_annotation_metadata(
+                    object_=query, annotation=ViewQueryInput, direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ViewResponse,
+                    construct_type(
+                        type_=ViewResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def delete_view(
+        self, collection_id: str, view_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DeleteViewResponse]:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        view_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DeleteViewResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/views/{jsonable_encoder(view_id)}",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DeleteViewResponse,
+                    construct_type(
+                        type_=DeleteViewResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

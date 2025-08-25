@@ -4,16 +4,16 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.collection_service_handlers_create_table_response import CollectionServiceHandlersCreateTableResponse
-from ..types.collection_service_handlers_delete_table_response import CollectionServiceHandlersDeleteTableResponse
-from ..types.collection_service_handlers_get_table_response import CollectionServiceHandlersGetTableResponse
-from ..types.collection_service_handlers_get_tables_response import CollectionServiceHandlersGetTablesResponse
-from ..types.collection_service_handlers_table_sync_response import CollectionServiceHandlersTableSyncResponse
-from ..types.collection_service_handlers_update_table_response import CollectionServiceHandlersUpdateTableResponse
+from ..types.schema_response import SchemaResponse
+from ..types.src_app_http_routes_collection_create_table_response import SrcAppHttpRoutesCollectionCreateTableResponse
+from ..types.src_app_http_routes_collection_delete_table_response import SrcAppHttpRoutesCollectionDeleteTableResponse
+from ..types.src_app_http_routes_collection_get_table_response import SrcAppHttpRoutesCollectionGetTableResponse
+from ..types.src_app_http_routes_collection_get_tables_response import SrcAppHttpRoutesCollectionGetTablesResponse
+from ..types.src_app_http_routes_collection_sync_table_response import SrcAppHttpRoutesCollectionSyncTableResponse
+from ..types.src_app_http_routes_collection_update_table_response import SrcAppHttpRoutesCollectionUpdateTableResponse
 from .raw_client import AsyncRawTablesClient, RawTablesClient
 from .types.table_config_input_schema_item import TableConfigInputSchemaItem
 from .types.table_data_schema_item import TableDataSchemaItem
-from .types.tables_get_schema_response import TablesGetSchemaResponse
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -36,7 +36,7 @@ class TablesClient:
 
     def list(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersGetTablesResponse:
+    ) -> SrcAppHttpRoutesCollectionGetTablesResponse:
         """
         Parameters
         ----------
@@ -47,7 +47,7 @@ class TablesClient:
 
         Returns
         -------
-        CollectionServiceHandlersGetTablesResponse
+        SrcAppHttpRoutesCollectionGetTablesResponse
             Successful Response
 
         Examples
@@ -72,8 +72,13 @@ class TablesClient:
         table_img_url: typing.Optional[str] = OMIT,
         table_description: typing.Optional[str] = OMIT,
         schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
+        icon_emoji: typing.Optional[str] = OMIT,
+        icon_asset_url: typing.Optional[str] = OMIT,
+        icon_fill: typing.Optional[str] = OMIT,
+        singular_name: typing.Optional[str] = OMIT,
+        plural_name: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersCreateTableResponse:
+    ) -> SrcAppHttpRoutesCollectionCreateTableResponse:
         """
         Parameters
         ----------
@@ -87,12 +92,22 @@ class TablesClient:
 
         schema : typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]
 
+        icon_emoji : typing.Optional[str]
+
+        icon_asset_url : typing.Optional[str]
+
+        icon_fill : typing.Optional[str]
+
+        singular_name : typing.Optional[str]
+
+        plural_name : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersCreateTableResponse
+        SrcAppHttpRoutesCollectionCreateTableResponse
             Successful Response
 
         Examples
@@ -112,13 +127,18 @@ class TablesClient:
             table_img_url=table_img_url,
             table_description=table_description,
             schema=schema,
+            icon_emoji=icon_emoji,
+            icon_asset_url=icon_asset_url,
+            icon_fill=icon_fill,
+            singular_name=singular_name,
+            plural_name=plural_name,
             request_options=request_options,
         )
         return _response.data
 
     def get(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersGetTableResponse:
+    ) -> SrcAppHttpRoutesCollectionGetTableResponse:
         """
         Parameters
         ----------
@@ -131,7 +151,7 @@ class TablesClient:
 
         Returns
         -------
-        CollectionServiceHandlersGetTableResponse
+        SrcAppHttpRoutesCollectionGetTableResponse
             Successful Response
 
         Examples
@@ -158,9 +178,14 @@ class TablesClient:
         table_img_url: typing.Optional[str] = OMIT,
         table_description: typing.Optional[str] = OMIT,
         schema: typing.Optional[typing.Sequence[TableDataSchemaItem]] = OMIT,
+        icon_emoji: typing.Optional[str] = OMIT,
+        icon_asset_url: typing.Optional[str] = OMIT,
+        icon_fill: typing.Optional[str] = OMIT,
+        singular_name: typing.Optional[str] = OMIT,
+        plural_name: typing.Optional[str] = OMIT,
         index_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersUpdateTableResponse:
+    ) -> SrcAppHttpRoutesCollectionUpdateTableResponse:
         """
         Parameters
         ----------
@@ -176,6 +201,16 @@ class TablesClient:
 
         schema : typing.Optional[typing.Sequence[TableDataSchemaItem]]
 
+        icon_emoji : typing.Optional[str]
+
+        icon_asset_url : typing.Optional[str]
+
+        icon_fill : typing.Optional[str]
+
+        singular_name : typing.Optional[str]
+
+        plural_name : typing.Optional[str]
+
         index_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -183,7 +218,7 @@ class TablesClient:
 
         Returns
         -------
-        CollectionServiceHandlersUpdateTableResponse
+        SrcAppHttpRoutesCollectionUpdateTableResponse
             Successful Response
 
         Examples
@@ -205,6 +240,11 @@ class TablesClient:
             table_img_url=table_img_url,
             table_description=table_description,
             schema=schema,
+            icon_emoji=icon_emoji,
+            icon_asset_url=icon_asset_url,
+            icon_fill=icon_fill,
+            singular_name=singular_name,
+            plural_name=plural_name,
             index_id=index_id,
             request_options=request_options,
         )
@@ -212,7 +252,7 @@ class TablesClient:
 
     def delete(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersDeleteTableResponse:
+    ) -> SrcAppHttpRoutesCollectionDeleteTableResponse:
         """
         Delete a table given a collection_id and table_id.
 
@@ -227,7 +267,7 @@ class TablesClient:
 
         Returns
         -------
-        CollectionServiceHandlersDeleteTableResponse
+        SrcAppHttpRoutesCollectionDeleteTableResponse
             Successful Response
 
         Examples
@@ -247,7 +287,7 @@ class TablesClient:
 
     def get_schema(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> TablesGetSchemaResponse:
+    ) -> SchemaResponse:
         """
         Parameters
         ----------
@@ -260,7 +300,7 @@ class TablesClient:
 
         Returns
         -------
-        TablesGetSchemaResponse
+        SchemaResponse
             Successful Response
 
         Examples
@@ -285,7 +325,7 @@ class TablesClient:
         *,
         request: typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersTableSyncResponse:
+    ) -> SrcAppHttpRoutesCollectionSyncTableResponse:
         """
         Sync a table with a list of documents.
 
@@ -302,7 +342,7 @@ class TablesClient:
 
         Returns
         -------
-        CollectionServiceHandlersTableSyncResponse
+        SrcAppHttpRoutesCollectionSyncTableResponse
             Successful Response
 
         Examples
@@ -339,7 +379,7 @@ class AsyncTablesClient:
 
     async def list(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersGetTablesResponse:
+    ) -> SrcAppHttpRoutesCollectionGetTablesResponse:
         """
         Parameters
         ----------
@@ -350,7 +390,7 @@ class AsyncTablesClient:
 
         Returns
         -------
-        CollectionServiceHandlersGetTablesResponse
+        SrcAppHttpRoutesCollectionGetTablesResponse
             Successful Response
 
         Examples
@@ -383,8 +423,13 @@ class AsyncTablesClient:
         table_img_url: typing.Optional[str] = OMIT,
         table_description: typing.Optional[str] = OMIT,
         schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
+        icon_emoji: typing.Optional[str] = OMIT,
+        icon_asset_url: typing.Optional[str] = OMIT,
+        icon_fill: typing.Optional[str] = OMIT,
+        singular_name: typing.Optional[str] = OMIT,
+        plural_name: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersCreateTableResponse:
+    ) -> SrcAppHttpRoutesCollectionCreateTableResponse:
         """
         Parameters
         ----------
@@ -398,12 +443,22 @@ class AsyncTablesClient:
 
         schema : typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]
 
+        icon_emoji : typing.Optional[str]
+
+        icon_asset_url : typing.Optional[str]
+
+        icon_fill : typing.Optional[str]
+
+        singular_name : typing.Optional[str]
+
+        plural_name : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersCreateTableResponse
+        SrcAppHttpRoutesCollectionCreateTableResponse
             Successful Response
 
         Examples
@@ -431,13 +486,18 @@ class AsyncTablesClient:
             table_img_url=table_img_url,
             table_description=table_description,
             schema=schema,
+            icon_emoji=icon_emoji,
+            icon_asset_url=icon_asset_url,
+            icon_fill=icon_fill,
+            singular_name=singular_name,
+            plural_name=plural_name,
             request_options=request_options,
         )
         return _response.data
 
     async def get(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersGetTableResponse:
+    ) -> SrcAppHttpRoutesCollectionGetTableResponse:
         """
         Parameters
         ----------
@@ -450,7 +510,7 @@ class AsyncTablesClient:
 
         Returns
         -------
-        CollectionServiceHandlersGetTableResponse
+        SrcAppHttpRoutesCollectionGetTableResponse
             Successful Response
 
         Examples
@@ -485,9 +545,14 @@ class AsyncTablesClient:
         table_img_url: typing.Optional[str] = OMIT,
         table_description: typing.Optional[str] = OMIT,
         schema: typing.Optional[typing.Sequence[TableDataSchemaItem]] = OMIT,
+        icon_emoji: typing.Optional[str] = OMIT,
+        icon_asset_url: typing.Optional[str] = OMIT,
+        icon_fill: typing.Optional[str] = OMIT,
+        singular_name: typing.Optional[str] = OMIT,
+        plural_name: typing.Optional[str] = OMIT,
         index_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersUpdateTableResponse:
+    ) -> SrcAppHttpRoutesCollectionUpdateTableResponse:
         """
         Parameters
         ----------
@@ -503,6 +568,16 @@ class AsyncTablesClient:
 
         schema : typing.Optional[typing.Sequence[TableDataSchemaItem]]
 
+        icon_emoji : typing.Optional[str]
+
+        icon_asset_url : typing.Optional[str]
+
+        icon_fill : typing.Optional[str]
+
+        singular_name : typing.Optional[str]
+
+        plural_name : typing.Optional[str]
+
         index_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -510,7 +585,7 @@ class AsyncTablesClient:
 
         Returns
         -------
-        CollectionServiceHandlersUpdateTableResponse
+        SrcAppHttpRoutesCollectionUpdateTableResponse
             Successful Response
 
         Examples
@@ -540,6 +615,11 @@ class AsyncTablesClient:
             table_img_url=table_img_url,
             table_description=table_description,
             schema=schema,
+            icon_emoji=icon_emoji,
+            icon_asset_url=icon_asset_url,
+            icon_fill=icon_fill,
+            singular_name=singular_name,
+            plural_name=plural_name,
             index_id=index_id,
             request_options=request_options,
         )
@@ -547,7 +627,7 @@ class AsyncTablesClient:
 
     async def delete(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersDeleteTableResponse:
+    ) -> SrcAppHttpRoutesCollectionDeleteTableResponse:
         """
         Delete a table given a collection_id and table_id.
 
@@ -562,7 +642,7 @@ class AsyncTablesClient:
 
         Returns
         -------
-        CollectionServiceHandlersDeleteTableResponse
+        SrcAppHttpRoutesCollectionDeleteTableResponse
             Successful Response
 
         Examples
@@ -590,7 +670,7 @@ class AsyncTablesClient:
 
     async def get_schema(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> TablesGetSchemaResponse:
+    ) -> SchemaResponse:
         """
         Parameters
         ----------
@@ -603,7 +683,7 @@ class AsyncTablesClient:
 
         Returns
         -------
-        TablesGetSchemaResponse
+        SchemaResponse
             Successful Response
 
         Examples
@@ -636,7 +716,7 @@ class AsyncTablesClient:
         *,
         request: typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersTableSyncResponse:
+    ) -> SrcAppHttpRoutesCollectionSyncTableResponse:
         """
         Sync a table with a list of documents.
 
@@ -653,7 +733,7 @@ class AsyncTablesClient:
 
         Returns
         -------
-        CollectionServiceHandlersTableSyncResponse
+        SrcAppHttpRoutesCollectionSyncTableResponse
             Successful Response
 
         Examples

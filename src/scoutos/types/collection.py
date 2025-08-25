@@ -7,15 +7,15 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .collection_config import CollectionConfig
-from .identity import Identity
+from .legacy_identity import LegacyIdentity
 
 
 class Collection(UncheckedBaseModel):
     collection_config: CollectionConfig
     last_updated_at: dt.datetime
     created_at: dt.datetime
-    created_by: Identity
-    last_updated_by: Identity
+    created_by: LegacyIdentity
+    last_updated_by: LegacyIdentity
     collection_id: str
     revision_id: str
 

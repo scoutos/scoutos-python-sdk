@@ -5,6 +5,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .text_long_column_automation_config import TextLongColumnAutomationConfig
 
 
 class TextLongColumn(UncheckedBaseModel):
@@ -13,6 +14,11 @@ class TextLongColumn(UncheckedBaseModel):
     column_type: typing.Literal["text-long"] = "text-long"
     data_type: typing.Optional[typing.Literal["string"]] = None
     hidden: typing.Optional[bool] = None
+    automation_config: typing.Optional[TextLongColumnAutomationConfig] = pydantic.Field(default=None)
+    """
+    Optional automation configuration to automatically calculate values for this column
+    """
+
     default: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:

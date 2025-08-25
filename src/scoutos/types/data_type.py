@@ -2,4 +2,4 @@
 
 import typing
 
-DataType = typing.Union[typing.Literal["boolean", "string", "number"], typing.Any]
+DataType = typing.Union[typing.Literal["boolean", "string", "number", "datetime"], typing.Any]

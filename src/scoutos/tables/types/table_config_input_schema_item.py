@@ -3,14 +3,27 @@
 import typing
 
 from ...types.check_box_column import CheckBoxColumn
+from ...types.date_time_column import DateTimeColumn
 from ...types.json_column import JsonColumn
 from ...types.markdown_column import MarkdownColumn
+from ...types.multi_select_column import MultiSelectColumn
 from ...types.number_column import NumberColumn
+from ...types.relation_column import RelationColumn
 from ...types.select_column import SelectColumn
 from ...types.text_long_column import TextLongColumn
 from ...types.text_short_column import TextShortColumn
 from ...types.url_column import UrlColumn
 
 TableConfigInputSchemaItem = typing.Union[
-    CheckBoxColumn, JsonColumn, MarkdownColumn, NumberColumn, SelectColumn, TextLongColumn, TextShortColumn, UrlColumn
+    CheckBoxColumn,
+    DateTimeColumn,
+    JsonColumn,
+    MarkdownColumn,
+    MultiSelectColumn,
+    NumberColumn,
+    RelationColumn,
+    SelectColumn,
+    TextLongColumn,
+    TextShortColumn,
+    UrlColumn,
 ]

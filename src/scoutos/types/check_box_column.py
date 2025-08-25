@@ -5,6 +5,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .check_box_column_automation_config import CheckBoxColumnAutomationConfig
 
 
 class CheckBoxColumn(UncheckedBaseModel):
@@ -13,6 +14,11 @@ class CheckBoxColumn(UncheckedBaseModel):
     column_type: typing.Literal["checkbox"] = "checkbox"
     data_type: typing.Optional[typing.Literal["boolean"]] = None
     hidden: typing.Optional[bool] = None
+    automation_config: typing.Optional[CheckBoxColumnAutomationConfig] = pydantic.Field(default=None)
+    """
+    Optional automation configuration to automatically calculate values for this column
+    """
+
     default: typing.Optional[bool] = None
 
     if IS_PYDANTIC_V2:

@@ -11,16 +11,16 @@ from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
-from ..types.collection_service_handlers_create_table_response import CollectionServiceHandlersCreateTableResponse
-from ..types.collection_service_handlers_delete_table_response import CollectionServiceHandlersDeleteTableResponse
-from ..types.collection_service_handlers_get_table_response import CollectionServiceHandlersGetTableResponse
-from ..types.collection_service_handlers_get_tables_response import CollectionServiceHandlersGetTablesResponse
-from ..types.collection_service_handlers_table_sync_response import CollectionServiceHandlersTableSyncResponse
-from ..types.collection_service_handlers_update_table_response import CollectionServiceHandlersUpdateTableResponse
 from ..types.http_validation_error import HttpValidationError
+from ..types.schema_response import SchemaResponse
+from ..types.src_app_http_routes_collection_create_table_response import SrcAppHttpRoutesCollectionCreateTableResponse
+from ..types.src_app_http_routes_collection_delete_table_response import SrcAppHttpRoutesCollectionDeleteTableResponse
+from ..types.src_app_http_routes_collection_get_table_response import SrcAppHttpRoutesCollectionGetTableResponse
+from ..types.src_app_http_routes_collection_get_tables_response import SrcAppHttpRoutesCollectionGetTablesResponse
+from ..types.src_app_http_routes_collection_sync_table_response import SrcAppHttpRoutesCollectionSyncTableResponse
+from ..types.src_app_http_routes_collection_update_table_response import SrcAppHttpRoutesCollectionUpdateTableResponse
 from .types.table_config_input_schema_item import TableConfigInputSchemaItem
 from .types.table_data_schema_item import TableDataSchemaItem
-from .types.tables_get_schema_response import TablesGetSchemaResponse
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -32,7 +32,7 @@ class RawTablesClient:
 
     def list(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[CollectionServiceHandlersGetTablesResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionGetTablesResponse]:
         """
         Parameters
         ----------
@@ -43,7 +43,7 @@ class RawTablesClient:
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersGetTablesResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionGetTablesResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -54,9 +54,9 @@ class RawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersGetTablesResponse,
+                    SrcAppHttpRoutesCollectionGetTablesResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetTablesResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetTablesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -85,8 +85,13 @@ class RawTablesClient:
         table_img_url: typing.Optional[str] = OMIT,
         table_description: typing.Optional[str] = OMIT,
         schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
+        icon_emoji: typing.Optional[str] = OMIT,
+        icon_asset_url: typing.Optional[str] = OMIT,
+        icon_fill: typing.Optional[str] = OMIT,
+        singular_name: typing.Optional[str] = OMIT,
+        plural_name: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CollectionServiceHandlersCreateTableResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionCreateTableResponse]:
         """
         Parameters
         ----------
@@ -100,12 +105,22 @@ class RawTablesClient:
 
         schema : typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]
 
+        icon_emoji : typing.Optional[str]
+
+        icon_asset_url : typing.Optional[str]
+
+        icon_fill : typing.Optional[str]
+
+        singular_name : typing.Optional[str]
+
+        plural_name : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersCreateTableResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionCreateTableResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -118,6 +133,11 @@ class RawTablesClient:
                 "schema": convert_and_respect_annotation_metadata(
                     object_=schema, annotation=typing.Sequence[TableConfigInputSchemaItem], direction="write"
                 ),
+                "icon_emoji": icon_emoji,
+                "icon_asset_url": icon_asset_url,
+                "icon_fill": icon_fill,
+                "singular_name": singular_name,
+                "plural_name": plural_name,
             },
             headers={
                 "content-type": "application/json",
@@ -128,9 +148,9 @@ class RawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersCreateTableResponse,
+                    SrcAppHttpRoutesCollectionCreateTableResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersCreateTableResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionCreateTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -153,7 +173,7 @@ class RawTablesClient:
 
     def get(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[CollectionServiceHandlersGetTableResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionGetTableResponse]:
         """
         Parameters
         ----------
@@ -166,7 +186,7 @@ class RawTablesClient:
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersGetTableResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionGetTableResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -177,9 +197,9 @@ class RawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersGetTableResponse,
+                    SrcAppHttpRoutesCollectionGetTableResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetTableResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -209,9 +229,14 @@ class RawTablesClient:
         table_img_url: typing.Optional[str] = OMIT,
         table_description: typing.Optional[str] = OMIT,
         schema: typing.Optional[typing.Sequence[TableDataSchemaItem]] = OMIT,
+        icon_emoji: typing.Optional[str] = OMIT,
+        icon_asset_url: typing.Optional[str] = OMIT,
+        icon_fill: typing.Optional[str] = OMIT,
+        singular_name: typing.Optional[str] = OMIT,
+        plural_name: typing.Optional[str] = OMIT,
         index_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CollectionServiceHandlersUpdateTableResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionUpdateTableResponse]:
         """
         Parameters
         ----------
@@ -227,6 +252,16 @@ class RawTablesClient:
 
         schema : typing.Optional[typing.Sequence[TableDataSchemaItem]]
 
+        icon_emoji : typing.Optional[str]
+
+        icon_asset_url : typing.Optional[str]
+
+        icon_fill : typing.Optional[str]
+
+        singular_name : typing.Optional[str]
+
+        plural_name : typing.Optional[str]
+
         index_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -234,7 +269,7 @@ class RawTablesClient:
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersUpdateTableResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionUpdateTableResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -247,6 +282,11 @@ class RawTablesClient:
                 "schema": convert_and_respect_annotation_metadata(
                     object_=schema, annotation=typing.Sequence[TableDataSchemaItem], direction="write"
                 ),
+                "icon_emoji": icon_emoji,
+                "icon_asset_url": icon_asset_url,
+                "icon_fill": icon_fill,
+                "singular_name": singular_name,
+                "plural_name": plural_name,
                 "index_id": index_id,
             },
             headers={
@@ -258,9 +298,9 @@ class RawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersUpdateTableResponse,
+                    SrcAppHttpRoutesCollectionUpdateTableResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersUpdateTableResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionUpdateTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -283,7 +323,7 @@ class RawTablesClient:
 
     def delete(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[CollectionServiceHandlersDeleteTableResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionDeleteTableResponse]:
         """
         Delete a table given a collection_id and table_id.
 
@@ -298,7 +338,7 @@ class RawTablesClient:
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersDeleteTableResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionDeleteTableResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -309,9 +349,9 @@ class RawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersDeleteTableResponse,
+                    SrcAppHttpRoutesCollectionDeleteTableResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersDeleteTableResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionDeleteTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -334,7 +374,7 @@ class RawTablesClient:
 
     def get_schema(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[TablesGetSchemaResponse]:
+    ) -> HttpResponse[SchemaResponse]:
         """
         Parameters
         ----------
@@ -347,7 +387,7 @@ class RawTablesClient:
 
         Returns
         -------
-        HttpResponse[TablesGetSchemaResponse]
+        HttpResponse[SchemaResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -358,9 +398,9 @@ class RawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    TablesGetSchemaResponse,
+                    SchemaResponse,
                     construct_type(
-                        type_=TablesGetSchemaResponse,  # type: ignore
+                        type_=SchemaResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -388,7 +428,7 @@ class RawTablesClient:
         *,
         request: typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CollectionServiceHandlersTableSyncResponse]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionSyncTableResponse]:
         """
         Sync a table with a list of documents.
 
@@ -405,7 +445,7 @@ class RawTablesClient:
 
         Returns
         -------
-        HttpResponse[CollectionServiceHandlersTableSyncResponse]
+        HttpResponse[SrcAppHttpRoutesCollectionSyncTableResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -421,9 +461,9 @@ class RawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersTableSyncResponse,
+                    SrcAppHttpRoutesCollectionSyncTableResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersTableSyncResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionSyncTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -451,7 +491,7 @@ class AsyncRawTablesClient:
 
     async def list(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[CollectionServiceHandlersGetTablesResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionGetTablesResponse]:
         """
         Parameters
         ----------
@@ -462,7 +502,7 @@ class AsyncRawTablesClient:
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersGetTablesResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionGetTablesResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -473,9 +513,9 @@ class AsyncRawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersGetTablesResponse,
+                    SrcAppHttpRoutesCollectionGetTablesResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetTablesResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetTablesResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -504,8 +544,13 @@ class AsyncRawTablesClient:
         table_img_url: typing.Optional[str] = OMIT,
         table_description: typing.Optional[str] = OMIT,
         schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
+        icon_emoji: typing.Optional[str] = OMIT,
+        icon_asset_url: typing.Optional[str] = OMIT,
+        icon_fill: typing.Optional[str] = OMIT,
+        singular_name: typing.Optional[str] = OMIT,
+        plural_name: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CollectionServiceHandlersCreateTableResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionCreateTableResponse]:
         """
         Parameters
         ----------
@@ -519,12 +564,22 @@ class AsyncRawTablesClient:
 
         schema : typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]
 
+        icon_emoji : typing.Optional[str]
+
+        icon_asset_url : typing.Optional[str]
+
+        icon_fill : typing.Optional[str]
+
+        singular_name : typing.Optional[str]
+
+        plural_name : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersCreateTableResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionCreateTableResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -537,6 +592,11 @@ class AsyncRawTablesClient:
                 "schema": convert_and_respect_annotation_metadata(
                     object_=schema, annotation=typing.Sequence[TableConfigInputSchemaItem], direction="write"
                 ),
+                "icon_emoji": icon_emoji,
+                "icon_asset_url": icon_asset_url,
+                "icon_fill": icon_fill,
+                "singular_name": singular_name,
+                "plural_name": plural_name,
             },
             headers={
                 "content-type": "application/json",
@@ -547,9 +607,9 @@ class AsyncRawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersCreateTableResponse,
+                    SrcAppHttpRoutesCollectionCreateTableResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersCreateTableResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionCreateTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -572,7 +632,7 @@ class AsyncRawTablesClient:
 
     async def get(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[CollectionServiceHandlersGetTableResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionGetTableResponse]:
         """
         Parameters
         ----------
@@ -585,7 +645,7 @@ class AsyncRawTablesClient:
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersGetTableResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionGetTableResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -596,9 +656,9 @@ class AsyncRawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersGetTableResponse,
+                    SrcAppHttpRoutesCollectionGetTableResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersGetTableResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -628,9 +688,14 @@ class AsyncRawTablesClient:
         table_img_url: typing.Optional[str] = OMIT,
         table_description: typing.Optional[str] = OMIT,
         schema: typing.Optional[typing.Sequence[TableDataSchemaItem]] = OMIT,
+        icon_emoji: typing.Optional[str] = OMIT,
+        icon_asset_url: typing.Optional[str] = OMIT,
+        icon_fill: typing.Optional[str] = OMIT,
+        singular_name: typing.Optional[str] = OMIT,
+        plural_name: typing.Optional[str] = OMIT,
         index_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CollectionServiceHandlersUpdateTableResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionUpdateTableResponse]:
         """
         Parameters
         ----------
@@ -646,6 +711,16 @@ class AsyncRawTablesClient:
 
         schema : typing.Optional[typing.Sequence[TableDataSchemaItem]]
 
+        icon_emoji : typing.Optional[str]
+
+        icon_asset_url : typing.Optional[str]
+
+        icon_fill : typing.Optional[str]
+
+        singular_name : typing.Optional[str]
+
+        plural_name : typing.Optional[str]
+
         index_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -653,7 +728,7 @@ class AsyncRawTablesClient:
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersUpdateTableResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionUpdateTableResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -666,6 +741,11 @@ class AsyncRawTablesClient:
                 "schema": convert_and_respect_annotation_metadata(
                     object_=schema, annotation=typing.Sequence[TableDataSchemaItem], direction="write"
                 ),
+                "icon_emoji": icon_emoji,
+                "icon_asset_url": icon_asset_url,
+                "icon_fill": icon_fill,
+                "singular_name": singular_name,
+                "plural_name": plural_name,
                 "index_id": index_id,
             },
             headers={
@@ -677,9 +757,9 @@ class AsyncRawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersUpdateTableResponse,
+                    SrcAppHttpRoutesCollectionUpdateTableResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersUpdateTableResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionUpdateTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -702,7 +782,7 @@ class AsyncRawTablesClient:
 
     async def delete(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[CollectionServiceHandlersDeleteTableResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionDeleteTableResponse]:
         """
         Delete a table given a collection_id and table_id.
 
@@ -717,7 +797,7 @@ class AsyncRawTablesClient:
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersDeleteTableResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionDeleteTableResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -728,9 +808,9 @@ class AsyncRawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersDeleteTableResponse,
+                    SrcAppHttpRoutesCollectionDeleteTableResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersDeleteTableResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionDeleteTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -753,7 +833,7 @@ class AsyncRawTablesClient:
 
     async def get_schema(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[TablesGetSchemaResponse]:
+    ) -> AsyncHttpResponse[SchemaResponse]:
         """
         Parameters
         ----------
@@ -766,7 +846,7 @@ class AsyncRawTablesClient:
 
         Returns
         -------
-        AsyncHttpResponse[TablesGetSchemaResponse]
+        AsyncHttpResponse[SchemaResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -777,9 +857,9 @@ class AsyncRawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    TablesGetSchemaResponse,
+                    SchemaResponse,
                     construct_type(
-                        type_=TablesGetSchemaResponse,  # type: ignore
+                        type_=SchemaResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -807,7 +887,7 @@ class AsyncRawTablesClient:
         *,
         request: typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CollectionServiceHandlersTableSyncResponse]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionSyncTableResponse]:
         """
         Sync a table with a list of documents.
 
@@ -824,7 +904,7 @@ class AsyncRawTablesClient:
 
         Returns
         -------
-        AsyncHttpResponse[CollectionServiceHandlersTableSyncResponse]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionSyncTableResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -840,9 +920,9 @@ class AsyncRawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CollectionServiceHandlersTableSyncResponse,
+                    SrcAppHttpRoutesCollectionSyncTableResponse,
                     construct_type(
-                        type_=CollectionServiceHandlersTableSyncResponse,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionSyncTableResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

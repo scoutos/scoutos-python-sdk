@@ -5,6 +5,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .select_column_automation_config import SelectColumnAutomationConfig
 from .select_option_item import SelectOptionItem
 
 
@@ -14,12 +15,15 @@ class SelectColumn(UncheckedBaseModel):
     column_type: typing.Literal["select"] = "select"
     data_type: typing.Optional[typing.Literal["string"]] = None
     hidden: typing.Optional[bool] = None
+    automation_config: typing.Optional[SelectColumnAutomationConfig] = pydantic.Field(default=None)
+    """
+    Optional automation configuration to automatically calculate values for this column
+    """
+
     options: typing.Optional[typing.List[SelectOptionItem]] = pydantic.Field(default=None)
     """
     Available options for selection
     """
-
-    selected_option: typing.Optional[int] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -4,18 +4,34 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.collection_service_handlers_create_collection_response import (
-    CollectionServiceHandlersCreateCollectionResponse,
+from ..types.collection_view_state_input import CollectionViewStateInput
+from ..types.delete_view_response import DeleteViewResponse
+from ..types.src_app_http_routes_collection_create_collection_response import (
+    SrcAppHttpRoutesCollectionCreateCollectionResponse,
 )
-from ..types.collection_service_handlers_delete_collection_response import (
-    CollectionServiceHandlersDeleteCollectionResponse,
+from ..types.src_app_http_routes_collection_delete_collection_response import (
+    SrcAppHttpRoutesCollectionDeleteCollectionResponse,
 )
-from ..types.collection_service_handlers_get_collection_response import CollectionServiceHandlersGetCollectionResponse
-from ..types.collection_service_handlers_get_collections_response import CollectionServiceHandlersGetCollectionsResponse
-from ..types.collection_service_handlers_update_collection_response import (
-    CollectionServiceHandlersUpdateCollectionResponse,
+from ..types.src_app_http_routes_collection_get_collection_response import (
+    SrcAppHttpRoutesCollectionGetCollectionResponse,
 )
+from ..types.src_app_http_routes_collection_get_collections_response import (
+    SrcAppHttpRoutesCollectionGetCollectionsResponse,
+)
+from ..types.src_app_http_routes_collection_update_collection_response import (
+    SrcAppHttpRoutesCollectionUpdateCollectionResponse,
+)
+from ..types.view_filter import ViewFilter
+from ..types.view_list_response import ViewListResponse
+from ..types.view_query_input import ViewQueryInput
+from ..types.view_response import ViewResponse
+from ..types.view_state_response import ViewStateResponse
+from ..types.view_visibility import ViewVisibility
 from .raw_client import AsyncRawCollectionsClient, RawCollectionsClient
+from .types.create_view_request_settings import CreateViewRequestSettings
+from .types.create_view_request_type import CreateViewRequestType
+from .types.update_view_request_settings import UpdateViewRequestSettings
+from .types.update_view_request_type import UpdateViewRequestType
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -42,8 +58,10 @@ class CollectionsClient:
         start_at: typing.Optional[str] = None,
         limit: typing.Optional[int] = None,
         query: typing.Optional[str] = None,
+        tags: typing.Optional[str] = None,
+        sort: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersGetCollectionsResponse:
+    ) -> SrcAppHttpRoutesCollectionGetCollectionsResponse:
         """
         Parameters
         ----------
@@ -56,12 +74,18 @@ class CollectionsClient:
         query : typing.Optional[str]
             Search query
 
+        tags : typing.Optional[str]
+            Filter by tags
+
+        sort : typing.Optional[str]
+            Sort
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersGetCollectionsResponse
+        SrcAppHttpRoutesCollectionGetCollectionsResponse
             Successful Response
 
         Examples
@@ -73,7 +97,9 @@ class CollectionsClient:
         )
         client.collections.list()
         """
-        _response = self._raw_client.list(start_at=start_at, limit=limit, query=query, request_options=request_options)
+        _response = self._raw_client.list(
+            start_at=start_at, limit=limit, query=query, tags=tags, sort=sort, request_options=request_options
+        )
         return _response.data
 
     def create(
@@ -82,8 +108,9 @@ class CollectionsClient:
         collection_display_name: typing.Optional[str] = OMIT,
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersCreateCollectionResponse:
+    ) -> SrcAppHttpRoutesCollectionCreateCollectionResponse:
         """
         Parameters
         ----------
@@ -93,12 +120,14 @@ class CollectionsClient:
 
         collection_description : typing.Optional[str]
 
+        tags : typing.Optional[typing.Sequence[str]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersCreateCollectionResponse
+        SrcAppHttpRoutesCollectionCreateCollectionResponse
             Successful Response
 
         Examples
@@ -114,13 +143,14 @@ class CollectionsClient:
             collection_display_name=collection_display_name,
             collection_img_url=collection_img_url,
             collection_description=collection_description,
+            tags=tags,
             request_options=request_options,
         )
         return _response.data
 
     def get(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersGetCollectionResponse:
+    ) -> SrcAppHttpRoutesCollectionGetCollectionResponse:
         """
         Parameters
         ----------
@@ -131,7 +161,7 @@ class CollectionsClient:
 
         Returns
         -------
-        CollectionServiceHandlersGetCollectionResponse
+        SrcAppHttpRoutesCollectionGetCollectionResponse
             Successful Response
 
         Examples
@@ -155,8 +185,9 @@ class CollectionsClient:
         collection_display_name: typing.Optional[str] = OMIT,
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersUpdateCollectionResponse:
+    ) -> SrcAppHttpRoutesCollectionUpdateCollectionResponse:
         """
         Parameters
         ----------
@@ -168,12 +199,14 @@ class CollectionsClient:
 
         collection_description : typing.Optional[str]
 
+        tags : typing.Optional[typing.Sequence[str]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersUpdateCollectionResponse
+        SrcAppHttpRoutesCollectionUpdateCollectionResponse
             Successful Response
 
         Examples
@@ -192,13 +225,14 @@ class CollectionsClient:
             collection_display_name=collection_display_name,
             collection_img_url=collection_img_url,
             collection_description=collection_description,
+            tags=tags,
             request_options=request_options,
         )
         return _response.data
 
     def delete(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersDeleteCollectionResponse:
+    ) -> SrcAppHttpRoutesCollectionDeleteCollectionResponse:
         """
         Delete a collection given a collection_id.
 
@@ -211,7 +245,7 @@ class CollectionsClient:
 
         Returns
         -------
-        CollectionServiceHandlersDeleteCollectionResponse
+        SrcAppHttpRoutesCollectionDeleteCollectionResponse
             Successful Response
 
         Examples
@@ -226,6 +260,307 @@ class CollectionsClient:
         )
         """
         _response = self._raw_client.delete(collection_id, request_options=request_options)
+        return _response.data
+
+    def get_views(
+        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ViewStateResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ViewStateResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.collections.get_views(
+            collection_id="collection_id",
+        )
+        """
+        _response = self._raw_client.get_views(collection_id, request_options=request_options)
+        return _response.data
+
+    def update_views(
+        self,
+        collection_id: str,
+        *,
+        view_state: CollectionViewStateInput,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ViewStateResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        view_state : CollectionViewStateInput
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ViewStateResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import CollectionViewStateInput, Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.collections.update_views(
+            collection_id="collection_id",
+            view_state=CollectionViewStateInput(
+                organization_id="organization_id",
+                collection_id="collection_id",
+            ),
+        )
+        """
+        _response = self._raw_client.update_views(collection_id, view_state=view_state, request_options=request_options)
+        return _response.data
+
+    def delete_views(
+        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ViewStateResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ViewStateResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.collections.delete_views(
+            collection_id="collection_id",
+        )
+        """
+        _response = self._raw_client.delete_views(collection_id, request_options=request_options)
+        return _response.data
+
+    def list_individual_views(
+        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ViewListResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ViewListResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.collections.list_individual_views(
+            collection_id="collection_id",
+        )
+        """
+        _response = self._raw_client.list_individual_views(collection_id, request_options=request_options)
+        return _response.data
+
+    def create_view(
+        self,
+        collection_id: str,
+        *,
+        name: str,
+        type: typing.Optional[CreateViewRequestType] = OMIT,
+        emoji: typing.Optional[str] = OMIT,
+        table_id: typing.Optional[str] = OMIT,
+        settings: typing.Optional[CreateViewRequestSettings] = OMIT,
+        visibility: typing.Optional[ViewVisibility] = OMIT,
+        shared_with: typing.Optional[typing.Sequence[str]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ViewResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        name : str
+
+        type : typing.Optional[CreateViewRequestType]
+
+        emoji : typing.Optional[str]
+
+        table_id : typing.Optional[str]
+
+        settings : typing.Optional[CreateViewRequestSettings]
+
+        visibility : typing.Optional[ViewVisibility]
+
+        shared_with : typing.Optional[typing.Sequence[str]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ViewResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.collections.create_view(
+            collection_id="collection_id",
+            name="name",
+        )
+        """
+        _response = self._raw_client.create_view(
+            collection_id,
+            name=name,
+            type=type,
+            emoji=emoji,
+            table_id=table_id,
+            settings=settings,
+            visibility=visibility,
+            shared_with=shared_with,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def update_view(
+        self,
+        collection_id: str,
+        view_id: str,
+        *,
+        name: typing.Optional[str] = OMIT,
+        type: typing.Optional[UpdateViewRequestType] = OMIT,
+        emoji: typing.Optional[str] = OMIT,
+        settings: typing.Optional[UpdateViewRequestSettings] = OMIT,
+        visibility: typing.Optional[ViewVisibility] = OMIT,
+        shared_with: typing.Optional[typing.Sequence[str]] = OMIT,
+        filters: typing.Optional[typing.Sequence[ViewFilter]] = OMIT,
+        query: typing.Optional[ViewQueryInput] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ViewResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        view_id : str
+
+        name : typing.Optional[str]
+
+        type : typing.Optional[UpdateViewRequestType]
+
+        emoji : typing.Optional[str]
+
+        settings : typing.Optional[UpdateViewRequestSettings]
+
+        visibility : typing.Optional[ViewVisibility]
+
+        shared_with : typing.Optional[typing.Sequence[str]]
+
+        filters : typing.Optional[typing.Sequence[ViewFilter]]
+
+        query : typing.Optional[ViewQueryInput]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ViewResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.collections.update_view(
+            collection_id="collection_id",
+            view_id="view_id",
+        )
+        """
+        _response = self._raw_client.update_view(
+            collection_id,
+            view_id,
+            name=name,
+            type=type,
+            emoji=emoji,
+            settings=settings,
+            visibility=visibility,
+            shared_with=shared_with,
+            filters=filters,
+            query=query,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def delete_view(
+        self, collection_id: str, view_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DeleteViewResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        view_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DeleteViewResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.collections.delete_view(
+            collection_id="collection_id",
+            view_id="view_id",
+        )
+        """
+        _response = self._raw_client.delete_view(collection_id, view_id, request_options=request_options)
         return _response.data
 
 
@@ -250,8 +585,10 @@ class AsyncCollectionsClient:
         start_at: typing.Optional[str] = None,
         limit: typing.Optional[int] = None,
         query: typing.Optional[str] = None,
+        tags: typing.Optional[str] = None,
+        sort: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersGetCollectionsResponse:
+    ) -> SrcAppHttpRoutesCollectionGetCollectionsResponse:
         """
         Parameters
         ----------
@@ -264,12 +601,18 @@ class AsyncCollectionsClient:
         query : typing.Optional[str]
             Search query
 
+        tags : typing.Optional[str]
+            Filter by tags
+
+        sort : typing.Optional[str]
+            Sort
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersGetCollectionsResponse
+        SrcAppHttpRoutesCollectionGetCollectionsResponse
             Successful Response
 
         Examples
@@ -290,7 +633,7 @@ class AsyncCollectionsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.list(
-            start_at=start_at, limit=limit, query=query, request_options=request_options
+            start_at=start_at, limit=limit, query=query, tags=tags, sort=sort, request_options=request_options
         )
         return _response.data
 
@@ -300,8 +643,9 @@ class AsyncCollectionsClient:
         collection_display_name: typing.Optional[str] = OMIT,
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersCreateCollectionResponse:
+    ) -> SrcAppHttpRoutesCollectionCreateCollectionResponse:
         """
         Parameters
         ----------
@@ -311,12 +655,14 @@ class AsyncCollectionsClient:
 
         collection_description : typing.Optional[str]
 
+        tags : typing.Optional[typing.Sequence[str]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersCreateCollectionResponse
+        SrcAppHttpRoutesCollectionCreateCollectionResponse
             Successful Response
 
         Examples
@@ -340,13 +686,14 @@ class AsyncCollectionsClient:
             collection_display_name=collection_display_name,
             collection_img_url=collection_img_url,
             collection_description=collection_description,
+            tags=tags,
             request_options=request_options,
         )
         return _response.data
 
     async def get(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersGetCollectionResponse:
+    ) -> SrcAppHttpRoutesCollectionGetCollectionResponse:
         """
         Parameters
         ----------
@@ -357,7 +704,7 @@ class AsyncCollectionsClient:
 
         Returns
         -------
-        CollectionServiceHandlersGetCollectionResponse
+        SrcAppHttpRoutesCollectionGetCollectionResponse
             Successful Response
 
         Examples
@@ -389,8 +736,9 @@ class AsyncCollectionsClient:
         collection_display_name: typing.Optional[str] = OMIT,
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CollectionServiceHandlersUpdateCollectionResponse:
+    ) -> SrcAppHttpRoutesCollectionUpdateCollectionResponse:
         """
         Parameters
         ----------
@@ -402,12 +750,14 @@ class AsyncCollectionsClient:
 
         collection_description : typing.Optional[str]
 
+        tags : typing.Optional[typing.Sequence[str]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        CollectionServiceHandlersUpdateCollectionResponse
+        SrcAppHttpRoutesCollectionUpdateCollectionResponse
             Successful Response
 
         Examples
@@ -434,13 +784,14 @@ class AsyncCollectionsClient:
             collection_display_name=collection_display_name,
             collection_img_url=collection_img_url,
             collection_description=collection_description,
+            tags=tags,
             request_options=request_options,
         )
         return _response.data
 
     async def delete(
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersDeleteCollectionResponse:
+    ) -> SrcAppHttpRoutesCollectionDeleteCollectionResponse:
         """
         Delete a collection given a collection_id.
 
@@ -453,7 +804,7 @@ class AsyncCollectionsClient:
 
         Returns
         -------
-        CollectionServiceHandlersDeleteCollectionResponse
+        SrcAppHttpRoutesCollectionDeleteCollectionResponse
             Successful Response
 
         Examples
@@ -476,4 +827,363 @@ class AsyncCollectionsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.delete(collection_id, request_options=request_options)
+        return _response.data
+
+    async def get_views(
+        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ViewStateResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ViewStateResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.collections.get_views(
+                collection_id="collection_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_views(collection_id, request_options=request_options)
+        return _response.data
+
+    async def update_views(
+        self,
+        collection_id: str,
+        *,
+        view_state: CollectionViewStateInput,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ViewStateResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        view_state : CollectionViewStateInput
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ViewStateResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout, CollectionViewStateInput
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.collections.update_views(
+                collection_id="collection_id",
+                view_state=CollectionViewStateInput(
+                    organization_id="organization_id",
+                    collection_id="collection_id",
+                ),
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.update_views(
+            collection_id, view_state=view_state, request_options=request_options
+        )
+        return _response.data
+
+    async def delete_views(
+        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ViewStateResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ViewStateResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.collections.delete_views(
+                collection_id="collection_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.delete_views(collection_id, request_options=request_options)
+        return _response.data
+
+    async def list_individual_views(
+        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ViewListResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ViewListResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.collections.list_individual_views(
+                collection_id="collection_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list_individual_views(collection_id, request_options=request_options)
+        return _response.data
+
+    async def create_view(
+        self,
+        collection_id: str,
+        *,
+        name: str,
+        type: typing.Optional[CreateViewRequestType] = OMIT,
+        emoji: typing.Optional[str] = OMIT,
+        table_id: typing.Optional[str] = OMIT,
+        settings: typing.Optional[CreateViewRequestSettings] = OMIT,
+        visibility: typing.Optional[ViewVisibility] = OMIT,
+        shared_with: typing.Optional[typing.Sequence[str]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ViewResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        name : str
+
+        type : typing.Optional[CreateViewRequestType]
+
+        emoji : typing.Optional[str]
+
+        table_id : typing.Optional[str]
+
+        settings : typing.Optional[CreateViewRequestSettings]
+
+        visibility : typing.Optional[ViewVisibility]
+
+        shared_with : typing.Optional[typing.Sequence[str]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ViewResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.collections.create_view(
+                collection_id="collection_id",
+                name="name",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.create_view(
+            collection_id,
+            name=name,
+            type=type,
+            emoji=emoji,
+            table_id=table_id,
+            settings=settings,
+            visibility=visibility,
+            shared_with=shared_with,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def update_view(
+        self,
+        collection_id: str,
+        view_id: str,
+        *,
+        name: typing.Optional[str] = OMIT,
+        type: typing.Optional[UpdateViewRequestType] = OMIT,
+        emoji: typing.Optional[str] = OMIT,
+        settings: typing.Optional[UpdateViewRequestSettings] = OMIT,
+        visibility: typing.Optional[ViewVisibility] = OMIT,
+        shared_with: typing.Optional[typing.Sequence[str]] = OMIT,
+        filters: typing.Optional[typing.Sequence[ViewFilter]] = OMIT,
+        query: typing.Optional[ViewQueryInput] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ViewResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        view_id : str
+
+        name : typing.Optional[str]
+
+        type : typing.Optional[UpdateViewRequestType]
+
+        emoji : typing.Optional[str]
+
+        settings : typing.Optional[UpdateViewRequestSettings]
+
+        visibility : typing.Optional[ViewVisibility]
+
+        shared_with : typing.Optional[typing.Sequence[str]]
+
+        filters : typing.Optional[typing.Sequence[ViewFilter]]
+
+        query : typing.Optional[ViewQueryInput]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ViewResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.collections.update_view(
+                collection_id="collection_id",
+                view_id="view_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.update_view(
+            collection_id,
+            view_id,
+            name=name,
+            type=type,
+            emoji=emoji,
+            settings=settings,
+            visibility=visibility,
+            shared_with=shared_with,
+            filters=filters,
+            query=query,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def delete_view(
+        self, collection_id: str, view_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DeleteViewResponse:
+        """
+        Parameters
+        ----------
+        collection_id : str
+
+        view_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DeleteViewResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.collections.delete_view(
+                collection_id="collection_id",
+                view_id="view_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.delete_view(collection_id, view_id, request_options=request_options)
         return _response.data

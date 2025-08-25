@@ -6,6 +6,7 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .column_type import ColumnType
+from .column_type_base_automation_config import ColumnTypeBaseAutomationConfig
 from .data_type import DataType
 
 
@@ -15,6 +16,10 @@ class ColumnTypeBase(UncheckedBaseModel):
     column_type: ColumnType
     data_type: DataType
     hidden: typing.Optional[bool] = None
+    automation_config: typing.Optional[ColumnTypeBaseAutomationConfig] = pydantic.Field(default=None)
+    """
+    Optional automation configuration to automatically calculate values for this column
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

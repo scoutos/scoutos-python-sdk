@@ -6,6 +6,10 @@ from .documents_create_request_body import DocumentsCreateRequestBody
 from .documents_create_request_body_item_value import DocumentsCreateRequestBodyItemValue
 from .documents_create_request_body_one_value import DocumentsCreateRequestBodyOneValue
 from .documents_create_request_body_zero_value import DocumentsCreateRequestBodyZeroValue
+from .documents_update_batch_request_body import DocumentsUpdateBatchRequestBody
+from .documents_update_batch_request_body_item_value import DocumentsUpdateBatchRequestBodyItemValue
+from .documents_update_batch_request_body_one_value import DocumentsUpdateBatchRequestBodyOneValue
+from .documents_update_batch_request_body_zero_value import DocumentsUpdateBatchRequestBodyZeroValue
 from .documents_update_request_value import DocumentsUpdateRequestValue
 
 __all__ = [
@@ -13,5 +17,9 @@ __all__ = [
     "DocumentsCreateRequestBodyItemValue",
     "DocumentsCreateRequestBodyOneValue",
     "DocumentsCreateRequestBodyZeroValue",
+    "DocumentsUpdateBatchRequestBody",
+    "DocumentsUpdateBatchRequestBodyItemValue",
+    "DocumentsUpdateBatchRequestBodyOneValue",
+    "DocumentsUpdateBatchRequestBodyZeroValue",
     "DocumentsUpdateRequestValue",
 ]

@@ -17,6 +17,11 @@ class TableConfigOutput(UncheckedBaseModel):
     schema_: typing_extensions.Annotated[
         typing.Optional[typing.List[TableConfigOutputSchemaItem]], FieldMetadata(alias="schema")
     ] = None
+    icon_emoji: typing.Optional[str] = None
+    icon_asset_url: typing.Optional[str] = None
+    icon_fill: typing.Optional[str] = None
+    singular_name: typing.Optional[str] = None
+    plural_name: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

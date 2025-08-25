@@ -6,7 +6,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .identity import Identity
+from .legacy_identity import LegacyIdentity
 from .table_config_output import TableConfigOutput
 
 
@@ -14,11 +14,13 @@ class Table(UncheckedBaseModel):
     table_config: TableConfigOutput
     created_at: typing.Optional[dt.datetime] = None
     last_updated_at: typing.Optional[dt.datetime] = None
-    created_by: Identity
-    last_updated_by: Identity
+    created_by: LegacyIdentity
+    last_updated_by: LegacyIdentity
     revision_id: str
     table_id: str
     index_id: typing.Optional[str] = None
+    collection_id: typing.Optional[str] = None
+    documents_uploading: typing.Optional[bool] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

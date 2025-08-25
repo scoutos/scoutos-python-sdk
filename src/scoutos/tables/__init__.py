@@ -2,6 +2,6 @@
 
 # isort: skip_file
 
-from .types import TableConfigInputSchemaItem, TableDataSchemaItem, TablesGetSchemaResponse
+from .types import TableConfigInputSchemaItem, TableDataSchemaItem
 
-__all__ = ["TableConfigInputSchemaItem", "TableDataSchemaItem", "TablesGetSchemaResponse"]
+__all__ = ["TableConfigInputSchemaItem", "TableDataSchemaItem"]

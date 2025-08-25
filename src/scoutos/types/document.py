@@ -6,8 +6,9 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .document_created_by import DocumentCreatedBy
 from .document_data_value import DocumentDataValue
-from .identity import Identity
+from .document_last_updated_by import DocumentLastUpdatedBy
 
 
 class Document(UncheckedBaseModel):
@@ -16,9 +17,10 @@ class Document(UncheckedBaseModel):
     document_data_id: typing.Optional[str] = None
     created_at: typing.Optional[dt.datetime] = None
     last_updated_at: typing.Optional[dt.datetime] = None
-    created_by: Identity
-    last_updated_by: Identity
+    created_by: DocumentCreatedBy
+    last_updated_by: DocumentLastUpdatedBy
     revision_id: typing.Optional[str] = None
+    job_id: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

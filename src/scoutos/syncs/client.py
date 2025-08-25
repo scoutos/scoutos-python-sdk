@@ -4,13 +4,13 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.collection_service_handlers_create_sync_response import CollectionServiceHandlersCreateSyncResponse
-from ..types.collection_service_handlers_delete_sync_response import CollectionServiceHandlersDeleteSyncResponse
-from ..types.collection_service_handlers_get_sync_response import CollectionServiceHandlersGetSyncResponse
-from ..types.collection_service_handlers_list_collection_syncs_response_model import (
-    CollectionServiceHandlersListCollectionSyncsResponseModel,
+from ..types.src_app_http_routes_collection_create_sync_response import SrcAppHttpRoutesCollectionCreateSyncResponse
+from ..types.src_app_http_routes_collection_delete_sync_response import SrcAppHttpRoutesCollectionDeleteSyncResponse
+from ..types.src_app_http_routes_collection_get_sync_response import SrcAppHttpRoutesCollectionGetSyncResponse
+from ..types.src_app_http_routes_collection_list_collection_syncs_response_model import (
+    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
 )
-from ..types.collection_service_handlers_update_sync_response import CollectionServiceHandlersUpdateSyncResponse
+from ..types.src_app_http_routes_collection_update_sync_response import SrcAppHttpRoutesCollectionUpdateSyncResponse
 from ..types.sync_config_input import SyncConfigInput
 from .raw_client import AsyncRawSyncsClient, RawSyncsClient
 
@@ -33,9 +33,44 @@ class SyncsClient:
         """
         return self._raw_client
 
+    def list(
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel:
+        """
+        List Sources by Destination, specifically given a collection and table
+
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.syncs.list(
+            collection_id="collection_id",
+            table_id="table_id",
+        )
+        """
+        _response = self._raw_client.list(collection_id, table_id, request_options=request_options)
+        return _response.data
+
     def get(
         self, sync_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersGetSyncResponse:
+    ) -> SrcAppHttpRoutesCollectionGetSyncResponse:
         """
         Parameters
         ----------
@@ -46,7 +81,7 @@ class SyncsClient:
 
         Returns
         -------
-        CollectionServiceHandlersGetSyncResponse
+        SrcAppHttpRoutesCollectionGetSyncResponse
             Successful Response
 
         Examples
@@ -65,7 +100,7 @@ class SyncsClient:
 
     def update(
         self, sync_id: str, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersUpdateSyncResponse:
+    ) -> SrcAppHttpRoutesCollectionUpdateSyncResponse:
         """
         Parameters
         ----------
@@ -78,7 +113,7 @@ class SyncsClient:
 
         Returns
         -------
-        CollectionServiceHandlersUpdateSyncResponse
+        SrcAppHttpRoutesCollectionUpdateSyncResponse
             Successful Response
 
         Examples
@@ -87,7 +122,7 @@ class SyncsClient:
             CollectionDestination,
             Mapping,
             Scout,
-            SourceSyncNotionSettings,
+            SourceSyncGoogleDriveSettings,
             SyncConfigInput,
         )
 
@@ -97,7 +132,7 @@ class SyncsClient:
         client.syncs.update(
             sync_id="sync_id",
             sync_config=SyncConfigInput(
-                source_settings=SourceSyncNotionSettings(),
+                source_settings=SourceSyncGoogleDriveSettings(),
                 destination=CollectionDestination(
                     collection_id="collection_id",
                     table_id="table_id",
@@ -111,7 +146,7 @@ class SyncsClient:
 
     def delete(
         self, sync_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersDeleteSyncResponse:
+    ) -> SrcAppHttpRoutesCollectionDeleteSyncResponse:
         """
         Parameters
         ----------
@@ -122,7 +157,7 @@ class SyncsClient:
 
         Returns
         -------
-        CollectionServiceHandlersDeleteSyncResponse
+        SrcAppHttpRoutesCollectionDeleteSyncResponse
             Successful Response
 
         Examples
@@ -139,44 +174,9 @@ class SyncsClient:
         _response = self._raw_client.delete(sync_id, request_options=request_options)
         return _response.data
 
-    def list(
-        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersListCollectionSyncsResponseModel:
-        """
-        List Sources by Destination, specifically given a collection and table
-
-        Parameters
-        ----------
-        collection_id : str
-
-        table_id : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        CollectionServiceHandlersListCollectionSyncsResponseModel
-            Successful Response
-
-        Examples
-        --------
-        from scoutos import Scout
-
-        client = Scout(
-            api_key="YOUR_API_KEY",
-        )
-        client.syncs.list(
-            collection_id="collection_id",
-            table_id="table_id",
-        )
-        """
-        _response = self._raw_client.list(collection_id, table_id, request_options=request_options)
-        return _response.data
-
     def create(
         self, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersCreateSyncResponse:
+    ) -> SrcAppHttpRoutesCollectionCreateSyncResponse:
         """
         Parameters
         ----------
@@ -187,7 +187,7 @@ class SyncsClient:
 
         Returns
         -------
-        CollectionServiceHandlersCreateSyncResponse
+        SrcAppHttpRoutesCollectionCreateSyncResponse
             Successful Response
 
         Examples
@@ -196,7 +196,7 @@ class SyncsClient:
             CollectionDestination,
             Mapping,
             Scout,
-            SourceSyncNotionSettings,
+            SourceSyncGoogleDriveSettings,
             SyncConfigInput,
         )
 
@@ -205,7 +205,7 @@ class SyncsClient:
         )
         client.syncs.create(
             sync_config=SyncConfigInput(
-                source_settings=SourceSyncNotionSettings(),
+                source_settings=SourceSyncGoogleDriveSettings(),
                 destination=CollectionDestination(
                     collection_id="collection_id",
                     table_id="table_id",
@@ -263,9 +263,52 @@ class AsyncSyncsClient:
         """
         return self._raw_client
 
+    async def list(
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel:
+        """
+        List Sources by Destination, specifically given a collection and table
+
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.syncs.list(
+                collection_id="collection_id",
+                table_id="table_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list(collection_id, table_id, request_options=request_options)
+        return _response.data
+
     async def get(
         self, sync_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersGetSyncResponse:
+    ) -> SrcAppHttpRoutesCollectionGetSyncResponse:
         """
         Parameters
         ----------
@@ -276,7 +319,7 @@ class AsyncSyncsClient:
 
         Returns
         -------
-        CollectionServiceHandlersGetSyncResponse
+        SrcAppHttpRoutesCollectionGetSyncResponse
             Successful Response
 
         Examples
@@ -303,7 +346,7 @@ class AsyncSyncsClient:
 
     async def update(
         self, sync_id: str, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersUpdateSyncResponse:
+    ) -> SrcAppHttpRoutesCollectionUpdateSyncResponse:
         """
         Parameters
         ----------
@@ -316,7 +359,7 @@ class AsyncSyncsClient:
 
         Returns
         -------
-        CollectionServiceHandlersUpdateSyncResponse
+        SrcAppHttpRoutesCollectionUpdateSyncResponse
             Successful Response
 
         Examples
@@ -327,7 +370,7 @@ class AsyncSyncsClient:
             AsyncScout,
             CollectionDestination,
             Mapping,
-            SourceSyncNotionSettings,
+            SourceSyncGoogleDriveSettings,
             SyncConfigInput,
         )
 
@@ -340,7 +383,7 @@ class AsyncSyncsClient:
             await client.syncs.update(
                 sync_id="sync_id",
                 sync_config=SyncConfigInput(
-                    source_settings=SourceSyncNotionSettings(),
+                    source_settings=SourceSyncGoogleDriveSettings(),
                     destination=CollectionDestination(
                         collection_id="collection_id",
                         table_id="table_id",
@@ -357,7 +400,7 @@ class AsyncSyncsClient:
 
     async def delete(
         self, sync_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersDeleteSyncResponse:
+    ) -> SrcAppHttpRoutesCollectionDeleteSyncResponse:
         """
         Parameters
         ----------
@@ -368,7 +411,7 @@ class AsyncSyncsClient:
 
         Returns
         -------
-        CollectionServiceHandlersDeleteSyncResponse
+        SrcAppHttpRoutesCollectionDeleteSyncResponse
             Successful Response
 
         Examples
@@ -393,52 +436,9 @@ class AsyncSyncsClient:
         _response = await self._raw_client.delete(sync_id, request_options=request_options)
         return _response.data
 
-    async def list(
-        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersListCollectionSyncsResponseModel:
-        """
-        List Sources by Destination, specifically given a collection and table
-
-        Parameters
-        ----------
-        collection_id : str
-
-        table_id : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        CollectionServiceHandlersListCollectionSyncsResponseModel
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from scoutos import AsyncScout
-
-        client = AsyncScout(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.syncs.list(
-                collection_id="collection_id",
-                table_id="table_id",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.list(collection_id, table_id, request_options=request_options)
-        return _response.data
-
     async def create(
         self, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
-    ) -> CollectionServiceHandlersCreateSyncResponse:
+    ) -> SrcAppHttpRoutesCollectionCreateSyncResponse:
         """
         Parameters
         ----------
@@ -449,7 +449,7 @@ class AsyncSyncsClient:
 
         Returns
         -------
-        CollectionServiceHandlersCreateSyncResponse
+        SrcAppHttpRoutesCollectionCreateSyncResponse
             Successful Response
 
         Examples
@@ -460,7 +460,7 @@ class AsyncSyncsClient:
             AsyncScout,
             CollectionDestination,
             Mapping,
-            SourceSyncNotionSettings,
+            SourceSyncGoogleDriveSettings,
             SyncConfigInput,
         )
 
@@ -472,7 +472,7 @@ class AsyncSyncsClient:
         async def main() -> None:
             await client.syncs.create(
                 sync_config=SyncConfigInput(
-                    source_settings=SourceSyncNotionSettings(),
+                    source_settings=SourceSyncGoogleDriveSettings(),
                     destination=CollectionDestination(
                         collection_id="collection_id",
                         table_id="table_id",

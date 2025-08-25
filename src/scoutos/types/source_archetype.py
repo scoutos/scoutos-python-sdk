@@ -5,6 +5,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .source_archetype_integration_version import SourceArchetypeIntegrationVersion
 
 
 class SourceArchetype(UncheckedBaseModel):
@@ -41,6 +42,11 @@ class SourceArchetype(UncheckedBaseModel):
     integrated_service_id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Determines if the SourceSync is a IntegratedService
+    """
+
+    integration_version: typing.Optional[SourceArchetypeIntegrationVersion] = pydantic.Field(default=None)
+    """
+    The version of the integration if SourceSync is an Integration
     """
 
     if IS_PYDANTIC_V2:

@@ -2,4 +2,6 @@
 
 import typing
 
-DocumentsCreateRequestBodyItemValue = typing.Union[bool, typing.Dict[str, typing.Optional[typing.Any]], float, int, str]
+DocumentsCreateRequestBodyItemValue = typing.Union[
+    bool, typing.Dict[str, typing.Optional[typing.Any]], float, int, str, typing.List[typing.Optional[typing.Any]]
+]

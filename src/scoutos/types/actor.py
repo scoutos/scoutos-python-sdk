@@ -5,12 +5,14 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .actor_type import ActorType
+from .actor_identity import ActorIdentity
+from .legacy_identity import LegacyIdentity
 
 
 class Actor(UncheckedBaseModel):
-    id: str
-    type: ActorType
+    scout_organization_id: str
+    identity: LegacyIdentity
+    actor_identity: ActorIdentity
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

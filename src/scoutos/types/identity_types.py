@@ -2,4 +2,4 @@
 
 import typing
 
-IdentityTypes = typing.Union[typing.Literal["user", "api_key"], typing.Any]
+IdentityTypes = typing.Union[typing.Literal["user", "api_key", "system"], typing.Any]

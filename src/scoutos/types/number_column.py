@@ -5,6 +5,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .number_column_automation_config import NumberColumnAutomationConfig
 from .number_column_default import NumberColumnDefault
 from .number_column_max_value import NumberColumnMaxValue
 from .number_column_min_value import NumberColumnMinValue
@@ -16,6 +17,11 @@ class NumberColumn(UncheckedBaseModel):
     column_type: typing.Literal["number"] = "number"
     data_type: typing.Optional[typing.Literal["number"]] = None
     hidden: typing.Optional[bool] = None
+    automation_config: typing.Optional[NumberColumnAutomationConfig] = pydantic.Field(default=None)
+    """
+    Optional automation configuration to automatically calculate values for this column
+    """
+
     default: typing.Optional[NumberColumnDefault] = None
     min_value: typing.Optional[NumberColumnMinValue] = None
     max_value: typing.Optional[NumberColumnMaxValue] = None

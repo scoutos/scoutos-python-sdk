@@ -7,6 +7,10 @@ from .types import (
     DocumentsCreateRequestBodyItemValue,
     DocumentsCreateRequestBodyOneValue,
     DocumentsCreateRequestBodyZeroValue,
+    DocumentsUpdateBatchRequestBody,
+    DocumentsUpdateBatchRequestBodyItemValue,
+    DocumentsUpdateBatchRequestBodyOneValue,
+    DocumentsUpdateBatchRequestBodyZeroValue,
     DocumentsUpdateRequestValue,
 )
 
@@ -15,5 +19,9 @@ __all__ = [
     "DocumentsCreateRequestBodyItemValue",
     "DocumentsCreateRequestBodyOneValue",
     "DocumentsCreateRequestBodyZeroValue",
+    "DocumentsUpdateBatchRequestBody",
+    "DocumentsUpdateBatchRequestBodyItemValue",
+    "DocumentsUpdateBatchRequestBodyOneValue",
+    "DocumentsUpdateBatchRequestBodyZeroValue",
     "DocumentsUpdateRequestValue",
 ]

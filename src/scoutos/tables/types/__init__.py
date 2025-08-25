@@ -4,6 +4,5 @@
 
 from .table_config_input_schema_item import TableConfigInputSchemaItem
 from .table_data_schema_item import TableDataSchemaItem
-from .tables_get_schema_response import TablesGetSchemaResponse
 
-__all__ = ["TableConfigInputSchemaItem", "TableDataSchemaItem", "TablesGetSchemaResponse"]
+__all__ = ["TableConfigInputSchemaItem", "TableDataSchemaItem"]

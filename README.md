@@ -13,7 +13,7 @@ pip install scoutos
 
 ## Reference
 
-A full reference for this library is available [here](./reference.md).
+A full reference for this library is available [here](https://github.com/scoutos/scoutos-python-sdk/blob/HEAD/./reference.md).
 
 ## Usage
 
@@ -25,7 +25,7 @@ from scoutos import Scout
 client = Scout(
     api_key="YOUR_API_KEY",
 )
-client.workflows.create_revision()
+client.parse_file_v_2_files_parse_post()
 ```
 
 ## Async Client
@@ -43,7 +43,7 @@ client = AsyncScout(
 
 
 async def main() -> None:
-    await client.workflows.create_revision()
+    await client.parse_file_v_2_files_parse_post()
 
 
 asyncio.run(main())
@@ -58,7 +58,7 @@ will be thrown.
 from scoutos.core.api_error import ApiError
 
 try:
-    client.workflows.create_revision(...)
+    client.parse_file_v_2_files_parse_post(...)
 except ApiError as e:
     print(e.status_code)
     print(e.body)
@@ -94,7 +94,7 @@ from scoutos import Scout
 client = Scout(
     ...,
 )
-response = client.workflows.with_raw_response.create_revision(...)
+response = client.with_raw_response.parse_file_v_2_files_parse_post(...)
 print(response.headers)  # access the response headers
 print(response.data)  # access the underlying object
 with client.workflows.with_raw_response.run_stream(...) as response:
@@ -118,7 +118,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `max_retries` request option to configure this behavior.
 
 ```python
-client.workflows.create_revision(..., request_options={
+client.parse_file_v_2_files_parse_post(..., request_options={
     "max_retries": 1
 })
 ```
@@ -138,7 +138,7 @@ client = Scout(
 
 
 # Override timeout for a specific method
-client.workflows.create_revision(..., request_options={
+client.parse_file_v_2_files_parse_post(..., request_options={
     "timeout_in_seconds": 1
 })
 ```
