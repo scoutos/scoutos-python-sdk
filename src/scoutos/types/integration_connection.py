@@ -18,6 +18,8 @@ class IntegrationConnection(UncheckedBaseModel):
     api_key_secret_ref: typing.Optional[str] = None
     access_token_secret_ref: typing.Optional[str] = None
     refresh_token_secret_ref: typing.Optional[str] = None
+    client_id_secret_ref: typing.Optional[str] = None
+    client_secret_secret_ref: typing.Optional[str] = None
     connected: bool
     metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
     scopes: typing.Optional[typing.List[str]] = None

@@ -8,6 +8,7 @@ from .json_column import JsonColumn
 from .markdown_column import MarkdownColumn
 from .multi_select_column import MultiSelectColumn
 from .number_column import NumberColumn
+from .people_column import PeopleColumn
 from .relation_column import RelationColumn
 from .select_column import SelectColumn
 from .text_long_column import TextLongColumn
@@ -21,6 +22,7 @@ TableConfigOutputSchemaItem = typing.Union[
     MarkdownColumn,
     MultiSelectColumn,
     NumberColumn,
+    PeopleColumn,
     RelationColumn,
     SelectColumn,
     TextLongColumn,

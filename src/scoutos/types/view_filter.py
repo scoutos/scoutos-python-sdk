@@ -10,9 +10,9 @@ from .filter_operator import FilterOperator
 
 
 class ViewFilter(UncheckedBaseModel):
-    id: str
+    id: typing.Optional[str] = None
     column_id: str
-    operator: FilterOperator
+    operator: typing.Optional[FilterOperator] = None
     value: typing.Optional[typing.Any] = None
     enabled: typing.Optional[bool] = None
     created_at: typing.Optional[dt.datetime] = None

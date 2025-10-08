@@ -37,6 +37,11 @@ class SitemapCrawlerSettingsInput(UncheckedBaseModel):
     Comma-separated list of domains to include. Only URLs from these domains will be crawled. Defaults to the domain of the startingURL.
     """
 
+    user_agent_header: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    User agent header to use for the crawl. By default, crawler will rotate user agents.
+    """
+
     max_depth: typing.Optional[int] = pydantic.Field(default=None)
     """
     Maximum number of link levels to follow from the starting page

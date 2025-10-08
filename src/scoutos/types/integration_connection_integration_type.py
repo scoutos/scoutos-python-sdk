@@ -21,6 +21,7 @@ IntegrationConnectionIntegrationType = typing.Union[
         "paypal",
         "sentry",
         "statsig",
+        "reddit",
         "scout_native_tools",
     ],
     typing.Any,

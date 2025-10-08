@@ -4,7 +4,17 @@ import typing
 
 UsageTypes = typing.Union[
     typing.Literal[
-        "crawl", "storage", "web_search", "input_tokens", "output_tokens", "text_embedding", "workflow_invocations"
+        "crawl",
+        "storage",
+        "web_search",
+        "input_tokens",
+        "output_tokens",
+        "text_embedding",
+        "workflow_invocations",
+        "agent_interactions",
+        "seats",
+        "integrations",
+        "active_workflows",
     ],
     typing.Any,
 ]

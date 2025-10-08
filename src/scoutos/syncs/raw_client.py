@@ -15,9 +15,7 @@ from ..types.http_validation_error import HttpValidationError
 from ..types.src_app_http_routes_collection_create_sync_response import SrcAppHttpRoutesCollectionCreateSyncResponse
 from ..types.src_app_http_routes_collection_delete_sync_response import SrcAppHttpRoutesCollectionDeleteSyncResponse
 from ..types.src_app_http_routes_collection_get_sync_response import SrcAppHttpRoutesCollectionGetSyncResponse
-from ..types.src_app_http_routes_collection_list_collection_syncs_response_model import (
-    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
-)
+from ..types.src_app_http_routes_collection_get_syncs_response import SrcAppHttpRoutesCollectionGetSyncsResponse
 from ..types.src_app_http_routes_collection_update_sync_response import SrcAppHttpRoutesCollectionUpdateSyncResponse
 from ..types.sync_config_input import SyncConfigInput
 
@@ -30,36 +28,75 @@ class RawSyncsClient:
         self._client_wrapper = client_wrapper
 
     def list(
-        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]:
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionGetSyncsResponse]:
         """
-        List Sources by Destination, specifically given a collection and table
-
         Parameters
         ----------
-        collection_id : str
-
-        table_id : str
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]
+        HttpResponse[SrcAppHttpRoutesCollectionGetSyncsResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/syncs",
+            "v2/syncs",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
+                    SrcAppHttpRoutesCollectionGetSyncsResponse,
                     construct_type(
-                        type_=SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetSyncsResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def create(
+        self, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionCreateSyncResponse]:
+        """
+        Parameters
+        ----------
+        sync_config : SyncConfigInput
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[SrcAppHttpRoutesCollectionCreateSyncResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "v2/syncs",
+            method="POST",
+            json={
+                "sync_config": convert_and_respect_annotation_metadata(
+                    object_=sync_config, annotation=SyncConfigInput, direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    SrcAppHttpRoutesCollectionCreateSyncResponse,
+                    construct_type(
+                        type_=SrcAppHttpRoutesCollectionCreateSyncResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -232,62 +269,6 @@ class RawSyncsClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def create(
-        self, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[SrcAppHttpRoutesCollectionCreateSyncResponse]:
-        """
-        Parameters
-        ----------
-        sync_config : SyncConfigInput
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[SrcAppHttpRoutesCollectionCreateSyncResponse]
-            Successful Response
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            "v2/syncs",
-            method="POST",
-            json={
-                "sync_config": convert_and_respect_annotation_metadata(
-                    object_=sync_config, annotation=SyncConfigInput, direction="write"
-                ),
-            },
-            headers={
-                "content-type": "application/json",
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    SrcAppHttpRoutesCollectionCreateSyncResponse,
-                    construct_type(
-                        type_=SrcAppHttpRoutesCollectionCreateSyncResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        construct_type(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
     def execute(
         self, sync_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[typing.Optional[typing.Any]]:
@@ -343,36 +324,75 @@ class AsyncRawSyncsClient:
         self._client_wrapper = client_wrapper
 
     async def list(
-        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]:
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionGetSyncsResponse]:
         """
-        List Sources by Destination, specifically given a collection and table
-
         Parameters
         ----------
-        collection_id : str
-
-        table_id : str
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionGetSyncsResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/syncs",
+            "v2/syncs",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
+                    SrcAppHttpRoutesCollectionGetSyncsResponse,
                     construct_type(
-                        type_=SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetSyncsResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def create(
+        self, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionCreateSyncResponse]:
+        """
+        Parameters
+        ----------
+        sync_config : SyncConfigInput
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionCreateSyncResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "v2/syncs",
+            method="POST",
+            json={
+                "sync_config": convert_and_respect_annotation_metadata(
+                    object_=sync_config, annotation=SyncConfigInput, direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    SrcAppHttpRoutesCollectionCreateSyncResponse,
+                    construct_type(
+                        type_=SrcAppHttpRoutesCollectionCreateSyncResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -525,62 +545,6 @@ class AsyncRawSyncsClient:
                     SrcAppHttpRoutesCollectionDeleteSyncResponse,
                     construct_type(
                         type_=SrcAppHttpRoutesCollectionDeleteSyncResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        construct_type(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def create(
-        self, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionCreateSyncResponse]:
-        """
-        Parameters
-        ----------
-        sync_config : SyncConfigInput
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[SrcAppHttpRoutesCollectionCreateSyncResponse]
-            Successful Response
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            "v2/syncs",
-            method="POST",
-            json={
-                "sync_config": convert_and_respect_annotation_metadata(
-                    object_=sync_config, annotation=SyncConfigInput, direction="write"
-                ),
-            },
-            headers={
-                "content-type": "application/json",
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    SrcAppHttpRoutesCollectionCreateSyncResponse,
-                    construct_type(
-                        type_=SrcAppHttpRoutesCollectionCreateSyncResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

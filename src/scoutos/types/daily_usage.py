@@ -12,7 +12,7 @@ class DailyUsage(UncheckedBaseModel):
     name: UsageTypes
     friendly_date: str
     price: float
-    display_name: str
+    display_name: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

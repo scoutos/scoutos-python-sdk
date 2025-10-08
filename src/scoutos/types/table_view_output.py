@@ -6,7 +6,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .table_view_settings import TableViewSettings
+from .table_view_settings_output import TableViewSettingsOutput
 from .view_filter import ViewFilter
 from .view_query_output import ViewQueryOutput
 from .view_visibility import ViewVisibility
@@ -27,7 +27,7 @@ class TableViewOutput(UncheckedBaseModel):
     filters: typing.Optional[typing.List[ViewFilter]] = None
     query: typing.Optional[ViewQueryOutput] = None
     type: typing.Literal["table"] = "table"
-    settings: TableViewSettings
+    settings: TableViewSettingsOutput
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

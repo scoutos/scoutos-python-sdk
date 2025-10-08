@@ -21,6 +21,7 @@ class IntegrationWithConnections(UncheckedBaseModel):
     tags: typing.Optional[typing.List[str]] = None
     enabled: typing.Optional[bool] = None
     permissions: typing.Optional[typing.List[typing.Dict[str, typing.Optional[typing.Any]]]] = None
+    auth_configs: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
     connected: bool
     connections: typing.List[IntegrationConnection]
     existing_auth_client_scope: typing.List[str]

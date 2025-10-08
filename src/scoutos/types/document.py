@@ -21,6 +21,9 @@ class Document(UncheckedBaseModel):
     last_updated_by: DocumentLastUpdatedBy
     revision_id: typing.Optional[str] = None
     job_id: typing.Optional[str] = None
+    sync_id: typing.Optional[str] = None
+    studio_row: typing.Optional[bool] = None
+    cells: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

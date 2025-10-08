@@ -60,6 +60,7 @@ class CollectionsClient:
         query: typing.Optional[str] = None,
         tags: typing.Optional[str] = None,
         sort: typing.Optional[str] = None,
+        drive: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionGetCollectionsResponse:
         """
@@ -80,6 +81,8 @@ class CollectionsClient:
         sort : typing.Optional[str]
             Sort
 
+        drive : typing.Optional[bool]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -95,10 +98,23 @@ class CollectionsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.collections.list()
+        client.collections.list(
+            start_at="start_at",
+            limit=1,
+            query="query",
+            tags="tags",
+            sort="sort",
+            drive=True,
+        )
         """
         _response = self._raw_client.list(
-            start_at=start_at, limit=limit, query=query, tags=tags, sort=sort, request_options=request_options
+            start_at=start_at,
+            limit=limit,
+            query=query,
+            tags=tags,
+            sort=sort,
+            drive=drive,
+            request_options=request_options,
         )
         return _response.data
 
@@ -587,6 +603,7 @@ class AsyncCollectionsClient:
         query: typing.Optional[str] = None,
         tags: typing.Optional[str] = None,
         sort: typing.Optional[str] = None,
+        drive: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionGetCollectionsResponse:
         """
@@ -606,6 +623,8 @@ class AsyncCollectionsClient:
 
         sort : typing.Optional[str]
             Sort
+
+        drive : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -627,13 +646,26 @@ class AsyncCollectionsClient:
 
 
         async def main() -> None:
-            await client.collections.list()
+            await client.collections.list(
+                start_at="start_at",
+                limit=1,
+                query="query",
+                tags="tags",
+                sort="sort",
+                drive=True,
+            )
 
 
         asyncio.run(main())
         """
         _response = await self._raw_client.list(
-            start_at=start_at, limit=limit, query=query, tags=tags, sort=sort, request_options=request_options
+            start_at=start_at,
+            limit=limit,
+            query=query,
+            tags=tags,
+            sort=sort,
+            drive=drive,
+            request_options=request_options,
         )
         return _response.data
 

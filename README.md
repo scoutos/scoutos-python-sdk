@@ -3,7 +3,7 @@
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fscoutos%2Fscoutos-python-sdk)
 [![pypi](https://img.shields.io/pypi/v/scoutos)](https://pypi.python.org/pypi/scoutos)
 
-The Scoutos Python library provides convenient access to the Scoutos API from Python.
+The Scoutos Python library provides convenient access to the Scoutos APIs from Python.
 
 ## Installation
 
@@ -25,12 +25,14 @@ from scoutos import Scout
 client = Scout(
     api_key="YOUR_API_KEY",
 )
-client.parse_file_v_2_files_parse_post()
+client.parse_file_v_2_files_parse_post(
+    return_text=True,
+)
 ```
 
 ## Async Client
 
-The SDK also exports an `async` client so that you can make non-blocking calls to our API.
+The SDK also exports an `async` client so that you can make non-blocking calls to our API. Note that if you are constructing an Async httpx client class to pass into this client, use `httpx.AsyncClient()` instead of `httpx.Client()` (e.g. for the `httpx_client` parameter of this client).
 
 ```python
 import asyncio
@@ -43,7 +45,9 @@ client = AsyncScout(
 
 
 async def main() -> None:
-    await client.parse_file_v_2_files_parse_post()
+    await client.parse_file_v_2_files_parse_post(
+        return_text=True,
+    )
 
 
 asyncio.run(main())
@@ -76,6 +80,9 @@ client = Scout(
 )
 response = client.workflows.run_stream(
     workflow_id="workflow_id",
+    environment="environment",
+    revision_id="revision_id",
+    session_id="session_id",
 )
 for chunk in response.data:
     yield chunk
@@ -155,7 +162,7 @@ from scoutos import Scout
 client = Scout(
     ...,
     httpx_client=httpx.Client(
-        proxies="http://my.test.proxy.example.com",
+        proxy="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
 )

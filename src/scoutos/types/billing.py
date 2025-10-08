@@ -6,6 +6,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .billing_limits import BillingLimits
 from .billing_usage import BillingUsage
 from .stripe_provider import StripeProvider
 from .subscription import Subscription
@@ -15,6 +16,7 @@ class Billing(UncheckedBaseModel):
     provider: typing.Optional[StripeProvider] = None
     subscriptions: typing.Optional[typing.List[Subscription]] = None
     renewal_date: typing.Optional[dt.datetime] = None
+    limits: typing.Optional[BillingLimits] = None
     usage: typing.Optional[BillingUsage] = None
 
     if IS_PYDANTIC_V2:

@@ -30,8 +30,8 @@ class WorkflowRunFailed(UncheckedBaseModel):
     """
 
     data: WorkflowRunFailedData
-    price: str
-    event_type: str
+    price: typing.Optional[str] = None
+    event_type: typing.Optional[str] = None
     version: EventVersion
 
     if IS_PYDANTIC_V2:

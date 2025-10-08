@@ -15,6 +15,7 @@ ColumnType = typing.Union[
         "url",
         "markdown",
         "relation",
+        "people",
     ],
     typing.Any,
 ]

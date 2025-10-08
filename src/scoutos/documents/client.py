@@ -16,7 +16,6 @@ from ..types.src_app_http_routes_collection_update_document_response import (
 from .raw_client import AsyncRawDocumentsClient, RawDocumentsClient
 from .types.documents_create_request_body import DocumentsCreateRequestBody
 from .types.documents_update_batch_request_body import DocumentsUpdateBatchRequestBody
-from .types.documents_update_request_value import DocumentsUpdateRequestValue
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -45,6 +44,8 @@ class DocumentsClient:
         limit: typing.Optional[int] = None,
         cursor: typing.Optional[str] = None,
         query: typing.Optional[str] = None,
+        offset: typing.Optional[int] = None,
+        sort_by: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionGetDocumentsResponse:
         """
@@ -62,6 +63,12 @@ class DocumentsClient:
 
         query : typing.Optional[str]
             Search query
+
+        offset : typing.Optional[int]
+            Offset to fetch next set of records
+
+        sort_by : typing.Optional[str]
+            Sort by field
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -81,10 +88,22 @@ class DocumentsClient:
         client.documents.list(
             collection_id="collection_id",
             table_id="table_id",
+            limit=1,
+            cursor="cursor",
+            query="query",
+            offset=1,
+            sort_by="sort_by",
         )
         """
         _response = self._raw_client.list(
-            collection_id, table_id, limit=limit, cursor=cursor, query=query, request_options=request_options
+            collection_id,
+            table_id,
+            limit=limit,
+            cursor=cursor,
+            query=query,
+            offset=offset,
+            sort_by=sort_by,
+            request_options=request_options,
         )
         return _response.data
 
@@ -95,7 +114,9 @@ class DocumentsClient:
         *,
         request: DocumentsCreateRequestBody,
         job_id: typing.Optional[str] = None,
+        sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
+        mode: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DocumentResponse:
         """
@@ -110,8 +131,14 @@ class DocumentsClient:
         job_id : typing.Optional[str]
             The job id responsible for the document creation/update
 
+        sync_id : typing.Optional[str]
+            The sync id the job belongs to thats responsible for the document creation/update
+
         await_completion : typing.Optional[bool]
             Whether to wait for document creation/update to complete
+
+        mode : typing.Optional[str]
+            The mode to use for the document creation/update
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -131,6 +158,10 @@ class DocumentsClient:
         client.documents.create(
             collection_id="collection_id",
             table_id="table_id",
+            job_id="job_id",
+            sync_id="sync_id",
+            await_completion=True,
+            mode="mode",
             request={"key": True},
         )
         """
@@ -139,7 +170,9 @@ class DocumentsClient:
             table_id,
             request=request,
             job_id=job_id,
+            sync_id=sync_id,
             await_completion=await_completion,
+            mode=mode,
             request_options=request_options,
         )
         return _response.data
@@ -151,7 +184,9 @@ class DocumentsClient:
         *,
         request: DocumentsUpdateBatchRequestBody,
         job_id: typing.Optional[str] = None,
+        sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
+        mode: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DocumentResponse:
         """
@@ -166,8 +201,14 @@ class DocumentsClient:
         job_id : typing.Optional[str]
             The job id responsible for the document creation/update
 
+        sync_id : typing.Optional[str]
+            The sync id the job belongs to thats responsible for the document creation/update
+
         await_completion : typing.Optional[bool]
             Whether to wait for document creation/update to complete
+
+        mode : typing.Optional[str]
+            The mode to use for the document creation/update
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -187,6 +228,10 @@ class DocumentsClient:
         client.documents.update_batch(
             collection_id="collection_id",
             table_id="table_id",
+            job_id="job_id",
+            sync_id="sync_id",
+            await_completion=True,
+            mode="mode",
             request={"key": True},
         )
         """
@@ -195,7 +240,9 @@ class DocumentsClient:
             table_id,
             request=request,
             job_id=job_id,
+            sync_id=sync_id,
             await_completion=await_completion,
+            mode=mode,
             request_options=request_options,
         )
         return _response.data
@@ -244,10 +291,10 @@ class DocumentsClient:
     def update(
         self,
         collection_id: str,
-        document_id: str,
         table_id: str,
+        document_id: str,
         *,
-        request: typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionUpdateDocumentResponse:
         """
@@ -255,11 +302,11 @@ class DocumentsClient:
         ----------
         collection_id : str
 
-        document_id : str
-
         table_id : str
 
-        request : typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]]
+        document_id : str
+
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -278,13 +325,13 @@ class DocumentsClient:
         )
         client.documents.update(
             collection_id="collection_id",
-            document_id="document_id",
             table_id="table_id",
-            request={},
+            document_id="document_id",
+            request={"key": "value"},
         )
         """
         _response = self._raw_client.update(
-            collection_id, document_id, table_id, request=request, request_options=request_options
+            collection_id, table_id, document_id, request=request, request_options=request_options
         )
         return _response.data
 
@@ -398,6 +445,8 @@ class AsyncDocumentsClient:
         limit: typing.Optional[int] = None,
         cursor: typing.Optional[str] = None,
         query: typing.Optional[str] = None,
+        offset: typing.Optional[int] = None,
+        sort_by: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionGetDocumentsResponse:
         """
@@ -415,6 +464,12 @@ class AsyncDocumentsClient:
 
         query : typing.Optional[str]
             Search query
+
+        offset : typing.Optional[int]
+            Offset to fetch next set of records
+
+        sort_by : typing.Optional[str]
+            Sort by field
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -439,13 +494,25 @@ class AsyncDocumentsClient:
             await client.documents.list(
                 collection_id="collection_id",
                 table_id="table_id",
+                limit=1,
+                cursor="cursor",
+                query="query",
+                offset=1,
+                sort_by="sort_by",
             )
 
 
         asyncio.run(main())
         """
         _response = await self._raw_client.list(
-            collection_id, table_id, limit=limit, cursor=cursor, query=query, request_options=request_options
+            collection_id,
+            table_id,
+            limit=limit,
+            cursor=cursor,
+            query=query,
+            offset=offset,
+            sort_by=sort_by,
+            request_options=request_options,
         )
         return _response.data
 
@@ -456,7 +523,9 @@ class AsyncDocumentsClient:
         *,
         request: DocumentsCreateRequestBody,
         job_id: typing.Optional[str] = None,
+        sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
+        mode: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DocumentResponse:
         """
@@ -471,8 +540,14 @@ class AsyncDocumentsClient:
         job_id : typing.Optional[str]
             The job id responsible for the document creation/update
 
+        sync_id : typing.Optional[str]
+            The sync id the job belongs to thats responsible for the document creation/update
+
         await_completion : typing.Optional[bool]
             Whether to wait for document creation/update to complete
+
+        mode : typing.Optional[str]
+            The mode to use for the document creation/update
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -497,6 +572,10 @@ class AsyncDocumentsClient:
             await client.documents.create(
                 collection_id="collection_id",
                 table_id="table_id",
+                job_id="job_id",
+                sync_id="sync_id",
+                await_completion=True,
+                mode="mode",
                 request={"key": True},
             )
 
@@ -508,7 +587,9 @@ class AsyncDocumentsClient:
             table_id,
             request=request,
             job_id=job_id,
+            sync_id=sync_id,
             await_completion=await_completion,
+            mode=mode,
             request_options=request_options,
         )
         return _response.data
@@ -520,7 +601,9 @@ class AsyncDocumentsClient:
         *,
         request: DocumentsUpdateBatchRequestBody,
         job_id: typing.Optional[str] = None,
+        sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
+        mode: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DocumentResponse:
         """
@@ -535,8 +618,14 @@ class AsyncDocumentsClient:
         job_id : typing.Optional[str]
             The job id responsible for the document creation/update
 
+        sync_id : typing.Optional[str]
+            The sync id the job belongs to thats responsible for the document creation/update
+
         await_completion : typing.Optional[bool]
             Whether to wait for document creation/update to complete
+
+        mode : typing.Optional[str]
+            The mode to use for the document creation/update
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -561,6 +650,10 @@ class AsyncDocumentsClient:
             await client.documents.update_batch(
                 collection_id="collection_id",
                 table_id="table_id",
+                job_id="job_id",
+                sync_id="sync_id",
+                await_completion=True,
+                mode="mode",
                 request={"key": True},
             )
 
@@ -572,7 +665,9 @@ class AsyncDocumentsClient:
             table_id,
             request=request,
             job_id=job_id,
+            sync_id=sync_id,
             await_completion=await_completion,
+            mode=mode,
             request_options=request_options,
         )
         return _response.data
@@ -629,10 +724,10 @@ class AsyncDocumentsClient:
     async def update(
         self,
         collection_id: str,
-        document_id: str,
         table_id: str,
+        document_id: str,
         *,
-        request: typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionUpdateDocumentResponse:
         """
@@ -640,11 +735,11 @@ class AsyncDocumentsClient:
         ----------
         collection_id : str
 
-        document_id : str
-
         table_id : str
 
-        request : typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]]
+        document_id : str
+
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -668,16 +763,16 @@ class AsyncDocumentsClient:
         async def main() -> None:
             await client.documents.update(
                 collection_id="collection_id",
-                document_id="document_id",
                 table_id="table_id",
-                request={},
+                document_id="document_id",
+                request={"key": "value"},
             )
 
 
         asyncio.run(main())
         """
         _response = await self._raw_client.update(
-            collection_id, document_id, table_id, request=request, request_options=request_options
+            collection_id, table_id, document_id, request=request, request_options=request_options
         )
         return _response.data
 

@@ -6,6 +6,7 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .sitemap_crawler_settings_input import SitemapCrawlerSettingsInput
+from .source_sync_sitemap_settings_input_mode import SourceSyncSitemapSettingsInputMode
 
 
 class SourceSyncSitemapSettingsInput(UncheckedBaseModel):
@@ -16,6 +17,10 @@ class SourceSyncSitemapSettingsInput(UncheckedBaseModel):
     """
 
     crawler_settings: typing.Optional[SitemapCrawlerSettingsInput] = None
+    mode: typing.Optional[SourceSyncSitemapSettingsInputMode] = pydantic.Field(default=None)
+    """
+    Merge: upsert documents keying off site url. Replace: merge and remove stale documents.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

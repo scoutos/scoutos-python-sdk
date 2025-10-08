@@ -6,6 +6,7 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .multi_page_crawler_settings_output import MultiPageCrawlerSettingsOutput
+from .source_sync_crawl_settings_output_mode import SourceSyncCrawlSettingsOutputMode
 
 
 class SourceSyncCrawlSettingsOutput(UncheckedBaseModel):
@@ -16,6 +17,10 @@ class SourceSyncCrawlSettingsOutput(UncheckedBaseModel):
     """
 
     crawler_settings: typing.Optional[MultiPageCrawlerSettingsOutput] = None
+    mode: typing.Optional[SourceSyncCrawlSettingsOutputMode] = pydantic.Field(default=None)
+    """
+    Merge: upsert documents keying off site url. Replace: merge and remove stale documents.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

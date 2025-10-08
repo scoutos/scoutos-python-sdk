@@ -78,7 +78,13 @@ class CopilotsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.copilots.list()
+        client.copilots.list(
+            sort="sort",
+            direction="direction",
+            start_at="start_at",
+            limit=1,
+            query="query",
+        )
         """
         _response = self._raw_client.list(
             sort=sort, direction=direction, start_at=start_at, limit=limit, query=query, request_options=request_options
@@ -367,7 +373,13 @@ class AsyncCopilotsClient:
 
 
         async def main() -> None:
-            await client.copilots.list()
+            await client.copilots.list(
+                sort="sort",
+                direction="direction",
+                start_at="start_at",
+                limit=1,
+                query="query",
+            )
 
 
         asyncio.run(main())

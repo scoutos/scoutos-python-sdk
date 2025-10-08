@@ -2,435 +2,979 @@
 
 # isort: skip_file
 
-from .typescript_automation_config import TypescriptAutomationConfig
-from .action_type import ActionType
-from .actor import Actor
-from .actor_identity import ActorIdentity
-from .actor_identity_id import ActorIdentityId
-from .actor_identity_type import ActorIdentityType
-from .agent_automation_config import AgentAutomationConfig
-from .agent_revision import AgentRevision
-from .agent_revision_model import AgentRevisionModel
-from .agent_revision_response_style import AgentRevisionResponseStyle
-from .ai_agent import AiAgent
-from .api_key_auth_type import ApiKeyAuthType
-from .api_key_identity import ApiKeyIdentity
-from .api_key_identity_details import ApiKeyIdentityDetails
-from .bare_input import BareInput
-from .bare_output import BareOutput
-from .baseline import Baseline
-from .billing import Billing
-from .billing_cycle import BillingCycle
-from .billing_cycles import BillingCycles
-from .billing_usage import BillingUsage
-from .block_config_item_boolean import BlockConfigItemBoolean
-from .block_config_item_json import BlockConfigItemJson
-from .block_config_item_llm import BlockConfigItemLlm
-from .block_config_item_number import BlockConfigItemNumber
-from .block_config_item_number_default_value import BlockConfigItemNumberDefaultValue
-from .block_config_item_number_maximum_value import BlockConfigItemNumberMaximumValue
-from .block_config_item_number_minimum_value import BlockConfigItemNumberMinimumValue
-from .block_config_item_number_value import BlockConfigItemNumberValue
-from .block_config_item_select import BlockConfigItemSelect
-from .block_config_item_text_long import BlockConfigItemTextLong
-from .block_config_item_text_long_value import BlockConfigItemTextLongValue
-from .block_config_item_text_short import BlockConfigItemTextShort
-from .block_input import BlockInput
-from .block_input_block_config_item import BlockInputBlockConfigItem
-from .block_output import BlockOutput
-from .block_output_block_config_item import BlockOutputBlockConfigItem
-from .block_run import BlockRun
-from .block_run_completed import BlockRunCompleted
-from .block_run_completed_data import BlockRunCompletedData
-from .block_run_completed_environment import BlockRunCompletedEnvironment
-from .block_run_failed import BlockRunFailed
-from .block_run_failed_data import BlockRunFailedData
-from .block_run_failed_environment import BlockRunFailedEnvironment
-from .block_run_started import BlockRunStarted
-from .block_run_started_data import BlockRunStartedData
-from .block_run_started_environment import BlockRunStartedEnvironment
-from .block_run_usage import BlockRunUsage
-from .block_state_updated import BlockStateUpdated
-from .block_state_updated_data import BlockStateUpdatedData
-from .block_state_updated_data_update_type import BlockStateUpdatedDataUpdateType
-from .block_state_updated_environment import BlockStateUpdatedEnvironment
-from .cancel_response import CancelResponse
-from .card_display_field import CardDisplayField
-from .channel import Channel
-from .check_box_column import CheckBoxColumn
-from .check_box_column_automation_config import CheckBoxColumnAutomationConfig
-from .collection import Collection
-from .collection_config import CollectionConfig
-from .collection_destination import CollectionDestination
-from .collection_view_state_input import CollectionViewStateInput
-from .collection_view_state_input_views_value import CollectionViewStateInputViewsValue
-from .collection_view_state_output import CollectionViewStateOutput
-from .collection_view_state_output_views_value import CollectionViewStateOutputViewsValue
-from .column_type import ColumnType
-from .column_type_base import ColumnTypeBase
-from .column_type_base_automation_config import ColumnTypeBaseAutomationConfig
-from .condition import Condition
-from .condition_field import ConditionField
-from .condition_operator import ConditionOperator
-from .connect_integration_request_auth_type import ConnectIntegrationRequestAuthType
-from .copilot import Copilot
-from .copilot_config import CopilotConfig
-from .copilot_config_code_theme import CopilotConfigCodeTheme
-from .copilot_config_fab_value import CopilotConfigFabValue
-from .copilot_config_mode import CopilotConfigMode
-from .create_integrations_response import CreateIntegrationsResponse
-from .create_tag_response import CreateTagResponse
-from .cron_trigger_config import CronTriggerConfig
-from .cron_trigger_config_action import CronTriggerConfigAction
-from .custom import Custom
-from .daily_usage import DailyUsage
-from .data_type import DataType
-from .date_time_column import DateTimeColumn
-from .date_time_column_automation_config import DateTimeColumnAutomationConfig
-from .default_input import DefaultInput
-from .default_output import DefaultOutput
-from .delete_trigger_response import DeleteTriggerResponse
-from .delete_view_response import DeleteViewResponse
-from .dependency import Dependency
-from .dimensions import Dimensions
-from .document import Document
-from .document_created_by import DocumentCreatedBy
-from .document_data_value import DocumentDataValue
-from .document_last_updated_by import DocumentLastUpdatedBy
-from .document_response import DocumentResponse
-from .edge_ui import EdgeUi
-from .environment import Environment
-from .environment_config import EnvironmentConfig
-from .environment_deployment_config import EnvironmentDeploymentConfig
-from .environment_deployment_config_revision_lookup import EnvironmentDeploymentConfigRevisionLookup
-from .environment_deployment_document import EnvironmentDeploymentDocument
-from .event_version import EventVersion
-from .execute_trigger_response import ExecuteTriggerResponse
-from .favor import Favor
-from .favorite_item import FavoriteItem
-from .file import File
-from .files_attribute import FilesAttribute
-from .files_response import FilesResponse
-from .filter_operator import FilterOperator
-from .filter_type import FilterType
-from .followup_email_request import FollowupEmailRequest
-from .friendly_invoice import FriendlyInvoice
-from .friendly_payment_methods import FriendlyPaymentMethods
-from .html_2_text import Html2Text
-from .http import Http
-from .http_validation_error import HttpValidationError
-from .identity import Identity
-from .identity_details import IdentityDetails
-from .identity_types import IdentityTypes
-from .integration import Integration
-from .integration_auth_type import IntegrationAuthType
-from .integration_connection import IntegrationConnection
-from .integration_connection_auth_type import IntegrationConnectionAuthType
-from .integration_connection_integration_type import IntegrationConnectionIntegrationType
-from .integration_with_connections import IntegrationWithConnections
-from .integration_with_connections_id import IntegrationWithConnectionsId
-from .interval import Interval
-from .interval_types import IntervalTypes
-from .invoice import Invoice
-from .invoice_meta import InvoiceMeta
-from .invoice_status import InvoiceStatus
-from .json_column import JsonColumn
-from .json_column_automation_config import JsonColumnAutomationConfig
-from .kanban_view_input import KanbanViewInput
-from .kanban_view_output import KanbanViewOutput
-from .kanban_view_settings import KanbanViewSettings
-from .legacy_identity import LegacyIdentity
-from .legacy_identity_details import LegacyIdentityDetails
-from .line_item import LineItem
-from .list_tags_response import ListTagsResponse
-from .list_triggers_response import ListTriggersResponse
-from .mapping import Mapping
-from .mark_down_with_context import MarkDownWithContext
-from .markdown_column import MarkdownColumn
-from .markdown_column_automation_config import MarkdownColumnAutomationConfig
-from .markdown_splitter_config import MarkdownSplitterConfig
-from .mcp_auth_type import McpAuthType
-from .message import Message
-from .message_chunk import MessageChunk
-from .model_provider import ModelProvider
-from .multi_page_crawler_settings_input import MultiPageCrawlerSettingsInput
-from .multi_page_crawler_settings_input_scraper import MultiPageCrawlerSettingsInputScraper
-from .multi_page_crawler_settings_input_text_extractor import MultiPageCrawlerSettingsInputTextExtractor
-from .multi_page_crawler_settings_output import MultiPageCrawlerSettingsOutput
-from .multi_page_crawler_settings_output_scraper import MultiPageCrawlerSettingsOutputScraper
-from .multi_page_crawler_settings_output_text_extractor import MultiPageCrawlerSettingsOutputTextExtractor
-from .multi_select_column import MultiSelectColumn
-from .multi_select_column_automation_config import MultiSelectColumnAutomationConfig
-from .node_ui import NodeUi
-from .notification import Notification
-from .notification_action import NotificationAction
-from .notification_action_type import NotificationActionType
-from .notification_severity import NotificationSeverity
-from .notification_type import NotificationType
-from .notion_filter_by import NotionFilterBy
-from .notion_filter_options import NotionFilterOptions
-from .number_column import NumberColumn
-from .number_column_automation_config import NumberColumnAutomationConfig
-from .number_column_default import NumberColumnDefault
-from .number_column_max_value import NumberColumnMaxValue
-from .number_column_min_value import NumberColumnMinValue
-from .o_auth_auth_type import OAuthAuthType
-from .organization import Organization
-from .paragraph_splitter_config import ParagraphSplitterConfig
-from .participant import Participant
-from .participant_type import ParticipantType
-from .placeholder_input import PlaceholderInput
-from .placeholder_input_type import PlaceholderInputType
-from .placeholder_output import PlaceholderOutput
-from .placeholder_output_type import PlaceholderOutputType
-from .plan_types import PlanTypes
-from .playwright import Playwright
-from .playwright_wait_for_load_state import PlaywrightWaitForLoadState
-from .position import Position
-from .prompt import Prompt
-from .prompt_role import PromptRole
-from .query_sort import QuerySort
-from .readability import Readability
-from .recursive_splitter_config import RecursiveSplitterConfig
-from .relation_column import RelationColumn
-from .relation_column_automation_config import RelationColumnAutomationConfig
-from .req_body import ReqBody
-from .request_body import RequestBody
-from .response_model_usage import ResponseModelUsage
-from .result import Result
-from .rule import Rule
-from .rules_input import RulesInput
-from .rules_output import RulesOutput
-from .run_log import RunLog
-from .run_log_pagination import RunLogPagination
-from .schedule import Schedule
-from .schema_response import SchemaResponse
-from .scout_user import ScoutUser
-from .select_column import SelectColumn
-from .select_column_automation_config import SelectColumnAutomationConfig
-from .select_option_item import SelectOptionItem
-from .sentence_splitter_config import SentenceSplitterConfig
-from .service_info import ServiceInfo
-from .single_page_crawler_settings_input import SinglePageCrawlerSettingsInput
-from .single_page_crawler_settings_input_scraper import SinglePageCrawlerSettingsInputScraper
-from .single_page_crawler_settings_input_text_extractor import SinglePageCrawlerSettingsInputTextExtractor
-from .single_page_crawler_settings_output import SinglePageCrawlerSettingsOutput
-from .single_page_crawler_settings_output_scraper import SinglePageCrawlerSettingsOutputScraper
-from .single_page_crawler_settings_output_text_extractor import SinglePageCrawlerSettingsOutputTextExtractor
-from .sitemap_crawler_settings_input import SitemapCrawlerSettingsInput
-from .sitemap_crawler_settings_input_scraper import SitemapCrawlerSettingsInputScraper
-from .sitemap_crawler_settings_input_text_extractor import SitemapCrawlerSettingsInputTextExtractor
-from .sitemap_crawler_settings_output import SitemapCrawlerSettingsOutput
-from .sitemap_crawler_settings_output_scraper import SitemapCrawlerSettingsOutputScraper
-from .sitemap_crawler_settings_output_text_extractor import SitemapCrawlerSettingsOutputTextExtractor
-from .slack_event_response import SlackEventResponse
-from .slack_trigger_config_input import SlackTriggerConfigInput
-from .slack_trigger_config_input_action import SlackTriggerConfigInputAction
-from .slack_trigger_config_output import SlackTriggerConfigOutput
-from .slack_trigger_config_output_action import SlackTriggerConfigOutputAction
-from .slack_url_verification import SlackUrlVerification
-from .sort_direction import SortDirection
-from .source_archetype import SourceArchetype
-from .source_archetype_integration_version import SourceArchetypeIntegrationVersion
-from .source_sync import SourceSync
-from .source_sync_crawl_settings_input import SourceSyncCrawlSettingsInput
-from .source_sync_crawl_settings_output import SourceSyncCrawlSettingsOutput
-from .source_sync_google_drive_settings import SourceSyncGoogleDriveSettings
-from .source_sync_notion_settings_input import SourceSyncNotionSettingsInput
-from .source_sync_notion_settings_output import SourceSyncNotionSettingsOutput
-from .source_sync_page_crawl_settings_input import SourceSyncPageCrawlSettingsInput
-from .source_sync_page_crawl_settings_output import SourceSyncPageCrawlSettingsOutput
-from .source_sync_sitemap_settings_input import SourceSyncSitemapSettingsInput
-from .source_sync_sitemap_settings_output import SourceSyncSitemapSettingsOutput
-from .source_sync_website_settings import SourceSyncWebsiteSettings
-from .source_sync_website_settings_splitter import SourceSyncWebsiteSettingsSplitter
-from .src_app_http_routes_billing_billing_hourly_data import SrcAppHttpRoutesBillingBillingHourlyData
-from .src_app_http_routes_billing_billing_hourly_response import SrcAppHttpRoutesBillingBillingHourlyResponse
-from .src_app_http_routes_billing_change_billing_plan_response import SrcAppHttpRoutesBillingChangeBillingPlanResponse
-from .src_app_http_routes_billing_create_portal_session_data import SrcAppHttpRoutesBillingCreatePortalSessionData
-from .src_app_http_routes_billing_create_portal_session_response import (
-    SrcAppHttpRoutesBillingCreatePortalSessionResponse,
-)
-from .src_app_http_routes_billing_free_plan_usage_data import SrcAppHttpRoutesBillingFreePlanUsageData
-from .src_app_http_routes_billing_free_plan_usage_response import SrcAppHttpRoutesBillingFreePlanUsageResponse
-from .src_app_http_routes_billing_get_billing_data import SrcAppHttpRoutesBillingGetBillingData
-from .src_app_http_routes_billing_get_billing_response import SrcAppHttpRoutesBillingGetBillingResponse
-from .src_app_http_routes_billing_get_info_get_info_response import SrcAppHttpRoutesBillingGetInfoGetInfoResponse
-from .src_app_http_routes_billing_get_invoices_data import SrcAppHttpRoutesBillingGetInvoicesData
-from .src_app_http_routes_billing_get_invoices_response import SrcAppHttpRoutesBillingGetInvoicesResponse
-from .src_app_http_routes_billing_get_notifications_response import SrcAppHttpRoutesBillingGetNotificationsResponse
-from .src_app_http_routes_billing_renew_plans_data import SrcAppHttpRoutesBillingRenewPlansData
-from .src_app_http_routes_billing_renew_plans_response import SrcAppHttpRoutesBillingRenewPlansResponse
-from .src_app_http_routes_collection_create_collection_response import (
-    SrcAppHttpRoutesCollectionCreateCollectionResponse,
-)
-from .src_app_http_routes_collection_create_sync_response import SrcAppHttpRoutesCollectionCreateSyncResponse
-from .src_app_http_routes_collection_create_table_response import SrcAppHttpRoutesCollectionCreateTableResponse
-from .src_app_http_routes_collection_delete_collection_response import (
-    SrcAppHttpRoutesCollectionDeleteCollectionResponse,
-)
-from .src_app_http_routes_collection_delete_documents_response import SrcAppHttpRoutesCollectionDeleteDocumentsResponse
-from .src_app_http_routes_collection_delete_sync_response import SrcAppHttpRoutesCollectionDeleteSyncResponse
-from .src_app_http_routes_collection_delete_table_response import SrcAppHttpRoutesCollectionDeleteTableResponse
-from .src_app_http_routes_collection_get_collection_response import SrcAppHttpRoutesCollectionGetCollectionResponse
-from .src_app_http_routes_collection_get_collections_response import SrcAppHttpRoutesCollectionGetCollectionsResponse
-from .src_app_http_routes_collection_get_document_response import SrcAppHttpRoutesCollectionGetDocumentResponse
-from .src_app_http_routes_collection_get_documents_response import SrcAppHttpRoutesCollectionGetDocumentsResponse
-from .src_app_http_routes_collection_get_sync_response import SrcAppHttpRoutesCollectionGetSyncResponse
-from .src_app_http_routes_collection_get_table_response import SrcAppHttpRoutesCollectionGetTableResponse
-from .src_app_http_routes_collection_get_tables_response import SrcAppHttpRoutesCollectionGetTablesResponse
-from .src_app_http_routes_collection_list_collection_syncs_response_model import (
-    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
-)
-from .src_app_http_routes_collection_list_source_archetypes_response_model import (
-    SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel,
-)
-from .src_app_http_routes_collection_parse_file_response import SrcAppHttpRoutesCollectionParseFileResponse
-from .src_app_http_routes_collection_sync_table_response import SrcAppHttpRoutesCollectionSyncTableResponse
-from .src_app_http_routes_collection_update_collection_response import (
-    SrcAppHttpRoutesCollectionUpdateCollectionResponse,
-)
-from .src_app_http_routes_collection_update_document_response import SrcAppHttpRoutesCollectionUpdateDocumentResponse
-from .src_app_http_routes_collection_update_sync_response import SrcAppHttpRoutesCollectionUpdateSyncResponse
-from .src_app_http_routes_collection_update_table_response import SrcAppHttpRoutesCollectionUpdateTableResponse
-from .src_app_http_routes_inbox_handle_message_incoming_message import SrcAppHttpRoutesInboxHandleMessageIncomingMessage
-from .src_app_http_routes_inbox_handle_message_incoming_message_content import (
-    SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent,
-)
-from .src_app_http_routes_inbox_handle_message_incoming_message_content_type import (
-    SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType,
-)
-from .src_app_http_routes_inbox_handle_message_interaction_request_participants_item import (
-    SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem,
-)
-from .src_app_http_routes_onboarding_followup_emails_data import SrcAppHttpRoutesOnboardingFollowupEmailsData
-from .src_app_http_routes_onboarding_followup_emails_response import SrcAppHttpRoutesOnboardingFollowupEmailsResponse
-from .src_app_http_routes_onboarding_handle_get_me_response import SrcAppHttpRoutesOnboardingHandleGetMeResponse
-from .src_app_http_routes_onboarding_handle_update_me_response import SrcAppHttpRoutesOnboardingHandleUpdateMeResponse
-from .src_app_http_routes_root_get_info_response import SrcAppHttpRoutesRootGetInfoResponse
-from .src_app_http_routes_trigger_create_trigger_response import SrcAppHttpRoutesTriggerCreateTriggerResponse
-from .src_app_http_routes_world_interact_incoming_message import SrcAppHttpRoutesWorldInteractIncomingMessage
-from .src_app_http_routes_world_interact_incoming_message_content import (
-    SrcAppHttpRoutesWorldInteractIncomingMessageContent,
-)
-from .src_app_http_routes_world_interact_incoming_message_content_item import (
-    SrcAppHttpRoutesWorldInteractIncomingMessageContentItem,
-)
-from .src_app_http_routes_world_interact_interaction_request import SrcAppHttpRoutesWorldInteractInteractionRequest
-from .src_handlers_create_copilot_response import SrcHandlersCreateCopilotResponse
-from .src_handlers_create_workflow_response import SrcHandlersCreateWorkflowResponse
-from .src_handlers_create_workflow_revision_response import SrcHandlersCreateWorkflowRevisionResponse
-from .src_handlers_delete_copilot_response import SrcHandlersDeleteCopilotResponse
-from .src_handlers_delete_workflow_response import SrcHandlersDeleteWorkflowResponse
-from .src_handlers_delete_workflow_revision_response import SrcHandlersDeleteWorkflowRevisionResponse
-from .src_handlers_get_copilot_response import SrcHandlersGetCopilotResponse
-from .src_handlers_get_workflow_environments_response import SrcHandlersGetWorkflowEnvironmentsResponse
-from .src_handlers_get_workflow_response import SrcHandlersGetWorkflowResponse
-from .src_handlers_list_copilots_response import SrcHandlersListCopilotsResponse
-from .src_handlers_list_workflow_revisions_response import SrcHandlersListWorkflowRevisionsResponse
-from .src_handlers_list_workflows_response import SrcHandlersListWorkflowsResponse
-from .src_handlers_promote_workflow_revision_response import SrcHandlersPromoteWorkflowRevisionResponse
-from .src_handlers_update_copilot_response import SrcHandlersUpdateCopilotResponse
-from .src_handlers_update_workflow_environment_response import SrcHandlersUpdateWorkflowEnvironmentResponse
-from .src_handlers_update_workflow_response import SrcHandlersUpdateWorkflowResponse
-from .stripe_provider import StripeProvider
-from .stripe_provider_meta import StripeProviderMeta
-from .subscription import Subscription
-from .sync import Sync
-from .sync_config_input import SyncConfigInput
-from .sync_config_input_source_settings import SyncConfigInputSourceSettings
-from .sync_config_output import SyncConfigOutput
-from .sync_config_output_source_settings import SyncConfigOutputSourceSettings
-from .table import Table
-from .table_config_output import TableConfigOutput
-from .table_config_output_schema_item import TableConfigOutputSchemaItem
-from .table_view_input import TableViewInput
-from .table_view_output import TableViewOutput
-from .table_view_settings import TableViewSettings
-from .table_view_settings_row_height import TableViewSettingsRowHeight
-from .tag import Tag
-from .text_extractor import TextExtractor
-from .text_extractor_config import TextExtractorConfig
-from .text_long_column import TextLongColumn
-from .text_long_column_automation_config import TextLongColumnAutomationConfig
-from .text_short_column import TextShortColumn
-from .text_short_column_automation_config import TextShortColumnAutomationConfig
-from .tool import Tool
-from .tools_data import ToolsData
-from .tools_response import ToolsResponse
-from .trafilatura_input import TrafilaturaInput
-from .trafilatura_input_trafilatura_type import TrafilaturaInputTrafilaturaType
-from .trafilatura_output import TrafilaturaOutput
-from .trafilatura_output_trafilatura_type import TrafilaturaOutputTrafilaturaType
-from .trigger import Trigger
-from .trigger_status import TriggerStatus
-from .trigger_trigger_config import TriggerTriggerConfig
-from .units import Units
-from .update_cron_auth_response import UpdateCronAuthResponse
-from .update_tag_response import UpdateTagResponse
-from .update_trigger_response import UpdateTriggerResponse
-from .url_column import UrlColumn
-from .url_column_automation_config import UrlColumnAutomationConfig
-from .usage import Usage
-from .usage_types import UsageTypes
-from .user import User
-from .user_identity import UserIdentity
-from .user_identity_details import UserIdentityDetails
-from .validation_error import ValidationError
-from .validation_error_loc_item import ValidationErrorLocItem
-from .view_filter import ViewFilter
-from .view_list_response import ViewListResponse
-from .view_list_response_data_item import ViewListResponseDataItem
-from .view_query_input import ViewQueryInput
-from .view_query_output import ViewQueryOutput
-from .view_response import ViewResponse
-from .view_response_data import ViewResponseData
-from .view_state_response import ViewStateResponse
-from .view_visibility import ViewVisibility
-from .workflow import Workflow
-from .workflow_actor import WorkflowActor
-from .workflow_actor_type import WorkflowActorType
-from .workflow_automation_config import WorkflowAutomationConfig
-from .workflow_config_input import WorkflowConfigInput
-from .workflow_config_output import WorkflowConfigOutput
-from .workflow_execute import WorkflowExecute
-from .workflow_note_input import WorkflowNoteInput
-from .workflow_note_output import WorkflowNoteOutput
-from .workflow_run import WorkflowRun
-from .workflow_run_completed import WorkflowRunCompleted
-from .workflow_run_completed_data import WorkflowRunCompletedData
-from .workflow_run_completed_environment import WorkflowRunCompletedEnvironment
-from .workflow_run_failed import WorkflowRunFailed
-from .workflow_run_failed_data import WorkflowRunFailedData
-from .workflow_run_failed_environment import WorkflowRunFailedEnvironment
-from .workflow_run_response import WorkflowRunResponse
-from .workflow_run_started import WorkflowRunStarted
-from .workflow_run_started_data import WorkflowRunStartedData
-from .workflow_run_started_environment import WorkflowRunStartedEnvironment
-from .workflow_run_state_value import WorkflowRunStateValue
-from .workflow_run_stop_reason import WorkflowRunStopReason
-from .workflow_run_stream_response import WorkflowRunStreamResponse
+import typing
+from importlib import import_module
+
+if typing.TYPE_CHECKING:
+    from .typescript_automation_config import TypescriptAutomationConfig
+    from .action_type import ActionType
+    from .activity_schema import ActivitySchema
+    from .actor import Actor
+    from .actor_identity import ActorIdentity
+    from .actor_identity_id import ActorIdentityId
+    from .actor_identity_type import ActorIdentityType
+    from .agent_hook import AgentHook
+    from .agent_hook_input import AgentHookInput
+    from .agent_revision import AgentRevision
+    from .agent_revision_model import AgentRevisionModel
+    from .agent_revision_response_style import AgentRevisionResponseStyle
+    from .agent_revision_tool_config_value import AgentRevisionToolConfigValue
+    from .agent_target_config import AgentTargetConfig
+    from .ai_agent import AiAgent
+    from .api_key_auth_type import ApiKeyAuthType
+    from .api_key_identity import ApiKeyIdentity
+    from .api_key_identity_details import ApiKeyIdentityDetails
+    from .automation_hook import AutomationHook
+    from .automation_hook_input import AutomationHookInput
+    from .automation_target_config import AutomationTargetConfig
+    from .bare_input import BareInput
+    from .bare_output import BareOutput
+    from .baseline import Baseline
+    from .billing import Billing
+    from .billing_cycle import BillingCycle
+    from .billing_cycles import BillingCycles
+    from .billing_limits import BillingLimits
+    from .billing_usage import BillingUsage
+    from .block_config_item_boolean import BlockConfigItemBoolean
+    from .block_config_item_json import BlockConfigItemJson
+    from .block_config_item_llm import BlockConfigItemLlm
+    from .block_config_item_number import BlockConfigItemNumber
+    from .block_config_item_number_default_value import BlockConfigItemNumberDefaultValue
+    from .block_config_item_number_maximum_value import BlockConfigItemNumberMaximumValue
+    from .block_config_item_number_minimum_value import BlockConfigItemNumberMinimumValue
+    from .block_config_item_number_value import BlockConfigItemNumberValue
+    from .block_config_item_select import BlockConfigItemSelect
+    from .block_config_item_text_long import BlockConfigItemTextLong
+    from .block_config_item_text_long_value import BlockConfigItemTextLongValue
+    from .block_config_item_text_short import BlockConfigItemTextShort
+    from .block_input import BlockInput
+    from .block_input_block_config_item import BlockInputBlockConfigItem
+    from .block_output import BlockOutput
+    from .block_output_block_config_item import BlockOutputBlockConfigItem
+    from .block_run import BlockRun
+    from .block_run_completed import BlockRunCompleted
+    from .block_run_completed_data import BlockRunCompletedData
+    from .block_run_completed_environment import BlockRunCompletedEnvironment
+    from .block_run_failed import BlockRunFailed
+    from .block_run_failed_data import BlockRunFailedData
+    from .block_run_failed_environment import BlockRunFailedEnvironment
+    from .block_run_started import BlockRunStarted
+    from .block_run_started_data import BlockRunStartedData
+    from .block_run_started_environment import BlockRunStartedEnvironment
+    from .block_run_usage import BlockRunUsage
+    from .block_state_updated import BlockStateUpdated
+    from .block_state_updated_data import BlockStateUpdatedData
+    from .block_state_updated_data_update_type import BlockStateUpdatedDataUpdateType
+    from .block_state_updated_environment import BlockStateUpdatedEnvironment
+    from .cancel_response import CancelResponse
+    from .card_display_field import CardDisplayField
+    from .channel import Channel
+    from .check_box_column import CheckBoxColumn
+    from .collection import Collection
+    from .collection_config import CollectionConfig
+    from .collection_destination import CollectionDestination
+    from .collection_view_state_input import CollectionViewStateInput
+    from .collection_view_state_input_views_value import CollectionViewStateInputViewsValue
+    from .collection_view_state_output import CollectionViewStateOutput
+    from .collection_view_state_output_views_value import CollectionViewStateOutputViewsValue
+    from .column_type import ColumnType
+    from .column_type_base import ColumnTypeBase
+    from .condition import Condition
+    from .condition_field import ConditionField
+    from .condition_operator import ConditionOperator
+    from .connect_integration_request_auth_type import ConnectIntegrationRequestAuthType
+    from .copilot import Copilot
+    from .copilot_config import CopilotConfig
+    from .copilot_config_code_theme import CopilotConfigCodeTheme
+    from .copilot_config_fab_value import CopilotConfigFabValue
+    from .copilot_config_mode import CopilotConfigMode
+    from .create_entity_request import CreateEntityRequest
+    from .create_hook_webhooks_post_request import CreateHookWebhooksPostRequest
+    from .create_hook_webhooks_post_response import CreateHookWebhooksPostResponse
+    from .create_integrations_response import CreateIntegrationsResponse
+    from .create_pulse_response import CreatePulseResponse
+    from .create_tag_response import CreateTagResponse
+    from .cron_trigger_config import CronTriggerConfig
+    from .cron_trigger_config_action import CronTriggerConfigAction
+    from .custom import Custom
+    from .daily_usage import DailyUsage
+    from .data_type import DataType
+    from .date_time_column import DateTimeColumn
+    from .default_input import DefaultInput
+    from .default_output import DefaultOutput
+    from .delete_hook_response import DeleteHookResponse
+    from .delete_response import DeleteResponse
+    from .delete_trigger_response import DeleteTriggerResponse
+    from .delete_view_response import DeleteViewResponse
+    from .dependency import Dependency
+    from .determined_billing_limits import DeterminedBillingLimits
+    from .dimensions import Dimensions
+    from .document import Document
+    from .document_created_by import DocumentCreatedBy
+    from .document_data_value import DocumentDataValue
+    from .document_last_updated_by import DocumentLastUpdatedBy
+    from .document_response import DocumentResponse
+    from .edge_ui import EdgeUi
+    from .entity_response import EntityResponse
+    from .entity_search_request_mode import EntitySearchRequestMode
+    from .entity_search_request_return_format import EntitySearchRequestReturnFormat
+    from .environment import Environment
+    from .environment_config import EnvironmentConfig
+    from .environment_deployment_config import EnvironmentDeploymentConfig
+    from .environment_deployment_config_revision_lookup import EnvironmentDeploymentConfigRevisionLookup
+    from .environment_deployment_document import EnvironmentDeploymentDocument
+    from .event_version import EventVersion
+    from .execute_tool_response import ExecuteToolResponse
+    from .execute_trigger_response import ExecuteTriggerResponse
+    from .favor import Favor
+    from .favorite_item import FavoriteItem
+    from .favorite_ref import FavoriteRef
+    from .field_mapping import FieldMapping
+    from .file import File
+    from .files_attribute import FilesAttribute
+    from .files_response import FilesResponse
+    from .filter_operator import FilterOperator
+    from .filter_type import FilterType
+    from .fluent_query_request_with_item import FluentQueryRequestWithItem
+    from .friendly_invoice import FriendlyInvoice
+    from .friendly_payment_methods import FriendlyPaymentMethods
+    from .get_hook_webhooks_hook_id_details_get_response import GetHookWebhooksHookIdDetailsGetResponse
+    from .hooks_list_response import HooksListResponse
+    from .html_2_text import Html2Text
+    from .http import Http
+    from .http_validation_error import HttpValidationError
+    from .identity import Identity
+    from .identity_details import IdentityDetails
+    from .identity_types import IdentityTypes
+    from .integration import Integration
+    from .integration_auth_type import IntegrationAuthType
+    from .integration_connection import IntegrationConnection
+    from .integration_connection_auth_type import IntegrationConnectionAuthType
+    from .integration_connection_integration_type import IntegrationConnectionIntegrationType
+    from .integration_with_connections import IntegrationWithConnections
+    from .integration_with_connections_id import IntegrationWithConnectionsId
+    from .interval import Interval
+    from .interval_types import IntervalTypes
+    from .invoice import Invoice
+    from .invoice_meta import InvoiceMeta
+    from .invoice_status import InvoiceStatus
+    from .json_column import JsonColumn
+    from .kanban_view_input import KanbanViewInput
+    from .kanban_view_output import KanbanViewOutput
+    from .kanban_view_settings_input import KanbanViewSettingsInput
+    from .kanban_view_settings_output import KanbanViewSettingsOutput
+    from .legacy_identity import LegacyIdentity
+    from .legacy_identity_details import LegacyIdentityDetails
+    from .line_item import LineItem
+    from .list_tags_response import ListTagsResponse
+    from .list_tools_response import ListToolsResponse
+    from .list_triggers_response import ListTriggersResponse
+    from .mapping import Mapping
+    from .mark_down_with_context import MarkDownWithContext
+    from .markdown_column import MarkdownColumn
+    from .markdown_splitter_config import MarkdownSplitterConfig
+    from .mcp_auth_type import McpAuthType
+    from .me import Me
+    from .mention import Mention
+    from .mention_participant import MentionParticipant
+    from .message import Message
+    from .message_chunk import MessageChunk
+    from .model_provider import ModelProvider
+    from .multi_page_crawler_settings_input import MultiPageCrawlerSettingsInput
+    from .multi_page_crawler_settings_input_scraper import MultiPageCrawlerSettingsInputScraper
+    from .multi_page_crawler_settings_input_text_extractor import MultiPageCrawlerSettingsInputTextExtractor
+    from .multi_page_crawler_settings_output import MultiPageCrawlerSettingsOutput
+    from .multi_page_crawler_settings_output_scraper import MultiPageCrawlerSettingsOutputScraper
+    from .multi_page_crawler_settings_output_text_extractor import MultiPageCrawlerSettingsOutputTextExtractor
+    from .multi_select_column import MultiSelectColumn
+    from .node_ui import NodeUi
+    from .notification import Notification
+    from .notification_action import NotificationAction
+    from .notification_action_type import NotificationActionType
+    from .notification_severity import NotificationSeverity
+    from .notification_type import NotificationType
+    from .notion_filter_by import NotionFilterBy
+    from .notion_filter_options import NotionFilterOptions
+    from .number_column import NumberColumn
+    from .number_column_default import NumberColumnDefault
+    from .number_column_max_value import NumberColumnMaxValue
+    from .number_column_min_value import NumberColumnMinValue
+    from .o_auth_auth_type import OAuthAuthType
+    from .organization import Organization
+    from .paragraph_splitter_config import ParagraphSplitterConfig
+    from .participant import Participant
+    from .participant_type import ParticipantType
+    from .people_column import PeopleColumn
+    from .placeholder_input import PlaceholderInput
+    from .placeholder_input_type import PlaceholderInputType
+    from .placeholder_output import PlaceholderOutput
+    from .placeholder_output_type import PlaceholderOutputType
+    from .plan_types import PlanTypes
+    from .playwright import Playwright
+    from .playwright_wait_for_load_state import PlaywrightWaitForLoadState
+    from .position import Position
+    from .prompt import Prompt
+    from .prompt_role import PromptRole
+    from .pulse_feed_response import PulseFeedResponse
+    from .pulse_hook import PulseHook
+    from .pulse_hook_input import PulseHookInput
+    from .pulse_target_config import PulseTargetConfig
+    from .query_builder_request_group_by_item import QueryBuilderRequestGroupByItem
+    from .query_builder_request_sort_by import QueryBuilderRequestSortBy
+    from .query_builder_request_sort_direction import QueryBuilderRequestSortDirection
+    from .query_builder_request_tag_mode import QueryBuilderRequestTagMode
+    from .query_sort import QuerySort
+    from .readability import Readability
+    from .recursive_splitter_config import RecursiveSplitterConfig
+    from .relation_column import RelationColumn
+    from .rename_response import RenameResponse
+    from .req_body import ReqBody
+    from .request_body import RequestBody
+    from .resource import Resource
+    from .resource_resource_type import ResourceResourceType
+    from .response_model_usage import ResponseModelUsage
+    from .result import Result
+    from .rule import Rule
+    from .rules_input import RulesInput
+    from .rules_output import RulesOutput
+    from .run_log import RunLog
+    from .run_log_pagination import RunLogPagination
+    from .schedule import Schedule
+    from .schema_response import SchemaResponse
+    from .schemas_response import SchemasResponse
+    from .scout_hook import ScoutHook
+    from .scout_hook_config_http import ScoutHookConfigHttp
+    from .scout_hook_event_discriminator import ScoutHookEventDiscriminator
+    from .scout_hook_event_discriminator_type import ScoutHookEventDiscriminatorType
+    from .scout_hook_event_trigger import ScoutHookEventTrigger
+    from .scout_hook_response import ScoutHookResponse
+    from .scout_hook_update import ScoutHookUpdate
+    from .scout_hook_update_triggering_events_item import ScoutHookUpdateTriggeringEventsItem
+    from .scout_hooks_response import ScoutHooksResponse
+    from .scout_user import ScoutUser
+    from .search_request_search_type import SearchRequestSearchType
+    from .select_column import SelectColumn
+    from .select_option_item import SelectOptionItem
+    from .sentence_splitter_config import SentenceSplitterConfig
+    from .service_info import ServiceInfo
+    from .single_page_crawler_settings_input import SinglePageCrawlerSettingsInput
+    from .single_page_crawler_settings_input_scraper import SinglePageCrawlerSettingsInputScraper
+    from .single_page_crawler_settings_input_text_extractor import SinglePageCrawlerSettingsInputTextExtractor
+    from .single_page_crawler_settings_output import SinglePageCrawlerSettingsOutput
+    from .single_page_crawler_settings_output_scraper import SinglePageCrawlerSettingsOutputScraper
+    from .single_page_crawler_settings_output_text_extractor import SinglePageCrawlerSettingsOutputTextExtractor
+    from .sitemap_crawler_settings_input import SitemapCrawlerSettingsInput
+    from .sitemap_crawler_settings_input_scraper import SitemapCrawlerSettingsInputScraper
+    from .sitemap_crawler_settings_input_text_extractor import SitemapCrawlerSettingsInputTextExtractor
+    from .sitemap_crawler_settings_output import SitemapCrawlerSettingsOutput
+    from .sitemap_crawler_settings_output_scraper import SitemapCrawlerSettingsOutputScraper
+    from .sitemap_crawler_settings_output_text_extractor import SitemapCrawlerSettingsOutputTextExtractor
+    from .slack_event_response import SlackEventResponse
+    from .slack_trigger_config_input import SlackTriggerConfigInput
+    from .slack_trigger_config_input_action import SlackTriggerConfigInputAction
+    from .slack_trigger_config_output import SlackTriggerConfigOutput
+    from .slack_trigger_config_output_action import SlackTriggerConfigOutputAction
+    from .slack_url_verification import SlackUrlVerification
+    from .sort_direction import SortDirection
+    from .source_archetype import SourceArchetype
+    from .source_archetype_integration_version import SourceArchetypeIntegrationVersion
+    from .source_sync import SourceSync
+    from .source_sync_crawl_settings_input import SourceSyncCrawlSettingsInput
+    from .source_sync_crawl_settings_input_mode import SourceSyncCrawlSettingsInputMode
+    from .source_sync_crawl_settings_output import SourceSyncCrawlSettingsOutput
+    from .source_sync_crawl_settings_output_mode import SourceSyncCrawlSettingsOutputMode
+    from .source_sync_google_drive_settings import SourceSyncGoogleDriveSettings
+    from .source_sync_notion_settings_input import SourceSyncNotionSettingsInput
+    from .source_sync_notion_settings_output import SourceSyncNotionSettingsOutput
+    from .source_sync_page_crawl_settings_input import SourceSyncPageCrawlSettingsInput
+    from .source_sync_page_crawl_settings_input_mode import SourceSyncPageCrawlSettingsInputMode
+    from .source_sync_page_crawl_settings_output import SourceSyncPageCrawlSettingsOutput
+    from .source_sync_page_crawl_settings_output_mode import SourceSyncPageCrawlSettingsOutputMode
+    from .source_sync_sitemap_settings_input import SourceSyncSitemapSettingsInput
+    from .source_sync_sitemap_settings_input_mode import SourceSyncSitemapSettingsInputMode
+    from .source_sync_sitemap_settings_output import SourceSyncSitemapSettingsOutput
+    from .source_sync_sitemap_settings_output_mode import SourceSyncSitemapSettingsOutputMode
+    from .source_sync_website_settings import SourceSyncWebsiteSettings
+    from .source_sync_website_settings_splitter import SourceSyncWebsiteSettingsSplitter
+    from .src_app_http_routes_billing_billing_hourly_data import SrcAppHttpRoutesBillingBillingHourlyData
+    from .src_app_http_routes_billing_billing_hourly_response import SrcAppHttpRoutesBillingBillingHourlyResponse
+    from .src_app_http_routes_billing_change_billing_plan_response import (
+        SrcAppHttpRoutesBillingChangeBillingPlanResponse,
+    )
+    from .src_app_http_routes_billing_create_portal_session_data import SrcAppHttpRoutesBillingCreatePortalSessionData
+    from .src_app_http_routes_billing_create_portal_session_response import (
+        SrcAppHttpRoutesBillingCreatePortalSessionResponse,
+    )
+    from .src_app_http_routes_billing_free_plan_usage_data import SrcAppHttpRoutesBillingFreePlanUsageData
+    from .src_app_http_routes_billing_free_plan_usage_response import SrcAppHttpRoutesBillingFreePlanUsageResponse
+    from .src_app_http_routes_billing_get_billing_data import SrcAppHttpRoutesBillingGetBillingData
+    from .src_app_http_routes_billing_get_billing_response import SrcAppHttpRoutesBillingGetBillingResponse
+    from .src_app_http_routes_billing_get_info_get_info_response import SrcAppHttpRoutesBillingGetInfoGetInfoResponse
+    from .src_app_http_routes_billing_get_invoices_data import SrcAppHttpRoutesBillingGetInvoicesData
+    from .src_app_http_routes_billing_get_invoices_response import SrcAppHttpRoutesBillingGetInvoicesResponse
+    from .src_app_http_routes_billing_get_notifications_response import SrcAppHttpRoutesBillingGetNotificationsResponse
+    from .src_app_http_routes_billing_renew_plans_data import SrcAppHttpRoutesBillingRenewPlansData
+    from .src_app_http_routes_billing_renew_plans_response import SrcAppHttpRoutesBillingRenewPlansResponse
+    from .src_app_http_routes_collection_create_collection_response import (
+        SrcAppHttpRoutesCollectionCreateCollectionResponse,
+    )
+    from .src_app_http_routes_collection_create_sync_response import SrcAppHttpRoutesCollectionCreateSyncResponse
+    from .src_app_http_routes_collection_create_table_response import SrcAppHttpRoutesCollectionCreateTableResponse
+    from .src_app_http_routes_collection_delete_collection_response import (
+        SrcAppHttpRoutesCollectionDeleteCollectionResponse,
+    )
+    from .src_app_http_routes_collection_delete_documents_response import (
+        SrcAppHttpRoutesCollectionDeleteDocumentsResponse,
+    )
+    from .src_app_http_routes_collection_delete_sync_response import SrcAppHttpRoutesCollectionDeleteSyncResponse
+    from .src_app_http_routes_collection_delete_table_response import SrcAppHttpRoutesCollectionDeleteTableResponse
+    from .src_app_http_routes_collection_get_collection_response import SrcAppHttpRoutesCollectionGetCollectionResponse
+    from .src_app_http_routes_collection_get_collections_response import (
+        SrcAppHttpRoutesCollectionGetCollectionsResponse,
+    )
+    from .src_app_http_routes_collection_get_document_response import SrcAppHttpRoutesCollectionGetDocumentResponse
+    from .src_app_http_routes_collection_get_documents_response import SrcAppHttpRoutesCollectionGetDocumentsResponse
+    from .src_app_http_routes_collection_get_sync_response import SrcAppHttpRoutesCollectionGetSyncResponse
+    from .src_app_http_routes_collection_get_syncs_response import SrcAppHttpRoutesCollectionGetSyncsResponse
+    from .src_app_http_routes_collection_get_table_response import SrcAppHttpRoutesCollectionGetTableResponse
+    from .src_app_http_routes_collection_get_tables_response import SrcAppHttpRoutesCollectionGetTablesResponse
+    from .src_app_http_routes_collection_list_collection_syncs_response_model import (
+        SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
+    )
+    from .src_app_http_routes_collection_list_source_archetypes_response_model import (
+        SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel,
+    )
+    from .src_app_http_routes_collection_parse_file_response import SrcAppHttpRoutesCollectionParseFileResponse
+    from .src_app_http_routes_collection_sync_table_response import SrcAppHttpRoutesCollectionSyncTableResponse
+    from .src_app_http_routes_collection_update_collection_response import (
+        SrcAppHttpRoutesCollectionUpdateCollectionResponse,
+    )
+    from .src_app_http_routes_collection_update_document_response import (
+        SrcAppHttpRoutesCollectionUpdateDocumentResponse,
+    )
+    from .src_app_http_routes_collection_update_sync_response import SrcAppHttpRoutesCollectionUpdateSyncResponse
+    from .src_app_http_routes_collection_update_table_response import SrcAppHttpRoutesCollectionUpdateTableResponse
+    from .src_app_http_routes_drive_create_drive_crawl_payload_source_sync_settings import (
+        SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings,
+    )
+    from .src_app_http_routes_inbox_handle_message_incoming_message import (
+        SrcAppHttpRoutesInboxHandleMessageIncomingMessage,
+    )
+    from .src_app_http_routes_inbox_handle_message_incoming_message_content import (
+        SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent,
+    )
+    from .src_app_http_routes_inbox_handle_message_incoming_message_content_type import (
+        SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType,
+    )
+    from .src_app_http_routes_inbox_handle_message_interaction_request_participants_item import (
+        SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem,
+    )
+    from .src_app_http_routes_onboarding_handle_get_me_response import SrcAppHttpRoutesOnboardingHandleGetMeResponse
+    from .src_app_http_routes_onboarding_handle_update_me_response import (
+        SrcAppHttpRoutesOnboardingHandleUpdateMeResponse,
+    )
+    from .src_app_http_routes_root_get_info_response import SrcAppHttpRoutesRootGetInfoResponse
+    from .src_app_http_routes_trigger_create_trigger_response import SrcAppHttpRoutesTriggerCreateTriggerResponse
+    from .src_app_http_routes_world_interact_incoming_message import SrcAppHttpRoutesWorldInteractIncomingMessage
+    from .src_app_http_routes_world_interact_incoming_message_content import (
+        SrcAppHttpRoutesWorldInteractIncomingMessageContent,
+    )
+    from .src_app_http_routes_world_interact_incoming_message_content_item import (
+        SrcAppHttpRoutesWorldInteractIncomingMessageContentItem,
+    )
+    from .src_app_http_routes_world_interact_interaction_request import SrcAppHttpRoutesWorldInteractInteractionRequest
+    from .src_handlers_create_copilot_response import SrcHandlersCreateCopilotResponse
+    from .src_handlers_create_workflow_response import SrcHandlersCreateWorkflowResponse
+    from .src_handlers_create_workflow_revision_response import SrcHandlersCreateWorkflowRevisionResponse
+    from .src_handlers_delete_copilot_response import SrcHandlersDeleteCopilotResponse
+    from .src_handlers_delete_workflow_response import SrcHandlersDeleteWorkflowResponse
+    from .src_handlers_delete_workflow_revision_response import SrcHandlersDeleteWorkflowRevisionResponse
+    from .src_handlers_get_copilot_response import SrcHandlersGetCopilotResponse
+    from .src_handlers_get_workflow_environments_response import SrcHandlersGetWorkflowEnvironmentsResponse
+    from .src_handlers_get_workflow_response import SrcHandlersGetWorkflowResponse
+    from .src_handlers_list_copilots_response import SrcHandlersListCopilotsResponse
+    from .src_handlers_list_workflow_revisions_response import SrcHandlersListWorkflowRevisionsResponse
+    from .src_handlers_list_workflows_response import SrcHandlersListWorkflowsResponse
+    from .src_handlers_promote_workflow_revision_response import SrcHandlersPromoteWorkflowRevisionResponse
+    from .src_handlers_update_copilot_response import SrcHandlersUpdateCopilotResponse
+    from .src_handlers_update_workflow_environment_response import SrcHandlersUpdateWorkflowEnvironmentResponse
+    from .src_handlers_update_workflow_response import SrcHandlersUpdateWorkflowResponse
+    from .store_response import StoreResponse
+    from .stripe_provider import StripeProvider
+    from .stripe_provider_meta import StripeProviderMeta
+    from .subscription import Subscription
+    from .sync import Sync
+    from .sync_config_input import SyncConfigInput
+    from .sync_config_input_source_settings import SyncConfigInputSourceSettings
+    from .sync_config_output import SyncConfigOutput
+    from .sync_config_output_source_settings import SyncConfigOutputSourceSettings
+    from .table import Table
+    from .table_config_output import TableConfigOutput
+    from .table_config_output_schema_item import TableConfigOutputSchemaItem
+    from .table_view_input import TableViewInput
+    from .table_view_output import TableViewOutput
+    from .table_view_settings_input import TableViewSettingsInput
+    from .table_view_settings_input_row_height import TableViewSettingsInputRowHeight
+    from .table_view_settings_output import TableViewSettingsOutput
+    from .table_view_settings_output_row_height import TableViewSettingsOutputRowHeight
+    from .tag import Tag
+    from .tags_response import TagsResponse
+    from .text_extractor import TextExtractor
+    from .text_extractor_config import TextExtractorConfig
+    from .text_long_column import TextLongColumn
+    from .text_short_column import TextShortColumn
+    from .tool import Tool
+    from .tool_config_resource import ToolConfigResource
+    from .tool_config_resource_type import ToolConfigResourceType
+    from .tool_details import ToolDetails
+    from .tools_data import ToolsData
+    from .tools_response import ToolsResponse
+    from .trafilatura_input import TrafilaturaInput
+    from .trafilatura_input_trafilatura_type import TrafilaturaInputTrafilaturaType
+    from .trafilatura_output import TrafilaturaOutput
+    from .trafilatura_output_trafilatura_type import TrafilaturaOutputTrafilaturaType
+    from .trigger import Trigger
+    from .trigger_status import TriggerStatus
+    from .trigger_trigger_config import TriggerTriggerConfig
+    from .units import Units
+    from .update_cron_auth_response import UpdateCronAuthResponse
+    from .update_tag_response import UpdateTagResponse
+    from .update_trigger_response import UpdateTriggerResponse
+    from .url_column import UrlColumn
+    from .usage import Usage
+    from .usage_types import UsageTypes
+    from .user_identity import UserIdentity
+    from .user_identity_details import UserIdentityDetails
+    from .user_organization_config import UserOrganizationConfig
+    from .validation_error import ValidationError
+    from .validation_error_loc_item import ValidationErrorLocItem
+    from .view_filter import ViewFilter
+    from .view_list_response import ViewListResponse
+    from .view_list_response_data_item import ViewListResponseDataItem
+    from .view_query_input import ViewQueryInput
+    from .view_query_output import ViewQueryOutput
+    from .view_response import ViewResponse
+    from .view_response_data import ViewResponseData
+    from .view_state_response import ViewStateResponse
+    from .view_visibility import ViewVisibility
+    from .workflow import Workflow
+    from .workflow_actor import WorkflowActor
+    from .workflow_actor_type import WorkflowActorType
+    from .workflow_config_input import WorkflowConfigInput
+    from .workflow_config_output import WorkflowConfigOutput
+    from .workflow_execute import WorkflowExecute
+    from .workflow_hook import WorkflowHook
+    from .workflow_hook_input import WorkflowHookInput
+    from .workflow_note_input import WorkflowNoteInput
+    from .workflow_note_output import WorkflowNoteOutput
+    from .workflow_run import WorkflowRun
+    from .workflow_run_completed import WorkflowRunCompleted
+    from .workflow_run_completed_data import WorkflowRunCompletedData
+    from .workflow_run_completed_environment import WorkflowRunCompletedEnvironment
+    from .workflow_run_failed import WorkflowRunFailed
+    from .workflow_run_failed_data import WorkflowRunFailedData
+    from .workflow_run_failed_environment import WorkflowRunFailedEnvironment
+    from .workflow_run_response import WorkflowRunResponse
+    from .workflow_run_started import WorkflowRunStarted
+    from .workflow_run_started_data import WorkflowRunStartedData
+    from .workflow_run_started_environment import WorkflowRunStartedEnvironment
+    from .workflow_run_state_value import WorkflowRunStateValue
+    from .workflow_run_stop_reason import WorkflowRunStopReason
+    from .workflow_run_stream_response import WorkflowRunStreamResponse
+    from .workflow_target_config import WorkflowTargetConfig
+_dynamic_imports: typing.Dict[str, str] = {
+    "ActionType": ".action_type",
+    "ActivitySchema": ".activity_schema",
+    "Actor": ".actor",
+    "ActorIdentity": ".actor_identity",
+    "ActorIdentityId": ".actor_identity_id",
+    "ActorIdentityType": ".actor_identity_type",
+    "AgentHook": ".agent_hook",
+    "AgentHookInput": ".agent_hook_input",
+    "AgentRevision": ".agent_revision",
+    "AgentRevisionModel": ".agent_revision_model",
+    "AgentRevisionResponseStyle": ".agent_revision_response_style",
+    "AgentRevisionToolConfigValue": ".agent_revision_tool_config_value",
+    "AgentTargetConfig": ".agent_target_config",
+    "AiAgent": ".ai_agent",
+    "ApiKeyAuthType": ".api_key_auth_type",
+    "ApiKeyIdentity": ".api_key_identity",
+    "ApiKeyIdentityDetails": ".api_key_identity_details",
+    "AutomationHook": ".automation_hook",
+    "AutomationHookInput": ".automation_hook_input",
+    "AutomationTargetConfig": ".automation_target_config",
+    "BareInput": ".bare_input",
+    "BareOutput": ".bare_output",
+    "Baseline": ".baseline",
+    "Billing": ".billing",
+    "BillingCycle": ".billing_cycle",
+    "BillingCycles": ".billing_cycles",
+    "BillingLimits": ".billing_limits",
+    "BillingUsage": ".billing_usage",
+    "BlockConfigItemBoolean": ".block_config_item_boolean",
+    "BlockConfigItemJson": ".block_config_item_json",
+    "BlockConfigItemLlm": ".block_config_item_llm",
+    "BlockConfigItemNumber": ".block_config_item_number",
+    "BlockConfigItemNumberDefaultValue": ".block_config_item_number_default_value",
+    "BlockConfigItemNumberMaximumValue": ".block_config_item_number_maximum_value",
+    "BlockConfigItemNumberMinimumValue": ".block_config_item_number_minimum_value",
+    "BlockConfigItemNumberValue": ".block_config_item_number_value",
+    "BlockConfigItemSelect": ".block_config_item_select",
+    "BlockConfigItemTextLong": ".block_config_item_text_long",
+    "BlockConfigItemTextLongValue": ".block_config_item_text_long_value",
+    "BlockConfigItemTextShort": ".block_config_item_text_short",
+    "BlockInput": ".block_input",
+    "BlockInputBlockConfigItem": ".block_input_block_config_item",
+    "BlockOutput": ".block_output",
+    "BlockOutputBlockConfigItem": ".block_output_block_config_item",
+    "BlockRun": ".block_run",
+    "BlockRunCompleted": ".block_run_completed",
+    "BlockRunCompletedData": ".block_run_completed_data",
+    "BlockRunCompletedEnvironment": ".block_run_completed_environment",
+    "BlockRunFailed": ".block_run_failed",
+    "BlockRunFailedData": ".block_run_failed_data",
+    "BlockRunFailedEnvironment": ".block_run_failed_environment",
+    "BlockRunStarted": ".block_run_started",
+    "BlockRunStartedData": ".block_run_started_data",
+    "BlockRunStartedEnvironment": ".block_run_started_environment",
+    "BlockRunUsage": ".block_run_usage",
+    "BlockStateUpdated": ".block_state_updated",
+    "BlockStateUpdatedData": ".block_state_updated_data",
+    "BlockStateUpdatedDataUpdateType": ".block_state_updated_data_update_type",
+    "BlockStateUpdatedEnvironment": ".block_state_updated_environment",
+    "CancelResponse": ".cancel_response",
+    "CardDisplayField": ".card_display_field",
+    "Channel": ".channel",
+    "CheckBoxColumn": ".check_box_column",
+    "Collection": ".collection",
+    "CollectionConfig": ".collection_config",
+    "CollectionDestination": ".collection_destination",
+    "CollectionViewStateInput": ".collection_view_state_input",
+    "CollectionViewStateInputViewsValue": ".collection_view_state_input_views_value",
+    "CollectionViewStateOutput": ".collection_view_state_output",
+    "CollectionViewStateOutputViewsValue": ".collection_view_state_output_views_value",
+    "ColumnType": ".column_type",
+    "ColumnTypeBase": ".column_type_base",
+    "Condition": ".condition",
+    "ConditionField": ".condition_field",
+    "ConditionOperator": ".condition_operator",
+    "ConnectIntegrationRequestAuthType": ".connect_integration_request_auth_type",
+    "Copilot": ".copilot",
+    "CopilotConfig": ".copilot_config",
+    "CopilotConfigCodeTheme": ".copilot_config_code_theme",
+    "CopilotConfigFabValue": ".copilot_config_fab_value",
+    "CopilotConfigMode": ".copilot_config_mode",
+    "CreateEntityRequest": ".create_entity_request",
+    "CreateHookWebhooksPostRequest": ".create_hook_webhooks_post_request",
+    "CreateHookWebhooksPostResponse": ".create_hook_webhooks_post_response",
+    "CreateIntegrationsResponse": ".create_integrations_response",
+    "CreatePulseResponse": ".create_pulse_response",
+    "CreateTagResponse": ".create_tag_response",
+    "CronTriggerConfig": ".cron_trigger_config",
+    "CronTriggerConfigAction": ".cron_trigger_config_action",
+    "Custom": ".custom",
+    "DailyUsage": ".daily_usage",
+    "DataType": ".data_type",
+    "DateTimeColumn": ".date_time_column",
+    "DefaultInput": ".default_input",
+    "DefaultOutput": ".default_output",
+    "DeleteHookResponse": ".delete_hook_response",
+    "DeleteResponse": ".delete_response",
+    "DeleteTriggerResponse": ".delete_trigger_response",
+    "DeleteViewResponse": ".delete_view_response",
+    "Dependency": ".dependency",
+    "DeterminedBillingLimits": ".determined_billing_limits",
+    "Dimensions": ".dimensions",
+    "Document": ".document",
+    "DocumentCreatedBy": ".document_created_by",
+    "DocumentDataValue": ".document_data_value",
+    "DocumentLastUpdatedBy": ".document_last_updated_by",
+    "DocumentResponse": ".document_response",
+    "EdgeUi": ".edge_ui",
+    "EntityResponse": ".entity_response",
+    "EntitySearchRequestMode": ".entity_search_request_mode",
+    "EntitySearchRequestReturnFormat": ".entity_search_request_return_format",
+    "Environment": ".environment",
+    "EnvironmentConfig": ".environment_config",
+    "EnvironmentDeploymentConfig": ".environment_deployment_config",
+    "EnvironmentDeploymentConfigRevisionLookup": ".environment_deployment_config_revision_lookup",
+    "EnvironmentDeploymentDocument": ".environment_deployment_document",
+    "EventVersion": ".event_version",
+    "ExecuteToolResponse": ".execute_tool_response",
+    "ExecuteTriggerResponse": ".execute_trigger_response",
+    "Favor": ".favor",
+    "FavoriteItem": ".favorite_item",
+    "FavoriteRef": ".favorite_ref",
+    "FieldMapping": ".field_mapping",
+    "File": ".file",
+    "FilesAttribute": ".files_attribute",
+    "FilesResponse": ".files_response",
+    "FilterOperator": ".filter_operator",
+    "FilterType": ".filter_type",
+    "FluentQueryRequestWithItem": ".fluent_query_request_with_item",
+    "FriendlyInvoice": ".friendly_invoice",
+    "FriendlyPaymentMethods": ".friendly_payment_methods",
+    "GetHookWebhooksHookIdDetailsGetResponse": ".get_hook_webhooks_hook_id_details_get_response",
+    "HooksListResponse": ".hooks_list_response",
+    "Html2Text": ".html_2_text",
+    "Http": ".http",
+    "HttpValidationError": ".http_validation_error",
+    "Identity": ".identity",
+    "IdentityDetails": ".identity_details",
+    "IdentityTypes": ".identity_types",
+    "Integration": ".integration",
+    "IntegrationAuthType": ".integration_auth_type",
+    "IntegrationConnection": ".integration_connection",
+    "IntegrationConnectionAuthType": ".integration_connection_auth_type",
+    "IntegrationConnectionIntegrationType": ".integration_connection_integration_type",
+    "IntegrationWithConnections": ".integration_with_connections",
+    "IntegrationWithConnectionsId": ".integration_with_connections_id",
+    "Interval": ".interval",
+    "IntervalTypes": ".interval_types",
+    "Invoice": ".invoice",
+    "InvoiceMeta": ".invoice_meta",
+    "InvoiceStatus": ".invoice_status",
+    "JsonColumn": ".json_column",
+    "KanbanViewInput": ".kanban_view_input",
+    "KanbanViewOutput": ".kanban_view_output",
+    "KanbanViewSettingsInput": ".kanban_view_settings_input",
+    "KanbanViewSettingsOutput": ".kanban_view_settings_output",
+    "LegacyIdentity": ".legacy_identity",
+    "LegacyIdentityDetails": ".legacy_identity_details",
+    "LineItem": ".line_item",
+    "ListTagsResponse": ".list_tags_response",
+    "ListToolsResponse": ".list_tools_response",
+    "ListTriggersResponse": ".list_triggers_response",
+    "Mapping": ".mapping",
+    "MarkDownWithContext": ".mark_down_with_context",
+    "MarkdownColumn": ".markdown_column",
+    "MarkdownSplitterConfig": ".markdown_splitter_config",
+    "McpAuthType": ".mcp_auth_type",
+    "Me": ".me",
+    "Mention": ".mention",
+    "MentionParticipant": ".mention_participant",
+    "Message": ".message",
+    "MessageChunk": ".message_chunk",
+    "ModelProvider": ".model_provider",
+    "MultiPageCrawlerSettingsInput": ".multi_page_crawler_settings_input",
+    "MultiPageCrawlerSettingsInputScraper": ".multi_page_crawler_settings_input_scraper",
+    "MultiPageCrawlerSettingsInputTextExtractor": ".multi_page_crawler_settings_input_text_extractor",
+    "MultiPageCrawlerSettingsOutput": ".multi_page_crawler_settings_output",
+    "MultiPageCrawlerSettingsOutputScraper": ".multi_page_crawler_settings_output_scraper",
+    "MultiPageCrawlerSettingsOutputTextExtractor": ".multi_page_crawler_settings_output_text_extractor",
+    "MultiSelectColumn": ".multi_select_column",
+    "NodeUi": ".node_ui",
+    "Notification": ".notification",
+    "NotificationAction": ".notification_action",
+    "NotificationActionType": ".notification_action_type",
+    "NotificationSeverity": ".notification_severity",
+    "NotificationType": ".notification_type",
+    "NotionFilterBy": ".notion_filter_by",
+    "NotionFilterOptions": ".notion_filter_options",
+    "NumberColumn": ".number_column",
+    "NumberColumnDefault": ".number_column_default",
+    "NumberColumnMaxValue": ".number_column_max_value",
+    "NumberColumnMinValue": ".number_column_min_value",
+    "OAuthAuthType": ".o_auth_auth_type",
+    "Organization": ".organization",
+    "ParagraphSplitterConfig": ".paragraph_splitter_config",
+    "Participant": ".participant",
+    "ParticipantType": ".participant_type",
+    "PeopleColumn": ".people_column",
+    "PlaceholderInput": ".placeholder_input",
+    "PlaceholderInputType": ".placeholder_input_type",
+    "PlaceholderOutput": ".placeholder_output",
+    "PlaceholderOutputType": ".placeholder_output_type",
+    "PlanTypes": ".plan_types",
+    "Playwright": ".playwright",
+    "PlaywrightWaitForLoadState": ".playwright_wait_for_load_state",
+    "Position": ".position",
+    "Prompt": ".prompt",
+    "PromptRole": ".prompt_role",
+    "PulseFeedResponse": ".pulse_feed_response",
+    "PulseHook": ".pulse_hook",
+    "PulseHookInput": ".pulse_hook_input",
+    "PulseTargetConfig": ".pulse_target_config",
+    "QueryBuilderRequestGroupByItem": ".query_builder_request_group_by_item",
+    "QueryBuilderRequestSortBy": ".query_builder_request_sort_by",
+    "QueryBuilderRequestSortDirection": ".query_builder_request_sort_direction",
+    "QueryBuilderRequestTagMode": ".query_builder_request_tag_mode",
+    "QuerySort": ".query_sort",
+    "Readability": ".readability",
+    "RecursiveSplitterConfig": ".recursive_splitter_config",
+    "RelationColumn": ".relation_column",
+    "RenameResponse": ".rename_response",
+    "ReqBody": ".req_body",
+    "RequestBody": ".request_body",
+    "Resource": ".resource",
+    "ResourceResourceType": ".resource_resource_type",
+    "ResponseModelUsage": ".response_model_usage",
+    "Result": ".result",
+    "Rule": ".rule",
+    "RulesInput": ".rules_input",
+    "RulesOutput": ".rules_output",
+    "RunLog": ".run_log",
+    "RunLogPagination": ".run_log_pagination",
+    "Schedule": ".schedule",
+    "SchemaResponse": ".schema_response",
+    "SchemasResponse": ".schemas_response",
+    "ScoutHook": ".scout_hook",
+    "ScoutHookConfigHttp": ".scout_hook_config_http",
+    "ScoutHookEventDiscriminator": ".scout_hook_event_discriminator",
+    "ScoutHookEventDiscriminatorType": ".scout_hook_event_discriminator_type",
+    "ScoutHookEventTrigger": ".scout_hook_event_trigger",
+    "ScoutHookResponse": ".scout_hook_response",
+    "ScoutHookUpdate": ".scout_hook_update",
+    "ScoutHookUpdateTriggeringEventsItem": ".scout_hook_update_triggering_events_item",
+    "ScoutHooksResponse": ".scout_hooks_response",
+    "ScoutUser": ".scout_user",
+    "SearchRequestSearchType": ".search_request_search_type",
+    "SelectColumn": ".select_column",
+    "SelectOptionItem": ".select_option_item",
+    "SentenceSplitterConfig": ".sentence_splitter_config",
+    "ServiceInfo": ".service_info",
+    "SinglePageCrawlerSettingsInput": ".single_page_crawler_settings_input",
+    "SinglePageCrawlerSettingsInputScraper": ".single_page_crawler_settings_input_scraper",
+    "SinglePageCrawlerSettingsInputTextExtractor": ".single_page_crawler_settings_input_text_extractor",
+    "SinglePageCrawlerSettingsOutput": ".single_page_crawler_settings_output",
+    "SinglePageCrawlerSettingsOutputScraper": ".single_page_crawler_settings_output_scraper",
+    "SinglePageCrawlerSettingsOutputTextExtractor": ".single_page_crawler_settings_output_text_extractor",
+    "SitemapCrawlerSettingsInput": ".sitemap_crawler_settings_input",
+    "SitemapCrawlerSettingsInputScraper": ".sitemap_crawler_settings_input_scraper",
+    "SitemapCrawlerSettingsInputTextExtractor": ".sitemap_crawler_settings_input_text_extractor",
+    "SitemapCrawlerSettingsOutput": ".sitemap_crawler_settings_output",
+    "SitemapCrawlerSettingsOutputScraper": ".sitemap_crawler_settings_output_scraper",
+    "SitemapCrawlerSettingsOutputTextExtractor": ".sitemap_crawler_settings_output_text_extractor",
+    "SlackEventResponse": ".slack_event_response",
+    "SlackTriggerConfigInput": ".slack_trigger_config_input",
+    "SlackTriggerConfigInputAction": ".slack_trigger_config_input_action",
+    "SlackTriggerConfigOutput": ".slack_trigger_config_output",
+    "SlackTriggerConfigOutputAction": ".slack_trigger_config_output_action",
+    "SlackUrlVerification": ".slack_url_verification",
+    "SortDirection": ".sort_direction",
+    "SourceArchetype": ".source_archetype",
+    "SourceArchetypeIntegrationVersion": ".source_archetype_integration_version",
+    "SourceSync": ".source_sync",
+    "SourceSyncCrawlSettingsInput": ".source_sync_crawl_settings_input",
+    "SourceSyncCrawlSettingsInputMode": ".source_sync_crawl_settings_input_mode",
+    "SourceSyncCrawlSettingsOutput": ".source_sync_crawl_settings_output",
+    "SourceSyncCrawlSettingsOutputMode": ".source_sync_crawl_settings_output_mode",
+    "SourceSyncGoogleDriveSettings": ".source_sync_google_drive_settings",
+    "SourceSyncNotionSettingsInput": ".source_sync_notion_settings_input",
+    "SourceSyncNotionSettingsOutput": ".source_sync_notion_settings_output",
+    "SourceSyncPageCrawlSettingsInput": ".source_sync_page_crawl_settings_input",
+    "SourceSyncPageCrawlSettingsInputMode": ".source_sync_page_crawl_settings_input_mode",
+    "SourceSyncPageCrawlSettingsOutput": ".source_sync_page_crawl_settings_output",
+    "SourceSyncPageCrawlSettingsOutputMode": ".source_sync_page_crawl_settings_output_mode",
+    "SourceSyncSitemapSettingsInput": ".source_sync_sitemap_settings_input",
+    "SourceSyncSitemapSettingsInputMode": ".source_sync_sitemap_settings_input_mode",
+    "SourceSyncSitemapSettingsOutput": ".source_sync_sitemap_settings_output",
+    "SourceSyncSitemapSettingsOutputMode": ".source_sync_sitemap_settings_output_mode",
+    "SourceSyncWebsiteSettings": ".source_sync_website_settings",
+    "SourceSyncWebsiteSettingsSplitter": ".source_sync_website_settings_splitter",
+    "SrcAppHttpRoutesBillingBillingHourlyData": ".src_app_http_routes_billing_billing_hourly_data",
+    "SrcAppHttpRoutesBillingBillingHourlyResponse": ".src_app_http_routes_billing_billing_hourly_response",
+    "SrcAppHttpRoutesBillingChangeBillingPlanResponse": ".src_app_http_routes_billing_change_billing_plan_response",
+    "SrcAppHttpRoutesBillingCreatePortalSessionData": ".src_app_http_routes_billing_create_portal_session_data",
+    "SrcAppHttpRoutesBillingCreatePortalSessionResponse": ".src_app_http_routes_billing_create_portal_session_response",
+    "SrcAppHttpRoutesBillingFreePlanUsageData": ".src_app_http_routes_billing_free_plan_usage_data",
+    "SrcAppHttpRoutesBillingFreePlanUsageResponse": ".src_app_http_routes_billing_free_plan_usage_response",
+    "SrcAppHttpRoutesBillingGetBillingData": ".src_app_http_routes_billing_get_billing_data",
+    "SrcAppHttpRoutesBillingGetBillingResponse": ".src_app_http_routes_billing_get_billing_response",
+    "SrcAppHttpRoutesBillingGetInfoGetInfoResponse": ".src_app_http_routes_billing_get_info_get_info_response",
+    "SrcAppHttpRoutesBillingGetInvoicesData": ".src_app_http_routes_billing_get_invoices_data",
+    "SrcAppHttpRoutesBillingGetInvoicesResponse": ".src_app_http_routes_billing_get_invoices_response",
+    "SrcAppHttpRoutesBillingGetNotificationsResponse": ".src_app_http_routes_billing_get_notifications_response",
+    "SrcAppHttpRoutesBillingRenewPlansData": ".src_app_http_routes_billing_renew_plans_data",
+    "SrcAppHttpRoutesBillingRenewPlansResponse": ".src_app_http_routes_billing_renew_plans_response",
+    "SrcAppHttpRoutesCollectionCreateCollectionResponse": ".src_app_http_routes_collection_create_collection_response",
+    "SrcAppHttpRoutesCollectionCreateSyncResponse": ".src_app_http_routes_collection_create_sync_response",
+    "SrcAppHttpRoutesCollectionCreateTableResponse": ".src_app_http_routes_collection_create_table_response",
+    "SrcAppHttpRoutesCollectionDeleteCollectionResponse": ".src_app_http_routes_collection_delete_collection_response",
+    "SrcAppHttpRoutesCollectionDeleteDocumentsResponse": ".src_app_http_routes_collection_delete_documents_response",
+    "SrcAppHttpRoutesCollectionDeleteSyncResponse": ".src_app_http_routes_collection_delete_sync_response",
+    "SrcAppHttpRoutesCollectionDeleteTableResponse": ".src_app_http_routes_collection_delete_table_response",
+    "SrcAppHttpRoutesCollectionGetCollectionResponse": ".src_app_http_routes_collection_get_collection_response",
+    "SrcAppHttpRoutesCollectionGetCollectionsResponse": ".src_app_http_routes_collection_get_collections_response",
+    "SrcAppHttpRoutesCollectionGetDocumentResponse": ".src_app_http_routes_collection_get_document_response",
+    "SrcAppHttpRoutesCollectionGetDocumentsResponse": ".src_app_http_routes_collection_get_documents_response",
+    "SrcAppHttpRoutesCollectionGetSyncResponse": ".src_app_http_routes_collection_get_sync_response",
+    "SrcAppHttpRoutesCollectionGetSyncsResponse": ".src_app_http_routes_collection_get_syncs_response",
+    "SrcAppHttpRoutesCollectionGetTableResponse": ".src_app_http_routes_collection_get_table_response",
+    "SrcAppHttpRoutesCollectionGetTablesResponse": ".src_app_http_routes_collection_get_tables_response",
+    "SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel": ".src_app_http_routes_collection_list_collection_syncs_response_model",
+    "SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel": ".src_app_http_routes_collection_list_source_archetypes_response_model",
+    "SrcAppHttpRoutesCollectionParseFileResponse": ".src_app_http_routes_collection_parse_file_response",
+    "SrcAppHttpRoutesCollectionSyncTableResponse": ".src_app_http_routes_collection_sync_table_response",
+    "SrcAppHttpRoutesCollectionUpdateCollectionResponse": ".src_app_http_routes_collection_update_collection_response",
+    "SrcAppHttpRoutesCollectionUpdateDocumentResponse": ".src_app_http_routes_collection_update_document_response",
+    "SrcAppHttpRoutesCollectionUpdateSyncResponse": ".src_app_http_routes_collection_update_sync_response",
+    "SrcAppHttpRoutesCollectionUpdateTableResponse": ".src_app_http_routes_collection_update_table_response",
+    "SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings": ".src_app_http_routes_drive_create_drive_crawl_payload_source_sync_settings",
+    "SrcAppHttpRoutesInboxHandleMessageIncomingMessage": ".src_app_http_routes_inbox_handle_message_incoming_message",
+    "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent": ".src_app_http_routes_inbox_handle_message_incoming_message_content",
+    "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType": ".src_app_http_routes_inbox_handle_message_incoming_message_content_type",
+    "SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem": ".src_app_http_routes_inbox_handle_message_interaction_request_participants_item",
+    "SrcAppHttpRoutesOnboardingHandleGetMeResponse": ".src_app_http_routes_onboarding_handle_get_me_response",
+    "SrcAppHttpRoutesOnboardingHandleUpdateMeResponse": ".src_app_http_routes_onboarding_handle_update_me_response",
+    "SrcAppHttpRoutesRootGetInfoResponse": ".src_app_http_routes_root_get_info_response",
+    "SrcAppHttpRoutesTriggerCreateTriggerResponse": ".src_app_http_routes_trigger_create_trigger_response",
+    "SrcAppHttpRoutesWorldInteractIncomingMessage": ".src_app_http_routes_world_interact_incoming_message",
+    "SrcAppHttpRoutesWorldInteractIncomingMessageContent": ".src_app_http_routes_world_interact_incoming_message_content",
+    "SrcAppHttpRoutesWorldInteractIncomingMessageContentItem": ".src_app_http_routes_world_interact_incoming_message_content_item",
+    "SrcAppHttpRoutesWorldInteractInteractionRequest": ".src_app_http_routes_world_interact_interaction_request",
+    "SrcHandlersCreateCopilotResponse": ".src_handlers_create_copilot_response",
+    "SrcHandlersCreateWorkflowResponse": ".src_handlers_create_workflow_response",
+    "SrcHandlersCreateWorkflowRevisionResponse": ".src_handlers_create_workflow_revision_response",
+    "SrcHandlersDeleteCopilotResponse": ".src_handlers_delete_copilot_response",
+    "SrcHandlersDeleteWorkflowResponse": ".src_handlers_delete_workflow_response",
+    "SrcHandlersDeleteWorkflowRevisionResponse": ".src_handlers_delete_workflow_revision_response",
+    "SrcHandlersGetCopilotResponse": ".src_handlers_get_copilot_response",
+    "SrcHandlersGetWorkflowEnvironmentsResponse": ".src_handlers_get_workflow_environments_response",
+    "SrcHandlersGetWorkflowResponse": ".src_handlers_get_workflow_response",
+    "SrcHandlersListCopilotsResponse": ".src_handlers_list_copilots_response",
+    "SrcHandlersListWorkflowRevisionsResponse": ".src_handlers_list_workflow_revisions_response",
+    "SrcHandlersListWorkflowsResponse": ".src_handlers_list_workflows_response",
+    "SrcHandlersPromoteWorkflowRevisionResponse": ".src_handlers_promote_workflow_revision_response",
+    "SrcHandlersUpdateCopilotResponse": ".src_handlers_update_copilot_response",
+    "SrcHandlersUpdateWorkflowEnvironmentResponse": ".src_handlers_update_workflow_environment_response",
+    "SrcHandlersUpdateWorkflowResponse": ".src_handlers_update_workflow_response",
+    "StoreResponse": ".store_response",
+    "StripeProvider": ".stripe_provider",
+    "StripeProviderMeta": ".stripe_provider_meta",
+    "Subscription": ".subscription",
+    "Sync": ".sync",
+    "SyncConfigInput": ".sync_config_input",
+    "SyncConfigInputSourceSettings": ".sync_config_input_source_settings",
+    "SyncConfigOutput": ".sync_config_output",
+    "SyncConfigOutputSourceSettings": ".sync_config_output_source_settings",
+    "Table": ".table",
+    "TableConfigOutput": ".table_config_output",
+    "TableConfigOutputSchemaItem": ".table_config_output_schema_item",
+    "TableViewInput": ".table_view_input",
+    "TableViewOutput": ".table_view_output",
+    "TableViewSettingsInput": ".table_view_settings_input",
+    "TableViewSettingsInputRowHeight": ".table_view_settings_input_row_height",
+    "TableViewSettingsOutput": ".table_view_settings_output",
+    "TableViewSettingsOutputRowHeight": ".table_view_settings_output_row_height",
+    "Tag": ".tag",
+    "TagsResponse": ".tags_response",
+    "TextExtractor": ".text_extractor",
+    "TextExtractorConfig": ".text_extractor_config",
+    "TextLongColumn": ".text_long_column",
+    "TextShortColumn": ".text_short_column",
+    "Tool": ".tool",
+    "ToolConfigResource": ".tool_config_resource",
+    "ToolConfigResourceType": ".tool_config_resource_type",
+    "ToolDetails": ".tool_details",
+    "ToolsData": ".tools_data",
+    "ToolsResponse": ".tools_response",
+    "TrafilaturaInput": ".trafilatura_input",
+    "TrafilaturaInputTrafilaturaType": ".trafilatura_input_trafilatura_type",
+    "TrafilaturaOutput": ".trafilatura_output",
+    "TrafilaturaOutputTrafilaturaType": ".trafilatura_output_trafilatura_type",
+    "Trigger": ".trigger",
+    "TriggerStatus": ".trigger_status",
+    "TriggerTriggerConfig": ".trigger_trigger_config",
+    "TypescriptAutomationConfig": ".typescript_automation_config",
+    "Units": ".units",
+    "UpdateCronAuthResponse": ".update_cron_auth_response",
+    "UpdateTagResponse": ".update_tag_response",
+    "UpdateTriggerResponse": ".update_trigger_response",
+    "UrlColumn": ".url_column",
+    "Usage": ".usage",
+    "UsageTypes": ".usage_types",
+    "UserIdentity": ".user_identity",
+    "UserIdentityDetails": ".user_identity_details",
+    "UserOrganizationConfig": ".user_organization_config",
+    "ValidationError": ".validation_error",
+    "ValidationErrorLocItem": ".validation_error_loc_item",
+    "ViewFilter": ".view_filter",
+    "ViewListResponse": ".view_list_response",
+    "ViewListResponseDataItem": ".view_list_response_data_item",
+    "ViewQueryInput": ".view_query_input",
+    "ViewQueryOutput": ".view_query_output",
+    "ViewResponse": ".view_response",
+    "ViewResponseData": ".view_response_data",
+    "ViewStateResponse": ".view_state_response",
+    "ViewVisibility": ".view_visibility",
+    "Workflow": ".workflow",
+    "WorkflowActor": ".workflow_actor",
+    "WorkflowActorType": ".workflow_actor_type",
+    "WorkflowConfigInput": ".workflow_config_input",
+    "WorkflowConfigOutput": ".workflow_config_output",
+    "WorkflowExecute": ".workflow_execute",
+    "WorkflowHook": ".workflow_hook",
+    "WorkflowHookInput": ".workflow_hook_input",
+    "WorkflowNoteInput": ".workflow_note_input",
+    "WorkflowNoteOutput": ".workflow_note_output",
+    "WorkflowRun": ".workflow_run",
+    "WorkflowRunCompleted": ".workflow_run_completed",
+    "WorkflowRunCompletedData": ".workflow_run_completed_data",
+    "WorkflowRunCompletedEnvironment": ".workflow_run_completed_environment",
+    "WorkflowRunFailed": ".workflow_run_failed",
+    "WorkflowRunFailedData": ".workflow_run_failed_data",
+    "WorkflowRunFailedEnvironment": ".workflow_run_failed_environment",
+    "WorkflowRunResponse": ".workflow_run_response",
+    "WorkflowRunStarted": ".workflow_run_started",
+    "WorkflowRunStartedData": ".workflow_run_started_data",
+    "WorkflowRunStartedEnvironment": ".workflow_run_started_environment",
+    "WorkflowRunStateValue": ".workflow_run_state_value",
+    "WorkflowRunStopReason": ".workflow_run_stop_reason",
+    "WorkflowRunStreamResponse": ".workflow_run_stream_response",
+    "WorkflowTargetConfig": ".workflow_target_config",
+}
+
+
+def __getattr__(attr_name: str) -> typing.Any:
+    module_name = _dynamic_imports.get(attr_name)
+    if module_name is None:
+        raise AttributeError(f"No {attr_name} found in _dynamic_imports for module name -> {__name__}")
+    try:
+        module = import_module(module_name, __package__)
+        if module_name == f".{attr_name}":
+            return module
+        else:
+            return getattr(module, attr_name)
+    except ImportError as e:
+        raise ImportError(f"Failed to import {attr_name} from {module_name}: {e}") from e
+    except AttributeError as e:
+        raise AttributeError(f"Failed to get {attr_name} from {module_name}: {e}") from e
+
+
+def __dir__():
+    lazy_attrs = list(_dynamic_imports.keys())
+    return sorted(lazy_attrs)
+
 
 __all__ = [
     "ActionType",
+    "ActivitySchema",
     "Actor",
     "ActorIdentity",
     "ActorIdentityId",
     "ActorIdentityType",
-    "AgentAutomationConfig",
+    "AgentHook",
+    "AgentHookInput",
     "AgentRevision",
     "AgentRevisionModel",
     "AgentRevisionResponseStyle",
+    "AgentRevisionToolConfigValue",
+    "AgentTargetConfig",
     "AiAgent",
     "ApiKeyAuthType",
     "ApiKeyIdentity",
     "ApiKeyIdentityDetails",
+    "AutomationHook",
+    "AutomationHookInput",
+    "AutomationTargetConfig",
     "BareInput",
     "BareOutput",
     "Baseline",
     "Billing",
     "BillingCycle",
     "BillingCycles",
+    "BillingLimits",
     "BillingUsage",
     "BlockConfigItemBoolean",
     "BlockConfigItemJson",
@@ -467,7 +1011,6 @@ __all__ = [
     "CardDisplayField",
     "Channel",
     "CheckBoxColumn",
-    "CheckBoxColumnAutomationConfig",
     "Collection",
     "CollectionConfig",
     "CollectionDestination",
@@ -477,7 +1020,6 @@ __all__ = [
     "CollectionViewStateOutputViewsValue",
     "ColumnType",
     "ColumnTypeBase",
-    "ColumnTypeBaseAutomationConfig",
     "Condition",
     "ConditionField",
     "ConditionOperator",
@@ -487,7 +1029,11 @@ __all__ = [
     "CopilotConfigCodeTheme",
     "CopilotConfigFabValue",
     "CopilotConfigMode",
+    "CreateEntityRequest",
+    "CreateHookWebhooksPostRequest",
+    "CreateHookWebhooksPostResponse",
     "CreateIntegrationsResponse",
+    "CreatePulseResponse",
     "CreateTagResponse",
     "CronTriggerConfig",
     "CronTriggerConfigAction",
@@ -495,12 +1041,14 @@ __all__ = [
     "DailyUsage",
     "DataType",
     "DateTimeColumn",
-    "DateTimeColumnAutomationConfig",
     "DefaultInput",
     "DefaultOutput",
+    "DeleteHookResponse",
+    "DeleteResponse",
     "DeleteTriggerResponse",
     "DeleteViewResponse",
     "Dependency",
+    "DeterminedBillingLimits",
     "Dimensions",
     "Document",
     "DocumentCreatedBy",
@@ -508,23 +1056,31 @@ __all__ = [
     "DocumentLastUpdatedBy",
     "DocumentResponse",
     "EdgeUi",
+    "EntityResponse",
+    "EntitySearchRequestMode",
+    "EntitySearchRequestReturnFormat",
     "Environment",
     "EnvironmentConfig",
     "EnvironmentDeploymentConfig",
     "EnvironmentDeploymentConfigRevisionLookup",
     "EnvironmentDeploymentDocument",
     "EventVersion",
+    "ExecuteToolResponse",
     "ExecuteTriggerResponse",
     "Favor",
     "FavoriteItem",
+    "FavoriteRef",
+    "FieldMapping",
     "File",
     "FilesAttribute",
     "FilesResponse",
     "FilterOperator",
     "FilterType",
-    "FollowupEmailRequest",
+    "FluentQueryRequestWithItem",
     "FriendlyInvoice",
     "FriendlyPaymentMethods",
+    "GetHookWebhooksHookIdDetailsGetResponse",
+    "HooksListResponse",
     "Html2Text",
     "Http",
     "HttpValidationError",
@@ -544,21 +1100,24 @@ __all__ = [
     "InvoiceMeta",
     "InvoiceStatus",
     "JsonColumn",
-    "JsonColumnAutomationConfig",
     "KanbanViewInput",
     "KanbanViewOutput",
-    "KanbanViewSettings",
+    "KanbanViewSettingsInput",
+    "KanbanViewSettingsOutput",
     "LegacyIdentity",
     "LegacyIdentityDetails",
     "LineItem",
     "ListTagsResponse",
+    "ListToolsResponse",
     "ListTriggersResponse",
     "Mapping",
     "MarkDownWithContext",
     "MarkdownColumn",
-    "MarkdownColumnAutomationConfig",
     "MarkdownSplitterConfig",
     "McpAuthType",
+    "Me",
+    "Mention",
+    "MentionParticipant",
     "Message",
     "MessageChunk",
     "ModelProvider",
@@ -569,7 +1128,6 @@ __all__ = [
     "MultiPageCrawlerSettingsOutputScraper",
     "MultiPageCrawlerSettingsOutputTextExtractor",
     "MultiSelectColumn",
-    "MultiSelectColumnAutomationConfig",
     "NodeUi",
     "Notification",
     "NotificationAction",
@@ -579,7 +1137,6 @@ __all__ = [
     "NotionFilterBy",
     "NotionFilterOptions",
     "NumberColumn",
-    "NumberColumnAutomationConfig",
     "NumberColumnDefault",
     "NumberColumnMaxValue",
     "NumberColumnMinValue",
@@ -588,6 +1145,7 @@ __all__ = [
     "ParagraphSplitterConfig",
     "Participant",
     "ParticipantType",
+    "PeopleColumn",
     "PlaceholderInput",
     "PlaceholderInputType",
     "PlaceholderOutput",
@@ -598,13 +1156,23 @@ __all__ = [
     "Position",
     "Prompt",
     "PromptRole",
+    "PulseFeedResponse",
+    "PulseHook",
+    "PulseHookInput",
+    "PulseTargetConfig",
+    "QueryBuilderRequestGroupByItem",
+    "QueryBuilderRequestSortBy",
+    "QueryBuilderRequestSortDirection",
+    "QueryBuilderRequestTagMode",
     "QuerySort",
     "Readability",
     "RecursiveSplitterConfig",
     "RelationColumn",
-    "RelationColumnAutomationConfig",
+    "RenameResponse",
     "ReqBody",
     "RequestBody",
+    "Resource",
+    "ResourceResourceType",
     "ResponseModelUsage",
     "Result",
     "Rule",
@@ -614,9 +1182,19 @@ __all__ = [
     "RunLogPagination",
     "Schedule",
     "SchemaResponse",
+    "SchemasResponse",
+    "ScoutHook",
+    "ScoutHookConfigHttp",
+    "ScoutHookEventDiscriminator",
+    "ScoutHookEventDiscriminatorType",
+    "ScoutHookEventTrigger",
+    "ScoutHookResponse",
+    "ScoutHookUpdate",
+    "ScoutHookUpdateTriggeringEventsItem",
+    "ScoutHooksResponse",
     "ScoutUser",
+    "SearchRequestSearchType",
     "SelectColumn",
-    "SelectColumnAutomationConfig",
     "SelectOptionItem",
     "SentenceSplitterConfig",
     "ServiceInfo",
@@ -643,14 +1221,20 @@ __all__ = [
     "SourceArchetypeIntegrationVersion",
     "SourceSync",
     "SourceSyncCrawlSettingsInput",
+    "SourceSyncCrawlSettingsInputMode",
     "SourceSyncCrawlSettingsOutput",
+    "SourceSyncCrawlSettingsOutputMode",
     "SourceSyncGoogleDriveSettings",
     "SourceSyncNotionSettingsInput",
     "SourceSyncNotionSettingsOutput",
     "SourceSyncPageCrawlSettingsInput",
+    "SourceSyncPageCrawlSettingsInputMode",
     "SourceSyncPageCrawlSettingsOutput",
+    "SourceSyncPageCrawlSettingsOutputMode",
     "SourceSyncSitemapSettingsInput",
+    "SourceSyncSitemapSettingsInputMode",
     "SourceSyncSitemapSettingsOutput",
+    "SourceSyncSitemapSettingsOutputMode",
     "SourceSyncWebsiteSettings",
     "SourceSyncWebsiteSettingsSplitter",
     "SrcAppHttpRoutesBillingBillingHourlyData",
@@ -680,6 +1264,7 @@ __all__ = [
     "SrcAppHttpRoutesCollectionGetDocumentResponse",
     "SrcAppHttpRoutesCollectionGetDocumentsResponse",
     "SrcAppHttpRoutesCollectionGetSyncResponse",
+    "SrcAppHttpRoutesCollectionGetSyncsResponse",
     "SrcAppHttpRoutesCollectionGetTableResponse",
     "SrcAppHttpRoutesCollectionGetTablesResponse",
     "SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel",
@@ -690,12 +1275,11 @@ __all__ = [
     "SrcAppHttpRoutesCollectionUpdateDocumentResponse",
     "SrcAppHttpRoutesCollectionUpdateSyncResponse",
     "SrcAppHttpRoutesCollectionUpdateTableResponse",
+    "SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessage",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType",
     "SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem",
-    "SrcAppHttpRoutesOnboardingFollowupEmailsData",
-    "SrcAppHttpRoutesOnboardingFollowupEmailsResponse",
     "SrcAppHttpRoutesOnboardingHandleGetMeResponse",
     "SrcAppHttpRoutesOnboardingHandleUpdateMeResponse",
     "SrcAppHttpRoutesRootGetInfoResponse",
@@ -720,6 +1304,7 @@ __all__ = [
     "SrcHandlersUpdateCopilotResponse",
     "SrcHandlersUpdateWorkflowEnvironmentResponse",
     "SrcHandlersUpdateWorkflowResponse",
+    "StoreResponse",
     "StripeProvider",
     "StripeProviderMeta",
     "Subscription",
@@ -733,16 +1318,20 @@ __all__ = [
     "TableConfigOutputSchemaItem",
     "TableViewInput",
     "TableViewOutput",
-    "TableViewSettings",
-    "TableViewSettingsRowHeight",
+    "TableViewSettingsInput",
+    "TableViewSettingsInputRowHeight",
+    "TableViewSettingsOutput",
+    "TableViewSettingsOutputRowHeight",
     "Tag",
+    "TagsResponse",
     "TextExtractor",
     "TextExtractorConfig",
     "TextLongColumn",
-    "TextLongColumnAutomationConfig",
     "TextShortColumn",
-    "TextShortColumnAutomationConfig",
     "Tool",
+    "ToolConfigResource",
+    "ToolConfigResourceType",
+    "ToolDetails",
     "ToolsData",
     "ToolsResponse",
     "TrafilaturaInput",
@@ -758,12 +1347,11 @@ __all__ = [
     "UpdateTagResponse",
     "UpdateTriggerResponse",
     "UrlColumn",
-    "UrlColumnAutomationConfig",
     "Usage",
     "UsageTypes",
-    "User",
     "UserIdentity",
     "UserIdentityDetails",
+    "UserOrganizationConfig",
     "ValidationError",
     "ValidationErrorLocItem",
     "ViewFilter",
@@ -778,10 +1366,11 @@ __all__ = [
     "Workflow",
     "WorkflowActor",
     "WorkflowActorType",
-    "WorkflowAutomationConfig",
     "WorkflowConfigInput",
     "WorkflowConfigOutput",
     "WorkflowExecute",
+    "WorkflowHook",
+    "WorkflowHookInput",
     "WorkflowNoteInput",
     "WorkflowNoteOutput",
     "WorkflowRun",
@@ -798,4 +1387,5 @@ __all__ = [
     "WorkflowRunStateValue",
     "WorkflowRunStopReason",
     "WorkflowRunStreamResponse",
+    "WorkflowTargetConfig",
 ]

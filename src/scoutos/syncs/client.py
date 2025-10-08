@@ -7,9 +7,7 @@ from ..core.request_options import RequestOptions
 from ..types.src_app_http_routes_collection_create_sync_response import SrcAppHttpRoutesCollectionCreateSyncResponse
 from ..types.src_app_http_routes_collection_delete_sync_response import SrcAppHttpRoutesCollectionDeleteSyncResponse
 from ..types.src_app_http_routes_collection_get_sync_response import SrcAppHttpRoutesCollectionGetSyncResponse
-from ..types.src_app_http_routes_collection_list_collection_syncs_response_model import (
-    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
-)
+from ..types.src_app_http_routes_collection_get_syncs_response import SrcAppHttpRoutesCollectionGetSyncsResponse
 from ..types.src_app_http_routes_collection_update_sync_response import SrcAppHttpRoutesCollectionUpdateSyncResponse
 from ..types.sync_config_input import SyncConfigInput
 from .raw_client import AsyncRawSyncsClient, RawSyncsClient
@@ -34,23 +32,17 @@ class SyncsClient:
         return self._raw_client
 
     def list(
-        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel:
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesCollectionGetSyncsResponse:
         """
-        List Sources by Destination, specifically given a collection and table
-
         Parameters
         ----------
-        collection_id : str
-
-        table_id : str
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel
+        SrcAppHttpRoutesCollectionGetSyncsResponse
             Successful Response
 
         Examples
@@ -60,12 +52,52 @@ class SyncsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.syncs.list(
-            collection_id="collection_id",
-            table_id="table_id",
+        client.syncs.list()
+        """
+        _response = self._raw_client.list(request_options=request_options)
+        return _response.data
+
+    def create(
+        self, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesCollectionCreateSyncResponse:
+        """
+        Parameters
+        ----------
+        sync_config : SyncConfigInput
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesCollectionCreateSyncResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import (
+            CollectionDestination,
+            Mapping,
+            Scout,
+            SourceSyncGoogleDriveSettings,
+            SyncConfigInput,
+        )
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.syncs.create(
+            sync_config=SyncConfigInput(
+                source_settings=SourceSyncGoogleDriveSettings(),
+                destination=CollectionDestination(
+                    collection_id="collection_id",
+                    table_id="table_id",
+                ),
+                mapping=Mapping(),
+            ),
         )
         """
-        _response = self._raw_client.list(collection_id, table_id, request_options=request_options)
+        _response = self._raw_client.create(sync_config=sync_config, request_options=request_options)
         return _response.data
 
     def get(
@@ -174,49 +206,6 @@ class SyncsClient:
         _response = self._raw_client.delete(sync_id, request_options=request_options)
         return _response.data
 
-    def create(
-        self, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
-    ) -> SrcAppHttpRoutesCollectionCreateSyncResponse:
-        """
-        Parameters
-        ----------
-        sync_config : SyncConfigInput
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        SrcAppHttpRoutesCollectionCreateSyncResponse
-            Successful Response
-
-        Examples
-        --------
-        from scoutos import (
-            CollectionDestination,
-            Mapping,
-            Scout,
-            SourceSyncGoogleDriveSettings,
-            SyncConfigInput,
-        )
-
-        client = Scout(
-            api_key="YOUR_API_KEY",
-        )
-        client.syncs.create(
-            sync_config=SyncConfigInput(
-                source_settings=SourceSyncGoogleDriveSettings(),
-                destination=CollectionDestination(
-                    collection_id="collection_id",
-                    table_id="table_id",
-                ),
-                mapping=Mapping(),
-            ),
-        )
-        """
-        _response = self._raw_client.create(sync_config=sync_config, request_options=request_options)
-        return _response.data
-
     def execute(
         self, sync_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> typing.Optional[typing.Any]:
@@ -264,23 +253,17 @@ class AsyncSyncsClient:
         return self._raw_client
 
     async def list(
-        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel:
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesCollectionGetSyncsResponse:
         """
-        List Sources by Destination, specifically given a collection and table
-
         Parameters
         ----------
-        collection_id : str
-
-        table_id : str
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel
+        SrcAppHttpRoutesCollectionGetSyncsResponse
             Successful Response
 
         Examples
@@ -295,15 +278,63 @@ class AsyncSyncsClient:
 
 
         async def main() -> None:
-            await client.syncs.list(
-                collection_id="collection_id",
-                table_id="table_id",
+            await client.syncs.list()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list(request_options=request_options)
+        return _response.data
+
+    async def create(
+        self, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesCollectionCreateSyncResponse:
+        """
+        Parameters
+        ----------
+        sync_config : SyncConfigInput
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesCollectionCreateSyncResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import (
+            AsyncScout,
+            CollectionDestination,
+            Mapping,
+            SourceSyncGoogleDriveSettings,
+            SyncConfigInput,
+        )
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.syncs.create(
+                sync_config=SyncConfigInput(
+                    source_settings=SourceSyncGoogleDriveSettings(),
+                    destination=CollectionDestination(
+                        collection_id="collection_id",
+                        table_id="table_id",
+                    ),
+                    mapping=Mapping(),
+                ),
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.list(collection_id, table_id, request_options=request_options)
+        _response = await self._raw_client.create(sync_config=sync_config, request_options=request_options)
         return _response.data
 
     async def get(
@@ -434,57 +465,6 @@ class AsyncSyncsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.delete(sync_id, request_options=request_options)
-        return _response.data
-
-    async def create(
-        self, *, sync_config: SyncConfigInput, request_options: typing.Optional[RequestOptions] = None
-    ) -> SrcAppHttpRoutesCollectionCreateSyncResponse:
-        """
-        Parameters
-        ----------
-        sync_config : SyncConfigInput
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        SrcAppHttpRoutesCollectionCreateSyncResponse
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from scoutos import (
-            AsyncScout,
-            CollectionDestination,
-            Mapping,
-            SourceSyncGoogleDriveSettings,
-            SyncConfigInput,
-        )
-
-        client = AsyncScout(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.syncs.create(
-                sync_config=SyncConfigInput(
-                    source_settings=SourceSyncGoogleDriveSettings(),
-                    destination=CollectionDestination(
-                        collection_id="collection_id",
-                        table_id="table_id",
-                    ),
-                    mapping=Mapping(),
-                ),
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.create(sync_config=sync_config, request_options=request_options)
         return _response.data
 
     async def execute(

@@ -9,6 +9,7 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 from .actor_identity import ActorIdentity
 from .agent_revision_model import AgentRevisionModel
 from .agent_revision_response_style import AgentRevisionResponseStyle
+from .agent_revision_tool_config_value import AgentRevisionToolConfigValue
 from .model_provider import ModelProvider
 
 
@@ -29,7 +30,7 @@ class AgentRevision(UncheckedBaseModel):
     response_style: typing.Optional[AgentRevisionResponseStyle] = None
     max_tokens: typing.Optional[int] = None
     max_turns: typing.Optional[int] = None
-    tool_config: typing.Optional[typing.Dict[str, typing.Optional[bool]]] = None
+    tool_config: typing.Optional[typing.Dict[str, typing.Optional[AgentRevisionToolConfigValue]]] = None
     conversation_starters: typing.Optional[typing.List[str]] = None
 
     if IS_PYDANTIC_V2:

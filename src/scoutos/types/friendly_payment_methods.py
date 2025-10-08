@@ -14,7 +14,7 @@ class FriendlyPaymentMethods(UncheckedBaseModel):
     brand: str
     last_4: typing_extensions.Annotated[str, FieldMetadata(alias="last4")]
     is_default: bool
-    description: str
+    description: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

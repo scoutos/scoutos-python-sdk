@@ -54,7 +54,10 @@ class UsageClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.usage.get()
+        client.usage.get(
+            start_date="start_date",
+            end_date="end_date",
+        )
         """
         _response = self._raw_client.get(start_date=start_date, end_date=end_date, request_options=request_options)
         return _response.data
@@ -111,7 +114,10 @@ class AsyncUsageClient:
 
 
         async def main() -> None:
-            await client.usage.get()
+            await client.usage.get(
+                start_date="start_date",
+                end_date="end_date",
+            )
 
 
         asyncio.run(main())

@@ -59,6 +59,7 @@ class IntegrationsClient:
         )
         client.integrations.list(
             service="service",
+            fetch_icons=True,
         )
         """
         _response = self._raw_client.list(service, fetch_icons=fetch_icons, request_options=request_options)
@@ -152,6 +153,7 @@ class AsyncIntegrationsClient:
         async def main() -> None:
             await client.integrations.list(
                 service="service",
+                fetch_icons=True,
             )
 
 

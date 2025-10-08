@@ -14,8 +14,8 @@ class FriendlyInvoice(UncheckedBaseModel):
     amount_due: int
     friendly_plan: str
     timestamp_start: int
-    friendly_amount_due: str
-    friendly_date: str
+    friendly_amount_due: typing.Optional[str] = None
+    friendly_date: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

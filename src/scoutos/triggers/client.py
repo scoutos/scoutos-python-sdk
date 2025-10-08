@@ -70,7 +70,10 @@ class TriggersClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.triggers.list()
+        client.triggers.list(
+            action_type="workflow.execute",
+            workflow_id="workflow_id",
+        )
         """
         _response = self._raw_client.list(
             action_type=action_type, workflow_id=workflow_id, request_options=request_options
@@ -268,7 +271,10 @@ class TriggersClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.triggers.update_cron_auth_headers()
+        client.triggers.update_cron_auth_headers(
+            dry_run=True,
+            test_org_id="test_org_id",
+        )
         """
         _response = self._raw_client.update_cron_auth_headers(
             dry_run=dry_run, test_org_id=test_org_id, request_options=request_options
@@ -331,7 +337,10 @@ class AsyncTriggersClient:
 
 
         async def main() -> None:
-            await client.triggers.list()
+            await client.triggers.list(
+                action_type="workflow.execute",
+                workflow_id="workflow_id",
+            )
 
 
         asyncio.run(main())
@@ -579,7 +588,10 @@ class AsyncTriggersClient:
 
 
         async def main() -> None:
-            await client.triggers.update_cron_auth_headers()
+            await client.triggers.update_cron_auth_headers(
+                dry_run=True,
+                test_org_id="test_org_id",
+            )
 
 
         asyncio.run(main())

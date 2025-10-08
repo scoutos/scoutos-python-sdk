@@ -56,6 +56,7 @@ class RawCollectionsClient:
         query: typing.Optional[str] = None,
         tags: typing.Optional[str] = None,
         sort: typing.Optional[str] = None,
+        drive: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[SrcAppHttpRoutesCollectionGetCollectionsResponse]:
         """
@@ -76,6 +77,8 @@ class RawCollectionsClient:
         sort : typing.Optional[str]
             Sort
 
+        drive : typing.Optional[bool]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -93,6 +96,7 @@ class RawCollectionsClient:
                 "query": query,
                 "tags": tags,
                 "sort": sort,
+                "drive": drive,
             },
             request_options=request_options,
         )
@@ -807,6 +811,7 @@ class AsyncRawCollectionsClient:
         query: typing.Optional[str] = None,
         tags: typing.Optional[str] = None,
         sort: typing.Optional[str] = None,
+        drive: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionGetCollectionsResponse]:
         """
@@ -827,6 +832,8 @@ class AsyncRawCollectionsClient:
         sort : typing.Optional[str]
             Sort
 
+        drive : typing.Optional[bool]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -844,6 +851,7 @@ class AsyncRawCollectionsClient:
                 "query": query,
                 "tags": tags,
                 "sort": sort,
+                "drive": drive,
             },
             request_options=request_options,
         )

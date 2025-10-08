@@ -33,6 +33,11 @@ class SourceSyncWebsiteSettings(UncheckedBaseModel):
 
     sitemap_urls: typing.Optional[typing.List[str]] = None
     start_urls: typing.Optional[typing.List[str]] = None
+    user_agent_header: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    User agent header to use for the crawl. By default, crawler will rotate user agents.
+    """
+
     source_archetype_id: typing.Literal["com.scoutos.website"] = "com.scoutos.website"
 
     if IS_PYDANTIC_V2:

@@ -23,7 +23,6 @@ from ..types.src_app_http_routes_collection_update_document_response import (
 )
 from .types.documents_create_request_body import DocumentsCreateRequestBody
 from .types.documents_update_batch_request_body import DocumentsUpdateBatchRequestBody
-from .types.documents_update_request_value import DocumentsUpdateRequestValue
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -41,6 +40,8 @@ class RawDocumentsClient:
         limit: typing.Optional[int] = None,
         cursor: typing.Optional[str] = None,
         query: typing.Optional[str] = None,
+        offset: typing.Optional[int] = None,
+        sort_by: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[SrcAppHttpRoutesCollectionGetDocumentsResponse]:
         """
@@ -59,6 +60,12 @@ class RawDocumentsClient:
         query : typing.Optional[str]
             Search query
 
+        offset : typing.Optional[int]
+            Offset to fetch next set of records
+
+        sort_by : typing.Optional[str]
+            Sort by field
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -74,6 +81,8 @@ class RawDocumentsClient:
                 "limit": limit,
                 "cursor": cursor,
                 "query": query,
+                "offset": offset,
+                "sort_by": sort_by,
             },
             request_options=request_options,
         )
@@ -110,7 +119,9 @@ class RawDocumentsClient:
         *,
         request: DocumentsCreateRequestBody,
         job_id: typing.Optional[str] = None,
+        sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
+        mode: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[DocumentResponse]:
         """
@@ -125,8 +136,14 @@ class RawDocumentsClient:
         job_id : typing.Optional[str]
             The job id responsible for the document creation/update
 
+        sync_id : typing.Optional[str]
+            The sync id the job belongs to thats responsible for the document creation/update
+
         await_completion : typing.Optional[bool]
             Whether to wait for document creation/update to complete
+
+        mode : typing.Optional[str]
+            The mode to use for the document creation/update
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -141,7 +158,9 @@ class RawDocumentsClient:
             method="POST",
             params={
                 "job_id": job_id,
+                "sync_id": sync_id,
                 "await_completion": await_completion,
+                "mode": mode,
             },
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=DocumentsCreateRequestBody, direction="write"
@@ -185,7 +204,9 @@ class RawDocumentsClient:
         *,
         request: DocumentsUpdateBatchRequestBody,
         job_id: typing.Optional[str] = None,
+        sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
+        mode: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[DocumentResponse]:
         """
@@ -200,8 +221,14 @@ class RawDocumentsClient:
         job_id : typing.Optional[str]
             The job id responsible for the document creation/update
 
+        sync_id : typing.Optional[str]
+            The sync id the job belongs to thats responsible for the document creation/update
+
         await_completion : typing.Optional[bool]
             Whether to wait for document creation/update to complete
+
+        mode : typing.Optional[str]
+            The mode to use for the document creation/update
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -216,7 +243,9 @@ class RawDocumentsClient:
             method="POST",
             params={
                 "job_id": job_id,
+                "sync_id": sync_id,
                 "await_completion": await_completion,
+                "mode": mode,
             },
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=DocumentsUpdateBatchRequestBody, direction="write"
@@ -312,10 +341,10 @@ class RawDocumentsClient:
     def update(
         self,
         collection_id: str,
-        document_id: str,
         table_id: str,
+        document_id: str,
         *,
-        request: typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[SrcAppHttpRoutesCollectionUpdateDocumentResponse]:
         """
@@ -323,11 +352,11 @@ class RawDocumentsClient:
         ----------
         collection_id : str
 
-        document_id : str
-
         table_id : str
 
-        request : typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]]
+        document_id : str
+
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -340,11 +369,7 @@ class RawDocumentsClient:
         _response = self._client_wrapper.httpx_client.request(
             f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
             method="PUT",
-            json=convert_and_respect_annotation_metadata(
-                object_=request,
-                annotation=typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
-                direction="write",
-            ),
+            json=request,
             headers={
                 "content-type": "application/json",
             },
@@ -509,6 +534,8 @@ class AsyncRawDocumentsClient:
         limit: typing.Optional[int] = None,
         cursor: typing.Optional[str] = None,
         query: typing.Optional[str] = None,
+        offset: typing.Optional[int] = None,
+        sort_by: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionGetDocumentsResponse]:
         """
@@ -527,6 +554,12 @@ class AsyncRawDocumentsClient:
         query : typing.Optional[str]
             Search query
 
+        offset : typing.Optional[int]
+            Offset to fetch next set of records
+
+        sort_by : typing.Optional[str]
+            Sort by field
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -542,6 +575,8 @@ class AsyncRawDocumentsClient:
                 "limit": limit,
                 "cursor": cursor,
                 "query": query,
+                "offset": offset,
+                "sort_by": sort_by,
             },
             request_options=request_options,
         )
@@ -578,7 +613,9 @@ class AsyncRawDocumentsClient:
         *,
         request: DocumentsCreateRequestBody,
         job_id: typing.Optional[str] = None,
+        sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
+        mode: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[DocumentResponse]:
         """
@@ -593,8 +630,14 @@ class AsyncRawDocumentsClient:
         job_id : typing.Optional[str]
             The job id responsible for the document creation/update
 
+        sync_id : typing.Optional[str]
+            The sync id the job belongs to thats responsible for the document creation/update
+
         await_completion : typing.Optional[bool]
             Whether to wait for document creation/update to complete
+
+        mode : typing.Optional[str]
+            The mode to use for the document creation/update
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -609,7 +652,9 @@ class AsyncRawDocumentsClient:
             method="POST",
             params={
                 "job_id": job_id,
+                "sync_id": sync_id,
                 "await_completion": await_completion,
+                "mode": mode,
             },
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=DocumentsCreateRequestBody, direction="write"
@@ -653,7 +698,9 @@ class AsyncRawDocumentsClient:
         *,
         request: DocumentsUpdateBatchRequestBody,
         job_id: typing.Optional[str] = None,
+        sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
+        mode: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[DocumentResponse]:
         """
@@ -668,8 +715,14 @@ class AsyncRawDocumentsClient:
         job_id : typing.Optional[str]
             The job id responsible for the document creation/update
 
+        sync_id : typing.Optional[str]
+            The sync id the job belongs to thats responsible for the document creation/update
+
         await_completion : typing.Optional[bool]
             Whether to wait for document creation/update to complete
+
+        mode : typing.Optional[str]
+            The mode to use for the document creation/update
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -684,7 +737,9 @@ class AsyncRawDocumentsClient:
             method="POST",
             params={
                 "job_id": job_id,
+                "sync_id": sync_id,
                 "await_completion": await_completion,
+                "mode": mode,
             },
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=DocumentsUpdateBatchRequestBody, direction="write"
@@ -780,10 +835,10 @@ class AsyncRawDocumentsClient:
     async def update(
         self,
         collection_id: str,
-        document_id: str,
         table_id: str,
+        document_id: str,
         *,
-        request: typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
+        request: typing.Optional[typing.Any] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionUpdateDocumentResponse]:
         """
@@ -791,11 +846,11 @@ class AsyncRawDocumentsClient:
         ----------
         collection_id : str
 
-        document_id : str
-
         table_id : str
 
-        request : typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]]
+        document_id : str
+
+        request : typing.Optional[typing.Any]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -808,11 +863,7 @@ class AsyncRawDocumentsClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
             method="PUT",
-            json=convert_and_respect_annotation_metadata(
-                object_=request,
-                annotation=typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
-                direction="write",
-            ),
+            json=request,
             headers={
                 "content-type": "application/json",
             },

@@ -8,6 +8,7 @@ from ...types.json_column import JsonColumn
 from ...types.markdown_column import MarkdownColumn
 from ...types.multi_select_column import MultiSelectColumn
 from ...types.number_column import NumberColumn
+from ...types.people_column import PeopleColumn
 from ...types.relation_column import RelationColumn
 from ...types.select_column import SelectColumn
 from ...types.text_long_column import TextLongColumn
@@ -21,6 +22,7 @@ TableDataSchemaItem = typing.Union[
     MarkdownColumn,
     MultiSelectColumn,
     NumberColumn,
+    PeopleColumn,
     RelationColumn,
     SelectColumn,
     TextLongColumn,

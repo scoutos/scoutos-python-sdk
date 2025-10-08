@@ -21,6 +21,8 @@ class Table(UncheckedBaseModel):
     index_id: typing.Optional[str] = None
     collection_id: typing.Optional[str] = None
     documents_uploading: typing.Optional[bool] = None
+    migrated: typing.Optional[bool] = None
+    agent_table_id: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

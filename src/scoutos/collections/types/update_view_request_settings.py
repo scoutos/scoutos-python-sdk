@@ -2,7 +2,7 @@
 
 import typing
 
-from ...types.kanban_view_settings import KanbanViewSettings
-from ...types.table_view_settings import TableViewSettings
+from ...types.kanban_view_settings_input import KanbanViewSettingsInput
+from ...types.table_view_settings_input import TableViewSettingsInput
 
-UpdateViewRequestSettings = typing.Union[KanbanViewSettings, TableViewSettings]
+UpdateViewRequestSettings = typing.Union[KanbanViewSettingsInput, TableViewSettingsInput]

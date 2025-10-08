@@ -2,15 +2,50 @@
 
 # isort: skip_file
 
-from .documents_create_request_body import DocumentsCreateRequestBody
-from .documents_create_request_body_item_value import DocumentsCreateRequestBodyItemValue
-from .documents_create_request_body_one_value import DocumentsCreateRequestBodyOneValue
-from .documents_create_request_body_zero_value import DocumentsCreateRequestBodyZeroValue
-from .documents_update_batch_request_body import DocumentsUpdateBatchRequestBody
-from .documents_update_batch_request_body_item_value import DocumentsUpdateBatchRequestBodyItemValue
-from .documents_update_batch_request_body_one_value import DocumentsUpdateBatchRequestBodyOneValue
-from .documents_update_batch_request_body_zero_value import DocumentsUpdateBatchRequestBodyZeroValue
-from .documents_update_request_value import DocumentsUpdateRequestValue
+import typing
+from importlib import import_module
+
+if typing.TYPE_CHECKING:
+    from .documents_create_request_body import DocumentsCreateRequestBody
+    from .documents_create_request_body_item_value import DocumentsCreateRequestBodyItemValue
+    from .documents_create_request_body_one_value import DocumentsCreateRequestBodyOneValue
+    from .documents_create_request_body_zero_value import DocumentsCreateRequestBodyZeroValue
+    from .documents_update_batch_request_body import DocumentsUpdateBatchRequestBody
+    from .documents_update_batch_request_body_item_value import DocumentsUpdateBatchRequestBodyItemValue
+    from .documents_update_batch_request_body_one_value import DocumentsUpdateBatchRequestBodyOneValue
+    from .documents_update_batch_request_body_zero_value import DocumentsUpdateBatchRequestBodyZeroValue
+_dynamic_imports: typing.Dict[str, str] = {
+    "DocumentsCreateRequestBody": ".documents_create_request_body",
+    "DocumentsCreateRequestBodyItemValue": ".documents_create_request_body_item_value",
+    "DocumentsCreateRequestBodyOneValue": ".documents_create_request_body_one_value",
+    "DocumentsCreateRequestBodyZeroValue": ".documents_create_request_body_zero_value",
+    "DocumentsUpdateBatchRequestBody": ".documents_update_batch_request_body",
+    "DocumentsUpdateBatchRequestBodyItemValue": ".documents_update_batch_request_body_item_value",
+    "DocumentsUpdateBatchRequestBodyOneValue": ".documents_update_batch_request_body_one_value",
+    "DocumentsUpdateBatchRequestBodyZeroValue": ".documents_update_batch_request_body_zero_value",
+}
+
+
+def __getattr__(attr_name: str) -> typing.Any:
+    module_name = _dynamic_imports.get(attr_name)
+    if module_name is None:
+        raise AttributeError(f"No {attr_name} found in _dynamic_imports for module name -> {__name__}")
+    try:
+        module = import_module(module_name, __package__)
+        if module_name == f".{attr_name}":
+            return module
+        else:
+            return getattr(module, attr_name)
+    except ImportError as e:
+        raise ImportError(f"Failed to import {attr_name} from {module_name}: {e}") from e
+    except AttributeError as e:
+        raise AttributeError(f"Failed to get {attr_name} from {module_name}: {e}") from e
+
+
+def __dir__():
+    lazy_attrs = list(_dynamic_imports.keys())
+    return sorted(lazy_attrs)
+
 
 __all__ = [
     "DocumentsCreateRequestBody",
@@ -21,5 +56,4 @@ __all__ = [
     "DocumentsUpdateBatchRequestBodyItemValue",
     "DocumentsUpdateBatchRequestBodyOneValue",
     "DocumentsUpdateBatchRequestBodyZeroValue",
-    "DocumentsUpdateRequestValue",
 ]

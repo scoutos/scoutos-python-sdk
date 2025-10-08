@@ -13,6 +13,11 @@ class BillingUsage(UncheckedBaseModel):
     The number of workflow runs for their current billing cycle
     """
 
+    agent_interactions: typing.Optional[int] = pydantic.Field(default=None)
+    """
+    The number of agent interactions for their current billing cycle
+    """
+
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
     else:

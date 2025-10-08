@@ -2,4 +2,4 @@
 
 import typing
 
-ConnectIntegrationRequestAuthType = typing.Union[typing.Literal["api_key", "oauth2"], typing.Any]
+ConnectIntegrationRequestAuthType = typing.Union[typing.Literal["api_key", "oauth2", "oauth2_custom"], typing.Any]

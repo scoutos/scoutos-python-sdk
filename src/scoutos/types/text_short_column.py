@@ -5,7 +5,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .text_short_column_automation_config import TextShortColumnAutomationConfig
+from .typescript_automation_config import TypescriptAutomationConfig
 
 
 class TextShortColumn(UncheckedBaseModel):
@@ -14,7 +14,7 @@ class TextShortColumn(UncheckedBaseModel):
     column_type: typing.Literal["text-short"] = "text-short"
     data_type: typing.Optional[typing.Literal["string"]] = None
     hidden: typing.Optional[bool] = None
-    automation_config: typing.Optional[TextShortColumnAutomationConfig] = pydantic.Field(default=None)
+    automation_config: TypescriptAutomationConfig = pydantic.Field()
     """
     Optional automation configuration to automatically calculate values for this column
     """

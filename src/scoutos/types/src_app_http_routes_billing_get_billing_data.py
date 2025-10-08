@@ -6,6 +6,7 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .billing_cycles import BillingCycles
+from .determined_billing_limits import DeterminedBillingLimits
 from .friendly_payment_methods import FriendlyPaymentMethods
 from .invoice import Invoice
 from .subscription import Subscription
@@ -22,6 +23,8 @@ class SrcAppHttpRoutesBillingGetBillingData(UncheckedBaseModel):
     failed_invoices: typing.List[Invoice]
     has_failed_payment: bool
     workflow_invocations: int
+    billing_limits: DeterminedBillingLimits
+    agent_interactions: int
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

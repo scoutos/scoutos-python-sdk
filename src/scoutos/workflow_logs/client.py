@@ -69,6 +69,12 @@ class WorkflowLogsClient:
         )
         response = client.workflow_logs.list_logs(
             workflow_id="workflow_id",
+            start_date="start_date",
+            end_date="end_date",
+            limit=1,
+            session_id="session_id",
+            status="status",
+            cursor="cursor",
         )
         for chunk in response:
             yield chunk
@@ -152,6 +158,12 @@ class AsyncWorkflowLogsClient:
         async def main() -> None:
             response = await client.workflow_logs.list_logs(
                 workflow_id="workflow_id",
+                start_date="start_date",
+                end_date="end_date",
+                limit=1,
+                session_id="session_id",
+                status="status",
+                cursor="cursor",
             )
             async for chunk in response:
                 yield chunk

@@ -99,7 +99,10 @@ class WorkflowsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.workflows.create_revision()
+        client.workflows.create_revision(
+            workflow_id="workflow_id",
+            workflow_key="workflow_key",
+        )
         """
         _response = self._raw_client.create_revision(
             workflow_id=workflow_id,
@@ -166,7 +169,14 @@ class WorkflowsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.workflows.list()
+        client.workflows.list(
+            sort="sort",
+            direction="direction",
+            start_at="start_at",
+            limit=1,
+            query="query",
+            tags="tags",
+        )
         """
         _response = self._raw_client.list(
             sort=sort,
@@ -233,7 +243,9 @@ class WorkflowsClient:
         client = Scout(
             api_key="YOUR_API_KEY",
         )
-        client.workflows.create()
+        client.workflows.create(
+            workflow_key="workflow_key",
+        )
         """
         _response = self._raw_client.create(
             workflow_key=workflow_key,
@@ -429,6 +441,9 @@ class WorkflowsClient:
         )
         response = client.workflows.run_stream(
             workflow_id="workflow_id",
+            environment="environment",
+            revision_id="revision_id",
+            session_id="session_id",
         )
         for chunk in response:
             yield chunk
@@ -488,6 +503,9 @@ class WorkflowsClient:
         )
         client.workflows.run(
             workflow_id="workflow_id",
+            environment="environment",
+            revision_id="revision_id",
+            session_id="session_id",
         )
         """
         _response = self._raw_client.run(
@@ -550,6 +568,9 @@ class WorkflowsClient:
             api_key="YOUR_API_KEY",
         )
         client.workflows.run_with_config(
+            environment="environment",
+            revision_id="revision_id",
+            session_id="session_id",
             workflow_config=WorkflowConfigInput(),
         )
         """
@@ -642,7 +663,10 @@ class AsyncWorkflowsClient:
 
 
         async def main() -> None:
-            await client.workflows.create_revision()
+            await client.workflows.create_revision(
+                workflow_id="workflow_id",
+                workflow_key="workflow_key",
+            )
 
 
         asyncio.run(main())
@@ -717,7 +741,14 @@ class AsyncWorkflowsClient:
 
 
         async def main() -> None:
-            await client.workflows.list()
+            await client.workflows.list(
+                sort="sort",
+                direction="direction",
+                start_at="start_at",
+                limit=1,
+                query="query",
+                tags="tags",
+            )
 
 
         asyncio.run(main())
@@ -792,7 +823,9 @@ class AsyncWorkflowsClient:
 
 
         async def main() -> None:
-            await client.workflows.create()
+            await client.workflows.create(
+                workflow_key="workflow_key",
+            )
 
 
         asyncio.run(main())
@@ -1020,6 +1053,9 @@ class AsyncWorkflowsClient:
         async def main() -> None:
             response = await client.workflows.run_stream(
                 workflow_id="workflow_id",
+                environment="environment",
+                revision_id="revision_id",
+                session_id="session_id",
             )
             async for chunk in response:
                 yield chunk
@@ -1088,6 +1124,9 @@ class AsyncWorkflowsClient:
         async def main() -> None:
             await client.workflows.run(
                 workflow_id="workflow_id",
+                environment="environment",
+                revision_id="revision_id",
+                session_id="session_id",
             )
 
 
@@ -1158,6 +1197,9 @@ class AsyncWorkflowsClient:
 
         async def main() -> None:
             await client.workflows.run_with_config(
+                environment="environment",
+                revision_id="revision_id",
+                session_id="session_id",
                 workflow_config=WorkflowConfigInput(),
             )
 
