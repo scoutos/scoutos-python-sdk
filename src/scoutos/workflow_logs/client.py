@@ -4,6 +4,7 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.run_log import RunLog
 from .raw_client import AsyncRawWorkflowLogsClient, RawWorkflowLogsClient
 from .types.workflow_logs_list_logs_response import WorkflowLogsListLogsResponse
 
@@ -33,6 +34,7 @@ class WorkflowLogsClient:
         session_id: typing.Optional[str] = None,
         status: typing.Optional[str] = None,
         cursor: typing.Optional[str] = None,
+        summary_only: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Iterator[WorkflowLogsListLogsResponse]:
         """
@@ -51,6 +53,8 @@ class WorkflowLogsClient:
         status : typing.Optional[str]
 
         cursor : typing.Optional[str]
+
+        summary_only : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -75,6 +79,7 @@ class WorkflowLogsClient:
             session_id="session_id",
             status="status",
             cursor="cursor",
+            summary_only=True,
         )
         for chunk in response:
             yield chunk
@@ -87,9 +92,62 @@ class WorkflowLogsClient:
             session_id=session_id,
             status=status,
             cursor=cursor,
+            summary_only=summary_only,
             request_options=request_options,
         ) as r:
             yield from r.data
+
+    def get_details(
+        self,
+        *,
+        workflow_id: str,
+        session_id: typing.Optional[str] = None,
+        workflow_run_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> RunLog:
+        """
+        Get full log details for a specific workflow run.
+        Requires either session_id or workflow_run_id to identify the log.
+
+        Parameters
+        ----------
+        workflow_id : str
+            The workflow ID
+
+        session_id : typing.Optional[str]
+            The session ID to identify the log. Either session_id or workflow_run_id must be provided.
+
+        workflow_run_id : typing.Optional[str]
+            The workflow run ID to identify the log. Either session_id or workflow_run_id must be provided.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        RunLog
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.workflow_logs.get_details(
+            workflow_id="workflow_id",
+            session_id="session_id",
+            workflow_run_id="workflow_run_id",
+        )
+        """
+        _response = self._raw_client.get_details(
+            workflow_id=workflow_id,
+            session_id=session_id,
+            workflow_run_id=workflow_run_id,
+            request_options=request_options,
+        )
+        return _response.data
 
 
 class AsyncWorkflowLogsClient:
@@ -117,6 +175,7 @@ class AsyncWorkflowLogsClient:
         session_id: typing.Optional[str] = None,
         status: typing.Optional[str] = None,
         cursor: typing.Optional[str] = None,
+        summary_only: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.AsyncIterator[WorkflowLogsListLogsResponse]:
         """
@@ -135,6 +194,8 @@ class AsyncWorkflowLogsClient:
         status : typing.Optional[str]
 
         cursor : typing.Optional[str]
+
+        summary_only : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -164,6 +225,7 @@ class AsyncWorkflowLogsClient:
                 session_id="session_id",
                 status="status",
                 cursor="cursor",
+                summary_only=True,
             )
             async for chunk in response:
                 yield chunk
@@ -179,7 +241,68 @@ class AsyncWorkflowLogsClient:
             session_id=session_id,
             status=status,
             cursor=cursor,
+            summary_only=summary_only,
             request_options=request_options,
         ) as r:
             async for _chunk in r.data:
                 yield _chunk
+
+    async def get_details(
+        self,
+        *,
+        workflow_id: str,
+        session_id: typing.Optional[str] = None,
+        workflow_run_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> RunLog:
+        """
+        Get full log details for a specific workflow run.
+        Requires either session_id or workflow_run_id to identify the log.
+
+        Parameters
+        ----------
+        workflow_id : str
+            The workflow ID
+
+        session_id : typing.Optional[str]
+            The session ID to identify the log. Either session_id or workflow_run_id must be provided.
+
+        workflow_run_id : typing.Optional[str]
+            The workflow run ID to identify the log. Either session_id or workflow_run_id must be provided.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        RunLog
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.workflow_logs.get_details(
+                workflow_id="workflow_id",
+                session_id="session_id",
+                workflow_run_id="workflow_run_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_details(
+            workflow_id=workflow_id,
+            session_id=session_id,
+            workflow_run_id=workflow_run_id,
+            request_options=request_options,
+        )
+        return _response.data

@@ -15,6 +15,8 @@ class RunLog(UncheckedBaseModel):
     workflow_id: str
     status: str
     session_id: str
+    environment: typing.Optional[str] = None
+    revision_id: typing.Optional[str] = None
     cost: float
     blocks: typing.Dict[str, BlockRun]
     output: typing.Optional[typing.Any] = None

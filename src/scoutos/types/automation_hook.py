@@ -28,7 +28,7 @@ class AutomationHook(UncheckedBaseModel):
     created_at: dt.datetime
     updated_at: dt.datetime
     created_by: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
-    target_type: typing.Literal["automation"] = "automation"
+    target_type: typing.Optional[typing.Literal["automation"]] = None
     target_config: AutomationTargetConfig
 
     if IS_PYDANTIC_V2:

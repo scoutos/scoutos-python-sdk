@@ -14,6 +14,7 @@ if typing.TYPE_CHECKING:
     from .documents_update_batch_request_body_item_value import DocumentsUpdateBatchRequestBodyItemValue
     from .documents_update_batch_request_body_one_value import DocumentsUpdateBatchRequestBodyOneValue
     from .documents_update_batch_request_body_zero_value import DocumentsUpdateBatchRequestBodyZeroValue
+    from .documents_update_request_value import DocumentsUpdateRequestValue
 _dynamic_imports: typing.Dict[str, str] = {
     "DocumentsCreateRequestBody": ".documents_create_request_body",
     "DocumentsCreateRequestBodyItemValue": ".documents_create_request_body_item_value",
@@ -23,6 +24,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DocumentsUpdateBatchRequestBodyItemValue": ".documents_update_batch_request_body_item_value",
     "DocumentsUpdateBatchRequestBodyOneValue": ".documents_update_batch_request_body_one_value",
     "DocumentsUpdateBatchRequestBodyZeroValue": ".documents_update_batch_request_body_zero_value",
+    "DocumentsUpdateRequestValue": ".documents_update_request_value",
 }
 
 
@@ -56,4 +58,5 @@ __all__ = [
     "DocumentsUpdateBatchRequestBodyItemValue",
     "DocumentsUpdateBatchRequestBodyOneValue",
     "DocumentsUpdateBatchRequestBodyZeroValue",
+    "DocumentsUpdateRequestValue",
 ]

@@ -24,7 +24,7 @@ class AutomationHookInput(UncheckedBaseModel):
     Whether to generate a secret for HMAC authentication
     """
 
-    target_type: typing.Literal["automation"] = "automation"
+    target_type: typing.Optional[typing.Literal["automation"]] = None
     target_config: typing.Optional[AutomationTargetConfig] = None
 
     if IS_PYDANTIC_V2:

@@ -28,7 +28,7 @@ class AgentHook(UncheckedBaseModel):
     created_at: dt.datetime
     updated_at: dt.datetime
     created_by: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
-    target_type: typing.Literal["agent"] = "agent"
+    target_type: typing.Optional[typing.Literal["agent"]] = None
     target_config: AgentTargetConfig
 
     if IS_PYDANTIC_V2:

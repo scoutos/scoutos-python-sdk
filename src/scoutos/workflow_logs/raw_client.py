@@ -13,6 +13,7 @@ from ..core.request_options import RequestOptions
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
+from ..types.run_log import RunLog
 from .types.workflow_logs_list_logs_response import WorkflowLogsListLogsResponse
 
 
@@ -31,6 +32,7 @@ class RawWorkflowLogsClient:
         session_id: typing.Optional[str] = None,
         status: typing.Optional[str] = None,
         cursor: typing.Optional[str] = None,
+        summary_only: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Iterator[HttpResponse[typing.Iterator[WorkflowLogsListLogsResponse]]]:
         """
@@ -49,6 +51,8 @@ class RawWorkflowLogsClient:
         status : typing.Optional[str]
 
         cursor : typing.Optional[str]
+
+        summary_only : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -69,6 +73,7 @@ class RawWorkflowLogsClient:
                 "session_id": session_id,
                 "status": status,
                 "cursor": cursor,
+                "summary_only": summary_only,
             },
             request_options=request_options,
         ) as _response:
@@ -116,6 +121,73 @@ class RawWorkflowLogsClient:
 
             yield _stream()
 
+    def get_details(
+        self,
+        *,
+        workflow_id: str,
+        session_id: typing.Optional[str] = None,
+        workflow_run_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[RunLog]:
+        """
+        Get full log details for a specific workflow run.
+        Requires either session_id or workflow_run_id to identify the log.
+
+        Parameters
+        ----------
+        workflow_id : str
+            The workflow ID
+
+        session_id : typing.Optional[str]
+            The session ID to identify the log. Either session_id or workflow_run_id must be provided.
+
+        workflow_run_id : typing.Optional[str]
+            The workflow run ID to identify the log. Either session_id or workflow_run_id must be provided.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[RunLog]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "v2/run_logs/details",
+            method="GET",
+            params={
+                "workflow_id": workflow_id,
+                "session_id": session_id,
+                "workflow_run_id": workflow_run_id,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    RunLog,
+                    construct_type(
+                        type_=RunLog,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
 
 class AsyncRawWorkflowLogsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -132,6 +204,7 @@ class AsyncRawWorkflowLogsClient:
         session_id: typing.Optional[str] = None,
         status: typing.Optional[str] = None,
         cursor: typing.Optional[str] = None,
+        summary_only: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.AsyncIterator[AsyncHttpResponse[typing.AsyncIterator[WorkflowLogsListLogsResponse]]]:
         """
@@ -150,6 +223,8 @@ class AsyncRawWorkflowLogsClient:
         status : typing.Optional[str]
 
         cursor : typing.Optional[str]
+
+        summary_only : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -170,6 +245,7 @@ class AsyncRawWorkflowLogsClient:
                 "session_id": session_id,
                 "status": status,
                 "cursor": cursor,
+                "summary_only": summary_only,
             },
             request_options=request_options,
         ) as _response:
@@ -216,3 +292,70 @@ class AsyncRawWorkflowLogsClient:
                 raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
             yield await _stream()
+
+    async def get_details(
+        self,
+        *,
+        workflow_id: str,
+        session_id: typing.Optional[str] = None,
+        workflow_run_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[RunLog]:
+        """
+        Get full log details for a specific workflow run.
+        Requires either session_id or workflow_run_id to identify the log.
+
+        Parameters
+        ----------
+        workflow_id : str
+            The workflow ID
+
+        session_id : typing.Optional[str]
+            The session ID to identify the log. Either session_id or workflow_run_id must be provided.
+
+        workflow_run_id : typing.Optional[str]
+            The workflow run ID to identify the log. Either session_id or workflow_run_id must be provided.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[RunLog]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "v2/run_logs/details",
+            method="GET",
+            params={
+                "workflow_id": workflow_id,
+                "session_id": session_id,
+                "workflow_run_id": workflow_run_id,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    RunLog,
+                    construct_type(
+                        type_=RunLog,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

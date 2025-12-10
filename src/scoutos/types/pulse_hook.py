@@ -28,7 +28,7 @@ class PulseHook(UncheckedBaseModel):
     created_at: dt.datetime
     updated_at: dt.datetime
     created_by: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
-    target_type: typing.Literal["pulse"] = "pulse"
+    target_type: typing.Optional[typing.Literal["pulse"]] = None
     target_config: PulseTargetConfig
 
     if IS_PYDANTIC_V2:

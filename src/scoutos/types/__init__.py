@@ -30,6 +30,8 @@ if typing.TYPE_CHECKING:
     from .bare_input import BareInput
     from .bare_output import BareOutput
     from .baseline import Baseline
+    from .batch_create_request import BatchCreateRequest
+    from .batch_generate_request import BatchGenerateRequest
     from .billing import Billing
     from .billing_cycle import BillingCycle
     from .billing_cycles import BillingCycles
@@ -66,6 +68,11 @@ if typing.TYPE_CHECKING:
     from .block_state_updated_data import BlockStateUpdatedData
     from .block_state_updated_data_update_type import BlockStateUpdatedDataUpdateType
     from .block_state_updated_environment import BlockStateUpdatedEnvironment
+    from .body_parse_file_v_2_files_parse_post import BodyParseFileV2FilesParsePost
+    from .body_upload_files_to_drive_drive_files_post import BodyUploadFilesToDriveDriveFilesPost
+    from .body_upload_private_files_inbox_session_id_files_post import BodyUploadPrivateFilesInboxSessionIdFilesPost
+    from .body_upload_pulse_files_stream_pulse_files_stream_post import BodyUploadPulseFilesStreamPulseFilesStreamPost
+    from .body_upsert_agent_agents_post import BodyUpsertAgentAgentsPost
     from .cancel_response import CancelResponse
     from .card_display_field import CardDisplayField
     from .channel import Channel
@@ -82,6 +89,7 @@ if typing.TYPE_CHECKING:
     from .condition import Condition
     from .condition_field import ConditionField
     from .condition_operator import ConditionOperator
+    from .connect_integration_request import ConnectIntegrationRequest
     from .connect_integration_request_auth_type import ConnectIntegrationRequestAuthType
     from .copilot import Copilot
     from .copilot_config import CopilotConfig
@@ -89,9 +97,8 @@ if typing.TYPE_CHECKING:
     from .copilot_config_fab_value import CopilotConfigFabValue
     from .copilot_config_mode import CopilotConfigMode
     from .create_entity_request import CreateEntityRequest
-    from .create_hook_webhooks_post_request import CreateHookWebhooksPostRequest
-    from .create_hook_webhooks_post_response import CreateHookWebhooksPostResponse
     from .create_integrations_response import CreateIntegrationsResponse
+    from .create_pulse_request import CreatePulseRequest
     from .create_pulse_response import CreatePulseResponse
     from .create_tag_response import CreateTagResponse
     from .cron_trigger_config import CronTriggerConfig
@@ -115,7 +122,9 @@ if typing.TYPE_CHECKING:
     from .document_last_updated_by import DocumentLastUpdatedBy
     from .document_response import DocumentResponse
     from .edge_ui import EdgeUi
+    from .entity_query_request import EntityQueryRequest
     from .entity_response import EntityResponse
+    from .entity_search_request import EntitySearchRequest
     from .entity_search_request_mode import EntitySearchRequestMode
     from .entity_search_request_return_format import EntitySearchRequestReturnFormat
     from .environment import Environment
@@ -124,6 +133,7 @@ if typing.TYPE_CHECKING:
     from .environment_deployment_config_revision_lookup import EnvironmentDeploymentConfigRevisionLookup
     from .environment_deployment_document import EnvironmentDeploymentDocument
     from .event_version import EventVersion
+    from .execute_tool_request import ExecuteToolRequest
     from .execute_tool_response import ExecuteToolResponse
     from .execute_trigger_response import ExecuteTriggerResponse
     from .favor import Favor
@@ -135,10 +145,13 @@ if typing.TYPE_CHECKING:
     from .files_response import FilesResponse
     from .filter_operator import FilterOperator
     from .filter_type import FilterType
+    from .flags import Flags
+    from .fluent_query_request import FluentQueryRequest
     from .fluent_query_request_with_item import FluentQueryRequestWithItem
     from .friendly_invoice import FriendlyInvoice
     from .friendly_payment_methods import FriendlyPaymentMethods
-    from .get_hook_webhooks_hook_id_details_get_response import GetHookWebhooksHookIdDetailsGetResponse
+    from .generate_ai_suggestion_request import GenerateAiSuggestionRequest
+    from .hook_update import HookUpdate
     from .hooks_list_response import HooksListResponse
     from .html_2_text import Html2Text
     from .http import Http
@@ -175,6 +188,7 @@ if typing.TYPE_CHECKING:
     from .markdown_splitter_config import MarkdownSplitterConfig
     from .mcp_auth_type import McpAuthType
     from .me import Me
+    from .me_update import MeUpdate
     from .mention import Mention
     from .mention_participant import MentionParticipant
     from .message import Message
@@ -195,6 +209,7 @@ if typing.TYPE_CHECKING:
     from .notification_type import NotificationType
     from .notion_filter_by import NotionFilterBy
     from .notion_filter_options import NotionFilterOptions
+    from .notion_o_auth_request import NotionOAuthRequest
     from .number_column import NumberColumn
     from .number_column_default import NumberColumnDefault
     from .number_column_max_value import NumberColumnMaxValue
@@ -209,24 +224,33 @@ if typing.TYPE_CHECKING:
     from .placeholder_input_type import PlaceholderInputType
     from .placeholder_output import PlaceholderOutput
     from .placeholder_output_type import PlaceholderOutputType
+    from .plan import Plan
     from .plan_types import PlanTypes
     from .playwright import Playwright
     from .playwright_wait_for_load_state import PlaywrightWaitForLoadState
     from .position import Position
     from .prompt import Prompt
     from .prompt_role import PromptRole
+    from .public_copilot_config import PublicCopilotConfig
+    from .public_copilot_config_code_theme import PublicCopilotConfigCodeTheme
+    from .public_copilot_config_fab_value import PublicCopilotConfigFabValue
+    from .public_copilot_config_mode import PublicCopilotConfigMode
+    from .public_copilot_response import PublicCopilotResponse
     from .pulse_feed_response import PulseFeedResponse
     from .pulse_hook import PulseHook
     from .pulse_hook_input import PulseHookInput
     from .pulse_target_config import PulseTargetConfig
+    from .query_builder_request import QueryBuilderRequest
     from .query_builder_request_group_by_item import QueryBuilderRequestGroupByItem
     from .query_builder_request_sort_by import QueryBuilderRequestSortBy
     from .query_builder_request_sort_direction import QueryBuilderRequestSortDirection
     from .query_builder_request_tag_mode import QueryBuilderRequestTagMode
+    from .query_request import QueryRequest
     from .query_sort import QuerySort
     from .readability import Readability
     from .recursive_splitter_config import RecursiveSplitterConfig
     from .relation_column import RelationColumn
+    from .rename_request import RenameRequest
     from .rename_response import RenameResponse
     from .req_body import ReqBody
     from .request_body import RequestBody
@@ -234,6 +258,7 @@ if typing.TYPE_CHECKING:
     from .resource_resource_type import ResourceResourceType
     from .response_model_usage import ResponseModelUsage
     from .result import Result
+    from .rotate_api_keys_request import RotateApiKeysRequest
     from .rule import Rule
     from .rules_input import RulesInput
     from .rules_output import RulesOutput
@@ -252,6 +277,7 @@ if typing.TYPE_CHECKING:
     from .scout_hook_update_triggering_events_item import ScoutHookUpdateTriggeringEventsItem
     from .scout_hooks_response import ScoutHooksResponse
     from .scout_user import ScoutUser
+    from .search_request import SearchRequest
     from .search_request_search_type import SearchRequestSearchType
     from .select_column import SelectColumn
     from .select_option_item import SelectOptionItem
@@ -270,6 +296,8 @@ if typing.TYPE_CHECKING:
     from .sitemap_crawler_settings_output_scraper import SitemapCrawlerSettingsOutputScraper
     from .sitemap_crawler_settings_output_text_extractor import SitemapCrawlerSettingsOutputTextExtractor
     from .slack_event_response import SlackEventResponse
+    from .slack_message_request import SlackMessageRequest
+    from .slack_reaction_request import SlackReactionRequest
     from .slack_trigger_config_input import SlackTriggerConfigInput
     from .slack_trigger_config_input_action import SlackTriggerConfigInputAction
     from .slack_trigger_config_output import SlackTriggerConfigOutput
@@ -354,9 +382,12 @@ if typing.TYPE_CHECKING:
     )
     from .src_app_http_routes_collection_update_sync_response import SrcAppHttpRoutesCollectionUpdateSyncResponse
     from .src_app_http_routes_collection_update_table_response import SrcAppHttpRoutesCollectionUpdateTableResponse
+    from .src_app_http_routes_drive_create_drive_crawl_payload import SrcAppHttpRoutesDriveCreateDriveCrawlPayload
     from .src_app_http_routes_drive_create_drive_crawl_payload_source_sync_settings import (
         SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings,
     )
+    from .src_app_http_routes_drive_grant_access_payload import SrcAppHttpRoutesDriveGrantAccessPayload
+    from .src_app_http_routes_drive_revoke_access_payload import SrcAppHttpRoutesDriveRevokeAccessPayload
     from .src_app_http_routes_inbox_handle_message_incoming_message import (
         SrcAppHttpRoutesInboxHandleMessageIncomingMessage,
     )
@@ -366,14 +397,23 @@ if typing.TYPE_CHECKING:
     from .src_app_http_routes_inbox_handle_message_incoming_message_content_type import (
         SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType,
     )
+    from .src_app_http_routes_inbox_handle_message_interaction_request import (
+        SrcAppHttpRoutesInboxHandleMessageInteractionRequest,
+    )
     from .src_app_http_routes_inbox_handle_message_interaction_request_participants_item import (
         SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem,
+    )
+    from .src_app_http_routes_integration_mcp_connect_mcp_payload import SrcAppHttpRoutesIntegrationMcpConnectMcpPayload
+    from .src_app_http_routes_integration_mcp_exchange_mcp_auth_payload import (
+        SrcAppHttpRoutesIntegrationMcpExchangeMcpAuthPayload,
     )
     from .src_app_http_routes_onboarding_handle_get_me_response import SrcAppHttpRoutesOnboardingHandleGetMeResponse
     from .src_app_http_routes_onboarding_handle_update_me_response import (
         SrcAppHttpRoutesOnboardingHandleUpdateMeResponse,
     )
     from .src_app_http_routes_root_get_info_response import SrcAppHttpRoutesRootGetInfoResponse
+    from .src_app_http_routes_tags_create_tag_payload import SrcAppHttpRoutesTagsCreateTagPayload
+    from .src_app_http_routes_tags_update_tag_payload import SrcAppHttpRoutesTagsUpdateTagPayload
     from .src_app_http_routes_trigger_create_trigger_response import SrcAppHttpRoutesTriggerCreateTriggerResponse
     from .src_app_http_routes_world_interact_incoming_message import SrcAppHttpRoutesWorldInteractIncomingMessage
     from .src_app_http_routes_world_interact_incoming_message_content import (
@@ -399,6 +439,7 @@ if typing.TYPE_CHECKING:
     from .src_handlers_update_copilot_response import SrcHandlersUpdateCopilotResponse
     from .src_handlers_update_workflow_environment_response import SrcHandlersUpdateWorkflowEnvironmentResponse
     from .src_handlers_update_workflow_response import SrcHandlersUpdateWorkflowResponse
+    from .src_handlers_update_workflow_revision_response import SrcHandlersUpdateWorkflowRevisionResponse
     from .store_response import StoreResponse
     from .stripe_provider import StripeProvider
     from .stripe_provider_meta import StripeProviderMeta
@@ -438,7 +479,10 @@ if typing.TYPE_CHECKING:
     from .trigger_trigger_config import TriggerTriggerConfig
     from .units import Units
     from .update_cron_auth_response import UpdateCronAuthResponse
+    from .update_entity_request import UpdateEntityRequest
+    from .update_questionnaire_files_request import UpdateQuestionnaireFilesRequest
     from .update_tag_response import UpdateTagResponse
+    from .update_tags_request import UpdateTagsRequest
     from .update_trigger_response import UpdateTriggerResponse
     from .url_column import UrlColumn
     from .usage import Usage
@@ -506,6 +550,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "BareInput": ".bare_input",
     "BareOutput": ".bare_output",
     "Baseline": ".baseline",
+    "BatchCreateRequest": ".batch_create_request",
+    "BatchGenerateRequest": ".batch_generate_request",
     "Billing": ".billing",
     "BillingCycle": ".billing_cycle",
     "BillingCycles": ".billing_cycles",
@@ -542,6 +588,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "BlockStateUpdatedData": ".block_state_updated_data",
     "BlockStateUpdatedDataUpdateType": ".block_state_updated_data_update_type",
     "BlockStateUpdatedEnvironment": ".block_state_updated_environment",
+    "BodyParseFileV2FilesParsePost": ".body_parse_file_v_2_files_parse_post",
+    "BodyUploadFilesToDriveDriveFilesPost": ".body_upload_files_to_drive_drive_files_post",
+    "BodyUploadPrivateFilesInboxSessionIdFilesPost": ".body_upload_private_files_inbox_session_id_files_post",
+    "BodyUploadPulseFilesStreamPulseFilesStreamPost": ".body_upload_pulse_files_stream_pulse_files_stream_post",
+    "BodyUpsertAgentAgentsPost": ".body_upsert_agent_agents_post",
     "CancelResponse": ".cancel_response",
     "CardDisplayField": ".card_display_field",
     "Channel": ".channel",
@@ -558,6 +609,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Condition": ".condition",
     "ConditionField": ".condition_field",
     "ConditionOperator": ".condition_operator",
+    "ConnectIntegrationRequest": ".connect_integration_request",
     "ConnectIntegrationRequestAuthType": ".connect_integration_request_auth_type",
     "Copilot": ".copilot",
     "CopilotConfig": ".copilot_config",
@@ -565,9 +617,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CopilotConfigFabValue": ".copilot_config_fab_value",
     "CopilotConfigMode": ".copilot_config_mode",
     "CreateEntityRequest": ".create_entity_request",
-    "CreateHookWebhooksPostRequest": ".create_hook_webhooks_post_request",
-    "CreateHookWebhooksPostResponse": ".create_hook_webhooks_post_response",
     "CreateIntegrationsResponse": ".create_integrations_response",
+    "CreatePulseRequest": ".create_pulse_request",
     "CreatePulseResponse": ".create_pulse_response",
     "CreateTagResponse": ".create_tag_response",
     "CronTriggerConfig": ".cron_trigger_config",
@@ -591,7 +642,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DocumentLastUpdatedBy": ".document_last_updated_by",
     "DocumentResponse": ".document_response",
     "EdgeUi": ".edge_ui",
+    "EntityQueryRequest": ".entity_query_request",
     "EntityResponse": ".entity_response",
+    "EntitySearchRequest": ".entity_search_request",
     "EntitySearchRequestMode": ".entity_search_request_mode",
     "EntitySearchRequestReturnFormat": ".entity_search_request_return_format",
     "Environment": ".environment",
@@ -600,6 +653,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "EnvironmentDeploymentConfigRevisionLookup": ".environment_deployment_config_revision_lookup",
     "EnvironmentDeploymentDocument": ".environment_deployment_document",
     "EventVersion": ".event_version",
+    "ExecuteToolRequest": ".execute_tool_request",
     "ExecuteToolResponse": ".execute_tool_response",
     "ExecuteTriggerResponse": ".execute_trigger_response",
     "Favor": ".favor",
@@ -611,10 +665,13 @@ _dynamic_imports: typing.Dict[str, str] = {
     "FilesResponse": ".files_response",
     "FilterOperator": ".filter_operator",
     "FilterType": ".filter_type",
+    "Flags": ".flags",
+    "FluentQueryRequest": ".fluent_query_request",
     "FluentQueryRequestWithItem": ".fluent_query_request_with_item",
     "FriendlyInvoice": ".friendly_invoice",
     "FriendlyPaymentMethods": ".friendly_payment_methods",
-    "GetHookWebhooksHookIdDetailsGetResponse": ".get_hook_webhooks_hook_id_details_get_response",
+    "GenerateAiSuggestionRequest": ".generate_ai_suggestion_request",
+    "HookUpdate": ".hook_update",
     "HooksListResponse": ".hooks_list_response",
     "Html2Text": ".html_2_text",
     "Http": ".http",
@@ -651,6 +708,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "MarkdownSplitterConfig": ".markdown_splitter_config",
     "McpAuthType": ".mcp_auth_type",
     "Me": ".me",
+    "MeUpdate": ".me_update",
     "Mention": ".mention",
     "MentionParticipant": ".mention_participant",
     "Message": ".message",
@@ -671,6 +729,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "NotificationType": ".notification_type",
     "NotionFilterBy": ".notion_filter_by",
     "NotionFilterOptions": ".notion_filter_options",
+    "NotionOAuthRequest": ".notion_o_auth_request",
     "NumberColumn": ".number_column",
     "NumberColumnDefault": ".number_column_default",
     "NumberColumnMaxValue": ".number_column_max_value",
@@ -685,24 +744,33 @@ _dynamic_imports: typing.Dict[str, str] = {
     "PlaceholderInputType": ".placeholder_input_type",
     "PlaceholderOutput": ".placeholder_output",
     "PlaceholderOutputType": ".placeholder_output_type",
+    "Plan": ".plan",
     "PlanTypes": ".plan_types",
     "Playwright": ".playwright",
     "PlaywrightWaitForLoadState": ".playwright_wait_for_load_state",
     "Position": ".position",
     "Prompt": ".prompt",
     "PromptRole": ".prompt_role",
+    "PublicCopilotConfig": ".public_copilot_config",
+    "PublicCopilotConfigCodeTheme": ".public_copilot_config_code_theme",
+    "PublicCopilotConfigFabValue": ".public_copilot_config_fab_value",
+    "PublicCopilotConfigMode": ".public_copilot_config_mode",
+    "PublicCopilotResponse": ".public_copilot_response",
     "PulseFeedResponse": ".pulse_feed_response",
     "PulseHook": ".pulse_hook",
     "PulseHookInput": ".pulse_hook_input",
     "PulseTargetConfig": ".pulse_target_config",
+    "QueryBuilderRequest": ".query_builder_request",
     "QueryBuilderRequestGroupByItem": ".query_builder_request_group_by_item",
     "QueryBuilderRequestSortBy": ".query_builder_request_sort_by",
     "QueryBuilderRequestSortDirection": ".query_builder_request_sort_direction",
     "QueryBuilderRequestTagMode": ".query_builder_request_tag_mode",
+    "QueryRequest": ".query_request",
     "QuerySort": ".query_sort",
     "Readability": ".readability",
     "RecursiveSplitterConfig": ".recursive_splitter_config",
     "RelationColumn": ".relation_column",
+    "RenameRequest": ".rename_request",
     "RenameResponse": ".rename_response",
     "ReqBody": ".req_body",
     "RequestBody": ".request_body",
@@ -710,6 +778,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ResourceResourceType": ".resource_resource_type",
     "ResponseModelUsage": ".response_model_usage",
     "Result": ".result",
+    "RotateApiKeysRequest": ".rotate_api_keys_request",
     "Rule": ".rule",
     "RulesInput": ".rules_input",
     "RulesOutput": ".rules_output",
@@ -728,6 +797,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ScoutHookUpdateTriggeringEventsItem": ".scout_hook_update_triggering_events_item",
     "ScoutHooksResponse": ".scout_hooks_response",
     "ScoutUser": ".scout_user",
+    "SearchRequest": ".search_request",
     "SearchRequestSearchType": ".search_request_search_type",
     "SelectColumn": ".select_column",
     "SelectOptionItem": ".select_option_item",
@@ -746,6 +816,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SitemapCrawlerSettingsOutputScraper": ".sitemap_crawler_settings_output_scraper",
     "SitemapCrawlerSettingsOutputTextExtractor": ".sitemap_crawler_settings_output_text_extractor",
     "SlackEventResponse": ".slack_event_response",
+    "SlackMessageRequest": ".slack_message_request",
+    "SlackReactionRequest": ".slack_reaction_request",
     "SlackTriggerConfigInput": ".slack_trigger_config_input",
     "SlackTriggerConfigInputAction": ".slack_trigger_config_input_action",
     "SlackTriggerConfigOutput": ".slack_trigger_config_output",
@@ -810,14 +882,22 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SrcAppHttpRoutesCollectionUpdateDocumentResponse": ".src_app_http_routes_collection_update_document_response",
     "SrcAppHttpRoutesCollectionUpdateSyncResponse": ".src_app_http_routes_collection_update_sync_response",
     "SrcAppHttpRoutesCollectionUpdateTableResponse": ".src_app_http_routes_collection_update_table_response",
+    "SrcAppHttpRoutesDriveCreateDriveCrawlPayload": ".src_app_http_routes_drive_create_drive_crawl_payload",
     "SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings": ".src_app_http_routes_drive_create_drive_crawl_payload_source_sync_settings",
+    "SrcAppHttpRoutesDriveGrantAccessPayload": ".src_app_http_routes_drive_grant_access_payload",
+    "SrcAppHttpRoutesDriveRevokeAccessPayload": ".src_app_http_routes_drive_revoke_access_payload",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessage": ".src_app_http_routes_inbox_handle_message_incoming_message",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent": ".src_app_http_routes_inbox_handle_message_incoming_message_content",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType": ".src_app_http_routes_inbox_handle_message_incoming_message_content_type",
+    "SrcAppHttpRoutesInboxHandleMessageInteractionRequest": ".src_app_http_routes_inbox_handle_message_interaction_request",
     "SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem": ".src_app_http_routes_inbox_handle_message_interaction_request_participants_item",
+    "SrcAppHttpRoutesIntegrationMcpConnectMcpPayload": ".src_app_http_routes_integration_mcp_connect_mcp_payload",
+    "SrcAppHttpRoutesIntegrationMcpExchangeMcpAuthPayload": ".src_app_http_routes_integration_mcp_exchange_mcp_auth_payload",
     "SrcAppHttpRoutesOnboardingHandleGetMeResponse": ".src_app_http_routes_onboarding_handle_get_me_response",
     "SrcAppHttpRoutesOnboardingHandleUpdateMeResponse": ".src_app_http_routes_onboarding_handle_update_me_response",
     "SrcAppHttpRoutesRootGetInfoResponse": ".src_app_http_routes_root_get_info_response",
+    "SrcAppHttpRoutesTagsCreateTagPayload": ".src_app_http_routes_tags_create_tag_payload",
+    "SrcAppHttpRoutesTagsUpdateTagPayload": ".src_app_http_routes_tags_update_tag_payload",
     "SrcAppHttpRoutesTriggerCreateTriggerResponse": ".src_app_http_routes_trigger_create_trigger_response",
     "SrcAppHttpRoutesWorldInteractIncomingMessage": ".src_app_http_routes_world_interact_incoming_message",
     "SrcAppHttpRoutesWorldInteractIncomingMessageContent": ".src_app_http_routes_world_interact_incoming_message_content",
@@ -839,6 +919,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SrcHandlersUpdateCopilotResponse": ".src_handlers_update_copilot_response",
     "SrcHandlersUpdateWorkflowEnvironmentResponse": ".src_handlers_update_workflow_environment_response",
     "SrcHandlersUpdateWorkflowResponse": ".src_handlers_update_workflow_response",
+    "SrcHandlersUpdateWorkflowRevisionResponse": ".src_handlers_update_workflow_revision_response",
     "StoreResponse": ".store_response",
     "StripeProvider": ".stripe_provider",
     "StripeProviderMeta": ".stripe_provider_meta",
@@ -879,7 +960,10 @@ _dynamic_imports: typing.Dict[str, str] = {
     "TypescriptAutomationConfig": ".typescript_automation_config",
     "Units": ".units",
     "UpdateCronAuthResponse": ".update_cron_auth_response",
+    "UpdateEntityRequest": ".update_entity_request",
+    "UpdateQuestionnaireFilesRequest": ".update_questionnaire_files_request",
     "UpdateTagResponse": ".update_tag_response",
+    "UpdateTagsRequest": ".update_tags_request",
     "UpdateTriggerResponse": ".update_trigger_response",
     "UrlColumn": ".url_column",
     "Usage": ".usage",
@@ -971,6 +1055,8 @@ __all__ = [
     "BareInput",
     "BareOutput",
     "Baseline",
+    "BatchCreateRequest",
+    "BatchGenerateRequest",
     "Billing",
     "BillingCycle",
     "BillingCycles",
@@ -1007,6 +1093,11 @@ __all__ = [
     "BlockStateUpdatedData",
     "BlockStateUpdatedDataUpdateType",
     "BlockStateUpdatedEnvironment",
+    "BodyParseFileV2FilesParsePost",
+    "BodyUploadFilesToDriveDriveFilesPost",
+    "BodyUploadPrivateFilesInboxSessionIdFilesPost",
+    "BodyUploadPulseFilesStreamPulseFilesStreamPost",
+    "BodyUpsertAgentAgentsPost",
     "CancelResponse",
     "CardDisplayField",
     "Channel",
@@ -1023,6 +1114,7 @@ __all__ = [
     "Condition",
     "ConditionField",
     "ConditionOperator",
+    "ConnectIntegrationRequest",
     "ConnectIntegrationRequestAuthType",
     "Copilot",
     "CopilotConfig",
@@ -1030,9 +1122,8 @@ __all__ = [
     "CopilotConfigFabValue",
     "CopilotConfigMode",
     "CreateEntityRequest",
-    "CreateHookWebhooksPostRequest",
-    "CreateHookWebhooksPostResponse",
     "CreateIntegrationsResponse",
+    "CreatePulseRequest",
     "CreatePulseResponse",
     "CreateTagResponse",
     "CronTriggerConfig",
@@ -1056,7 +1147,9 @@ __all__ = [
     "DocumentLastUpdatedBy",
     "DocumentResponse",
     "EdgeUi",
+    "EntityQueryRequest",
     "EntityResponse",
+    "EntitySearchRequest",
     "EntitySearchRequestMode",
     "EntitySearchRequestReturnFormat",
     "Environment",
@@ -1065,6 +1158,7 @@ __all__ = [
     "EnvironmentDeploymentConfigRevisionLookup",
     "EnvironmentDeploymentDocument",
     "EventVersion",
+    "ExecuteToolRequest",
     "ExecuteToolResponse",
     "ExecuteTriggerResponse",
     "Favor",
@@ -1076,10 +1170,13 @@ __all__ = [
     "FilesResponse",
     "FilterOperator",
     "FilterType",
+    "Flags",
+    "FluentQueryRequest",
     "FluentQueryRequestWithItem",
     "FriendlyInvoice",
     "FriendlyPaymentMethods",
-    "GetHookWebhooksHookIdDetailsGetResponse",
+    "GenerateAiSuggestionRequest",
+    "HookUpdate",
     "HooksListResponse",
     "Html2Text",
     "Http",
@@ -1116,6 +1213,7 @@ __all__ = [
     "MarkdownSplitterConfig",
     "McpAuthType",
     "Me",
+    "MeUpdate",
     "Mention",
     "MentionParticipant",
     "Message",
@@ -1136,6 +1234,7 @@ __all__ = [
     "NotificationType",
     "NotionFilterBy",
     "NotionFilterOptions",
+    "NotionOAuthRequest",
     "NumberColumn",
     "NumberColumnDefault",
     "NumberColumnMaxValue",
@@ -1150,24 +1249,33 @@ __all__ = [
     "PlaceholderInputType",
     "PlaceholderOutput",
     "PlaceholderOutputType",
+    "Plan",
     "PlanTypes",
     "Playwright",
     "PlaywrightWaitForLoadState",
     "Position",
     "Prompt",
     "PromptRole",
+    "PublicCopilotConfig",
+    "PublicCopilotConfigCodeTheme",
+    "PublicCopilotConfigFabValue",
+    "PublicCopilotConfigMode",
+    "PublicCopilotResponse",
     "PulseFeedResponse",
     "PulseHook",
     "PulseHookInput",
     "PulseTargetConfig",
+    "QueryBuilderRequest",
     "QueryBuilderRequestGroupByItem",
     "QueryBuilderRequestSortBy",
     "QueryBuilderRequestSortDirection",
     "QueryBuilderRequestTagMode",
+    "QueryRequest",
     "QuerySort",
     "Readability",
     "RecursiveSplitterConfig",
     "RelationColumn",
+    "RenameRequest",
     "RenameResponse",
     "ReqBody",
     "RequestBody",
@@ -1175,6 +1283,7 @@ __all__ = [
     "ResourceResourceType",
     "ResponseModelUsage",
     "Result",
+    "RotateApiKeysRequest",
     "Rule",
     "RulesInput",
     "RulesOutput",
@@ -1193,6 +1302,7 @@ __all__ = [
     "ScoutHookUpdateTriggeringEventsItem",
     "ScoutHooksResponse",
     "ScoutUser",
+    "SearchRequest",
     "SearchRequestSearchType",
     "SelectColumn",
     "SelectOptionItem",
@@ -1211,6 +1321,8 @@ __all__ = [
     "SitemapCrawlerSettingsOutputScraper",
     "SitemapCrawlerSettingsOutputTextExtractor",
     "SlackEventResponse",
+    "SlackMessageRequest",
+    "SlackReactionRequest",
     "SlackTriggerConfigInput",
     "SlackTriggerConfigInputAction",
     "SlackTriggerConfigOutput",
@@ -1275,14 +1387,22 @@ __all__ = [
     "SrcAppHttpRoutesCollectionUpdateDocumentResponse",
     "SrcAppHttpRoutesCollectionUpdateSyncResponse",
     "SrcAppHttpRoutesCollectionUpdateTableResponse",
+    "SrcAppHttpRoutesDriveCreateDriveCrawlPayload",
     "SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings",
+    "SrcAppHttpRoutesDriveGrantAccessPayload",
+    "SrcAppHttpRoutesDriveRevokeAccessPayload",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessage",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType",
+    "SrcAppHttpRoutesInboxHandleMessageInteractionRequest",
     "SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem",
+    "SrcAppHttpRoutesIntegrationMcpConnectMcpPayload",
+    "SrcAppHttpRoutesIntegrationMcpExchangeMcpAuthPayload",
     "SrcAppHttpRoutesOnboardingHandleGetMeResponse",
     "SrcAppHttpRoutesOnboardingHandleUpdateMeResponse",
     "SrcAppHttpRoutesRootGetInfoResponse",
+    "SrcAppHttpRoutesTagsCreateTagPayload",
+    "SrcAppHttpRoutesTagsUpdateTagPayload",
     "SrcAppHttpRoutesTriggerCreateTriggerResponse",
     "SrcAppHttpRoutesWorldInteractIncomingMessage",
     "SrcAppHttpRoutesWorldInteractIncomingMessageContent",
@@ -1304,6 +1424,7 @@ __all__ = [
     "SrcHandlersUpdateCopilotResponse",
     "SrcHandlersUpdateWorkflowEnvironmentResponse",
     "SrcHandlersUpdateWorkflowResponse",
+    "SrcHandlersUpdateWorkflowRevisionResponse",
     "StoreResponse",
     "StripeProvider",
     "StripeProviderMeta",
@@ -1344,7 +1465,10 @@ __all__ = [
     "TypescriptAutomationConfig",
     "Units",
     "UpdateCronAuthResponse",
+    "UpdateEntityRequest",
+    "UpdateQuestionnaireFilesRequest",
     "UpdateTagResponse",
+    "UpdateTagsRequest",
     "UpdateTriggerResponse",
     "UrlColumn",
     "Usage",

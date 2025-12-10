@@ -28,7 +28,7 @@ class WorkflowHook(UncheckedBaseModel):
     created_at: dt.datetime
     updated_at: dt.datetime
     created_by: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
-    target_type: typing.Literal["workflow"] = "workflow"
+    target_type: typing.Optional[typing.Literal["workflow"]] = None
     target_config: WorkflowTargetConfig
 
     if IS_PYDANTIC_V2:

@@ -5,6 +5,21 @@
 
 The Scoutos Python library provides convenient access to the Scoutos APIs from Python.
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Reference](#reference)
+- [Usage](#usage)
+- [Async Client](#async-client)
+- [Exception Handling](#exception-handling)
+- [Streaming](#streaming)
+- [Advanced](#advanced)
+  - [Access Raw Response Data](#access-raw-response-data)
+  - [Retries](#retries)
+  - [Timeouts](#timeouts)
+  - [Custom Client](#custom-client)
+- [Contributing](#contributing)
+
 ## Installation
 
 ```sh
@@ -25,8 +40,9 @@ from scoutos import Scout
 client = Scout(
     api_key="YOUR_API_KEY",
 )
-client.parse_file_v_2_files_parse_post(
-    return_text=True,
+client.workflows.create_revision(
+    workflow_id="workflow_id",
+    workflow_key="workflow_key",
 )
 ```
 
@@ -45,8 +61,9 @@ client = AsyncScout(
 
 
 async def main() -> None:
-    await client.parse_file_v_2_files_parse_post(
-        return_text=True,
+    await client.workflows.create_revision(
+        workflow_id="workflow_id",
+        workflow_key="workflow_key",
     )
 
 
@@ -62,7 +79,7 @@ will be thrown.
 from scoutos.core.api_error import ApiError
 
 try:
-    client.parse_file_v_2_files_parse_post(...)
+    client.workflows.create_revision(...)
 except ApiError as e:
     print(e.status_code)
     print(e.body)
@@ -101,7 +118,7 @@ from scoutos import Scout
 client = Scout(
     ...,
 )
-response = client.with_raw_response.parse_file_v_2_files_parse_post(...)
+response = client.workflows.with_raw_response.create_revision(...)
 print(response.headers)  # access the response headers
 print(response.data)  # access the underlying object
 with client.workflows.with_raw_response.run_stream(...) as response:
@@ -125,7 +142,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `max_retries` request option to configure this behavior.
 
 ```python
-client.parse_file_v_2_files_parse_post(..., request_options={
+client.workflows.create_revision(..., request_options={
     "max_retries": 1
 })
 ```
@@ -145,7 +162,7 @@ client = Scout(
 
 
 # Override timeout for a specific method
-client.parse_file_v_2_files_parse_post(..., request_options={
+client.workflows.create_revision(..., request_options={
     "timeout_in_seconds": 1
 })
 ```

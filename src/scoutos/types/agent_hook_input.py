@@ -24,7 +24,7 @@ class AgentHookInput(UncheckedBaseModel):
     Whether to generate a secret for HMAC authentication
     """
 
-    target_type: typing.Literal["agent"] = "agent"
+    target_type: typing.Optional[typing.Literal["agent"]] = None
     target_config: typing.Optional[AgentTargetConfig] = None
 
     if IS_PYDANTIC_V2:

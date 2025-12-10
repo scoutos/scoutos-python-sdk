@@ -24,7 +24,7 @@ class WorkflowHookInput(UncheckedBaseModel):
     Whether to generate a secret for HMAC authentication
     """
 
-    target_type: typing.Literal["workflow"] = "workflow"
+    target_type: typing.Optional[typing.Literal["workflow"]] = None
     target_config: typing.Optional[WorkflowTargetConfig] = None
 
     if IS_PYDANTIC_V2:

@@ -119,6 +119,7 @@ class RawCopilotsClient:
         message_placeholder: typing.Optional[str] = OMIT,
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
+        powered_by: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[SrcHandlersCreateCopilotResponse]:
         """
@@ -146,6 +147,8 @@ class RawCopilotsClient:
 
         allowed_origins : typing.Optional[str]
 
+        powered_by : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -171,6 +174,7 @@ class RawCopilotsClient:
                 "message_placeholder": message_placeholder,
                 "initial_activity": initial_activity,
                 "allowed_origins": allowed_origins,
+                "powered_by": powered_by,
             },
             headers={
                 "content-type": "application/json",
@@ -208,7 +212,7 @@ class RawCopilotsClient:
         self, copilot_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[SrcHandlersGetCopilotResponse]:
         """
-        Fetch app configuration by ID.
+        Fetch copilot configuration by ID.
 
         Parameters
         ----------
@@ -268,6 +272,7 @@ class RawCopilotsClient:
         message_placeholder: typing.Optional[str] = OMIT,
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
+        powered_by: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[SrcHandlersUpdateCopilotResponse]:
         """
@@ -297,6 +302,8 @@ class RawCopilotsClient:
 
         allowed_origins : typing.Optional[str]
 
+        powered_by : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -322,6 +329,7 @@ class RawCopilotsClient:
                 "message_placeholder": message_placeholder,
                 "initial_activity": initial_activity,
                 "allowed_origins": allowed_origins,
+                "powered_by": powered_by,
             },
             headers={
                 "content-type": "application/json",
@@ -497,6 +505,7 @@ class AsyncRawCopilotsClient:
         message_placeholder: typing.Optional[str] = OMIT,
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
+        powered_by: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[SrcHandlersCreateCopilotResponse]:
         """
@@ -524,6 +533,8 @@ class AsyncRawCopilotsClient:
 
         allowed_origins : typing.Optional[str]
 
+        powered_by : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -549,6 +560,7 @@ class AsyncRawCopilotsClient:
                 "message_placeholder": message_placeholder,
                 "initial_activity": initial_activity,
                 "allowed_origins": allowed_origins,
+                "powered_by": powered_by,
             },
             headers={
                 "content-type": "application/json",
@@ -586,7 +598,7 @@ class AsyncRawCopilotsClient:
         self, copilot_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[SrcHandlersGetCopilotResponse]:
         """
-        Fetch app configuration by ID.
+        Fetch copilot configuration by ID.
 
         Parameters
         ----------
@@ -646,6 +658,7 @@ class AsyncRawCopilotsClient:
         message_placeholder: typing.Optional[str] = OMIT,
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
+        powered_by: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[SrcHandlersUpdateCopilotResponse]:
         """
@@ -675,6 +688,8 @@ class AsyncRawCopilotsClient:
 
         allowed_origins : typing.Optional[str]
 
+        powered_by : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -700,6 +715,7 @@ class AsyncRawCopilotsClient:
                 "message_placeholder": message_placeholder,
                 "initial_activity": initial_activity,
                 "allowed_origins": allowed_origins,
+                "powered_by": powered_by,
             },
             headers={
                 "content-type": "application/json",

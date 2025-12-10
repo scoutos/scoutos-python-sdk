@@ -25,6 +25,39 @@ class RevisionsClient:
         """
         return self._raw_client
 
+    def delete(
+        self, workflow_id: str, revision_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcHandlersDeleteWorkflowRevisionResponse:
+        """
+        Parameters
+        ----------
+        workflow_id : str
+
+        revision_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcHandlersDeleteWorkflowRevisionResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.revisions.delete(
+            workflow_id="workflow_id",
+            revision_id="revision_id",
+        )
+        """
+        _response = self._raw_client.delete(workflow_id, revision_id, request_options=request_options)
+        return _response.data
+
     def list(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> SrcHandlersListWorkflowRevisionsResponse:
@@ -90,7 +123,23 @@ class RevisionsClient:
         _response = self._raw_client.update(workflow_id, revision_id, request_options=request_options)
         return _response.data
 
-    def delete(
+
+class AsyncRevisionsClient:
+    def __init__(self, *, client_wrapper: AsyncClientWrapper):
+        self._raw_client = AsyncRawRevisionsClient(client_wrapper=client_wrapper)
+
+    @property
+    def with_raw_response(self) -> AsyncRawRevisionsClient:
+        """
+        Retrieves a raw implementation of this client that returns raw responses.
+
+        Returns
+        -------
+        AsyncRawRevisionsClient
+        """
+        return self._raw_client
+
+    async def delete(
         self, workflow_id: str, revision_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> SrcHandlersDeleteWorkflowRevisionResponse:
         """
@@ -110,34 +159,26 @@ class RevisionsClient:
 
         Examples
         --------
-        from scoutos import Scout
+        import asyncio
 
-        client = Scout(
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
             api_key="YOUR_API_KEY",
         )
-        client.revisions.delete(
-            workflow_id="workflow_id",
-            revision_id="revision_id",
-        )
+
+
+        async def main() -> None:
+            await client.revisions.delete(
+                workflow_id="workflow_id",
+                revision_id="revision_id",
+            )
+
+
+        asyncio.run(main())
         """
-        _response = self._raw_client.delete(workflow_id, revision_id, request_options=request_options)
+        _response = await self._raw_client.delete(workflow_id, revision_id, request_options=request_options)
         return _response.data
-
-
-class AsyncRevisionsClient:
-    def __init__(self, *, client_wrapper: AsyncClientWrapper):
-        self._raw_client = AsyncRawRevisionsClient(client_wrapper=client_wrapper)
-
-    @property
-    def with_raw_response(self) -> AsyncRawRevisionsClient:
-        """
-        Retrieves a raw implementation of this client that returns raw responses.
-
-        Returns
-        -------
-        AsyncRawRevisionsClient
-        """
-        return self._raw_client
 
     async def list(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
@@ -218,45 +259,4 @@ class AsyncRevisionsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.update(workflow_id, revision_id, request_options=request_options)
-        return _response.data
-
-    async def delete(
-        self, workflow_id: str, revision_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> SrcHandlersDeleteWorkflowRevisionResponse:
-        """
-        Parameters
-        ----------
-        workflow_id : str
-
-        revision_id : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        SrcHandlersDeleteWorkflowRevisionResponse
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from scoutos import AsyncScout
-
-        client = AsyncScout(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.revisions.delete(
-                workflow_id="workflow_id",
-                revision_id="revision_id",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.delete(workflow_id, revision_id, request_options=request_options)
         return _response.data

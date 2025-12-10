@@ -22,6 +22,7 @@ IntegrationConnectionIntegrationType = typing.Union[
         "sentry",
         "statsig",
         "reddit",
+        "airtable",
         "scout_native_tools",
     ],
     typing.Any,

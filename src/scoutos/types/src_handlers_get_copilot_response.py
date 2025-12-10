@@ -5,11 +5,11 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .copilot import Copilot
+from .public_copilot_response import PublicCopilotResponse
 
 
 class SrcHandlersGetCopilotResponse(UncheckedBaseModel):
-    data: Copilot
+    data: PublicCopilotResponse
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

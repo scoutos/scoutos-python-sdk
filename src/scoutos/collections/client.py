@@ -18,6 +18,9 @@ from ..types.src_app_http_routes_collection_get_collection_response import (
 from ..types.src_app_http_routes_collection_get_collections_response import (
     SrcAppHttpRoutesCollectionGetCollectionsResponse,
 )
+from ..types.src_app_http_routes_collection_list_collection_syncs_response_model import (
+    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
+)
 from ..types.src_app_http_routes_collection_update_collection_response import (
     SrcAppHttpRoutesCollectionUpdateCollectionResponse,
 )
@@ -276,6 +279,41 @@ class CollectionsClient:
         )
         """
         _response = self._raw_client.delete(collection_id, request_options=request_options)
+        return _response.data
+
+    def list_syncs(
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel:
+        """
+        List Sources by Destination, specifically given a collection and table
+
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.collections.list_syncs(
+            collection_id="collection_id",
+            table_id="table_id",
+        )
+        """
+        _response = self._raw_client.list_syncs(collection_id, table_id, request_options=request_options)
         return _response.data
 
     def get_views(
@@ -859,6 +897,49 @@ class AsyncCollectionsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.delete(collection_id, request_options=request_options)
+        return _response.data
+
+    async def list_syncs(
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel:
+        """
+        List Sources by Destination, specifically given a collection and table
+
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.collections.list_syncs(
+                collection_id="collection_id",
+                table_id="table_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list_syncs(collection_id, table_id, request_options=request_options)
         return _response.data
 
     async def get_views(

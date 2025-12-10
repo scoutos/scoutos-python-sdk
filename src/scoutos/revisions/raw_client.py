@@ -20,6 +20,55 @@ class RawRevisionsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
+    def delete(
+        self, workflow_id: str, revision_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[SrcHandlersDeleteWorkflowRevisionResponse]:
+        """
+        Parameters
+        ----------
+        workflow_id : str
+
+        revision_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[SrcHandlersDeleteWorkflowRevisionResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/workflows/{jsonable_encoder(workflow_id)}/revisions/{jsonable_encoder(revision_id)}",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    SrcHandlersDeleteWorkflowRevisionResponse,
+                    construct_type(
+                        type_=SrcHandlersDeleteWorkflowRevisionResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     def list(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[SrcHandlersListWorkflowRevisionsResponse]:
@@ -118,9 +167,14 @@ class RawRevisionsClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def delete(
+
+class AsyncRawRevisionsClient:
+    def __init__(self, *, client_wrapper: AsyncClientWrapper):
+        self._client_wrapper = client_wrapper
+
+    async def delete(
         self, workflow_id: str, revision_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[SrcHandlersDeleteWorkflowRevisionResponse]:
+    ) -> AsyncHttpResponse[SrcHandlersDeleteWorkflowRevisionResponse]:
         """
         Parameters
         ----------
@@ -133,10 +187,10 @@ class RawRevisionsClient:
 
         Returns
         -------
-        HttpResponse[SrcHandlersDeleteWorkflowRevisionResponse]
+        AsyncHttpResponse[SrcHandlersDeleteWorkflowRevisionResponse]
             Successful Response
         """
-        _response = self._client_wrapper.httpx_client.request(
+        _response = await self._client_wrapper.httpx_client.request(
             f"v2/workflows/{jsonable_encoder(workflow_id)}/revisions/{jsonable_encoder(revision_id)}",
             method="DELETE",
             request_options=request_options,
@@ -150,7 +204,7 @@ class RawRevisionsClient:
                         object_=_response.json(),
                     ),
                 )
-                return HttpResponse(response=_response, data=_data)
+                return AsyncHttpResponse(response=_response, data=_data)
             if _response.status_code == 422:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
@@ -166,11 +220,6 @@ class RawRevisionsClient:
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-
-class AsyncRawRevisionsClient:
-    def __init__(self, *, client_wrapper: AsyncClientWrapper):
-        self._client_wrapper = client_wrapper
 
     async def list(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
@@ -250,55 +299,6 @@ class AsyncRawRevisionsClient:
                     SrcHandlersPromoteWorkflowRevisionResponse,
                     construct_type(
                         type_=SrcHandlersPromoteWorkflowRevisionResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        construct_type(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def delete(
-        self, workflow_id: str, revision_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[SrcHandlersDeleteWorkflowRevisionResponse]:
-        """
-        Parameters
-        ----------
-        workflow_id : str
-
-        revision_id : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[SrcHandlersDeleteWorkflowRevisionResponse]
-            Successful Response
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            f"v2/workflows/{jsonable_encoder(workflow_id)}/revisions/{jsonable_encoder(revision_id)}",
-            method="DELETE",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    SrcHandlersDeleteWorkflowRevisionResponse,
-                    construct_type(
-                        type_=SrcHandlersDeleteWorkflowRevisionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

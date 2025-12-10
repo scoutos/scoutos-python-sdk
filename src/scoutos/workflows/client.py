@@ -129,6 +129,7 @@ class WorkflowsClient:
         limit: typing.Optional[int] = None,
         query: typing.Optional[str] = None,
         tags: typing.Optional[str] = None,
+        drive: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcHandlersListWorkflowsResponse:
         """
@@ -154,6 +155,8 @@ class WorkflowsClient:
         tags : typing.Optional[str]
             Filter by tags
 
+        drive : typing.Optional[bool]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -176,6 +179,7 @@ class WorkflowsClient:
             limit=1,
             query="query",
             tags="tags",
+            drive=True,
         )
         """
         _response = self._raw_client.list(
@@ -185,6 +189,7 @@ class WorkflowsClient:
             limit=limit,
             query=query,
             tags=tags,
+            drive=drive,
             request_options=request_options,
         )
         return _response.data
@@ -696,6 +701,7 @@ class AsyncWorkflowsClient:
         limit: typing.Optional[int] = None,
         query: typing.Optional[str] = None,
         tags: typing.Optional[str] = None,
+        drive: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcHandlersListWorkflowsResponse:
         """
@@ -720,6 +726,8 @@ class AsyncWorkflowsClient:
 
         tags : typing.Optional[str]
             Filter by tags
+
+        drive : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -748,6 +756,7 @@ class AsyncWorkflowsClient:
                 limit=1,
                 query="query",
                 tags="tags",
+                drive=True,
             )
 
 
@@ -760,6 +769,7 @@ class AsyncWorkflowsClient:
             limit=limit,
             query=query,
             tags=tags,
+            drive=drive,
             request_options=request_options,
         )
         return _response.data

@@ -22,6 +22,7 @@ class CopilotConfig(UncheckedBaseModel):
     message_placeholder: typing.Optional[str] = None
     initial_activity: typing.Optional[typing.List[typing.Optional[typing.Any]]] = None
     allowed_origins: typing.Optional[str] = None
+    powered_by: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -19,6 +19,8 @@ class BlockRun(UncheckedBaseModel):
     metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
     elapsed_time_ms: typing.Optional[int] = None
     cost: typing.Optional[float] = None
+    message: typing.Optional[str] = None
+    workflow_state: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
     status: typing.Optional[str] = None
     timestamp_start: typing.Optional[dt.datetime] = None
     timestamp_end: typing.Optional[dt.datetime] = None

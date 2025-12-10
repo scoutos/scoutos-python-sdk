@@ -156,6 +156,7 @@ class RawWorkflowsClient:
         limit: typing.Optional[int] = None,
         query: typing.Optional[str] = None,
         tags: typing.Optional[str] = None,
+        drive: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[SrcHandlersListWorkflowsResponse]:
         """
@@ -181,6 +182,8 @@ class RawWorkflowsClient:
         tags : typing.Optional[str]
             Filter by tags
 
+        drive : typing.Optional[bool]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -199,6 +202,7 @@ class RawWorkflowsClient:
                 "limit": limit,
                 "query": query,
                 "tags": tags,
+                "drive": drive,
             },
             request_options=request_options,
         )
@@ -920,6 +924,7 @@ class AsyncRawWorkflowsClient:
         limit: typing.Optional[int] = None,
         query: typing.Optional[str] = None,
         tags: typing.Optional[str] = None,
+        drive: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[SrcHandlersListWorkflowsResponse]:
         """
@@ -945,6 +950,8 @@ class AsyncRawWorkflowsClient:
         tags : typing.Optional[str]
             Filter by tags
 
+        drive : typing.Optional[bool]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -963,6 +970,7 @@ class AsyncRawWorkflowsClient:
                 "limit": limit,
                 "query": query,
                 "tags": tags,
+                "drive": drive,
             },
             request_options=request_options,
         )

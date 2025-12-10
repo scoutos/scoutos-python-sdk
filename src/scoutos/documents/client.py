@@ -16,6 +16,7 @@ from ..types.src_app_http_routes_collection_update_document_response import (
 from .raw_client import AsyncRawDocumentsClient, RawDocumentsClient
 from .types.documents_create_request_body import DocumentsCreateRequestBody
 from .types.documents_update_batch_request_body import DocumentsUpdateBatchRequestBody
+from .types.documents_update_request_value import DocumentsUpdateRequestValue
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -294,7 +295,7 @@ class DocumentsClient:
         table_id: str,
         document_id: str,
         *,
-        request: typing.Optional[typing.Any] = None,
+        request: typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionUpdateDocumentResponse:
         """
@@ -306,7 +307,7 @@ class DocumentsClient:
 
         document_id : str
 
-        request : typing.Optional[typing.Any]
+        request : typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -327,7 +328,7 @@ class DocumentsClient:
             collection_id="collection_id",
             table_id="table_id",
             document_id="document_id",
-            request={"key": "value"},
+            request={},
         )
         """
         _response = self._raw_client.update(
@@ -727,7 +728,7 @@ class AsyncDocumentsClient:
         table_id: str,
         document_id: str,
         *,
-        request: typing.Optional[typing.Any] = None,
+        request: typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionUpdateDocumentResponse:
         """
@@ -739,7 +740,7 @@ class AsyncDocumentsClient:
 
         document_id : str
 
-        request : typing.Optional[typing.Any]
+        request : typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -765,7 +766,7 @@ class AsyncDocumentsClient:
                 collection_id="collection_id",
                 table_id="table_id",
                 document_id="document_id",
-                request={"key": "value"},
+                request={},
             )
 
 

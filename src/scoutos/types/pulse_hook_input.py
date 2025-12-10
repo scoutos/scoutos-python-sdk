@@ -14,7 +14,7 @@ class PulseHookInput(UncheckedBaseModel):
     """
 
     name: str
-    target_type: typing.Literal["pulse"] = "pulse"
+    target_type: typing.Optional[typing.Literal["pulse"]] = None
     target_id: str
     description: typing.Optional[str] = None
     target_config: typing.Optional[PulseTargetConfig] = None

@@ -8,6 +8,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .actor_identity import ActorIdentity
 from .favorite_item import FavoriteItem
+from .flags import Flags
 from .user_organization_config import UserOrganizationConfig
 
 
@@ -28,6 +29,8 @@ class Me(UncheckedBaseModel):
     lead_id: typing.Optional[str] = None
     organizations: typing.Optional[typing.Dict[str, UserOrganizationConfig]] = None
     favorites: typing.Optional[typing.List[FavoriteItem]] = None
+    flags: Flags
+    permissions: typing.Optional[typing.Dict[str, bool]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

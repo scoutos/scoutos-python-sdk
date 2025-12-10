@@ -105,6 +105,7 @@ class CopilotsClient:
         message_placeholder: typing.Optional[str] = OMIT,
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
+        powered_by: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcHandlersCreateCopilotResponse:
         """
@@ -131,6 +132,8 @@ class CopilotsClient:
         initial_activity : typing.Optional[typing.Sequence[typing.Optional[typing.Any]]]
 
         allowed_origins : typing.Optional[str]
+
+        powered_by : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -161,6 +164,7 @@ class CopilotsClient:
             message_placeholder=message_placeholder,
             initial_activity=initial_activity,
             allowed_origins=allowed_origins,
+            powered_by=powered_by,
             request_options=request_options,
         )
         return _response.data
@@ -169,7 +173,7 @@ class CopilotsClient:
         self, copilot_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> SrcHandlersGetCopilotResponse:
         """
-        Fetch app configuration by ID.
+        Fetch copilot configuration by ID.
 
         Parameters
         ----------
@@ -212,6 +216,7 @@ class CopilotsClient:
         message_placeholder: typing.Optional[str] = OMIT,
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
+        powered_by: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcHandlersUpdateCopilotResponse:
         """
@@ -240,6 +245,8 @@ class CopilotsClient:
         initial_activity : typing.Optional[typing.Sequence[typing.Optional[typing.Any]]]
 
         allowed_origins : typing.Optional[str]
+
+        powered_by : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -273,6 +280,7 @@ class CopilotsClient:
             message_placeholder=message_placeholder,
             initial_activity=initial_activity,
             allowed_origins=allowed_origins,
+            powered_by=powered_by,
             request_options=request_options,
         )
         return _response.data
@@ -403,6 +411,7 @@ class AsyncCopilotsClient:
         message_placeholder: typing.Optional[str] = OMIT,
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
+        powered_by: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcHandlersCreateCopilotResponse:
         """
@@ -429,6 +438,8 @@ class AsyncCopilotsClient:
         initial_activity : typing.Optional[typing.Sequence[typing.Optional[typing.Any]]]
 
         allowed_origins : typing.Optional[str]
+
+        powered_by : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -467,6 +478,7 @@ class AsyncCopilotsClient:
             message_placeholder=message_placeholder,
             initial_activity=initial_activity,
             allowed_origins=allowed_origins,
+            powered_by=powered_by,
             request_options=request_options,
         )
         return _response.data
@@ -475,7 +487,7 @@ class AsyncCopilotsClient:
         self, copilot_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> SrcHandlersGetCopilotResponse:
         """
-        Fetch app configuration by ID.
+        Fetch copilot configuration by ID.
 
         Parameters
         ----------
@@ -526,6 +538,7 @@ class AsyncCopilotsClient:
         message_placeholder: typing.Optional[str] = OMIT,
         initial_activity: typing.Optional[typing.Sequence[typing.Optional[typing.Any]]] = OMIT,
         allowed_origins: typing.Optional[str] = OMIT,
+        powered_by: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcHandlersUpdateCopilotResponse:
         """
@@ -554,6 +567,8 @@ class AsyncCopilotsClient:
         initial_activity : typing.Optional[typing.Sequence[typing.Optional[typing.Any]]]
 
         allowed_origins : typing.Optional[str]
+
+        powered_by : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -595,6 +610,7 @@ class AsyncCopilotsClient:
             message_placeholder=message_placeholder,
             initial_activity=initial_activity,
             allowed_origins=allowed_origins,
+            powered_by=powered_by,
             request_options=request_options,
         )
         return _response.data

@@ -23,6 +23,7 @@ from ..types.src_app_http_routes_collection_update_document_response import (
 )
 from .types.documents_create_request_body import DocumentsCreateRequestBody
 from .types.documents_update_batch_request_body import DocumentsUpdateBatchRequestBody
+from .types.documents_update_request_value import DocumentsUpdateRequestValue
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -344,7 +345,7 @@ class RawDocumentsClient:
         table_id: str,
         document_id: str,
         *,
-        request: typing.Optional[typing.Any] = None,
+        request: typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[SrcAppHttpRoutesCollectionUpdateDocumentResponse]:
         """
@@ -356,7 +357,7 @@ class RawDocumentsClient:
 
         document_id : str
 
-        request : typing.Optional[typing.Any]
+        request : typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -369,7 +370,11 @@ class RawDocumentsClient:
         _response = self._client_wrapper.httpx_client.request(
             f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
             method="PUT",
-            json=request,
+            json=convert_and_respect_annotation_metadata(
+                object_=request,
+                annotation=typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
+                direction="write",
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -838,7 +843,7 @@ class AsyncRawDocumentsClient:
         table_id: str,
         document_id: str,
         *,
-        request: typing.Optional[typing.Any] = None,
+        request: typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionUpdateDocumentResponse]:
         """
@@ -850,7 +855,7 @@ class AsyncRawDocumentsClient:
 
         document_id : str
 
-        request : typing.Optional[typing.Any]
+        request : typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -863,7 +868,11 @@ class AsyncRawDocumentsClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
             method="PUT",
-            json=request,
+            json=convert_and_respect_annotation_metadata(
+                object_=request,
+                annotation=typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
+                direction="write",
+            ),
             headers={
                 "content-type": "application/json",
             },

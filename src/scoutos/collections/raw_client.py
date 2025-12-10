@@ -26,6 +26,9 @@ from ..types.src_app_http_routes_collection_get_collection_response import (
 from ..types.src_app_http_routes_collection_get_collections_response import (
     SrcAppHttpRoutesCollectionGetCollectionsResponse,
 )
+from ..types.src_app_http_routes_collection_list_collection_syncs_response_model import (
+    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
+)
 from ..types.src_app_http_routes_collection_update_collection_response import (
     SrcAppHttpRoutesCollectionUpdateCollectionResponse,
 )
@@ -343,6 +346,57 @@ class RawCollectionsClient:
                     SrcAppHttpRoutesCollectionDeleteCollectionResponse,
                     construct_type(
                         type_=SrcAppHttpRoutesCollectionDeleteCollectionResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def list_syncs(
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]:
+        """
+        List Sources by Destination, specifically given a collection and table
+
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/syncs",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
+                    construct_type(
+                        type_=SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1098,6 +1152,57 @@ class AsyncRawCollectionsClient:
                     SrcAppHttpRoutesCollectionDeleteCollectionResponse,
                     construct_type(
                         type_=SrcAppHttpRoutesCollectionDeleteCollectionResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def list_syncs(
+        self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]:
+        """
+        List Sources by Destination, specifically given a collection and table
+
+        Parameters
+        ----------
+        collection_id : str
+
+        table_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/syncs",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
+                    construct_type(
+                        type_=SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
