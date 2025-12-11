@@ -4997,7 +4997,7 @@ client.documents.update(
 <dl>
 <dd>
 
-**request:** `typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]]` 
+**request:** `DocumentsUpdateRequest` 
     
 </dd>
 </dl>

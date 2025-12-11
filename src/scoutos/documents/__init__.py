@@ -15,7 +15,6 @@ if typing.TYPE_CHECKING:
         DocumentsUpdateBatchRequestBodyItemValue,
         DocumentsUpdateBatchRequestBodyOneValue,
         DocumentsUpdateBatchRequestBodyZeroValue,
-        DocumentsUpdateRequestValue,
     )
 _dynamic_imports: typing.Dict[str, str] = {
     "DocumentsCreateRequestBody": ".types",
@@ -26,7 +25,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DocumentsUpdateBatchRequestBodyItemValue": ".types",
     "DocumentsUpdateBatchRequestBodyOneValue": ".types",
     "DocumentsUpdateBatchRequestBodyZeroValue": ".types",
-    "DocumentsUpdateRequestValue": ".types",
 }
 
 
@@ -60,5 +58,4 @@ __all__ = [
     "DocumentsUpdateBatchRequestBodyItemValue",
     "DocumentsUpdateBatchRequestBodyOneValue",
     "DocumentsUpdateBatchRequestBodyZeroValue",
-    "DocumentsUpdateRequestValue",
 ]

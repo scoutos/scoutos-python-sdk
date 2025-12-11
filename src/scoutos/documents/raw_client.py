@@ -12,6 +12,7 @@ from ..core.serialization import convert_and_respect_annotation_metadata
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.document_response import DocumentResponse
+from ..types.documents_update_request import DocumentsUpdateRequest
 from ..types.http_validation_error import HttpValidationError
 from ..types.src_app_http_routes_collection_delete_documents_response import (
     SrcAppHttpRoutesCollectionDeleteDocumentsResponse,
@@ -23,7 +24,6 @@ from ..types.src_app_http_routes_collection_update_document_response import (
 )
 from .types.documents_create_request_body import DocumentsCreateRequestBody
 from .types.documents_update_batch_request_body import DocumentsUpdateBatchRequestBody
-from .types.documents_update_request_value import DocumentsUpdateRequestValue
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -345,7 +345,7 @@ class RawDocumentsClient:
         table_id: str,
         document_id: str,
         *,
-        request: typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
+        request: DocumentsUpdateRequest,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[SrcAppHttpRoutesCollectionUpdateDocumentResponse]:
         """
@@ -357,7 +357,7 @@ class RawDocumentsClient:
 
         document_id : str
 
-        request : typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]]
+        request : DocumentsUpdateRequest
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -371,9 +371,7 @@ class RawDocumentsClient:
             f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
             method="PUT",
             json=convert_and_respect_annotation_metadata(
-                object_=request,
-                annotation=typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
-                direction="write",
+                object_=request, annotation=DocumentsUpdateRequest, direction="write"
             ),
             headers={
                 "content-type": "application/json",
@@ -843,7 +841,7 @@ class AsyncRawDocumentsClient:
         table_id: str,
         document_id: str,
         *,
-        request: typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
+        request: DocumentsUpdateRequest,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionUpdateDocumentResponse]:
         """
@@ -855,7 +853,7 @@ class AsyncRawDocumentsClient:
 
         document_id : str
 
-        request : typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]]
+        request : DocumentsUpdateRequest
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -869,9 +867,7 @@ class AsyncRawDocumentsClient:
             f"v2/collections/{jsonable_encoder(collection_id)}/tables/{jsonable_encoder(table_id)}/documents/{jsonable_encoder(document_id)}",
             method="PUT",
             json=convert_and_respect_annotation_metadata(
-                object_=request,
-                annotation=typing.Dict[str, typing.Optional[DocumentsUpdateRequestValue]],
-                direction="write",
+                object_=request, annotation=DocumentsUpdateRequest, direction="write"
             ),
             headers={
                 "content-type": "application/json",

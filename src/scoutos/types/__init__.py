@@ -121,6 +121,8 @@ if typing.TYPE_CHECKING:
     from .document_data_value import DocumentDataValue
     from .document_last_updated_by import DocumentLastUpdatedBy
     from .document_response import DocumentResponse
+    from .documents_update_request import DocumentsUpdateRequest
+    from .documents_update_request_value import DocumentsUpdateRequestValue
     from .edge_ui import EdgeUi
     from .entity_query_request import EntityQueryRequest
     from .entity_response import EntityResponse
@@ -641,6 +643,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DocumentDataValue": ".document_data_value",
     "DocumentLastUpdatedBy": ".document_last_updated_by",
     "DocumentResponse": ".document_response",
+    "DocumentsUpdateRequest": ".documents_update_request",
+    "DocumentsUpdateRequestValue": ".documents_update_request_value",
     "EdgeUi": ".edge_ui",
     "EntityQueryRequest": ".entity_query_request",
     "EntityResponse": ".entity_response",
@@ -1146,6 +1150,8 @@ __all__ = [
     "DocumentDataValue",
     "DocumentLastUpdatedBy",
     "DocumentResponse",
+    "DocumentsUpdateRequest",
+    "DocumentsUpdateRequestValue",
     "EdgeUi",
     "EntityQueryRequest",
     "EntityResponse",

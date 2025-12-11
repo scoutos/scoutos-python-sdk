@@ -121,6 +121,8 @@ if typing.TYPE_CHECKING:
         DocumentDataValue,
         DocumentLastUpdatedBy,
         DocumentResponse,
+        DocumentsUpdateRequest,
+        DocumentsUpdateRequestValue,
         EdgeUi,
         EntityQueryRequest,
         EntityResponse,
@@ -522,7 +524,6 @@ if typing.TYPE_CHECKING:
         DocumentsUpdateBatchRequestBodyItemValue,
         DocumentsUpdateBatchRequestBodyOneValue,
         DocumentsUpdateBatchRequestBodyZeroValue,
-        DocumentsUpdateRequestValue,
     )
     from .environment import ScoutEnvironment
     from .tables import TableConfigInputSchemaItem, TableDataSchemaItem
@@ -662,7 +663,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DocumentsUpdateBatchRequestBodyItemValue": ".documents",
     "DocumentsUpdateBatchRequestBodyOneValue": ".documents",
     "DocumentsUpdateBatchRequestBodyZeroValue": ".documents",
-    "DocumentsUpdateRequestValue": ".documents",
+    "DocumentsUpdateRequest": ".types",
+    "DocumentsUpdateRequestValue": ".types",
     "EdgeUi": ".types",
     "EntityQueryRequest": ".types",
     "EntityResponse": ".types",
@@ -1211,6 +1213,7 @@ __all__ = [
     "DocumentsUpdateBatchRequestBodyItemValue",
     "DocumentsUpdateBatchRequestBodyOneValue",
     "DocumentsUpdateBatchRequestBodyZeroValue",
+    "DocumentsUpdateRequest",
     "DocumentsUpdateRequestValue",
     "EdgeUi",
     "EntityQueryRequest",
