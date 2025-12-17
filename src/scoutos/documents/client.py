@@ -47,6 +47,8 @@ class DocumentsClient:
         query: typing.Optional[str] = None,
         offset: typing.Optional[int] = None,
         sort_by: typing.Optional[str] = None,
+        filter_column: typing.Optional[str] = None,
+        filter_value: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionGetDocumentsResponse:
         """
@@ -71,6 +73,12 @@ class DocumentsClient:
         sort_by : typing.Optional[str]
             Sort by field
 
+        filter_column : typing.Optional[str]
+            Column to filter by (column_id or column_display_name). Requires filter_value. Cannot be used with pagination, sorting or query.
+
+        filter_value : typing.Optional[str]
+            Value to match on. No partial text matching. Requires filter_column. Cannot be used with pagination, sorting or query.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -94,6 +102,8 @@ class DocumentsClient:
             query="query",
             offset=1,
             sort_by="sort_by",
+            filter_column="filter_column",
+            filter_value="filter_value",
         )
         """
         _response = self._raw_client.list(
@@ -104,6 +114,8 @@ class DocumentsClient:
             query=query,
             offset=offset,
             sort_by=sort_by,
+            filter_column=filter_column,
+            filter_value=filter_value,
             request_options=request_options,
         )
         return _response.data
@@ -257,6 +269,8 @@ class DocumentsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionGetDocumentResponse:
         """
+        Route handler for getting a document
+
         Parameters
         ----------
         collection_id : str
@@ -299,6 +313,8 @@ class DocumentsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionUpdateDocumentResponse:
         """
+        Route handler for updating a document
+
         Parameters
         ----------
         collection_id : str
@@ -448,6 +464,8 @@ class AsyncDocumentsClient:
         query: typing.Optional[str] = None,
         offset: typing.Optional[int] = None,
         sort_by: typing.Optional[str] = None,
+        filter_column: typing.Optional[str] = None,
+        filter_value: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionGetDocumentsResponse:
         """
@@ -471,6 +489,12 @@ class AsyncDocumentsClient:
 
         sort_by : typing.Optional[str]
             Sort by field
+
+        filter_column : typing.Optional[str]
+            Column to filter by (column_id or column_display_name). Requires filter_value. Cannot be used with pagination, sorting or query.
+
+        filter_value : typing.Optional[str]
+            Value to match on. No partial text matching. Requires filter_column. Cannot be used with pagination, sorting or query.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -500,6 +524,8 @@ class AsyncDocumentsClient:
                 query="query",
                 offset=1,
                 sort_by="sort_by",
+                filter_column="filter_column",
+                filter_value="filter_value",
             )
 
 
@@ -513,6 +539,8 @@ class AsyncDocumentsClient:
             query=query,
             offset=offset,
             sort_by=sort_by,
+            filter_column=filter_column,
+            filter_value=filter_value,
             request_options=request_options,
         )
         return _response.data
@@ -682,6 +710,8 @@ class AsyncDocumentsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionGetDocumentResponse:
         """
+        Route handler for getting a document
+
         Parameters
         ----------
         collection_id : str
@@ -732,6 +762,8 @@ class AsyncDocumentsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionUpdateDocumentResponse:
         """
+        Route handler for updating a document
+
         Parameters
         ----------
         collection_id : str

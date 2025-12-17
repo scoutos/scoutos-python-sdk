@@ -5,12 +5,12 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .agent_target_config import AgentTargetConfig
+from .task_target_config import TaskTargetConfig
 
 
-class AgentHookInput(UncheckedBaseModel):
+class TaskHookInput(UncheckedBaseModel):
     """
-    Input schema for agent hooks (future).
+    Input schema for task hooks.
     """
 
     name: str
@@ -24,8 +24,8 @@ class AgentHookInput(UncheckedBaseModel):
     Whether to generate a secret for HMAC authentication
     """
 
-    target_type: typing.Optional[typing.Literal["agent"]] = None
-    target_config: typing.Optional[AgentTargetConfig] = None
+    target_type: typing.Optional[typing.Literal["task"]] = None
+    target_config: typing.Optional[TaskTargetConfig] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

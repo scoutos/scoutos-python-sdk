@@ -7,14 +7,24 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 
 
-class AgentTargetConfig(UncheckedBaseModel):
+class FieldPath(UncheckedBaseModel):
     """
-    Configuration specific to agent targets (future).
+    Available field path in workflow output
     """
 
-    agent_mode: typing.Optional[str] = pydantic.Field(default=None)
+    path: str = pydantic.Field()
     """
-    How to interact with the agent
+    Field path (e.g., 'block_id.output.field')
+    """
+
+    type: str = pydantic.Field()
+    """
+    Field type (string, number, array, object)
+    """
+
+    sample_value: typing.Optional[typing.Optional[typing.Any]] = pydantic.Field(default=None)
+    """
+    Sample value from output
     """
 
     if IS_PYDANTIC_V2:

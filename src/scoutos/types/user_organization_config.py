@@ -6,10 +6,12 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .favorite_ref import FavoriteRef
+from .user_organization_config_roles_item import UserOrganizationConfigRolesItem
 
 
 class UserOrganizationConfig(UncheckedBaseModel):
     favorites: typing.Optional[typing.List[FavoriteRef]] = None
+    roles: typing.Optional[typing.List[UserOrganizationConfigRolesItem]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

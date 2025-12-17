@@ -4,4 +4,6 @@ import typing
 
 from .scout_hook_event_trigger import ScoutHookEventTrigger
 
-ScoutHookUpdateTriggeringEventsItem = typing.Union[typing.Literal["agent.interaction.responded"], ScoutHookEventTrigger]
+ScoutHookUpdateTriggeringEventsItem = typing.Union[
+    typing.Literal["agent.interaction.responded"], str, ScoutHookEventTrigger
+]

@@ -18,6 +18,7 @@ class Billing(UncheckedBaseModel):
     renewal_date: typing.Optional[dt.datetime] = None
     limits: typing.Optional[BillingLimits] = None
     usage: typing.Optional[BillingUsage] = None
+    credits: typing.Optional[int] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

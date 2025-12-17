@@ -10,6 +10,10 @@ from .src_app_http_routes_world_interact_incoming_message import SrcAppHttpRoute
 
 class SrcAppHttpRoutesWorldInteractInteractionRequest(UncheckedBaseModel):
     messages: typing.List[SrcAppHttpRoutesWorldInteractIncomingMessage]
+    metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
+    """
+    Optional metadata (e.g., salesforce_session)
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -2,4 +2,4 @@
 
 import typing
 
-ActionType = typing.Union[typing.Literal["workflow.execute", "source.sync"], typing.Any]
+ActionType = typing.Union[typing.Literal["workflow.execute", "source.sync", "agent.execute"], typing.Any]

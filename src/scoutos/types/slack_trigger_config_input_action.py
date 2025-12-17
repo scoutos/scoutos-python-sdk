@@ -2,7 +2,8 @@
 
 import typing
 
+from .agent_execute import AgentExecute
 from .source_sync import SourceSync
 from .workflow_execute import WorkflowExecute
 
-SlackTriggerConfigInputAction = typing.Union[SourceSync, WorkflowExecute]
+SlackTriggerConfigInputAction = typing.Union[AgentExecute, SourceSync, WorkflowExecute]

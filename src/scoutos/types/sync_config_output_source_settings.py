@@ -4,6 +4,8 @@ import typing
 
 from .source_sync_crawl_settings_output import SourceSyncCrawlSettingsOutput
 from .source_sync_google_drive_settings import SourceSyncGoogleDriveSettings
+from .source_sync_laserfiche_settings import SourceSyncLaserficheSettings
+from .source_sync_microsoft_365_settings import SourceSyncMicrosoft365Settings
 from .source_sync_notion_settings_output import SourceSyncNotionSettingsOutput
 from .source_sync_page_crawl_settings_output import SourceSyncPageCrawlSettingsOutput
 from .source_sync_sitemap_settings_output import SourceSyncSitemapSettingsOutput
@@ -11,6 +13,8 @@ from .source_sync_website_settings import SourceSyncWebsiteSettings
 
 SyncConfigOutputSourceSettings = typing.Union[
     SourceSyncGoogleDriveSettings,
+    SourceSyncLaserficheSettings,
+    SourceSyncMicrosoft365Settings,
     SourceSyncNotionSettingsOutput,
     SourceSyncCrawlSettingsOutput,
     SourceSyncPageCrawlSettingsOutput,

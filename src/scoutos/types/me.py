@@ -9,10 +9,16 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 from .actor_identity import ActorIdentity
 from .favorite_item import FavoriteItem
 from .flags import Flags
+from .me_organization import MeOrganization
 from .user_organization_config import UserOrganizationConfig
 
 
 class Me(UncheckedBaseModel):
+    """
+    A user w.r.t a particular organization aka. the user's preferences,
+    permissions, and other configuration.
+    """
+
     id: typing.Optional[str] = None
     doc_type: typing.Optional[typing.Literal["user"]] = None
     created_by: ActorIdentity
@@ -28,6 +34,8 @@ class Me(UncheckedBaseModel):
     use_cases: typing.Optional[typing.List[str]] = None
     lead_id: typing.Optional[str] = None
     organizations: typing.Optional[typing.Dict[str, UserOrganizationConfig]] = None
+    acting_as: MeOrganization
+    memberships: typing.Dict[str, MeOrganization]
     favorites: typing.Optional[typing.List[FavoriteItem]] = None
     flags: Flags
     permissions: typing.Optional[typing.Dict[str, bool]] = None

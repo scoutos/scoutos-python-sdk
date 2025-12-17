@@ -13,17 +13,22 @@ if typing.TYPE_CHECKING:
     from .actor_identity import ActorIdentity
     from .actor_identity_id import ActorIdentityId
     from .actor_identity_type import ActorIdentityType
-    from .agent_hook import AgentHook
-    from .agent_hook_input import AgentHookInput
+    from .add_credits_payload import AddCreditsPayload
+    from .add_credits_response import AddCreditsResponse
+    from .agent_execute import AgentExecute
     from .agent_revision import AgentRevision
     from .agent_revision_model import AgentRevisionModel
     from .agent_revision_response_style import AgentRevisionResponseStyle
     from .agent_revision_tool_config_value import AgentRevisionToolConfigValue
-    from .agent_target_config import AgentTargetConfig
+    from .agent_scorer import AgentScorer
+    from .agent_target import AgentTarget
+    from .agentic_model import AgenticModel
     from .ai_agent import AiAgent
     from .api_key_auth_type import ApiKeyAuthType
     from .api_key_identity import ApiKeyIdentity
     from .api_key_identity_details import ApiKeyIdentityDetails
+    from .assertion_result import AssertionResult
+    from .assertion_result_assertion_type import AssertionResultAssertionType
     from .automation_hook import AutomationHook
     from .automation_hook_input import AutomationHookInput
     from .automation_target_config import AutomationTargetConfig
@@ -32,6 +37,7 @@ if typing.TYPE_CHECKING:
     from .baseline import Baseline
     from .batch_create_request import BatchCreateRequest
     from .batch_generate_request import BatchGenerateRequest
+    from .batch_invite_request import BatchInviteRequest
     from .billing import Billing
     from .billing_cycle import BillingCycle
     from .billing_cycles import BillingCycles
@@ -73,6 +79,8 @@ if typing.TYPE_CHECKING:
     from .body_upload_private_files_inbox_session_id_files_post import BodyUploadPrivateFilesInboxSessionIdFilesPost
     from .body_upload_pulse_files_stream_pulse_files_stream_post import BodyUploadPulseFilesStreamPulseFilesStreamPost
     from .body_upsert_agent_agents_post import BodyUpsertAgentAgentsPost
+    from .call_tracking_settings_response import CallTrackingSettingsResponse
+    from .call_tracking_settings_update import CallTrackingSettingsUpdate
     from .cancel_response import CancelResponse
     from .card_display_field import CardDisplayField
     from .channel import Channel
@@ -80,6 +88,7 @@ if typing.TYPE_CHECKING:
     from .collection import Collection
     from .collection_config import CollectionConfig
     from .collection_destination import CollectionDestination
+    from .collection_tables import CollectionTables
     from .collection_view_state_input import CollectionViewStateInput
     from .collection_view_state_input_views_value import CollectionViewStateInputViewsValue
     from .collection_view_state_output import CollectionViewStateOutput
@@ -91,15 +100,23 @@ if typing.TYPE_CHECKING:
     from .condition_operator import ConditionOperator
     from .connect_integration_request import ConnectIntegrationRequest
     from .connect_integration_request_auth_type import ConnectIntegrationRequestAuthType
+    from .contains_assertion import ContainsAssertion
     from .copilot import Copilot
     from .copilot_config import CopilotConfig
     from .copilot_config_code_theme import CopilotConfigCodeTheme
     from .copilot_config_fab_value import CopilotConfigFabValue
     from .copilot_config_mode import CopilotConfigMode
     from .create_entity_request import CreateEntityRequest
+    from .create_evaluation_request import CreateEvaluationRequest
+    from .create_feedback_request import CreateFeedbackRequest
+    from .create_feedback_request_metadata import CreateFeedbackRequestMetadata
+    from .create_feedback_request_target_type import CreateFeedbackRequestTargetType
+    from .create_feedback_request_user_type import CreateFeedbackRequestUserType
     from .create_integrations_response import CreateIntegrationsResponse
     from .create_pulse_request import CreatePulseRequest
     from .create_pulse_response import CreatePulseResponse
+    from .create_scorer_request import CreateScorerRequest
+    from .create_scorer_request_scorer import CreateScorerRequestScorer
     from .create_tag_response import CreateTagResponse
     from .cron_trigger_config import CronTriggerConfig
     from .cron_trigger_config_action import CronTriggerConfigAction
@@ -109,6 +126,7 @@ if typing.TYPE_CHECKING:
     from .date_time_column import DateTimeColumn
     from .default_input import DefaultInput
     from .default_output import DefaultOutput
+    from .delete_feedback_response import DeleteFeedbackResponse
     from .delete_hook_response import DeleteHookResponse
     from .delete_response import DeleteResponse
     from .delete_trigger_response import DeleteTriggerResponse
@@ -134,14 +152,43 @@ if typing.TYPE_CHECKING:
     from .environment_deployment_config import EnvironmentDeploymentConfig
     from .environment_deployment_config_revision_lookup import EnvironmentDeploymentConfigRevisionLookup
     from .environment_deployment_document import EnvironmentDeploymentDocument
+    from .evaluation import Evaluation
+    from .evaluation_config_input import EvaluationConfigInput
+    from .evaluation_config_input_target import EvaluationConfigInputTarget
+    from .evaluation_config_output import EvaluationConfigOutput
+    from .evaluation_config_output_target import EvaluationConfigOutputTarget
+    from .evaluation_config_response import EvaluationConfigResponse
+    from .evaluation_list_response import EvaluationListResponse
+    from .evaluation_metrics import EvaluationMetrics
+    from .evaluation_response import EvaluationResponse
+    from .evaluation_run import EvaluationRun
+    from .evaluation_run_create import EvaluationRunCreate
+    from .evaluation_run_query import EvaluationRunQuery
+    from .evaluation_run_status import EvaluationRunStatus
+    from .evaluation_trend_response import EvaluationTrendResponse
     from .event_version import EventVersion
+    from .exact_match_assertion import ExactMatchAssertion
+    from .execute_scorer_request import ExecuteScorerRequest
+    from .execute_scorer_request_scorer import ExecuteScorerRequestScorer
+    from .execute_scorer_response import ExecuteScorerResponse
     from .execute_tool_request import ExecuteToolRequest
     from .execute_tool_response import ExecuteToolResponse
     from .execute_trigger_response import ExecuteTriggerResponse
     from .favor import Favor
     from .favorite_item import FavoriteItem
     from .favorite_ref import FavoriteRef
+    from .feedback import Feedback
+    from .feedback_list_response import FeedbackListResponse
+    from .feedback_list_response_wrapper import FeedbackListResponseWrapper
+    from .feedback_metadata import FeedbackMetadata
+    from .feedback_priority import FeedbackPriority
+    from .feedback_response import FeedbackResponse
+    from .feedback_status import FeedbackStatus
+    from .feedback_target_type import FeedbackTargetType
+    from .feedback_user_type import FeedbackUserType
+    from .field_exists_assertion import FieldExistsAssertion
     from .field_mapping import FieldMapping
+    from .field_path import FieldPath
     from .file import File
     from .files_attribute import FilesAttribute
     from .files_response import FilesResponse
@@ -153,14 +200,19 @@ if typing.TYPE_CHECKING:
     from .friendly_invoice import FriendlyInvoice
     from .friendly_payment_methods import FriendlyPaymentMethods
     from .generate_ai_suggestion_request import GenerateAiSuggestionRequest
+    from .generic_feedback_metadata import GenericFeedbackMetadata
+    from .get_credits_response import GetCreditsResponse
     from .hook_update import HookUpdate
     from .hooks_list_response import HooksListResponse
     from .html_2_text import Html2Text
     from .http import Http
     from .http_validation_error import HttpValidationError
+    from .human_review_scorer import HumanReviewScorer
+    from .human_review_scorer_review_type import HumanReviewScorerReviewType
     from .identity import Identity
     from .identity_details import IdentityDetails
     from .identity_types import IdentityTypes
+    from .input_schema import InputSchema
     from .integration import Integration
     from .integration_auth_type import IntegrationAuthType
     from .integration_connection import IntegrationConnection
@@ -181,15 +233,19 @@ if typing.TYPE_CHECKING:
     from .legacy_identity import LegacyIdentity
     from .legacy_identity_details import LegacyIdentityDetails
     from .line_item import LineItem
+    from .list_scorers_response import ListScorersResponse
+    from .list_scorers_response_scorers_item import ListScorersResponseScorersItem
     from .list_tags_response import ListTagsResponse
     from .list_tools_response import ListToolsResponse
     from .list_triggers_response import ListTriggersResponse
+    from .llm_judge_assertion import LlmJudgeAssertion
     from .mapping import Mapping
     from .mark_down_with_context import MarkDownWithContext
     from .markdown_column import MarkdownColumn
     from .markdown_splitter_config import MarkdownSplitterConfig
     from .mcp_auth_type import McpAuthType
     from .me import Me
+    from .me_organization import MeOrganization
     from .me_update import MeUpdate
     from .mention import Mention
     from .mention_participant import MentionParticipant
@@ -203,6 +259,8 @@ if typing.TYPE_CHECKING:
     from .multi_page_crawler_settings_output_scraper import MultiPageCrawlerSettingsOutputScraper
     from .multi_page_crawler_settings_output_text_extractor import MultiPageCrawlerSettingsOutputTextExtractor
     from .multi_select_column import MultiSelectColumn
+    from .native_scorer import NativeScorer
+    from .native_scorer_config_type import NativeScorerConfigType
     from .node_ui import NodeUi
     from .notification import Notification
     from .notification_action import NotificationAction
@@ -218,6 +276,8 @@ if typing.TYPE_CHECKING:
     from .number_column_min_value import NumberColumnMinValue
     from .o_auth_auth_type import OAuthAuthType
     from .organization import Organization
+    from .organization_member_invite import OrganizationMemberInvite
+    from .organization_member_invite_roles_item import OrganizationMemberInviteRolesItem
     from .paragraph_splitter_config import ParagraphSplitterConfig
     from .participant import Participant
     from .participant_type import ParticipantType
@@ -233,6 +293,7 @@ if typing.TYPE_CHECKING:
     from .position import Position
     from .prompt import Prompt
     from .prompt_role import PromptRole
+    from .prompt_target import PromptTarget
     from .public_copilot_config import PublicCopilotConfig
     from .public_copilot_config_code_theme import PublicCopilotConfigCodeTheme
     from .public_copilot_config_fab_value import PublicCopilotConfigFabValue
@@ -251,15 +312,16 @@ if typing.TYPE_CHECKING:
     from .query_sort import QuerySort
     from .readability import Readability
     from .recursive_splitter_config import RecursiveSplitterConfig
+    from .regex_match_assertion import RegexMatchAssertion
     from .relation_column import RelationColumn
     from .rename_request import RenameRequest
     from .rename_response import RenameResponse
     from .req_body import ReqBody
-    from .request_body import RequestBody
     from .resource import Resource
     from .resource_resource_type import ResourceResourceType
     from .response_model_usage import ResponseModelUsage
     from .result import Result
+    from .review_option import ReviewOption
     from .rotate_api_keys_request import RotateApiKeysRequest
     from .rule import Rule
     from .rules_input import RulesInput
@@ -269,11 +331,16 @@ if typing.TYPE_CHECKING:
     from .schedule import Schedule
     from .schema_response import SchemaResponse
     from .schemas_response import SchemasResponse
+    from .score_field import ScoreField
+    from .scorer_config_runtime import ScorerConfigRuntime
+    from .scorer_response import ScorerResponse
+    from .scorer_response_scorer import ScorerResponseScorer
     from .scout_hook import ScoutHook
     from .scout_hook_config_http import ScoutHookConfigHttp
     from .scout_hook_event_discriminator import ScoutHookEventDiscriminator
     from .scout_hook_event_discriminator_type import ScoutHookEventDiscriminatorType
     from .scout_hook_event_trigger import ScoutHookEventTrigger
+    from .scout_hook_event_trigger_type import ScoutHookEventTriggerType
     from .scout_hook_response import ScoutHookResponse
     from .scout_hook_update import ScoutHookUpdate
     from .scout_hook_update_triggering_events_item import ScoutHookUpdateTriggeringEventsItem
@@ -283,6 +350,7 @@ if typing.TYPE_CHECKING:
     from .search_request_search_type import SearchRequestSearchType
     from .select_column import SelectColumn
     from .select_option_item import SelectOptionItem
+    from .semantic_similarity_assertion import SemanticSimilarityAssertion
     from .sentence_splitter_config import SentenceSplitterConfig
     from .service_info import ServiceInfo
     from .single_page_crawler_settings_input import SinglePageCrawlerSettingsInput
@@ -314,6 +382,11 @@ if typing.TYPE_CHECKING:
     from .source_sync_crawl_settings_output import SourceSyncCrawlSettingsOutput
     from .source_sync_crawl_settings_output_mode import SourceSyncCrawlSettingsOutputMode
     from .source_sync_google_drive_settings import SourceSyncGoogleDriveSettings
+    from .source_sync_laserfiche_settings import SourceSyncLaserficheSettings
+    from .source_sync_microsoft_365_settings import SourceSyncMicrosoft365Settings
+    from .source_sync_microsoft_365_settings_transcription_method import (
+        SourceSyncMicrosoft365SettingsTranscriptionMethod,
+    )
     from .source_sync_notion_settings_input import SourceSyncNotionSettingsInput
     from .source_sync_notion_settings_output import SourceSyncNotionSettingsOutput
     from .source_sync_page_crawl_settings_input import SourceSyncPageCrawlSettingsInput
@@ -364,6 +437,9 @@ if typing.TYPE_CHECKING:
     )
     from .src_app_http_routes_collection_get_document_response import SrcAppHttpRoutesCollectionGetDocumentResponse
     from .src_app_http_routes_collection_get_documents_response import SrcAppHttpRoutesCollectionGetDocumentsResponse
+    from .src_app_http_routes_collection_get_scheduled_syncs_response import (
+        SrcAppHttpRoutesCollectionGetScheduledSyncsResponse,
+    )
     from .src_app_http_routes_collection_get_sync_response import SrcAppHttpRoutesCollectionGetSyncResponse
     from .src_app_http_routes_collection_get_syncs_response import SrcAppHttpRoutesCollectionGetSyncsResponse
     from .src_app_http_routes_collection_get_table_response import SrcAppHttpRoutesCollectionGetTableResponse
@@ -390,6 +466,9 @@ if typing.TYPE_CHECKING:
     )
     from .src_app_http_routes_drive_grant_access_payload import SrcAppHttpRoutesDriveGrantAccessPayload
     from .src_app_http_routes_drive_revoke_access_payload import SrcAppHttpRoutesDriveRevokeAccessPayload
+    from .src_app_http_routes_evaluation_scorer_routes_base_response import (
+        SrcAppHttpRoutesEvaluationScorerRoutesBaseResponse,
+    )
     from .src_app_http_routes_inbox_handle_message_incoming_message import (
         SrcAppHttpRoutesInboxHandleMessageIncomingMessage,
     )
@@ -414,6 +493,8 @@ if typing.TYPE_CHECKING:
         SrcAppHttpRoutesOnboardingHandleUpdateMeResponse,
     )
     from .src_app_http_routes_root_get_info_response import SrcAppHttpRoutesRootGetInfoResponse
+    from .src_app_http_routes_tables_get_tool_tables_request_body import SrcAppHttpRoutesTablesGetToolTablesRequestBody
+    from .src_app_http_routes_tables_get_tool_tables_response import SrcAppHttpRoutesTablesGetToolTablesResponse
     from .src_app_http_routes_tags_create_tag_payload import SrcAppHttpRoutesTagsCreateTagPayload
     from .src_app_http_routes_tags_update_tag_payload import SrcAppHttpRoutesTagsUpdateTagPayload
     from .src_app_http_routes_trigger_create_trigger_response import SrcAppHttpRoutesTriggerCreateTriggerResponse
@@ -452,8 +533,10 @@ if typing.TYPE_CHECKING:
     from .sync_config_output import SyncConfigOutput
     from .sync_config_output_source_settings import SyncConfigOutputSourceSettings
     from .table import Table
+    from .table_and_collection_item import TableAndCollectionItem
     from .table_config_output import TableConfigOutput
     from .table_config_output_schema_item import TableConfigOutputSchemaItem
+    from .table_item import TableItem
     from .table_view_input import TableViewInput
     from .table_view_output import TableViewOutput
     from .table_view_settings_input import TableViewSettingsInput
@@ -462,6 +545,15 @@ if typing.TYPE_CHECKING:
     from .table_view_settings_output_row_height import TableViewSettingsOutputRowHeight
     from .tag import Tag
     from .tags_response import TagsResponse
+    from .task_hook import TaskHook
+    from .task_hook_input import TaskHookInput
+    from .task_target_config import TaskTargetConfig
+    from .template_install_request import TemplateInstallRequest
+    from .template_variable import TemplateVariable
+    from .test_case import TestCase
+    from .test_case_assertions_item import TestCaseAssertionsItem
+    from .test_result import TestResult
+    from .test_result_status import TestResultStatus
     from .text_extractor import TextExtractor
     from .text_extractor_config import TextExtractorConfig
     from .text_long_column import TextLongColumn
@@ -470,6 +562,7 @@ if typing.TYPE_CHECKING:
     from .tool_config_resource import ToolConfigResource
     from .tool_config_resource_type import ToolConfigResourceType
     from .tool_details import ToolDetails
+    from .tool_target import ToolTarget
     from .tools_data import ToolsData
     from .tools_response import ToolsResponse
     from .trafilatura_input import TrafilaturaInput
@@ -479,10 +572,19 @@ if typing.TYPE_CHECKING:
     from .trigger import Trigger
     from .trigger_status import TriggerStatus
     from .trigger_trigger_config import TriggerTriggerConfig
+    from .type_check_assertion import TypeCheckAssertion
+    from .type_check_assertion_expected_type import TypeCheckAssertionExpectedType
     from .units import Units
     from .update_cron_auth_response import UpdateCronAuthResponse
     from .update_entity_request import UpdateEntityRequest
+    from .update_evaluation_request import UpdateEvaluationRequest
+    from .update_feedback_request import UpdateFeedbackRequest
+    from .update_feedback_request_metadata import UpdateFeedbackRequestMetadata
+    from .update_feedback_request_priority import UpdateFeedbackRequestPriority
+    from .update_feedback_request_status import UpdateFeedbackRequestStatus
     from .update_questionnaire_files_request import UpdateQuestionnaireFilesRequest
+    from .update_scorer_request import UpdateScorerRequest
+    from .update_scorer_request_scorer import UpdateScorerRequestScorer
     from .update_tag_response import UpdateTagResponse
     from .update_tags_request import UpdateTagsRequest
     from .update_trigger_response import UpdateTriggerResponse
@@ -492,6 +594,7 @@ if typing.TYPE_CHECKING:
     from .user_identity import UserIdentity
     from .user_identity_details import UserIdentityDetails
     from .user_organization_config import UserOrganizationConfig
+    from .user_organization_config_roles_item import UserOrganizationConfigRolesItem
     from .validation_error import ValidationError
     from .validation_error_loc_item import ValidationErrorLocItem
     from .view_filter import ViewFilter
@@ -513,6 +616,8 @@ if typing.TYPE_CHECKING:
     from .workflow_hook_input import WorkflowHookInput
     from .workflow_note_input import WorkflowNoteInput
     from .workflow_note_output import WorkflowNoteOutput
+    from .workflow_preview_request import WorkflowPreviewRequest
+    from .workflow_preview_response import WorkflowPreviewResponse
     from .workflow_run import WorkflowRun
     from .workflow_run_completed import WorkflowRunCompleted
     from .workflow_run_completed_data import WorkflowRunCompletedData
@@ -520,6 +625,7 @@ if typing.TYPE_CHECKING:
     from .workflow_run_failed import WorkflowRunFailed
     from .workflow_run_failed_data import WorkflowRunFailedData
     from .workflow_run_failed_environment import WorkflowRunFailedEnvironment
+    from .workflow_run_feedback_metadata import WorkflowRunFeedbackMetadata
     from .workflow_run_response import WorkflowRunResponse
     from .workflow_run_started import WorkflowRunStarted
     from .workflow_run_started_data import WorkflowRunStartedData
@@ -527,6 +633,7 @@ if typing.TYPE_CHECKING:
     from .workflow_run_state_value import WorkflowRunStateValue
     from .workflow_run_stop_reason import WorkflowRunStopReason
     from .workflow_run_stream_response import WorkflowRunStreamResponse
+    from .workflow_target import WorkflowTarget
     from .workflow_target_config import WorkflowTargetConfig
 _dynamic_imports: typing.Dict[str, str] = {
     "ActionType": ".action_type",
@@ -535,17 +642,22 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ActorIdentity": ".actor_identity",
     "ActorIdentityId": ".actor_identity_id",
     "ActorIdentityType": ".actor_identity_type",
-    "AgentHook": ".agent_hook",
-    "AgentHookInput": ".agent_hook_input",
+    "AddCreditsPayload": ".add_credits_payload",
+    "AddCreditsResponse": ".add_credits_response",
+    "AgentExecute": ".agent_execute",
     "AgentRevision": ".agent_revision",
     "AgentRevisionModel": ".agent_revision_model",
     "AgentRevisionResponseStyle": ".agent_revision_response_style",
     "AgentRevisionToolConfigValue": ".agent_revision_tool_config_value",
-    "AgentTargetConfig": ".agent_target_config",
+    "AgentScorer": ".agent_scorer",
+    "AgentTarget": ".agent_target",
+    "AgenticModel": ".agentic_model",
     "AiAgent": ".ai_agent",
     "ApiKeyAuthType": ".api_key_auth_type",
     "ApiKeyIdentity": ".api_key_identity",
     "ApiKeyIdentityDetails": ".api_key_identity_details",
+    "AssertionResult": ".assertion_result",
+    "AssertionResultAssertionType": ".assertion_result_assertion_type",
     "AutomationHook": ".automation_hook",
     "AutomationHookInput": ".automation_hook_input",
     "AutomationTargetConfig": ".automation_target_config",
@@ -554,6 +666,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Baseline": ".baseline",
     "BatchCreateRequest": ".batch_create_request",
     "BatchGenerateRequest": ".batch_generate_request",
+    "BatchInviteRequest": ".batch_invite_request",
     "Billing": ".billing",
     "BillingCycle": ".billing_cycle",
     "BillingCycles": ".billing_cycles",
@@ -595,6 +708,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "BodyUploadPrivateFilesInboxSessionIdFilesPost": ".body_upload_private_files_inbox_session_id_files_post",
     "BodyUploadPulseFilesStreamPulseFilesStreamPost": ".body_upload_pulse_files_stream_pulse_files_stream_post",
     "BodyUpsertAgentAgentsPost": ".body_upsert_agent_agents_post",
+    "CallTrackingSettingsResponse": ".call_tracking_settings_response",
+    "CallTrackingSettingsUpdate": ".call_tracking_settings_update",
     "CancelResponse": ".cancel_response",
     "CardDisplayField": ".card_display_field",
     "Channel": ".channel",
@@ -602,6 +717,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Collection": ".collection",
     "CollectionConfig": ".collection_config",
     "CollectionDestination": ".collection_destination",
+    "CollectionTables": ".collection_tables",
     "CollectionViewStateInput": ".collection_view_state_input",
     "CollectionViewStateInputViewsValue": ".collection_view_state_input_views_value",
     "CollectionViewStateOutput": ".collection_view_state_output",
@@ -613,15 +729,23 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ConditionOperator": ".condition_operator",
     "ConnectIntegrationRequest": ".connect_integration_request",
     "ConnectIntegrationRequestAuthType": ".connect_integration_request_auth_type",
+    "ContainsAssertion": ".contains_assertion",
     "Copilot": ".copilot",
     "CopilotConfig": ".copilot_config",
     "CopilotConfigCodeTheme": ".copilot_config_code_theme",
     "CopilotConfigFabValue": ".copilot_config_fab_value",
     "CopilotConfigMode": ".copilot_config_mode",
     "CreateEntityRequest": ".create_entity_request",
+    "CreateEvaluationRequest": ".create_evaluation_request",
+    "CreateFeedbackRequest": ".create_feedback_request",
+    "CreateFeedbackRequestMetadata": ".create_feedback_request_metadata",
+    "CreateFeedbackRequestTargetType": ".create_feedback_request_target_type",
+    "CreateFeedbackRequestUserType": ".create_feedback_request_user_type",
     "CreateIntegrationsResponse": ".create_integrations_response",
     "CreatePulseRequest": ".create_pulse_request",
     "CreatePulseResponse": ".create_pulse_response",
+    "CreateScorerRequest": ".create_scorer_request",
+    "CreateScorerRequestScorer": ".create_scorer_request_scorer",
     "CreateTagResponse": ".create_tag_response",
     "CronTriggerConfig": ".cron_trigger_config",
     "CronTriggerConfigAction": ".cron_trigger_config_action",
@@ -631,6 +755,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DateTimeColumn": ".date_time_column",
     "DefaultInput": ".default_input",
     "DefaultOutput": ".default_output",
+    "DeleteFeedbackResponse": ".delete_feedback_response",
     "DeleteHookResponse": ".delete_hook_response",
     "DeleteResponse": ".delete_response",
     "DeleteTriggerResponse": ".delete_trigger_response",
@@ -656,14 +781,43 @@ _dynamic_imports: typing.Dict[str, str] = {
     "EnvironmentDeploymentConfig": ".environment_deployment_config",
     "EnvironmentDeploymentConfigRevisionLookup": ".environment_deployment_config_revision_lookup",
     "EnvironmentDeploymentDocument": ".environment_deployment_document",
+    "Evaluation": ".evaluation",
+    "EvaluationConfigInput": ".evaluation_config_input",
+    "EvaluationConfigInputTarget": ".evaluation_config_input_target",
+    "EvaluationConfigOutput": ".evaluation_config_output",
+    "EvaluationConfigOutputTarget": ".evaluation_config_output_target",
+    "EvaluationConfigResponse": ".evaluation_config_response",
+    "EvaluationListResponse": ".evaluation_list_response",
+    "EvaluationMetrics": ".evaluation_metrics",
+    "EvaluationResponse": ".evaluation_response",
+    "EvaluationRun": ".evaluation_run",
+    "EvaluationRunCreate": ".evaluation_run_create",
+    "EvaluationRunQuery": ".evaluation_run_query",
+    "EvaluationRunStatus": ".evaluation_run_status",
+    "EvaluationTrendResponse": ".evaluation_trend_response",
     "EventVersion": ".event_version",
+    "ExactMatchAssertion": ".exact_match_assertion",
+    "ExecuteScorerRequest": ".execute_scorer_request",
+    "ExecuteScorerRequestScorer": ".execute_scorer_request_scorer",
+    "ExecuteScorerResponse": ".execute_scorer_response",
     "ExecuteToolRequest": ".execute_tool_request",
     "ExecuteToolResponse": ".execute_tool_response",
     "ExecuteTriggerResponse": ".execute_trigger_response",
     "Favor": ".favor",
     "FavoriteItem": ".favorite_item",
     "FavoriteRef": ".favorite_ref",
+    "Feedback": ".feedback",
+    "FeedbackListResponse": ".feedback_list_response",
+    "FeedbackListResponseWrapper": ".feedback_list_response_wrapper",
+    "FeedbackMetadata": ".feedback_metadata",
+    "FeedbackPriority": ".feedback_priority",
+    "FeedbackResponse": ".feedback_response",
+    "FeedbackStatus": ".feedback_status",
+    "FeedbackTargetType": ".feedback_target_type",
+    "FeedbackUserType": ".feedback_user_type",
+    "FieldExistsAssertion": ".field_exists_assertion",
     "FieldMapping": ".field_mapping",
+    "FieldPath": ".field_path",
     "File": ".file",
     "FilesAttribute": ".files_attribute",
     "FilesResponse": ".files_response",
@@ -675,14 +829,19 @@ _dynamic_imports: typing.Dict[str, str] = {
     "FriendlyInvoice": ".friendly_invoice",
     "FriendlyPaymentMethods": ".friendly_payment_methods",
     "GenerateAiSuggestionRequest": ".generate_ai_suggestion_request",
+    "GenericFeedbackMetadata": ".generic_feedback_metadata",
+    "GetCreditsResponse": ".get_credits_response",
     "HookUpdate": ".hook_update",
     "HooksListResponse": ".hooks_list_response",
     "Html2Text": ".html_2_text",
     "Http": ".http",
     "HttpValidationError": ".http_validation_error",
+    "HumanReviewScorer": ".human_review_scorer",
+    "HumanReviewScorerReviewType": ".human_review_scorer_review_type",
     "Identity": ".identity",
     "IdentityDetails": ".identity_details",
     "IdentityTypes": ".identity_types",
+    "InputSchema": ".input_schema",
     "Integration": ".integration",
     "IntegrationAuthType": ".integration_auth_type",
     "IntegrationConnection": ".integration_connection",
@@ -703,15 +862,19 @@ _dynamic_imports: typing.Dict[str, str] = {
     "LegacyIdentity": ".legacy_identity",
     "LegacyIdentityDetails": ".legacy_identity_details",
     "LineItem": ".line_item",
+    "ListScorersResponse": ".list_scorers_response",
+    "ListScorersResponseScorersItem": ".list_scorers_response_scorers_item",
     "ListTagsResponse": ".list_tags_response",
     "ListToolsResponse": ".list_tools_response",
     "ListTriggersResponse": ".list_triggers_response",
+    "LlmJudgeAssertion": ".llm_judge_assertion",
     "Mapping": ".mapping",
     "MarkDownWithContext": ".mark_down_with_context",
     "MarkdownColumn": ".markdown_column",
     "MarkdownSplitterConfig": ".markdown_splitter_config",
     "McpAuthType": ".mcp_auth_type",
     "Me": ".me",
+    "MeOrganization": ".me_organization",
     "MeUpdate": ".me_update",
     "Mention": ".mention",
     "MentionParticipant": ".mention_participant",
@@ -725,6 +888,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "MultiPageCrawlerSettingsOutputScraper": ".multi_page_crawler_settings_output_scraper",
     "MultiPageCrawlerSettingsOutputTextExtractor": ".multi_page_crawler_settings_output_text_extractor",
     "MultiSelectColumn": ".multi_select_column",
+    "NativeScorer": ".native_scorer",
+    "NativeScorerConfigType": ".native_scorer_config_type",
     "NodeUi": ".node_ui",
     "Notification": ".notification",
     "NotificationAction": ".notification_action",
@@ -740,6 +905,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "NumberColumnMinValue": ".number_column_min_value",
     "OAuthAuthType": ".o_auth_auth_type",
     "Organization": ".organization",
+    "OrganizationMemberInvite": ".organization_member_invite",
+    "OrganizationMemberInviteRolesItem": ".organization_member_invite_roles_item",
     "ParagraphSplitterConfig": ".paragraph_splitter_config",
     "Participant": ".participant",
     "ParticipantType": ".participant_type",
@@ -755,6 +922,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Position": ".position",
     "Prompt": ".prompt",
     "PromptRole": ".prompt_role",
+    "PromptTarget": ".prompt_target",
     "PublicCopilotConfig": ".public_copilot_config",
     "PublicCopilotConfigCodeTheme": ".public_copilot_config_code_theme",
     "PublicCopilotConfigFabValue": ".public_copilot_config_fab_value",
@@ -773,15 +941,16 @@ _dynamic_imports: typing.Dict[str, str] = {
     "QuerySort": ".query_sort",
     "Readability": ".readability",
     "RecursiveSplitterConfig": ".recursive_splitter_config",
+    "RegexMatchAssertion": ".regex_match_assertion",
     "RelationColumn": ".relation_column",
     "RenameRequest": ".rename_request",
     "RenameResponse": ".rename_response",
     "ReqBody": ".req_body",
-    "RequestBody": ".request_body",
     "Resource": ".resource",
     "ResourceResourceType": ".resource_resource_type",
     "ResponseModelUsage": ".response_model_usage",
     "Result": ".result",
+    "ReviewOption": ".review_option",
     "RotateApiKeysRequest": ".rotate_api_keys_request",
     "Rule": ".rule",
     "RulesInput": ".rules_input",
@@ -791,11 +960,16 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Schedule": ".schedule",
     "SchemaResponse": ".schema_response",
     "SchemasResponse": ".schemas_response",
+    "ScoreField": ".score_field",
+    "ScorerConfigRuntime": ".scorer_config_runtime",
+    "ScorerResponse": ".scorer_response",
+    "ScorerResponseScorer": ".scorer_response_scorer",
     "ScoutHook": ".scout_hook",
     "ScoutHookConfigHttp": ".scout_hook_config_http",
     "ScoutHookEventDiscriminator": ".scout_hook_event_discriminator",
     "ScoutHookEventDiscriminatorType": ".scout_hook_event_discriminator_type",
     "ScoutHookEventTrigger": ".scout_hook_event_trigger",
+    "ScoutHookEventTriggerType": ".scout_hook_event_trigger_type",
     "ScoutHookResponse": ".scout_hook_response",
     "ScoutHookUpdate": ".scout_hook_update",
     "ScoutHookUpdateTriggeringEventsItem": ".scout_hook_update_triggering_events_item",
@@ -805,6 +979,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SearchRequestSearchType": ".search_request_search_type",
     "SelectColumn": ".select_column",
     "SelectOptionItem": ".select_option_item",
+    "SemanticSimilarityAssertion": ".semantic_similarity_assertion",
     "SentenceSplitterConfig": ".sentence_splitter_config",
     "ServiceInfo": ".service_info",
     "SinglePageCrawlerSettingsInput": ".single_page_crawler_settings_input",
@@ -836,6 +1011,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SourceSyncCrawlSettingsOutput": ".source_sync_crawl_settings_output",
     "SourceSyncCrawlSettingsOutputMode": ".source_sync_crawl_settings_output_mode",
     "SourceSyncGoogleDriveSettings": ".source_sync_google_drive_settings",
+    "SourceSyncLaserficheSettings": ".source_sync_laserfiche_settings",
+    "SourceSyncMicrosoft365Settings": ".source_sync_microsoft_365_settings",
+    "SourceSyncMicrosoft365SettingsTranscriptionMethod": ".source_sync_microsoft_365_settings_transcription_method",
     "SourceSyncNotionSettingsInput": ".source_sync_notion_settings_input",
     "SourceSyncNotionSettingsOutput": ".source_sync_notion_settings_output",
     "SourceSyncPageCrawlSettingsInput": ".source_sync_page_crawl_settings_input",
@@ -874,6 +1052,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SrcAppHttpRoutesCollectionGetCollectionsResponse": ".src_app_http_routes_collection_get_collections_response",
     "SrcAppHttpRoutesCollectionGetDocumentResponse": ".src_app_http_routes_collection_get_document_response",
     "SrcAppHttpRoutesCollectionGetDocumentsResponse": ".src_app_http_routes_collection_get_documents_response",
+    "SrcAppHttpRoutesCollectionGetScheduledSyncsResponse": ".src_app_http_routes_collection_get_scheduled_syncs_response",
     "SrcAppHttpRoutesCollectionGetSyncResponse": ".src_app_http_routes_collection_get_sync_response",
     "SrcAppHttpRoutesCollectionGetSyncsResponse": ".src_app_http_routes_collection_get_syncs_response",
     "SrcAppHttpRoutesCollectionGetTableResponse": ".src_app_http_routes_collection_get_table_response",
@@ -890,6 +1069,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings": ".src_app_http_routes_drive_create_drive_crawl_payload_source_sync_settings",
     "SrcAppHttpRoutesDriveGrantAccessPayload": ".src_app_http_routes_drive_grant_access_payload",
     "SrcAppHttpRoutesDriveRevokeAccessPayload": ".src_app_http_routes_drive_revoke_access_payload",
+    "SrcAppHttpRoutesEvaluationScorerRoutesBaseResponse": ".src_app_http_routes_evaluation_scorer_routes_base_response",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessage": ".src_app_http_routes_inbox_handle_message_incoming_message",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent": ".src_app_http_routes_inbox_handle_message_incoming_message_content",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType": ".src_app_http_routes_inbox_handle_message_incoming_message_content_type",
@@ -900,6 +1080,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SrcAppHttpRoutesOnboardingHandleGetMeResponse": ".src_app_http_routes_onboarding_handle_get_me_response",
     "SrcAppHttpRoutesOnboardingHandleUpdateMeResponse": ".src_app_http_routes_onboarding_handle_update_me_response",
     "SrcAppHttpRoutesRootGetInfoResponse": ".src_app_http_routes_root_get_info_response",
+    "SrcAppHttpRoutesTablesGetToolTablesRequestBody": ".src_app_http_routes_tables_get_tool_tables_request_body",
+    "SrcAppHttpRoutesTablesGetToolTablesResponse": ".src_app_http_routes_tables_get_tool_tables_response",
     "SrcAppHttpRoutesTagsCreateTagPayload": ".src_app_http_routes_tags_create_tag_payload",
     "SrcAppHttpRoutesTagsUpdateTagPayload": ".src_app_http_routes_tags_update_tag_payload",
     "SrcAppHttpRoutesTriggerCreateTriggerResponse": ".src_app_http_routes_trigger_create_trigger_response",
@@ -934,8 +1116,10 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SyncConfigOutput": ".sync_config_output",
     "SyncConfigOutputSourceSettings": ".sync_config_output_source_settings",
     "Table": ".table",
+    "TableAndCollectionItem": ".table_and_collection_item",
     "TableConfigOutput": ".table_config_output",
     "TableConfigOutputSchemaItem": ".table_config_output_schema_item",
+    "TableItem": ".table_item",
     "TableViewInput": ".table_view_input",
     "TableViewOutput": ".table_view_output",
     "TableViewSettingsInput": ".table_view_settings_input",
@@ -944,6 +1128,15 @@ _dynamic_imports: typing.Dict[str, str] = {
     "TableViewSettingsOutputRowHeight": ".table_view_settings_output_row_height",
     "Tag": ".tag",
     "TagsResponse": ".tags_response",
+    "TaskHook": ".task_hook",
+    "TaskHookInput": ".task_hook_input",
+    "TaskTargetConfig": ".task_target_config",
+    "TemplateInstallRequest": ".template_install_request",
+    "TemplateVariable": ".template_variable",
+    "TestCase": ".test_case",
+    "TestCaseAssertionsItem": ".test_case_assertions_item",
+    "TestResult": ".test_result",
+    "TestResultStatus": ".test_result_status",
     "TextExtractor": ".text_extractor",
     "TextExtractorConfig": ".text_extractor_config",
     "TextLongColumn": ".text_long_column",
@@ -952,6 +1145,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ToolConfigResource": ".tool_config_resource",
     "ToolConfigResourceType": ".tool_config_resource_type",
     "ToolDetails": ".tool_details",
+    "ToolTarget": ".tool_target",
     "ToolsData": ".tools_data",
     "ToolsResponse": ".tools_response",
     "TrafilaturaInput": ".trafilatura_input",
@@ -961,11 +1155,20 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Trigger": ".trigger",
     "TriggerStatus": ".trigger_status",
     "TriggerTriggerConfig": ".trigger_trigger_config",
+    "TypeCheckAssertion": ".type_check_assertion",
+    "TypeCheckAssertionExpectedType": ".type_check_assertion_expected_type",
     "TypescriptAutomationConfig": ".typescript_automation_config",
     "Units": ".units",
     "UpdateCronAuthResponse": ".update_cron_auth_response",
     "UpdateEntityRequest": ".update_entity_request",
+    "UpdateEvaluationRequest": ".update_evaluation_request",
+    "UpdateFeedbackRequest": ".update_feedback_request",
+    "UpdateFeedbackRequestMetadata": ".update_feedback_request_metadata",
+    "UpdateFeedbackRequestPriority": ".update_feedback_request_priority",
+    "UpdateFeedbackRequestStatus": ".update_feedback_request_status",
     "UpdateQuestionnaireFilesRequest": ".update_questionnaire_files_request",
+    "UpdateScorerRequest": ".update_scorer_request",
+    "UpdateScorerRequestScorer": ".update_scorer_request_scorer",
     "UpdateTagResponse": ".update_tag_response",
     "UpdateTagsRequest": ".update_tags_request",
     "UpdateTriggerResponse": ".update_trigger_response",
@@ -975,6 +1178,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "UserIdentity": ".user_identity",
     "UserIdentityDetails": ".user_identity_details",
     "UserOrganizationConfig": ".user_organization_config",
+    "UserOrganizationConfigRolesItem": ".user_organization_config_roles_item",
     "ValidationError": ".validation_error",
     "ValidationErrorLocItem": ".validation_error_loc_item",
     "ViewFilter": ".view_filter",
@@ -996,6 +1200,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "WorkflowHookInput": ".workflow_hook_input",
     "WorkflowNoteInput": ".workflow_note_input",
     "WorkflowNoteOutput": ".workflow_note_output",
+    "WorkflowPreviewRequest": ".workflow_preview_request",
+    "WorkflowPreviewResponse": ".workflow_preview_response",
     "WorkflowRun": ".workflow_run",
     "WorkflowRunCompleted": ".workflow_run_completed",
     "WorkflowRunCompletedData": ".workflow_run_completed_data",
@@ -1003,6 +1209,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "WorkflowRunFailed": ".workflow_run_failed",
     "WorkflowRunFailedData": ".workflow_run_failed_data",
     "WorkflowRunFailedEnvironment": ".workflow_run_failed_environment",
+    "WorkflowRunFeedbackMetadata": ".workflow_run_feedback_metadata",
     "WorkflowRunResponse": ".workflow_run_response",
     "WorkflowRunStarted": ".workflow_run_started",
     "WorkflowRunStartedData": ".workflow_run_started_data",
@@ -1010,6 +1217,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "WorkflowRunStateValue": ".workflow_run_state_value",
     "WorkflowRunStopReason": ".workflow_run_stop_reason",
     "WorkflowRunStreamResponse": ".workflow_run_stream_response",
+    "WorkflowTarget": ".workflow_target",
     "WorkflowTargetConfig": ".workflow_target_config",
 }
 
@@ -1042,17 +1250,22 @@ __all__ = [
     "ActorIdentity",
     "ActorIdentityId",
     "ActorIdentityType",
-    "AgentHook",
-    "AgentHookInput",
+    "AddCreditsPayload",
+    "AddCreditsResponse",
+    "AgentExecute",
     "AgentRevision",
     "AgentRevisionModel",
     "AgentRevisionResponseStyle",
     "AgentRevisionToolConfigValue",
-    "AgentTargetConfig",
+    "AgentScorer",
+    "AgentTarget",
+    "AgenticModel",
     "AiAgent",
     "ApiKeyAuthType",
     "ApiKeyIdentity",
     "ApiKeyIdentityDetails",
+    "AssertionResult",
+    "AssertionResultAssertionType",
     "AutomationHook",
     "AutomationHookInput",
     "AutomationTargetConfig",
@@ -1061,6 +1274,7 @@ __all__ = [
     "Baseline",
     "BatchCreateRequest",
     "BatchGenerateRequest",
+    "BatchInviteRequest",
     "Billing",
     "BillingCycle",
     "BillingCycles",
@@ -1102,6 +1316,8 @@ __all__ = [
     "BodyUploadPrivateFilesInboxSessionIdFilesPost",
     "BodyUploadPulseFilesStreamPulseFilesStreamPost",
     "BodyUpsertAgentAgentsPost",
+    "CallTrackingSettingsResponse",
+    "CallTrackingSettingsUpdate",
     "CancelResponse",
     "CardDisplayField",
     "Channel",
@@ -1109,6 +1325,7 @@ __all__ = [
     "Collection",
     "CollectionConfig",
     "CollectionDestination",
+    "CollectionTables",
     "CollectionViewStateInput",
     "CollectionViewStateInputViewsValue",
     "CollectionViewStateOutput",
@@ -1120,15 +1337,23 @@ __all__ = [
     "ConditionOperator",
     "ConnectIntegrationRequest",
     "ConnectIntegrationRequestAuthType",
+    "ContainsAssertion",
     "Copilot",
     "CopilotConfig",
     "CopilotConfigCodeTheme",
     "CopilotConfigFabValue",
     "CopilotConfigMode",
     "CreateEntityRequest",
+    "CreateEvaluationRequest",
+    "CreateFeedbackRequest",
+    "CreateFeedbackRequestMetadata",
+    "CreateFeedbackRequestTargetType",
+    "CreateFeedbackRequestUserType",
     "CreateIntegrationsResponse",
     "CreatePulseRequest",
     "CreatePulseResponse",
+    "CreateScorerRequest",
+    "CreateScorerRequestScorer",
     "CreateTagResponse",
     "CronTriggerConfig",
     "CronTriggerConfigAction",
@@ -1138,6 +1363,7 @@ __all__ = [
     "DateTimeColumn",
     "DefaultInput",
     "DefaultOutput",
+    "DeleteFeedbackResponse",
     "DeleteHookResponse",
     "DeleteResponse",
     "DeleteTriggerResponse",
@@ -1163,14 +1389,43 @@ __all__ = [
     "EnvironmentDeploymentConfig",
     "EnvironmentDeploymentConfigRevisionLookup",
     "EnvironmentDeploymentDocument",
+    "Evaluation",
+    "EvaluationConfigInput",
+    "EvaluationConfigInputTarget",
+    "EvaluationConfigOutput",
+    "EvaluationConfigOutputTarget",
+    "EvaluationConfigResponse",
+    "EvaluationListResponse",
+    "EvaluationMetrics",
+    "EvaluationResponse",
+    "EvaluationRun",
+    "EvaluationRunCreate",
+    "EvaluationRunQuery",
+    "EvaluationRunStatus",
+    "EvaluationTrendResponse",
     "EventVersion",
+    "ExactMatchAssertion",
+    "ExecuteScorerRequest",
+    "ExecuteScorerRequestScorer",
+    "ExecuteScorerResponse",
     "ExecuteToolRequest",
     "ExecuteToolResponse",
     "ExecuteTriggerResponse",
     "Favor",
     "FavoriteItem",
     "FavoriteRef",
+    "Feedback",
+    "FeedbackListResponse",
+    "FeedbackListResponseWrapper",
+    "FeedbackMetadata",
+    "FeedbackPriority",
+    "FeedbackResponse",
+    "FeedbackStatus",
+    "FeedbackTargetType",
+    "FeedbackUserType",
+    "FieldExistsAssertion",
     "FieldMapping",
+    "FieldPath",
     "File",
     "FilesAttribute",
     "FilesResponse",
@@ -1182,14 +1437,19 @@ __all__ = [
     "FriendlyInvoice",
     "FriendlyPaymentMethods",
     "GenerateAiSuggestionRequest",
+    "GenericFeedbackMetadata",
+    "GetCreditsResponse",
     "HookUpdate",
     "HooksListResponse",
     "Html2Text",
     "Http",
     "HttpValidationError",
+    "HumanReviewScorer",
+    "HumanReviewScorerReviewType",
     "Identity",
     "IdentityDetails",
     "IdentityTypes",
+    "InputSchema",
     "Integration",
     "IntegrationAuthType",
     "IntegrationConnection",
@@ -1210,15 +1470,19 @@ __all__ = [
     "LegacyIdentity",
     "LegacyIdentityDetails",
     "LineItem",
+    "ListScorersResponse",
+    "ListScorersResponseScorersItem",
     "ListTagsResponse",
     "ListToolsResponse",
     "ListTriggersResponse",
+    "LlmJudgeAssertion",
     "Mapping",
     "MarkDownWithContext",
     "MarkdownColumn",
     "MarkdownSplitterConfig",
     "McpAuthType",
     "Me",
+    "MeOrganization",
     "MeUpdate",
     "Mention",
     "MentionParticipant",
@@ -1232,6 +1496,8 @@ __all__ = [
     "MultiPageCrawlerSettingsOutputScraper",
     "MultiPageCrawlerSettingsOutputTextExtractor",
     "MultiSelectColumn",
+    "NativeScorer",
+    "NativeScorerConfigType",
     "NodeUi",
     "Notification",
     "NotificationAction",
@@ -1247,6 +1513,8 @@ __all__ = [
     "NumberColumnMinValue",
     "OAuthAuthType",
     "Organization",
+    "OrganizationMemberInvite",
+    "OrganizationMemberInviteRolesItem",
     "ParagraphSplitterConfig",
     "Participant",
     "ParticipantType",
@@ -1262,6 +1530,7 @@ __all__ = [
     "Position",
     "Prompt",
     "PromptRole",
+    "PromptTarget",
     "PublicCopilotConfig",
     "PublicCopilotConfigCodeTheme",
     "PublicCopilotConfigFabValue",
@@ -1280,15 +1549,16 @@ __all__ = [
     "QuerySort",
     "Readability",
     "RecursiveSplitterConfig",
+    "RegexMatchAssertion",
     "RelationColumn",
     "RenameRequest",
     "RenameResponse",
     "ReqBody",
-    "RequestBody",
     "Resource",
     "ResourceResourceType",
     "ResponseModelUsage",
     "Result",
+    "ReviewOption",
     "RotateApiKeysRequest",
     "Rule",
     "RulesInput",
@@ -1298,11 +1568,16 @@ __all__ = [
     "Schedule",
     "SchemaResponse",
     "SchemasResponse",
+    "ScoreField",
+    "ScorerConfigRuntime",
+    "ScorerResponse",
+    "ScorerResponseScorer",
     "ScoutHook",
     "ScoutHookConfigHttp",
     "ScoutHookEventDiscriminator",
     "ScoutHookEventDiscriminatorType",
     "ScoutHookEventTrigger",
+    "ScoutHookEventTriggerType",
     "ScoutHookResponse",
     "ScoutHookUpdate",
     "ScoutHookUpdateTriggeringEventsItem",
@@ -1312,6 +1587,7 @@ __all__ = [
     "SearchRequestSearchType",
     "SelectColumn",
     "SelectOptionItem",
+    "SemanticSimilarityAssertion",
     "SentenceSplitterConfig",
     "ServiceInfo",
     "SinglePageCrawlerSettingsInput",
@@ -1343,6 +1619,9 @@ __all__ = [
     "SourceSyncCrawlSettingsOutput",
     "SourceSyncCrawlSettingsOutputMode",
     "SourceSyncGoogleDriveSettings",
+    "SourceSyncLaserficheSettings",
+    "SourceSyncMicrosoft365Settings",
+    "SourceSyncMicrosoft365SettingsTranscriptionMethod",
     "SourceSyncNotionSettingsInput",
     "SourceSyncNotionSettingsOutput",
     "SourceSyncPageCrawlSettingsInput",
@@ -1381,6 +1660,7 @@ __all__ = [
     "SrcAppHttpRoutesCollectionGetCollectionsResponse",
     "SrcAppHttpRoutesCollectionGetDocumentResponse",
     "SrcAppHttpRoutesCollectionGetDocumentsResponse",
+    "SrcAppHttpRoutesCollectionGetScheduledSyncsResponse",
     "SrcAppHttpRoutesCollectionGetSyncResponse",
     "SrcAppHttpRoutesCollectionGetSyncsResponse",
     "SrcAppHttpRoutesCollectionGetTableResponse",
@@ -1397,6 +1677,7 @@ __all__ = [
     "SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings",
     "SrcAppHttpRoutesDriveGrantAccessPayload",
     "SrcAppHttpRoutesDriveRevokeAccessPayload",
+    "SrcAppHttpRoutesEvaluationScorerRoutesBaseResponse",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessage",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType",
@@ -1407,6 +1688,8 @@ __all__ = [
     "SrcAppHttpRoutesOnboardingHandleGetMeResponse",
     "SrcAppHttpRoutesOnboardingHandleUpdateMeResponse",
     "SrcAppHttpRoutesRootGetInfoResponse",
+    "SrcAppHttpRoutesTablesGetToolTablesRequestBody",
+    "SrcAppHttpRoutesTablesGetToolTablesResponse",
     "SrcAppHttpRoutesTagsCreateTagPayload",
     "SrcAppHttpRoutesTagsUpdateTagPayload",
     "SrcAppHttpRoutesTriggerCreateTriggerResponse",
@@ -1441,8 +1724,10 @@ __all__ = [
     "SyncConfigOutput",
     "SyncConfigOutputSourceSettings",
     "Table",
+    "TableAndCollectionItem",
     "TableConfigOutput",
     "TableConfigOutputSchemaItem",
+    "TableItem",
     "TableViewInput",
     "TableViewOutput",
     "TableViewSettingsInput",
@@ -1451,6 +1736,15 @@ __all__ = [
     "TableViewSettingsOutputRowHeight",
     "Tag",
     "TagsResponse",
+    "TaskHook",
+    "TaskHookInput",
+    "TaskTargetConfig",
+    "TemplateInstallRequest",
+    "TemplateVariable",
+    "TestCase",
+    "TestCaseAssertionsItem",
+    "TestResult",
+    "TestResultStatus",
     "TextExtractor",
     "TextExtractorConfig",
     "TextLongColumn",
@@ -1459,6 +1753,7 @@ __all__ = [
     "ToolConfigResource",
     "ToolConfigResourceType",
     "ToolDetails",
+    "ToolTarget",
     "ToolsData",
     "ToolsResponse",
     "TrafilaturaInput",
@@ -1468,11 +1763,20 @@ __all__ = [
     "Trigger",
     "TriggerStatus",
     "TriggerTriggerConfig",
+    "TypeCheckAssertion",
+    "TypeCheckAssertionExpectedType",
     "TypescriptAutomationConfig",
     "Units",
     "UpdateCronAuthResponse",
     "UpdateEntityRequest",
+    "UpdateEvaluationRequest",
+    "UpdateFeedbackRequest",
+    "UpdateFeedbackRequestMetadata",
+    "UpdateFeedbackRequestPriority",
+    "UpdateFeedbackRequestStatus",
     "UpdateQuestionnaireFilesRequest",
+    "UpdateScorerRequest",
+    "UpdateScorerRequestScorer",
     "UpdateTagResponse",
     "UpdateTagsRequest",
     "UpdateTriggerResponse",
@@ -1482,6 +1786,7 @@ __all__ = [
     "UserIdentity",
     "UserIdentityDetails",
     "UserOrganizationConfig",
+    "UserOrganizationConfigRolesItem",
     "ValidationError",
     "ValidationErrorLocItem",
     "ViewFilter",
@@ -1503,6 +1808,8 @@ __all__ = [
     "WorkflowHookInput",
     "WorkflowNoteInput",
     "WorkflowNoteOutput",
+    "WorkflowPreviewRequest",
+    "WorkflowPreviewResponse",
     "WorkflowRun",
     "WorkflowRunCompleted",
     "WorkflowRunCompletedData",
@@ -1510,6 +1817,7 @@ __all__ = [
     "WorkflowRunFailed",
     "WorkflowRunFailedData",
     "WorkflowRunFailedEnvironment",
+    "WorkflowRunFeedbackMetadata",
     "WorkflowRunResponse",
     "WorkflowRunStarted",
     "WorkflowRunStartedData",
@@ -1517,5 +1825,6 @@ __all__ = [
     "WorkflowRunStateValue",
     "WorkflowRunStopReason",
     "WorkflowRunStreamResponse",
+    "WorkflowTarget",
     "WorkflowTargetConfig",
 ]

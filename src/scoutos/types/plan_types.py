@@ -20,6 +20,9 @@ PlanTypes = typing.Union[
         "plan_13",
         "plan_14",
         "plan_15",
+        "plan_16",
+        "plan_17",
+        "plan_18",
     ],
     typing.Any,
 ]

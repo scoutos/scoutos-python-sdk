@@ -5,11 +5,11 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .sync_config_input import SyncConfigInput
 
 
-class RequestBody(UncheckedBaseModel):
-    sync_config: SyncConfigInput
+class TableItem(UncheckedBaseModel):
+    table_id: str
+    table_name: str
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -14,12 +14,19 @@ class Flags(UncheckedBaseModel):
     """
 
     automation_columns: typing.Optional[bool] = None
-    display_scout_organization_id: typing.Optional[bool] = None
-    inbox_agent_trace: typing.Optional[bool] = None
-    multi_player_chat: typing.Optional[bool] = None
     team_workspace: typing.Optional[bool] = None
     token_counts: typing.Optional[bool] = None
+    copilot_greeting: typing.Optional[bool] = None
+    copilot_powered_by: typing.Optional[bool] = None
+    copilot_shadow: typing.Optional[bool] = None
+    copilot_show_scrollbar: typing.Optional[bool] = None
+    copilot_fab_additional_options: typing.Optional[bool] = None
+    nav_evaluations: typing.Optional[bool] = None
+    nav_scorers: typing.Optional[bool] = None
+    nav_feedback: typing.Optional[bool] = None
+    feedback_discussion: typing.Optional[bool] = None
     drive_integrations: typing.Optional[bool] = None
+    self_service: typing.Optional[bool] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

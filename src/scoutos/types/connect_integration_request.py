@@ -11,6 +11,7 @@ from .connect_integration_request_auth_type import ConnectIntegrationRequestAuth
 class ConnectIntegrationRequest(UncheckedBaseModel):
     auth_type: ConnectIntegrationRequestAuthType
     api_key: typing.Optional[str] = None
+    connection_name: typing.Optional[str] = None
     code: typing.Optional[str] = None
     state: typing.Optional[str] = None
     scope: typing.Optional[str] = None
@@ -18,6 +19,7 @@ class ConnectIntegrationRequest(UncheckedBaseModel):
     client_id: typing.Optional[str] = None
     client_secret: typing.Optional[str] = None
     environment: typing.Optional[str] = None
+    metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

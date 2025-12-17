@@ -75,7 +75,6 @@ class TablesClient:
         icon_emoji: typing.Optional[str] = OMIT,
         icon_asset_url: typing.Optional[str] = OMIT,
         icon_fill: typing.Optional[str] = OMIT,
-        singular_name: typing.Optional[str] = OMIT,
         plural_name: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionCreateTableResponse:
@@ -97,8 +96,6 @@ class TablesClient:
         icon_asset_url : typing.Optional[str]
 
         icon_fill : typing.Optional[str]
-
-        singular_name : typing.Optional[str]
 
         plural_name : typing.Optional[str]
 
@@ -130,7 +127,6 @@ class TablesClient:
             icon_emoji=icon_emoji,
             icon_asset_url=icon_asset_url,
             icon_fill=icon_fill,
-            singular_name=singular_name,
             plural_name=plural_name,
             request_options=request_options,
         )
@@ -181,7 +177,6 @@ class TablesClient:
         icon_emoji: typing.Optional[str] = OMIT,
         icon_asset_url: typing.Optional[str] = OMIT,
         icon_fill: typing.Optional[str] = OMIT,
-        singular_name: typing.Optional[str] = OMIT,
         plural_name: typing.Optional[str] = OMIT,
         index_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -206,8 +201,6 @@ class TablesClient:
         icon_asset_url : typing.Optional[str]
 
         icon_fill : typing.Optional[str]
-
-        singular_name : typing.Optional[str]
 
         plural_name : typing.Optional[str]
 
@@ -243,7 +236,6 @@ class TablesClient:
             icon_emoji=icon_emoji,
             icon_asset_url=icon_asset_url,
             icon_fill=icon_fill,
-            singular_name=singular_name,
             plural_name=plural_name,
             index_id=index_id,
             request_options=request_options,
@@ -426,7 +418,6 @@ class AsyncTablesClient:
         icon_emoji: typing.Optional[str] = OMIT,
         icon_asset_url: typing.Optional[str] = OMIT,
         icon_fill: typing.Optional[str] = OMIT,
-        singular_name: typing.Optional[str] = OMIT,
         plural_name: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionCreateTableResponse:
@@ -448,8 +439,6 @@ class AsyncTablesClient:
         icon_asset_url : typing.Optional[str]
 
         icon_fill : typing.Optional[str]
-
-        singular_name : typing.Optional[str]
 
         plural_name : typing.Optional[str]
 
@@ -489,7 +478,6 @@ class AsyncTablesClient:
             icon_emoji=icon_emoji,
             icon_asset_url=icon_asset_url,
             icon_fill=icon_fill,
-            singular_name=singular_name,
             plural_name=plural_name,
             request_options=request_options,
         )
@@ -548,7 +536,6 @@ class AsyncTablesClient:
         icon_emoji: typing.Optional[str] = OMIT,
         icon_asset_url: typing.Optional[str] = OMIT,
         icon_fill: typing.Optional[str] = OMIT,
-        singular_name: typing.Optional[str] = OMIT,
         plural_name: typing.Optional[str] = OMIT,
         index_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -573,8 +560,6 @@ class AsyncTablesClient:
         icon_asset_url : typing.Optional[str]
 
         icon_fill : typing.Optional[str]
-
-        singular_name : typing.Optional[str]
 
         plural_name : typing.Optional[str]
 
@@ -618,7 +603,6 @@ class AsyncTablesClient:
             icon_emoji=icon_emoji,
             icon_asset_url=icon_asset_url,
             icon_fill=icon_fill,
-            singular_name=singular_name,
             plural_name=plural_name,
             index_id=index_id,
             request_options=request_options,

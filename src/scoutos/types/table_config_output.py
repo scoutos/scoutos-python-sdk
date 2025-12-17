@@ -20,7 +20,6 @@ class TableConfigOutput(UncheckedBaseModel):
     icon_emoji: typing.Optional[str] = None
     icon_asset_url: typing.Optional[str] = None
     icon_fill: typing.Optional[str] = None
-    singular_name: typing.Optional[str] = None
     plural_name: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:

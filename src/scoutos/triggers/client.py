@@ -98,15 +98,15 @@ class TriggersClient:
 
         Examples
         --------
-        from scoutos import Scout, SlackTriggerConfigInput, SourceSync
+        from scoutos import AgentExecute, Scout, SlackTriggerConfigInput
 
         client = Scout(
             api_key="YOUR_API_KEY",
         )
         client.triggers.create(
             request=SlackTriggerConfigInput(
-                action=SourceSync(
-                    sync_id="sync_id",
+                action=AgentExecute(
+                    agent_id="agent_id",
                 ),
             ),
         )
@@ -138,7 +138,7 @@ class TriggersClient:
 
         Examples
         --------
-        from scoutos import Scout, SlackTriggerConfigInput, SourceSync
+        from scoutos import AgentExecute, Scout, SlackTriggerConfigInput
 
         client = Scout(
             api_key="YOUR_API_KEY",
@@ -146,8 +146,8 @@ class TriggersClient:
         client.triggers.update(
             trigger_id="trigger_id",
             request=SlackTriggerConfigInput(
-                action=SourceSync(
-                    sync_id="sync_id",
+                action=AgentExecute(
+                    agent_id="agent_id",
                 ),
             ),
         )
@@ -370,7 +370,7 @@ class AsyncTriggersClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScout, SlackTriggerConfigInput, SourceSync
+        from scoutos import AgentExecute, AsyncScout, SlackTriggerConfigInput
 
         client = AsyncScout(
             api_key="YOUR_API_KEY",
@@ -380,8 +380,8 @@ class AsyncTriggersClient:
         async def main() -> None:
             await client.triggers.create(
                 request=SlackTriggerConfigInput(
-                    action=SourceSync(
-                        sync_id="sync_id",
+                    action=AgentExecute(
+                        agent_id="agent_id",
                     ),
                 ),
             )
@@ -418,7 +418,7 @@ class AsyncTriggersClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScout, SlackTriggerConfigInput, SourceSync
+        from scoutos import AgentExecute, AsyncScout, SlackTriggerConfigInput
 
         client = AsyncScout(
             api_key="YOUR_API_KEY",
@@ -429,8 +429,8 @@ class AsyncTriggersClient:
             await client.triggers.update(
                 trigger_id="trigger_id",
                 request=SlackTriggerConfigInput(
-                    action=SourceSync(
-                        sync_id="sync_id",
+                    action=AgentExecute(
+                        agent_id="agent_id",
                     ),
                 ),
             )

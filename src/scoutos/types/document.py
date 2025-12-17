@@ -22,7 +22,7 @@ class Document(UncheckedBaseModel):
     revision_id: typing.Optional[str] = None
     job_id: typing.Optional[str] = None
     sync_id: typing.Optional[str] = None
-    studio_row: typing.Optional[bool] = None
+    studio_row_id: typing.Optional[str] = None
     cells: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
 
     if IS_PYDANTIC_V2:

@@ -6,10 +6,11 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .scout_hook_event_discriminator import ScoutHookEventDiscriminator
+from .scout_hook_event_trigger_type import ScoutHookEventTriggerType
 
 
 class ScoutHookEventTrigger(UncheckedBaseModel):
-    type: typing.Optional[typing.Literal["agent.interaction.responded"]] = None
+    type: typing.Optional[ScoutHookEventTriggerType] = None
     discriminator: typing.Optional[ScoutHookEventDiscriminator] = None
 
     if IS_PYDANTIC_V2:

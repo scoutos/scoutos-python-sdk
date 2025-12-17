@@ -9,6 +9,10 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 
 class SourceSyncGoogleDriveSettings(UncheckedBaseModel):
     source_archetype_id: typing.Literal["com.google.drive"] = "com.google.drive"
+    filter_options: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
+    """
+    Narrow down resources you sync from the source. Ensure you include fetch_filters method on Source Sync Archetype.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

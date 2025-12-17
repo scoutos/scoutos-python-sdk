@@ -6,12 +6,12 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .agent_target_config import AgentTargetConfig
+from .task_target_config import TaskTargetConfig
 
 
-class AgentHook(UncheckedBaseModel):
+class TaskHook(UncheckedBaseModel):
     """
-    Hook model for agent targets (future).
+    Hook model for task targets.
     """
 
     id: str
@@ -28,8 +28,8 @@ class AgentHook(UncheckedBaseModel):
     created_at: dt.datetime
     updated_at: dt.datetime
     created_by: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
-    target_type: typing.Optional[typing.Literal["agent"]] = None
-    target_config: AgentTargetConfig
+    target_type: typing.Optional[typing.Literal["task"]] = None
+    target_config: TaskTargetConfig
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -2318,15 +2318,15 @@ client.triggers.list(
 <dd>
 
 ```python
-from scoutos import Scout, SlackTriggerConfigInput, SourceSync
+from scoutos import AgentExecute, Scout, SlackTriggerConfigInput
 
 client = Scout(
     api_key="YOUR_API_KEY",
 )
 client.triggers.create(
     request=SlackTriggerConfigInput(
-        action=SourceSync(
-            sync_id="sync_id",
+        action=AgentExecute(
+            agent_id="agent_id",
         ),
     ),
 )
@@ -2378,7 +2378,7 @@ client.triggers.create(
 <dd>
 
 ```python
-from scoutos import Scout, SlackTriggerConfigInput, SourceSync
+from scoutos import AgentExecute, Scout, SlackTriggerConfigInput
 
 client = Scout(
     api_key="YOUR_API_KEY",
@@ -2386,8 +2386,8 @@ client = Scout(
 client.triggers.update(
     trigger_id="trigger_id",
     request=SlackTriggerConfigInput(
-        action=SourceSync(
-            sync_id="sync_id",
+        action=AgentExecute(
+            agent_id="agent_id",
         ),
     ),
 )
@@ -4059,14 +4059,6 @@ client.tables.create(
 <dl>
 <dd>
 
-**singular_name:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **plural_name:** `typing.Optional[str]` 
     
 </dd>
@@ -4254,14 +4246,6 @@ client.tables.update(
 <dd>
 
 **icon_fill:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**singular_name:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -4556,6 +4540,8 @@ client.documents.list(
     query="query",
     offset=1,
     sort_by="sort_by",
+    filter_column="filter_column",
+    filter_value="filter_value",
 )
 
 ```
@@ -4621,6 +4607,22 @@ client.documents.list(
 <dd>
 
 **sort_by:** `typing.Optional[str]` — Sort by field
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter_column:** `typing.Optional[str]` — Column to filter by (column_id or column_display_name). Requires filter_value. Cannot be used with pagination, sorting or query.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter_value:** `typing.Optional[str]` — Value to match on. No partial text matching. Requires filter_column. Cannot be used with pagination, sorting or query.
     
 </dd>
 </dl>
@@ -4864,6 +4866,20 @@ client.documents.update_batch(
 <dl>
 <dd>
 
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Route handler for getting a document
+</dd>
+</dl>
+</dd>
+</dl>
+
 #### 🔌 Usage
 
 <dl>
@@ -4937,6 +4953,20 @@ client.documents.get(
 <details><summary><code>client.documents.<a href="src/scoutos/documents/client.py">update</a>(...)</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Route handler for updating a document
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 

@@ -10,6 +10,7 @@ from .actor_identity import ActorIdentity
 from .agent_revision_model import AgentRevisionModel
 from .agent_revision_response_style import AgentRevisionResponseStyle
 from .agent_revision_tool_config_value import AgentRevisionToolConfigValue
+from .agentic_model import AgenticModel
 from .model_provider import ModelProvider
 
 
@@ -32,6 +33,7 @@ class AgentRevision(UncheckedBaseModel):
     max_turns: typing.Optional[int] = None
     tool_config: typing.Optional[typing.Dict[str, typing.Optional[AgentRevisionToolConfigValue]]] = None
     conversation_starters: typing.Optional[typing.List[str]] = None
+    dynamic_fallbacks: typing.Optional[typing.List[AgenticModel]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

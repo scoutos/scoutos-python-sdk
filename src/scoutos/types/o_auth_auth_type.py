@@ -9,8 +9,8 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 
 class OAuthAuthType(UncheckedBaseModel):
     type: typing.Literal["oauth2"] = "oauth2"
-    client_id: str
-    client_secret: str
+    client_id: typing.Optional[str] = None
+    client_secret: typing.Optional[str] = None
     redirect_uri: typing.Optional[str] = None
     token_uri: typing.Optional[str] = None
     base_url: typing.Optional[str] = None
