@@ -13,6 +13,7 @@ class TableViewSettingsInput(UncheckedBaseModel):
     column_visibility: typing.Optional[typing.Dict[str, bool]] = None
     column_order: typing.Optional[typing.List[str]] = None
     column_widths: typing.Optional[typing.Dict[str, int]] = None
+    column_pinned_count: typing.Optional[int] = None
     type: typing.Literal["table"] = "table"
     row_height: typing.Optional[TableViewSettingsInputRowHeight] = None
     show_row_numbers: typing.Optional[bool] = None

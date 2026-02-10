@@ -2,13 +2,14 @@
 
 import typing
 
-from .documents_update_batch_request_body_item_value import DocumentsUpdateBatchRequestBodyItemValue
 from .documents_update_batch_request_body_one_value import DocumentsUpdateBatchRequestBodyOneValue
+from .documents_update_batch_request_body_three_item_value import DocumentsUpdateBatchRequestBodyThreeItemValue
+from .documents_update_batch_request_body_two_item_value import DocumentsUpdateBatchRequestBodyTwoItemValue
 from .documents_update_batch_request_body_zero_value import DocumentsUpdateBatchRequestBodyZeroValue
 
 DocumentsUpdateBatchRequestBody = typing.Union[
     typing.Dict[str, DocumentsUpdateBatchRequestBodyZeroValue],
     typing.Dict[str, typing.Optional[DocumentsUpdateBatchRequestBodyOneValue]],
-    typing.List[typing.Dict[str, DocumentsUpdateBatchRequestBodyItemValue]],
-    typing.List[typing.Dict[str, typing.Optional[DocumentsUpdateBatchRequestBodyItemValue]]],
+    typing.List[typing.Dict[str, DocumentsUpdateBatchRequestBodyTwoItemValue]],
+    typing.List[typing.Dict[str, typing.Optional[DocumentsUpdateBatchRequestBodyThreeItemValue]]],
 ]

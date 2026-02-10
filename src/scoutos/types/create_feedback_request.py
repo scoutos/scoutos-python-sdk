@@ -5,27 +5,38 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .create_feedback_request_metadata import CreateFeedbackRequestMetadata
 from .create_feedback_request_target_type import CreateFeedbackRequestTargetType
-from .create_feedback_request_user_type import CreateFeedbackRequestUserType
 
 
 class CreateFeedbackRequest(UncheckedBaseModel):
     """
-    Request to create new feedback
+    Request to create new feedback.
+
+    User identification follows Braintrust's pattern - pass user_id in metadata:
+        {
+            "target_type": "workflow_run",
+            "target_id": "run_123",
+            "scorer_id": "thumbs",
+            "score": 1,
+            "metadata": {
+                "user_id": "customer_456",
+                "workflow_id": "wf_abc",
+                "session_id": "sess_789"
+            }
+        }
+
+    Required metadata fields by target_type:
+        - workflow_run: workflow_id, session_id
     """
 
     target_type: CreateFeedbackRequestTargetType
     target_id: str
     scorer_id: str
-    user_type: typing.Optional[CreateFeedbackRequestUserType] = None
-    external_user_id: typing.Optional[str] = None
-    external_user_metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
     score: typing.Optional[float] = None
     selected_option: typing.Optional[str] = None
     comment: typing.Optional[str] = None
     correction: typing.Optional[typing.Optional[typing.Any]] = None
-    metadata: CreateFeedbackRequestMetadata
+    metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

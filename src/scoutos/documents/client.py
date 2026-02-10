@@ -130,6 +130,7 @@ class DocumentsClient:
         sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
         mode: typing.Optional[str] = None,
+        merge_fields: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DocumentResponse:
         """
@@ -153,6 +154,9 @@ class DocumentsClient:
         mode : typing.Optional[str]
             The mode to use for the document creation/update
 
+        merge_fields : typing.Optional[bool]
+            Whether to merge only provided fields into existing document
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -175,6 +179,7 @@ class DocumentsClient:
             sync_id="sync_id",
             await_completion=True,
             mode="mode",
+            merge_fields=True,
             request={"key": True},
         )
         """
@@ -186,6 +191,7 @@ class DocumentsClient:
             sync_id=sync_id,
             await_completion=await_completion,
             mode=mode,
+            merge_fields=merge_fields,
             request_options=request_options,
         )
         return _response.data
@@ -200,6 +206,7 @@ class DocumentsClient:
         sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
         mode: typing.Optional[str] = None,
+        merge_fields: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DocumentResponse:
         """
@@ -223,6 +230,9 @@ class DocumentsClient:
         mode : typing.Optional[str]
             The mode to use for the document creation/update
 
+        merge_fields : typing.Optional[bool]
+            Whether to merge only provided fields into existing document
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -245,6 +255,7 @@ class DocumentsClient:
             sync_id="sync_id",
             await_completion=True,
             mode="mode",
+            merge_fields=True,
             request={"key": True},
         )
         """
@@ -256,6 +267,7 @@ class DocumentsClient:
             sync_id=sync_id,
             await_completion=await_completion,
             mode=mode,
+            merge_fields=merge_fields,
             request_options=request_options,
         )
         return _response.data
@@ -555,6 +567,7 @@ class AsyncDocumentsClient:
         sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
         mode: typing.Optional[str] = None,
+        merge_fields: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DocumentResponse:
         """
@@ -577,6 +590,9 @@ class AsyncDocumentsClient:
 
         mode : typing.Optional[str]
             The mode to use for the document creation/update
+
+        merge_fields : typing.Optional[bool]
+            Whether to merge only provided fields into existing document
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -605,6 +621,7 @@ class AsyncDocumentsClient:
                 sync_id="sync_id",
                 await_completion=True,
                 mode="mode",
+                merge_fields=True,
                 request={"key": True},
             )
 
@@ -619,6 +636,7 @@ class AsyncDocumentsClient:
             sync_id=sync_id,
             await_completion=await_completion,
             mode=mode,
+            merge_fields=merge_fields,
             request_options=request_options,
         )
         return _response.data
@@ -633,6 +651,7 @@ class AsyncDocumentsClient:
         sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
         mode: typing.Optional[str] = None,
+        merge_fields: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DocumentResponse:
         """
@@ -655,6 +674,9 @@ class AsyncDocumentsClient:
 
         mode : typing.Optional[str]
             The mode to use for the document creation/update
+
+        merge_fields : typing.Optional[bool]
+            Whether to merge only provided fields into existing document
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -683,6 +705,7 @@ class AsyncDocumentsClient:
                 sync_id="sync_id",
                 await_completion=True,
                 mode="mode",
+                merge_fields=True,
                 request={"key": True},
             )
 
@@ -697,6 +720,7 @@ class AsyncDocumentsClient:
             sync_id=sync_id,
             await_completion=await_completion,
             mode=mode,
+            merge_fields=merge_fields,
             request_options=request_options,
         )
         return _response.data

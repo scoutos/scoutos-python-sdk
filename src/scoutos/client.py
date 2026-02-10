@@ -6,6 +6,7 @@ import os
 import typing
 
 import httpx
+from .core.api_error import ApiError
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .environment import ScoutEnvironment
 
@@ -13,6 +14,7 @@ if typing.TYPE_CHECKING:
     from .collections.client import AsyncCollectionsClient, CollectionsClient
     from .copilots.client import AsyncCopilotsClient, CopilotsClient
     from .documents.client import AsyncDocumentsClient, DocumentsClient
+    from .drive.client import AsyncDriveClient, DriveClient
     from .environments.client import AsyncEnvironmentsClient, EnvironmentsClient
     from .integrations.client import AsyncIntegrationsClient, IntegrationsClient
     from .organizations.client import AsyncOrganizationsClient, OrganizationsClient
@@ -81,6 +83,8 @@ class Scout:
         _defaulted_timeout = (
             timeout if timeout is not None else 60 if httpx_client is None else httpx_client.timeout.read
         )
+        if api_key is None:
+            raise ApiError(body="The client must be instantiated be either passing in api_key or setting SCOUT_API_KEY")
         self._client_wrapper = SyncClientWrapper(
             base_url=_get_base_url(base_url=base_url, environment=environment),
             api_key=api_key,
@@ -107,6 +111,7 @@ class Scout:
         self._documents: typing.Optional[DocumentsClient] = None
         self._sources: typing.Optional[SourcesClient] = None
         self._syncs: typing.Optional[SyncsClient] = None
+        self._drive: typing.Optional[DriveClient] = None
 
     @property
     def workflows(self):
@@ -228,6 +233,14 @@ class Scout:
             self._syncs = SyncsClient(client_wrapper=self._client_wrapper)
         return self._syncs
 
+    @property
+    def drive(self):
+        if self._drive is None:
+            from .drive.client import DriveClient  # noqa: E402
+
+            self._drive = DriveClient(client_wrapper=self._client_wrapper)
+        return self._drive
+
 
 class AsyncScout:
     """
@@ -283,6 +296,8 @@ class AsyncScout:
         _defaulted_timeout = (
             timeout if timeout is not None else 60 if httpx_client is None else httpx_client.timeout.read
         )
+        if api_key is None:
+            raise ApiError(body="The client must be instantiated be either passing in api_key or setting SCOUT_API_KEY")
         self._client_wrapper = AsyncClientWrapper(
             base_url=_get_base_url(base_url=base_url, environment=environment),
             api_key=api_key,
@@ -309,6 +324,7 @@ class AsyncScout:
         self._documents: typing.Optional[AsyncDocumentsClient] = None
         self._sources: typing.Optional[AsyncSourcesClient] = None
         self._syncs: typing.Optional[AsyncSyncsClient] = None
+        self._drive: typing.Optional[AsyncDriveClient] = None
 
     @property
     def workflows(self):
@@ -429,6 +445,14 @@ class AsyncScout:
 
             self._syncs = AsyncSyncsClient(client_wrapper=self._client_wrapper)
         return self._syncs
+
+    @property
+    def drive(self):
+        if self._drive is None:
+            from .drive.client import AsyncDriveClient  # noqa: E402
+
+            self._drive = AsyncDriveClient(client_wrapper=self._client_wrapper)
+        return self._drive
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: ScoutEnvironment) -> str:

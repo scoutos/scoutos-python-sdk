@@ -5,9 +5,22 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .collection_destination import CollectionDestination
+from .input_schema_source_settings import InputSchemaSourceSettings
+from .mapping import Mapping
+from .schedule import Schedule
 
 
 class InputSchema(UncheckedBaseModel):
+    """
+    InputSchema includes all fields from SyncConfig.
+    """
+
+    source_settings: InputSchemaSourceSettings
+    destination: CollectionDestination
+    mapping: Mapping
+    schedule: typing.Optional[Schedule] = None
+
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
     else:

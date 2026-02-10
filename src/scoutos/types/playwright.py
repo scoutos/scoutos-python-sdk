@@ -15,6 +15,16 @@ class Playwright(UncheckedBaseModel):
     Determines when the scraper considers navigation to be finished.
     """
 
+    wait_for_timeout: typing.Optional[int] = pydantic.Field(default=None)
+    """
+    Additional wait time in milliseconds after page load to allow JavaScript hydration. Only applies to Playwright scraper.
+    """
+
+    wait_for_event: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Wait for a custom page/window event (e.g., 'appLoaded') before scraping. The page must dispatch this event via window.dispatchEvent(new Event('eventName')). Playwright only.
+    """
+
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
     else:

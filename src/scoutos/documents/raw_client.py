@@ -133,6 +133,7 @@ class RawDocumentsClient:
         sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
         mode: typing.Optional[str] = None,
+        merge_fields: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[DocumentResponse]:
         """
@@ -156,6 +157,9 @@ class RawDocumentsClient:
         mode : typing.Optional[str]
             The mode to use for the document creation/update
 
+        merge_fields : typing.Optional[bool]
+            Whether to merge only provided fields into existing document
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -172,6 +176,7 @@ class RawDocumentsClient:
                 "sync_id": sync_id,
                 "await_completion": await_completion,
                 "mode": mode,
+                "merge_fields": merge_fields,
             },
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=DocumentsCreateRequestBody, direction="write"
@@ -218,6 +223,7 @@ class RawDocumentsClient:
         sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
         mode: typing.Optional[str] = None,
+        merge_fields: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[DocumentResponse]:
         """
@@ -241,6 +247,9 @@ class RawDocumentsClient:
         mode : typing.Optional[str]
             The mode to use for the document creation/update
 
+        merge_fields : typing.Optional[bool]
+            Whether to merge only provided fields into existing document
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -257,6 +266,7 @@ class RawDocumentsClient:
                 "sync_id": sync_id,
                 "await_completion": await_completion,
                 "mode": mode,
+                "merge_fields": merge_fields,
             },
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=DocumentsUpdateBatchRequestBody, direction="write"
@@ -643,6 +653,7 @@ class AsyncRawDocumentsClient:
         sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
         mode: typing.Optional[str] = None,
+        merge_fields: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[DocumentResponse]:
         """
@@ -666,6 +677,9 @@ class AsyncRawDocumentsClient:
         mode : typing.Optional[str]
             The mode to use for the document creation/update
 
+        merge_fields : typing.Optional[bool]
+            Whether to merge only provided fields into existing document
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -682,6 +696,7 @@ class AsyncRawDocumentsClient:
                 "sync_id": sync_id,
                 "await_completion": await_completion,
                 "mode": mode,
+                "merge_fields": merge_fields,
             },
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=DocumentsCreateRequestBody, direction="write"
@@ -728,6 +743,7 @@ class AsyncRawDocumentsClient:
         sync_id: typing.Optional[str] = None,
         await_completion: typing.Optional[bool] = None,
         mode: typing.Optional[str] = None,
+        merge_fields: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[DocumentResponse]:
         """
@@ -751,6 +767,9 @@ class AsyncRawDocumentsClient:
         mode : typing.Optional[str]
             The mode to use for the document creation/update
 
+        merge_fields : typing.Optional[bool]
+            Whether to merge only provided fields into existing document
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -767,6 +786,7 @@ class AsyncRawDocumentsClient:
                 "sync_id": sync_id,
                 "await_completion": await_completion,
                 "mode": mode,
+                "merge_fields": merge_fields,
             },
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=DocumentsUpdateBatchRequestBody, direction="write"

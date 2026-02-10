@@ -5,7 +5,6 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .update_feedback_request_metadata import UpdateFeedbackRequestMetadata
 from .update_feedback_request_priority import UpdateFeedbackRequestPriority
 from .update_feedback_request_status import UpdateFeedbackRequestStatus
 
@@ -19,7 +18,7 @@ class UpdateFeedbackRequest(UncheckedBaseModel):
     selected_option: typing.Optional[str] = None
     comment: typing.Optional[str] = None
     correction: typing.Optional[typing.Optional[typing.Any]] = None
-    metadata: typing.Optional[UpdateFeedbackRequestMetadata] = None
+    metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
     status: typing.Optional[UpdateFeedbackRequestStatus] = None
     priority: typing.Optional[UpdateFeedbackRequestPriority] = None
     assigned_to: typing.Optional[str] = None

@@ -14,9 +14,8 @@ from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.collection_view_state_input import CollectionViewStateInput
 from ..types.delete_view_response import DeleteViewResponse
 from ..types.http_validation_error import HttpValidationError
-from ..types.src_app_http_routes_collection_create_collection_response import (
-    SrcAppHttpRoutesCollectionCreateCollectionResponse,
-)
+from ..types.response import Response
+from ..types.response_model import ResponseModel
 from ..types.src_app_http_routes_collection_delete_collection_response import (
     SrcAppHttpRoutesCollectionDeleteCollectionResponse,
 )
@@ -25,9 +24,6 @@ from ..types.src_app_http_routes_collection_get_collection_response import (
 )
 from ..types.src_app_http_routes_collection_get_collections_response import (
     SrcAppHttpRoutesCollectionGetCollectionsResponse,
-)
-from ..types.src_app_http_routes_collection_list_collection_syncs_response_model import (
-    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
 )
 from ..types.src_app_http_routes_collection_update_collection_response import (
     SrcAppHttpRoutesCollectionUpdateCollectionResponse,
@@ -136,8 +132,9 @@ class RawCollectionsClient:
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
+        table_order: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[SrcAppHttpRoutesCollectionCreateCollectionResponse]:
+    ) -> HttpResponse[Response]:
         """
         Parameters
         ----------
@@ -149,12 +146,14 @@ class RawCollectionsClient:
 
         tags : typing.Optional[typing.Sequence[str]]
 
+        table_order : typing.Optional[typing.Sequence[str]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[SrcAppHttpRoutesCollectionCreateCollectionResponse]
+        HttpResponse[Response]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -165,6 +164,7 @@ class RawCollectionsClient:
                 "collection_img_url": collection_img_url,
                 "collection_description": collection_description,
                 "tags": tags,
+                "table_order": table_order,
             },
             headers={
                 "content-type": "application/json",
@@ -175,9 +175,9 @@ class RawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    SrcAppHttpRoutesCollectionCreateCollectionResponse,
+                    Response,
                     construct_type(
-                        type_=SrcAppHttpRoutesCollectionCreateCollectionResponse,  # type: ignore
+                        type_=Response,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -253,6 +253,7 @@ class RawCollectionsClient:
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
+        table_order: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[SrcAppHttpRoutesCollectionUpdateCollectionResponse]:
         """
@@ -267,6 +268,8 @@ class RawCollectionsClient:
         collection_description : typing.Optional[str]
 
         tags : typing.Optional[typing.Sequence[str]]
+
+        table_order : typing.Optional[typing.Sequence[str]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -284,6 +287,7 @@ class RawCollectionsClient:
                 "collection_img_url": collection_img_url,
                 "collection_description": collection_description,
                 "tags": tags,
+                "table_order": table_order,
             },
             headers={
                 "content-type": "application/json",
@@ -321,7 +325,8 @@ class RawCollectionsClient:
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[SrcAppHttpRoutesCollectionDeleteCollectionResponse]:
         """
-        Delete a collection given a collection_id.
+        Queue collection deletion and return immediately.
+        Deletion happens asynchronously in background.
 
         Parameters
         ----------
@@ -368,7 +373,7 @@ class RawCollectionsClient:
 
     def list_syncs(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]:
+    ) -> HttpResponse[ResponseModel]:
         """
         List Sources by Destination, specifically given a collection and table
 
@@ -383,7 +388,7 @@ class RawCollectionsClient:
 
         Returns
         -------
-        HttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]
+        HttpResponse[ResponseModel]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -394,9 +399,9 @@ class RawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
+                    ResponseModel,
                     construct_type(
-                        type_=SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,  # type: ignore
+                        type_=ResponseModel,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -942,8 +947,9 @@ class AsyncRawCollectionsClient:
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
+        table_order: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionCreateCollectionResponse]:
+    ) -> AsyncHttpResponse[Response]:
         """
         Parameters
         ----------
@@ -955,12 +961,14 @@ class AsyncRawCollectionsClient:
 
         tags : typing.Optional[typing.Sequence[str]]
 
+        table_order : typing.Optional[typing.Sequence[str]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[SrcAppHttpRoutesCollectionCreateCollectionResponse]
+        AsyncHttpResponse[Response]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -971,6 +979,7 @@ class AsyncRawCollectionsClient:
                 "collection_img_url": collection_img_url,
                 "collection_description": collection_description,
                 "tags": tags,
+                "table_order": table_order,
             },
             headers={
                 "content-type": "application/json",
@@ -981,9 +990,9 @@ class AsyncRawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    SrcAppHttpRoutesCollectionCreateCollectionResponse,
+                    Response,
                     construct_type(
-                        type_=SrcAppHttpRoutesCollectionCreateCollectionResponse,  # type: ignore
+                        type_=Response,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1059,6 +1068,7 @@ class AsyncRawCollectionsClient:
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
+        table_order: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionUpdateCollectionResponse]:
         """
@@ -1073,6 +1083,8 @@ class AsyncRawCollectionsClient:
         collection_description : typing.Optional[str]
 
         tags : typing.Optional[typing.Sequence[str]]
+
+        table_order : typing.Optional[typing.Sequence[str]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1090,6 +1102,7 @@ class AsyncRawCollectionsClient:
                 "collection_img_url": collection_img_url,
                 "collection_description": collection_description,
                 "tags": tags,
+                "table_order": table_order,
             },
             headers={
                 "content-type": "application/json",
@@ -1127,7 +1140,8 @@ class AsyncRawCollectionsClient:
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionDeleteCollectionResponse]:
         """
-        Delete a collection given a collection_id.
+        Queue collection deletion and return immediately.
+        Deletion happens asynchronously in background.
 
         Parameters
         ----------
@@ -1174,7 +1188,7 @@ class AsyncRawCollectionsClient:
 
     async def list_syncs(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]:
+    ) -> AsyncHttpResponse[ResponseModel]:
         """
         List Sources by Destination, specifically given a collection and table
 
@@ -1189,7 +1203,7 @@ class AsyncRawCollectionsClient:
 
         Returns
         -------
-        AsyncHttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]
+        AsyncHttpResponse[ResponseModel]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -1200,9 +1214,9 @@ class AsyncRawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
+                    ResponseModel,
                     construct_type(
-                        type_=SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,  # type: ignore
+                        type_=ResponseModel,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

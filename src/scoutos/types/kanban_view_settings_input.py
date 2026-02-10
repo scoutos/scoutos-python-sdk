@@ -13,6 +13,7 @@ class KanbanViewSettingsInput(UncheckedBaseModel):
     column_visibility: typing.Optional[typing.Dict[str, bool]] = None
     column_order: typing.Optional[typing.List[str]] = None
     column_widths: typing.Optional[typing.Dict[str, int]] = None
+    column_pinned_count: typing.Optional[int] = None
     type: typing.Literal["kanban"] = "kanban"
     grouping_column: str
     group_visibility: typing.Optional[typing.Dict[str, bool]] = None

@@ -6,9 +6,8 @@ from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.collection_view_state_input import CollectionViewStateInput
 from ..types.delete_view_response import DeleteViewResponse
-from ..types.src_app_http_routes_collection_create_collection_response import (
-    SrcAppHttpRoutesCollectionCreateCollectionResponse,
-)
+from ..types.response import Response
+from ..types.response_model import ResponseModel
 from ..types.src_app_http_routes_collection_delete_collection_response import (
     SrcAppHttpRoutesCollectionDeleteCollectionResponse,
 )
@@ -17,9 +16,6 @@ from ..types.src_app_http_routes_collection_get_collection_response import (
 )
 from ..types.src_app_http_routes_collection_get_collections_response import (
     SrcAppHttpRoutesCollectionGetCollectionsResponse,
-)
-from ..types.src_app_http_routes_collection_list_collection_syncs_response_model import (
-    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
 )
 from ..types.src_app_http_routes_collection_update_collection_response import (
     SrcAppHttpRoutesCollectionUpdateCollectionResponse,
@@ -128,8 +124,9 @@ class CollectionsClient:
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
+        table_order: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> SrcAppHttpRoutesCollectionCreateCollectionResponse:
+    ) -> Response:
         """
         Parameters
         ----------
@@ -141,12 +138,14 @@ class CollectionsClient:
 
         tags : typing.Optional[typing.Sequence[str]]
 
+        table_order : typing.Optional[typing.Sequence[str]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        SrcAppHttpRoutesCollectionCreateCollectionResponse
+        Response
             Successful Response
 
         Examples
@@ -163,6 +162,7 @@ class CollectionsClient:
             collection_img_url=collection_img_url,
             collection_description=collection_description,
             tags=tags,
+            table_order=table_order,
             request_options=request_options,
         )
         return _response.data
@@ -205,6 +205,7 @@ class CollectionsClient:
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
+        table_order: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionUpdateCollectionResponse:
         """
@@ -219,6 +220,8 @@ class CollectionsClient:
         collection_description : typing.Optional[str]
 
         tags : typing.Optional[typing.Sequence[str]]
+
+        table_order : typing.Optional[typing.Sequence[str]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -245,6 +248,7 @@ class CollectionsClient:
             collection_img_url=collection_img_url,
             collection_description=collection_description,
             tags=tags,
+            table_order=table_order,
             request_options=request_options,
         )
         return _response.data
@@ -253,7 +257,8 @@ class CollectionsClient:
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> SrcAppHttpRoutesCollectionDeleteCollectionResponse:
         """
-        Delete a collection given a collection_id.
+        Queue collection deletion and return immediately.
+        Deletion happens asynchronously in background.
 
         Parameters
         ----------
@@ -283,7 +288,7 @@ class CollectionsClient:
 
     def list_syncs(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel:
+    ) -> ResponseModel:
         """
         List Sources by Destination, specifically given a collection and table
 
@@ -298,7 +303,7 @@ class CollectionsClient:
 
         Returns
         -------
-        SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel
+        ResponseModel
             Successful Response
 
         Examples
@@ -714,8 +719,9 @@ class AsyncCollectionsClient:
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
+        table_order: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> SrcAppHttpRoutesCollectionCreateCollectionResponse:
+    ) -> Response:
         """
         Parameters
         ----------
@@ -727,12 +733,14 @@ class AsyncCollectionsClient:
 
         tags : typing.Optional[typing.Sequence[str]]
 
+        table_order : typing.Optional[typing.Sequence[str]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        SrcAppHttpRoutesCollectionCreateCollectionResponse
+        Response
             Successful Response
 
         Examples
@@ -757,6 +765,7 @@ class AsyncCollectionsClient:
             collection_img_url=collection_img_url,
             collection_description=collection_description,
             tags=tags,
+            table_order=table_order,
             request_options=request_options,
         )
         return _response.data
@@ -807,6 +816,7 @@ class AsyncCollectionsClient:
         collection_img_url: typing.Optional[str] = OMIT,
         collection_description: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
+        table_order: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionUpdateCollectionResponse:
         """
@@ -821,6 +831,8 @@ class AsyncCollectionsClient:
         collection_description : typing.Optional[str]
 
         tags : typing.Optional[typing.Sequence[str]]
+
+        table_order : typing.Optional[typing.Sequence[str]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -855,6 +867,7 @@ class AsyncCollectionsClient:
             collection_img_url=collection_img_url,
             collection_description=collection_description,
             tags=tags,
+            table_order=table_order,
             request_options=request_options,
         )
         return _response.data
@@ -863,7 +876,8 @@ class AsyncCollectionsClient:
         self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> SrcAppHttpRoutesCollectionDeleteCollectionResponse:
         """
-        Delete a collection given a collection_id.
+        Queue collection deletion and return immediately.
+        Deletion happens asynchronously in background.
 
         Parameters
         ----------
@@ -901,7 +915,7 @@ class AsyncCollectionsClient:
 
     async def list_syncs(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel:
+    ) -> ResponseModel:
         """
         List Sources by Destination, specifically given a collection and table
 
@@ -916,7 +930,7 @@ class AsyncCollectionsClient:
 
         Returns
         -------
-        SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel
+        ResponseModel
             Successful Response
 
         Examples

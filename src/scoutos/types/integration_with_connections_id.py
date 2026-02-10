@@ -30,6 +30,8 @@ IntegrationWithConnectionsId = typing.Union[
         "scout_native_tools",
         "fireflies",
         "microsoft365",
+        "sanity",
+        "myla",
     ],
     typing.Any,
 ]

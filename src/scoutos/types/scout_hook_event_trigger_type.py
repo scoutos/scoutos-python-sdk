@@ -2,4 +2,9 @@
 
 import typing
 
-ScoutHookEventTriggerType = typing.Union[typing.Literal["agent.interaction.responded"], str]
+ScoutHookEventTriggerType = typing.Union[
+    typing.Literal["agent.interaction.responded"],
+    typing.Literal["studio_table.row.updated"],
+    typing.Literal["studio_table.row.created"],
+    str,
+]

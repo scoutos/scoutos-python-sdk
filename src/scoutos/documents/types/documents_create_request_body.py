@@ -2,13 +2,14 @@
 
 import typing
 
-from .documents_create_request_body_item_value import DocumentsCreateRequestBodyItemValue
 from .documents_create_request_body_one_value import DocumentsCreateRequestBodyOneValue
+from .documents_create_request_body_three_item_value import DocumentsCreateRequestBodyThreeItemValue
+from .documents_create_request_body_two_item_value import DocumentsCreateRequestBodyTwoItemValue
 from .documents_create_request_body_zero_value import DocumentsCreateRequestBodyZeroValue
 
 DocumentsCreateRequestBody = typing.Union[
     typing.Dict[str, DocumentsCreateRequestBodyZeroValue],
     typing.Dict[str, typing.Optional[DocumentsCreateRequestBodyOneValue]],
-    typing.List[typing.Dict[str, DocumentsCreateRequestBodyItemValue]],
-    typing.List[typing.Dict[str, typing.Optional[DocumentsCreateRequestBodyItemValue]]],
+    typing.List[typing.Dict[str, DocumentsCreateRequestBodyTwoItemValue]],
+    typing.List[typing.Dict[str, typing.Optional[DocumentsCreateRequestBodyThreeItemValue]]],
 ]

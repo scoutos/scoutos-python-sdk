@@ -42,6 +42,11 @@ class MultiPageCrawlerSettingsOutput(UncheckedBaseModel):
     User agent header to use for the crawl. By default, crawler will rotate user agents.
     """
 
+    include_raw_html: typing.Optional[bool] = pydantic.Field(default=None)
+    """
+    Include raw HTML content in the crawl output for ADA compliance analysis.
+    """
+
     max_depth: typing.Optional[int] = pydantic.Field(default=None)
     """
     Maximum number of link levels to follow from the starting page

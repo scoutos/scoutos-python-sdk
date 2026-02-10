@@ -5,11 +5,11 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .src_app_http_routes_world_interact_incoming_message import SrcAppHttpRoutesWorldInteractIncomingMessage
+from .incoming_message import IncomingMessage
 
 
 class SrcAppHttpRoutesWorldInteractInteractionRequest(UncheckedBaseModel):
-    messages: typing.List[SrcAppHttpRoutesWorldInteractIncomingMessage]
+    messages: typing.List[IncomingMessage]
     metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
     """
     Optional metadata (e.g., salesforce_session)

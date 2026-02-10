@@ -7,21 +7,25 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .documents_create_request_body import DocumentsCreateRequestBody
-    from .documents_create_request_body_item_value import DocumentsCreateRequestBodyItemValue
     from .documents_create_request_body_one_value import DocumentsCreateRequestBodyOneValue
+    from .documents_create_request_body_three_item_value import DocumentsCreateRequestBodyThreeItemValue
+    from .documents_create_request_body_two_item_value import DocumentsCreateRequestBodyTwoItemValue
     from .documents_create_request_body_zero_value import DocumentsCreateRequestBodyZeroValue
     from .documents_update_batch_request_body import DocumentsUpdateBatchRequestBody
-    from .documents_update_batch_request_body_item_value import DocumentsUpdateBatchRequestBodyItemValue
     from .documents_update_batch_request_body_one_value import DocumentsUpdateBatchRequestBodyOneValue
+    from .documents_update_batch_request_body_three_item_value import DocumentsUpdateBatchRequestBodyThreeItemValue
+    from .documents_update_batch_request_body_two_item_value import DocumentsUpdateBatchRequestBodyTwoItemValue
     from .documents_update_batch_request_body_zero_value import DocumentsUpdateBatchRequestBodyZeroValue
 _dynamic_imports: typing.Dict[str, str] = {
     "DocumentsCreateRequestBody": ".documents_create_request_body",
-    "DocumentsCreateRequestBodyItemValue": ".documents_create_request_body_item_value",
     "DocumentsCreateRequestBodyOneValue": ".documents_create_request_body_one_value",
+    "DocumentsCreateRequestBodyThreeItemValue": ".documents_create_request_body_three_item_value",
+    "DocumentsCreateRequestBodyTwoItemValue": ".documents_create_request_body_two_item_value",
     "DocumentsCreateRequestBodyZeroValue": ".documents_create_request_body_zero_value",
     "DocumentsUpdateBatchRequestBody": ".documents_update_batch_request_body",
-    "DocumentsUpdateBatchRequestBodyItemValue": ".documents_update_batch_request_body_item_value",
     "DocumentsUpdateBatchRequestBodyOneValue": ".documents_update_batch_request_body_one_value",
+    "DocumentsUpdateBatchRequestBodyThreeItemValue": ".documents_update_batch_request_body_three_item_value",
+    "DocumentsUpdateBatchRequestBodyTwoItemValue": ".documents_update_batch_request_body_two_item_value",
     "DocumentsUpdateBatchRequestBodyZeroValue": ".documents_update_batch_request_body_zero_value",
 }
 
@@ -49,11 +53,13 @@ def __dir__():
 
 __all__ = [
     "DocumentsCreateRequestBody",
-    "DocumentsCreateRequestBodyItemValue",
     "DocumentsCreateRequestBodyOneValue",
+    "DocumentsCreateRequestBodyThreeItemValue",
+    "DocumentsCreateRequestBodyTwoItemValue",
     "DocumentsCreateRequestBodyZeroValue",
     "DocumentsUpdateBatchRequestBody",
-    "DocumentsUpdateBatchRequestBodyItemValue",
     "DocumentsUpdateBatchRequestBodyOneValue",
+    "DocumentsUpdateBatchRequestBodyThreeItemValue",
+    "DocumentsUpdateBatchRequestBodyTwoItemValue",
     "DocumentsUpdateBatchRequestBodyZeroValue",
 ]

@@ -3054,6 +3054,14 @@ client.collections.create()
 <dl>
 <dd>
 
+**table_order:** `typing.Optional[typing.Sequence[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -3198,6 +3206,14 @@ client.collections.update(
 <dl>
 <dd>
 
+**table_order:** `typing.Optional[typing.Sequence[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -3222,7 +3238,8 @@ client.collections.update(
 <dl>
 <dd>
 
-Delete a collection given a collection_id.
+Queue collection deletion and return immediately.
+Deletion happens asynchronously in background.
 </dd>
 </dl>
 </dd>
@@ -4667,6 +4684,7 @@ client.documents.create(
     sync_id="sync_id",
     await_completion=True,
     mode="mode",
+    merge_fields=True,
     request={"key": True},
 )
 
@@ -4740,6 +4758,14 @@ client.documents.create(
 <dl>
 <dd>
 
+**merge_fields:** `typing.Optional[bool]` — Whether to merge only provided fields into existing document
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -4777,6 +4803,7 @@ client.documents.update_batch(
     sync_id="sync_id",
     await_completion=True,
     mode="mode",
+    merge_fields=True,
     request={"key": True},
 )
 
@@ -4843,6 +4870,14 @@ client.documents.update_batch(
 <dd>
 
 **mode:** `typing.Optional[str]` — The mode to use for the document creation/update
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merge_fields:** `typing.Optional[bool]` — Whether to merge only provided fields into existing document
     
 </dd>
 </dl>
@@ -5607,6 +5642,189 @@ client.syncs.execute(
 <dd>
 
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Drive
+<details><summary><code>client.drive.<a href="src/scoutos/drive/client.py">upload</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Upload one or more files to Drive.
+
+- `files`: the file uploads (multipart)
+- `metadata`: a JSON string containing a list of per-file metadata dicts,
+  positionally aligned with `files`. Each dict may contain:
+    - `path`   — fully qualified destination path (takes precedence)
+    - `folder` — destination folder
+    - `name`   — destination filename
+
+Resolution logic for each file at index i:
+- If path is provided, use it as the fully qualified path
+- Else if folder and name are provided, combine as {folder}/{name}
+- Else if folder is provided, combine as {folder}/{upload_filename}
+- Else if name is provided, use /{name} (root)
+- Else fall back to None (domain default behavior)
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.drive.upload()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**files:** `from __future__ import annotations
+
+typing.List[core.File]` — See core.File for more documentation
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**metadata:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.drive.<a href="src/scoutos/drive/client.py">download</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Download a single file from Drive.
+
+Provide one of the following to identify the file:
+- `path`: fully qualified path (e.g., '/foo/bar/hello.txt')
+- `name` + `folder`: file name within a specific folder (e.g., name='hello.txt', folder='/foo/bar')
+
+Returns the file content as a streaming binary response.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.drive.download()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**path:** `typing.Optional[str]` — Fully qualified path to the file (e.g., '/foo/bar/hello.txt')
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` — File name to search for (e.g., 'hello.txt')
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**folder:** `typing.Optional[str]` — Folder to search within (e.g., '/foo/bar')
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration. You can pass in configuration such as `chunk_size`, and more to customize the request and response.
     
 </dd>
 </dl>

@@ -23,7 +23,7 @@ class PeopleColumn(UncheckedBaseModel):
     allow_multiple: typing.Optional[bool] = None
     options: typing.Optional[typing.List[SelectOptionItem]] = pydantic.Field(default=None)
     """
-    Available options for selection
+    Some available options and their configurations. Options are hydrated client side from the user's organization members.
     """
 
     if IS_PYDANTIC_V2:

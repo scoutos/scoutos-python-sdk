@@ -20,6 +20,16 @@ class SourceSyncWebsiteSettings(UncheckedBaseModel):
     exclude_before_lastmod_date: typing.Optional[str] = None
     splitter: typing.Optional[SourceSyncWebsiteSettingsSplitter] = None
     wait_for_load_state: typing.Optional[str] = None
+    wait_for_timeout: typing.Optional[int] = pydantic.Field(default=None)
+    """
+    Wait for timeout (in ms) to allow JS hydration of a page. Playwright only.
+    """
+
+    wait_for_event: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Wait for a custom page/window event (e.g., 'appLoaded') before scraping. The page must dispatch this event via window.dispatchEvent(new Event('eventName')). Playwright only.
+    """
+
     scraper: typing.Optional[str] = None
     text_extractor: typing.Optional[TextExtractor] = None
     text_extractor_config: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
@@ -36,6 +46,11 @@ class SourceSyncWebsiteSettings(UncheckedBaseModel):
     user_agent_header: typing.Optional[str] = pydantic.Field(default=None)
     """
     User agent header to use for the crawl. By default, crawler will rotate user agents.
+    """
+
+    include_raw_html: typing.Optional[bool] = pydantic.Field(default=None)
+    """
+    Include raw HTML content in the crawl output for ADA compliance analysis.
     """
 
     source_archetype_id: typing.Literal["com.scoutos.website"] = "com.scoutos.website"

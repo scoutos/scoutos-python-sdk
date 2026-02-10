@@ -15,6 +15,7 @@ class OAuthAuthType(UncheckedBaseModel):
     token_uri: typing.Optional[str] = None
     base_url: typing.Optional[str] = None
     scopes: typing.Optional[typing.List[str]] = None
+    environment: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

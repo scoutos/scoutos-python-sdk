@@ -2,6 +2,4 @@
 
 import typing
 
-UpdateFeedbackRequestStatus = typing.Union[
-    typing.Literal["new", "open", "in_progress", "resolved", "closed", "wont_fix"], typing.Any
-]
+UpdateFeedbackRequestStatus = typing.Union[typing.Literal["new", "reviewing", "resolved", "dismissed"], typing.Any]

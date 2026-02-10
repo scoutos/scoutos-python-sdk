@@ -9,6 +9,11 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 
 class SourceSyncGoogleDriveSettings(UncheckedBaseModel):
     source_archetype_id: typing.Literal["com.google.drive"] = "com.google.drive"
+    connection_id: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Which Google Drive connection to sync from.
+    """
+
     filter_options: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
     """
     Narrow down resources you sync from the source. Ensure you include fetch_filters method on Source Sync Archetype.

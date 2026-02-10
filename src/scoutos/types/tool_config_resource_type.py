@@ -2,4 +2,6 @@
 
 import typing
 
-ToolConfigResourceType = typing.Union[typing.Literal["tables", "workflow", "crawl", "file", "integration"], typing.Any]
+ToolConfigResourceType = typing.Union[
+    typing.Literal["tables", "workflow", "crawl", "file", "integration", "directory"], typing.Any
+]

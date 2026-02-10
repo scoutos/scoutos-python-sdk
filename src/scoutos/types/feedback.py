@@ -6,7 +6,6 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .feedback_metadata import FeedbackMetadata
 from .feedback_priority import FeedbackPriority
 from .feedback_status import FeedbackStatus
 from .feedback_target_type import FeedbackTargetType
@@ -82,9 +81,9 @@ class Feedback(UncheckedBaseModel):
     Correction data (for future use)
     """
 
-    metadata: FeedbackMetadata = pydantic.Field()
+    metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
     """
-    Target-specific metadata, validated based on target_type
+    Flexible metadata including user_id, session_id, etc.
     """
 
     status: typing.Optional[FeedbackStatus] = pydantic.Field(default=None)

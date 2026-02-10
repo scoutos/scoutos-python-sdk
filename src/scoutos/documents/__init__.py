@@ -8,22 +8,26 @@ from importlib import import_module
 if typing.TYPE_CHECKING:
     from .types import (
         DocumentsCreateRequestBody,
-        DocumentsCreateRequestBodyItemValue,
         DocumentsCreateRequestBodyOneValue,
+        DocumentsCreateRequestBodyThreeItemValue,
+        DocumentsCreateRequestBodyTwoItemValue,
         DocumentsCreateRequestBodyZeroValue,
         DocumentsUpdateBatchRequestBody,
-        DocumentsUpdateBatchRequestBodyItemValue,
         DocumentsUpdateBatchRequestBodyOneValue,
+        DocumentsUpdateBatchRequestBodyThreeItemValue,
+        DocumentsUpdateBatchRequestBodyTwoItemValue,
         DocumentsUpdateBatchRequestBodyZeroValue,
     )
 _dynamic_imports: typing.Dict[str, str] = {
     "DocumentsCreateRequestBody": ".types",
-    "DocumentsCreateRequestBodyItemValue": ".types",
     "DocumentsCreateRequestBodyOneValue": ".types",
+    "DocumentsCreateRequestBodyThreeItemValue": ".types",
+    "DocumentsCreateRequestBodyTwoItemValue": ".types",
     "DocumentsCreateRequestBodyZeroValue": ".types",
     "DocumentsUpdateBatchRequestBody": ".types",
-    "DocumentsUpdateBatchRequestBodyItemValue": ".types",
     "DocumentsUpdateBatchRequestBodyOneValue": ".types",
+    "DocumentsUpdateBatchRequestBodyThreeItemValue": ".types",
+    "DocumentsUpdateBatchRequestBodyTwoItemValue": ".types",
     "DocumentsUpdateBatchRequestBodyZeroValue": ".types",
 }
 
@@ -51,11 +55,13 @@ def __dir__():
 
 __all__ = [
     "DocumentsCreateRequestBody",
-    "DocumentsCreateRequestBodyItemValue",
     "DocumentsCreateRequestBodyOneValue",
+    "DocumentsCreateRequestBodyThreeItemValue",
+    "DocumentsCreateRequestBodyTwoItemValue",
     "DocumentsCreateRequestBodyZeroValue",
     "DocumentsUpdateBatchRequestBody",
-    "DocumentsUpdateBatchRequestBodyItemValue",
     "DocumentsUpdateBatchRequestBodyOneValue",
+    "DocumentsUpdateBatchRequestBodyThreeItemValue",
+    "DocumentsUpdateBatchRequestBodyTwoItemValue",
     "DocumentsUpdateBatchRequestBodyZeroValue",
 ]

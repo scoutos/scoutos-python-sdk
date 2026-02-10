@@ -4,4 +4,4 @@ import enum
 
 
 class ScoutEnvironment(enum.Enum):
-    PROD = "https://api-prod.scoutos.com"
+    PROD = "https://api.scoutos.com"
