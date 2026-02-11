@@ -5,15 +5,13 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .agent import Agent
+from .agent_revision_output import AgentRevisionOutput
 
 
-class SrcAppHttpRoutesBriefingBriefingRoutesDeleteResponse(UncheckedBaseModel):
-    """
-    Delete response
-    """
-
-    ok: typing.Optional[bool] = None
-    message: typing.Optional[str] = None
+class ActiveAgentResponse(UncheckedBaseModel):
+    agent: Agent
+    revision: AgentRevisionOutput
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

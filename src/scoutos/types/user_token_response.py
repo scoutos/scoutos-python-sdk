@@ -5,11 +5,12 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .src_app_http_routes_billing_create_portal_session_data import SrcAppHttpRoutesBillingCreatePortalSessionData
 
 
-class SrcAppHttpRoutesBillingCreatePortalSessionResponse(UncheckedBaseModel):
-    data: SrcAppHttpRoutesBillingCreatePortalSessionData
+class UserTokenResponse(UncheckedBaseModel):
+    integration_type: str
+    access_token: str
+    refresh_token: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

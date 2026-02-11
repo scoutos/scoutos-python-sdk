@@ -2,4 +2,4 @@
 
 import typing
 
-AgentRevisionModel = typing.Union[typing.Literal["_dynamic"], str]
+AgentRevisionOutputModel = typing.Union[typing.Literal["_dynamic"], str]

@@ -5,6 +5,11 @@ import typing
 from .. import core
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.active_agent_response import ActiveAgentResponse
+from ..types.agent import Agent
+from ..types.delete_agent_response import DeleteAgentResponse
+from ..types.incoming_message import IncomingMessage
+from ..types.upsert_agent_response import UpsertAgentResponse
 from .raw_client import AsyncRawAgentsClient, RawAgentsClient
 
 # this is used as the default value for optional parameters
@@ -26,7 +31,215 @@ class AgentsClient:
         """
         return self._raw_client
 
-    def list(self, *, request_options: typing.Optional[RequestOptions] = None) -> typing.Optional[typing.Any]:
+    def interact(
+        self,
+        agent_id: str,
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        session_id: typing.Optional[str] = None,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Iterator[typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        agent_id : str
+
+        messages : typing.Sequence[IncomingMessage]
+
+        session_id : typing.Optional[str]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Yields
+        ------
+        typing.Iterator[typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import IncomingMessage, Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        response = client.agents.interact(
+            agent_id="agent_id",
+            session_id="session_id",
+            messages=[
+                IncomingMessage(
+                    content="content",
+                )
+            ],
+        )
+        for chunk in response:
+            yield chunk
+        """
+        with self._raw_client.interact(
+            agent_id, messages=messages, session_id=session_id, metadata=metadata, request_options=request_options
+        ) as r:
+            yield from r.data
+
+    def interact_sync(
+        self,
+        agent_id: str,
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        session_id: typing.Optional[str] = None,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        agent_id : str
+
+        messages : typing.Sequence[IncomingMessage]
+
+        session_id : typing.Optional[str]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import IncomingMessage, Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.agents.interact_sync(
+            agent_id="agent_id",
+            session_id="session_id",
+            messages=[
+                IncomingMessage(
+                    content="content",
+                )
+            ],
+        )
+        """
+        _response = self._raw_client.interact_sync(
+            agent_id, messages=messages, session_id=session_id, metadata=metadata, request_options=request_options
+        )
+        return _response.data
+
+    def interact_with_session(
+        self,
+        agent_id: str,
+        session_id: typing.Optional[str],
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Iterator[typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        agent_id : str
+
+        session_id : typing.Optional[str]
+
+        messages : typing.Sequence[IncomingMessage]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Yields
+        ------
+        typing.Iterator[typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import IncomingMessage, Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        response = client.agents.interact_with_session(
+            agent_id="agent_id",
+            session_id="session_id",
+            messages=[
+                IncomingMessage(
+                    content="content",
+                )
+            ],
+        )
+        for chunk in response:
+            yield chunk
+        """
+        with self._raw_client.interact_with_session(
+            agent_id, session_id, messages=messages, metadata=metadata, request_options=request_options
+        ) as r:
+            yield from r.data
+
+    def interact_sync_with_session(
+        self,
+        agent_id: str,
+        session_id: typing.Optional[str],
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        agent_id : str
+
+        session_id : typing.Optional[str]
+
+        messages : typing.Sequence[IncomingMessage]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import IncomingMessage, Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.agents.interact_sync_with_session(
+            agent_id="agent_id",
+            session_id="session_id",
+            messages=[
+                IncomingMessage(
+                    content="content",
+                )
+            ],
+        )
+        """
+        _response = self._raw_client.interact_sync_with_session(
+            agent_id, session_id, messages=messages, metadata=metadata, request_options=request_options
+        )
+        return _response.data
+
+    def list(self, *, request_options: typing.Optional[RequestOptions] = None) -> typing.List[Agent]:
         """
         Parameters
         ----------
@@ -35,7 +248,7 @@ class AgentsClient:
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        typing.List[Agent]
             Successful Response
 
         Examples
@@ -59,7 +272,7 @@ class AgentsClient:
         activate: typing.Optional[bool] = OMIT,
         agent_image: typing.Optional[core.File] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Optional[typing.Any]:
+    ) -> UpsertAgentResponse:
         """
         Parameters
         ----------
@@ -79,7 +292,7 @@ class AgentsClient:
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        UpsertAgentResponse
             Successful Response
 
         Examples
@@ -104,9 +317,7 @@ class AgentsClient:
         )
         return _response.data
 
-    def get(
-        self, agent_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+    def get(self, agent_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ActiveAgentResponse:
         """
         Retrieve an agent and its active revision by agent_id.
         Verifies that the agent belongs to the actor's organization.
@@ -120,7 +331,7 @@ class AgentsClient:
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        ActiveAgentResponse
             Successful Response
 
         Examples
@@ -137,9 +348,7 @@ class AgentsClient:
         _response = self._raw_client.get(agent_id, request_options=request_options)
         return _response.data
 
-    def delete(
-        self, agent_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+    def delete(self, agent_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> DeleteAgentResponse:
         """
         Parameters
         ----------
@@ -150,7 +359,7 @@ class AgentsClient:
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        DeleteAgentResponse
             Successful Response
 
         Examples
@@ -183,7 +392,249 @@ class AsyncAgentsClient:
         """
         return self._raw_client
 
-    async def list(self, *, request_options: typing.Optional[RequestOptions] = None) -> typing.Optional[typing.Any]:
+    async def interact(
+        self,
+        agent_id: str,
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        session_id: typing.Optional[str] = None,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.AsyncIterator[typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        agent_id : str
+
+        messages : typing.Sequence[IncomingMessage]
+
+        session_id : typing.Optional[str]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Yields
+        ------
+        typing.AsyncIterator[typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout, IncomingMessage
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            response = await client.agents.interact(
+                agent_id="agent_id",
+                session_id="session_id",
+                messages=[
+                    IncomingMessage(
+                        content="content",
+                    )
+                ],
+            )
+            async for chunk in response:
+                yield chunk
+
+
+        asyncio.run(main())
+        """
+        async with self._raw_client.interact(
+            agent_id, messages=messages, session_id=session_id, metadata=metadata, request_options=request_options
+        ) as r:
+            async for _chunk in r.data:
+                yield _chunk
+
+    async def interact_sync(
+        self,
+        agent_id: str,
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        session_id: typing.Optional[str] = None,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        agent_id : str
+
+        messages : typing.Sequence[IncomingMessage]
+
+        session_id : typing.Optional[str]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout, IncomingMessage
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.agents.interact_sync(
+                agent_id="agent_id",
+                session_id="session_id",
+                messages=[
+                    IncomingMessage(
+                        content="content",
+                    )
+                ],
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.interact_sync(
+            agent_id, messages=messages, session_id=session_id, metadata=metadata, request_options=request_options
+        )
+        return _response.data
+
+    async def interact_with_session(
+        self,
+        agent_id: str,
+        session_id: typing.Optional[str],
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.AsyncIterator[typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        agent_id : str
+
+        session_id : typing.Optional[str]
+
+        messages : typing.Sequence[IncomingMessage]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Yields
+        ------
+        typing.AsyncIterator[typing.Optional[typing.Any]]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout, IncomingMessage
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            response = await client.agents.interact_with_session(
+                agent_id="agent_id",
+                session_id="session_id",
+                messages=[
+                    IncomingMessage(
+                        content="content",
+                    )
+                ],
+            )
+            async for chunk in response:
+                yield chunk
+
+
+        asyncio.run(main())
+        """
+        async with self._raw_client.interact_with_session(
+            agent_id, session_id, messages=messages, metadata=metadata, request_options=request_options
+        ) as r:
+            async for _chunk in r.data:
+                yield _chunk
+
+    async def interact_sync_with_session(
+        self,
+        agent_id: str,
+        session_id: typing.Optional[str],
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        agent_id : str
+
+        session_id : typing.Optional[str]
+
+        messages : typing.Sequence[IncomingMessage]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout, IncomingMessage
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.agents.interact_sync_with_session(
+                agent_id="agent_id",
+                session_id="session_id",
+                messages=[
+                    IncomingMessage(
+                        content="content",
+                    )
+                ],
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.interact_sync_with_session(
+            agent_id, session_id, messages=messages, metadata=metadata, request_options=request_options
+        )
+        return _response.data
+
+    async def list(self, *, request_options: typing.Optional[RequestOptions] = None) -> typing.List[Agent]:
         """
         Parameters
         ----------
@@ -192,7 +643,7 @@ class AsyncAgentsClient:
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        typing.List[Agent]
             Successful Response
 
         Examples
@@ -224,7 +675,7 @@ class AsyncAgentsClient:
         activate: typing.Optional[bool] = OMIT,
         agent_image: typing.Optional[core.File] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Optional[typing.Any]:
+    ) -> UpsertAgentResponse:
         """
         Parameters
         ----------
@@ -244,7 +695,7 @@ class AsyncAgentsClient:
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        UpsertAgentResponse
             Successful Response
 
         Examples
@@ -279,7 +730,7 @@ class AsyncAgentsClient:
 
     async def get(
         self, agent_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+    ) -> ActiveAgentResponse:
         """
         Retrieve an agent and its active revision by agent_id.
         Verifies that the agent belongs to the actor's organization.
@@ -293,7 +744,7 @@ class AsyncAgentsClient:
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        ActiveAgentResponse
             Successful Response
 
         Examples
@@ -320,7 +771,7 @@ class AsyncAgentsClient:
 
     async def delete(
         self, agent_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+    ) -> DeleteAgentResponse:
         """
         Parameters
         ----------
@@ -331,7 +782,7 @@ class AsyncAgentsClient:
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        DeleteAgentResponse
             Successful Response
 
         Examples

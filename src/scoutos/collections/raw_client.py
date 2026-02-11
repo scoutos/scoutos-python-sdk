@@ -14,7 +14,6 @@ from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.collection_view_state_input import CollectionViewStateInput
 from ..types.delete_view_response import DeleteViewResponse
 from ..types.http_validation_error import HttpValidationError
-from ..types.response import Response
 from ..types.src_app_http_routes_collection_create_collection_response import (
     SrcAppHttpRoutesCollectionCreateCollectionResponse,
 )
@@ -23,6 +22,9 @@ from ..types.src_app_http_routes_collection_delete_collection_response import (
 )
 from ..types.src_app_http_routes_collection_get_collection_response import (
     SrcAppHttpRoutesCollectionGetCollectionResponse,
+)
+from ..types.src_app_http_routes_collection_get_collections_response import (
+    SrcAppHttpRoutesCollectionGetCollectionsResponse,
 )
 from ..types.src_app_http_routes_collection_list_collection_syncs_response_model import (
     SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
@@ -59,7 +61,7 @@ class RawCollectionsClient:
         sort: typing.Optional[str] = None,
         drive: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[Response]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionGetCollectionsResponse]:
         """
         Parameters
         ----------
@@ -85,7 +87,7 @@ class RawCollectionsClient:
 
         Returns
         -------
-        HttpResponse[Response]
+        HttpResponse[SrcAppHttpRoutesCollectionGetCollectionsResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -104,9 +106,9 @@ class RawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    Response,
+                    SrcAppHttpRoutesCollectionGetCollectionsResponse,
                     construct_type(
-                        type_=Response,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetCollectionsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -874,7 +876,7 @@ class AsyncRawCollectionsClient:
         sort: typing.Optional[str] = None,
         drive: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[Response]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionGetCollectionsResponse]:
         """
         Parameters
         ----------
@@ -900,7 +902,7 @@ class AsyncRawCollectionsClient:
 
         Returns
         -------
-        AsyncHttpResponse[Response]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionGetCollectionsResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -919,9 +921,9 @@ class AsyncRawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    Response,
+                    SrcAppHttpRoutesCollectionGetCollectionsResponse,
                     construct_type(
-                        type_=Response,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionGetCollectionsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

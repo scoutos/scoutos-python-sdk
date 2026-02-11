@@ -20,6 +20,7 @@ class ConnectIntegrationRequest(UncheckedBaseModel):
     client_secret: typing.Optional[str] = None
     environment: typing.Optional[str] = None
     metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
+    user_scoped: typing.Optional[bool] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

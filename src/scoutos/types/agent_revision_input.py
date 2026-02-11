@@ -7,14 +7,14 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .actor_identity import ActorIdentity
-from .agent_revision_model import AgentRevisionModel
-from .agent_revision_response_style import AgentRevisionResponseStyle
-from .agent_revision_tool_config_value import AgentRevisionToolConfigValue
+from .agent_revision_input_model import AgentRevisionInputModel
+from .agent_revision_input_response_style import AgentRevisionInputResponseStyle
+from .agent_revision_input_tool_config_value import AgentRevisionInputToolConfigValue
 from .agentic_model import AgenticModel
 from .model_provider import ModelProvider
 
 
-class AgentRevision(UncheckedBaseModel):
+class AgentRevisionInput(UncheckedBaseModel):
     id: typing.Optional[str] = None
     doc_type: typing.Optional[typing.Literal["agent_revision"]] = None
     created_by: ActorIdentity
@@ -25,13 +25,13 @@ class AgentRevision(UncheckedBaseModel):
     parent: str
     organization_id: str
     model_provider: typing.Optional[ModelProvider] = None
-    model: AgentRevisionModel
+    model: AgentRevisionInputModel
     system: str
     temperature: typing.Optional[float] = None
-    response_style: typing.Optional[AgentRevisionResponseStyle] = None
+    response_style: typing.Optional[AgentRevisionInputResponseStyle] = None
     max_tokens: typing.Optional[int] = None
     max_turns: typing.Optional[int] = None
-    tool_config: typing.Optional[typing.Dict[str, typing.Optional[AgentRevisionToolConfigValue]]] = None
+    tool_config: typing.Optional[typing.Dict[str, typing.Optional[AgentRevisionInputToolConfigValue]]] = None
     conversation_starters: typing.Optional[typing.List[str]] = None
     dynamic_fallbacks: typing.Optional[typing.List[AgenticModel]] = None
 

@@ -6,7 +6,6 @@ from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.collection_view_state_input import CollectionViewStateInput
 from ..types.delete_view_response import DeleteViewResponse
-from ..types.response import Response
 from ..types.src_app_http_routes_collection_create_collection_response import (
     SrcAppHttpRoutesCollectionCreateCollectionResponse,
 )
@@ -15,6 +14,9 @@ from ..types.src_app_http_routes_collection_delete_collection_response import (
 )
 from ..types.src_app_http_routes_collection_get_collection_response import (
     SrcAppHttpRoutesCollectionGetCollectionResponse,
+)
+from ..types.src_app_http_routes_collection_get_collections_response import (
+    SrcAppHttpRoutesCollectionGetCollectionsResponse,
 )
 from ..types.src_app_http_routes_collection_list_collection_syncs_response_model import (
     SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
@@ -63,7 +65,7 @@ class CollectionsClient:
         sort: typing.Optional[str] = None,
         drive: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> Response:
+    ) -> SrcAppHttpRoutesCollectionGetCollectionsResponse:
         """
         Parameters
         ----------
@@ -89,7 +91,7 @@ class CollectionsClient:
 
         Returns
         -------
-        Response
+        SrcAppHttpRoutesCollectionGetCollectionsResponse
             Successful Response
 
         Examples
@@ -650,7 +652,7 @@ class AsyncCollectionsClient:
         sort: typing.Optional[str] = None,
         drive: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> Response:
+    ) -> SrcAppHttpRoutesCollectionGetCollectionsResponse:
         """
         Parameters
         ----------
@@ -676,7 +678,7 @@ class AsyncCollectionsClient:
 
         Returns
         -------
-        Response
+        SrcAppHttpRoutesCollectionGetCollectionsResponse
             Successful Response
 
         Examples

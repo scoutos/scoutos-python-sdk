@@ -4,4 +4,4 @@ import typing
 
 from .tool_config_resource import ToolConfigResource
 
-AgentRevisionToolConfigValue = typing.Union[bool, typing.List[ToolConfigResource]]
+AgentRevisionInputToolConfigValue = typing.Union[bool, typing.List[ToolConfigResource]]

@@ -2,6 +2,6 @@
 
 import typing
 
-AgentRevisionResponseStyle = typing.Union[
+AgentRevisionInputResponseStyle = typing.Union[
     typing.Literal["precise", "balanced", "creative", "experimental", "json"], typing.Any
 ]

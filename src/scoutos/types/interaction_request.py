@@ -5,20 +5,15 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .agent_revision import AgentRevision
-from .files_attribute import FilesAttribute
-from .interaction_request_participants_item import InteractionRequestParticipantsItem
-from .mention import Mention
-from .src_app_http_routes_inbox_handle_message_incoming_message import SrcAppHttpRoutesInboxHandleMessageIncomingMessage
+from .incoming_message import IncomingMessage
 
 
 class InteractionRequest(UncheckedBaseModel):
-    messages: typing.List[SrcAppHttpRoutesInboxHandleMessageIncomingMessage]
-    participants: typing.List[InteractionRequestParticipantsItem]
-    history: typing.Optional[typing.List[SrcAppHttpRoutesInboxHandleMessageIncomingMessage]] = None
-    files: typing.Optional[typing.List[FilesAttribute]] = None
-    mentions: typing.Optional[typing.List[Mention]] = None
-    ephemeral_agent_revision: typing.Optional[AgentRevision] = None
+    messages: typing.List[IncomingMessage]
+    metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
+    """
+    Optional metadata (e.g., salesforce_session)
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
