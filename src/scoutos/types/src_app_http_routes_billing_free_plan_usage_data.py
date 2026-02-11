@@ -7,12 +7,9 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 
 
-class BodyUpsertAgentAgentsPost(UncheckedBaseModel):
-    agent: str
-    agent_id: typing.Optional[str] = None
-    activate: typing.Optional[bool] = None
-    revision: str
-    agent_image: typing.Optional[str] = None
+class SrcAppHttpRoutesBillingFreePlanUsageData(UncheckedBaseModel):
+    ok: bool
+    msg: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

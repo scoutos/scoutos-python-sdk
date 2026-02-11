@@ -5,13 +5,13 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .collection import Collection
+from .table_and_collection_item import TableAndCollectionItem
 
 
-class SrcAppHttpRoutesCollectionGetCollectionsResponse(UncheckedBaseModel):
-    data: typing.Optional[typing.List[Collection]] = None
-    has_more: typing.Optional[bool] = None
-    next_cursor: typing.Optional[str] = None
+class RequestBody(UncheckedBaseModel):
+    query: typing.Optional[str] = None
+    limit: typing.Optional[int] = None
+    include_tables: typing.Optional[typing.List[TableAndCollectionItem]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -11,6 +11,7 @@ from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .environment import ScoutEnvironment
 
 if typing.TYPE_CHECKING:
+    from .agents.client import AgentsClient, AsyncAgentsClient
     from .collections.client import AsyncCollectionsClient, CollectionsClient
     from .copilots.client import AsyncCopilotsClient, CopilotsClient
     from .documents.client import AsyncDocumentsClient, DocumentsClient
@@ -111,6 +112,7 @@ class Scout:
         self._documents: typing.Optional[DocumentsClient] = None
         self._sources: typing.Optional[SourcesClient] = None
         self._syncs: typing.Optional[SyncsClient] = None
+        self._agents: typing.Optional[AgentsClient] = None
         self._drive: typing.Optional[DriveClient] = None
 
     @property
@@ -234,6 +236,14 @@ class Scout:
         return self._syncs
 
     @property
+    def agents(self):
+        if self._agents is None:
+            from .agents.client import AgentsClient  # noqa: E402
+
+            self._agents = AgentsClient(client_wrapper=self._client_wrapper)
+        return self._agents
+
+    @property
     def drive(self):
         if self._drive is None:
             from .drive.client import DriveClient  # noqa: E402
@@ -324,6 +334,7 @@ class AsyncScout:
         self._documents: typing.Optional[AsyncDocumentsClient] = None
         self._sources: typing.Optional[AsyncSourcesClient] = None
         self._syncs: typing.Optional[AsyncSyncsClient] = None
+        self._agents: typing.Optional[AsyncAgentsClient] = None
         self._drive: typing.Optional[AsyncDriveClient] = None
 
     @property
@@ -445,6 +456,14 @@ class AsyncScout:
 
             self._syncs = AsyncSyncsClient(client_wrapper=self._client_wrapper)
         return self._syncs
+
+    @property
+    def agents(self):
+        if self._agents is None:
+            from .agents.client import AsyncAgentsClient  # noqa: E402
+
+            self._agents = AsyncAgentsClient(client_wrapper=self._client_wrapper)
+        return self._agents
 
     @property
     def drive(self):

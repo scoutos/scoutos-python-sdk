@@ -5,11 +5,11 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .sync import Sync
+from .source_archetype import SourceArchetype
 
 
 class ResponseModel(UncheckedBaseModel):
-    syncs: typing.List[Sync]
+    sources: typing.List[SourceArchetype]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

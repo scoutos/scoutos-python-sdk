@@ -5,13 +5,11 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .collection import Collection
 
 
-class SrcAppHttpRoutesIntegrationMcpConnectMcpPayload(UncheckedBaseModel):
-    url: str
-    name: str
-    headers: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
-    integration_id: str
+class SrcAppHttpRoutesCollectionCreateCollectionResponse(UncheckedBaseModel):
+    data: typing.Optional[Collection] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

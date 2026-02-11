@@ -5,11 +5,11 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .source_archetype import SourceArchetype
 
 
-class SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel(UncheckedBaseModel):
-    sources: typing.List[SourceArchetype]
+class SrcAppHttpRoutesBillingGetInfoGetInfoResponse(UncheckedBaseModel):
+    message: typing.Optional[str] = None
+    container_start_time: str
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

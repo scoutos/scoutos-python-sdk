@@ -15,15 +15,17 @@ from ..types.collection_view_state_input import CollectionViewStateInput
 from ..types.delete_view_response import DeleteViewResponse
 from ..types.http_validation_error import HttpValidationError
 from ..types.response import Response
-from ..types.response_model import ResponseModel
+from ..types.src_app_http_routes_collection_create_collection_response import (
+    SrcAppHttpRoutesCollectionCreateCollectionResponse,
+)
 from ..types.src_app_http_routes_collection_delete_collection_response import (
     SrcAppHttpRoutesCollectionDeleteCollectionResponse,
 )
 from ..types.src_app_http_routes_collection_get_collection_response import (
     SrcAppHttpRoutesCollectionGetCollectionResponse,
 )
-from ..types.src_app_http_routes_collection_get_collections_response import (
-    SrcAppHttpRoutesCollectionGetCollectionsResponse,
+from ..types.src_app_http_routes_collection_list_collection_syncs_response_model import (
+    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
 )
 from ..types.src_app_http_routes_collection_update_collection_response import (
     SrcAppHttpRoutesCollectionUpdateCollectionResponse,
@@ -57,7 +59,7 @@ class RawCollectionsClient:
         sort: typing.Optional[str] = None,
         drive: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[SrcAppHttpRoutesCollectionGetCollectionsResponse]:
+    ) -> HttpResponse[Response]:
         """
         Parameters
         ----------
@@ -83,7 +85,7 @@ class RawCollectionsClient:
 
         Returns
         -------
-        HttpResponse[SrcAppHttpRoutesCollectionGetCollectionsResponse]
+        HttpResponse[Response]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -102,9 +104,9 @@ class RawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    SrcAppHttpRoutesCollectionGetCollectionsResponse,
+                    Response,
                     construct_type(
-                        type_=SrcAppHttpRoutesCollectionGetCollectionsResponse,  # type: ignore
+                        type_=Response,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -134,7 +136,7 @@ class RawCollectionsClient:
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
         table_order: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[Response]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionCreateCollectionResponse]:
         """
         Parameters
         ----------
@@ -153,7 +155,7 @@ class RawCollectionsClient:
 
         Returns
         -------
-        HttpResponse[Response]
+        HttpResponse[SrcAppHttpRoutesCollectionCreateCollectionResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -175,9 +177,9 @@ class RawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    Response,
+                    SrcAppHttpRoutesCollectionCreateCollectionResponse,
                     construct_type(
-                        type_=Response,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionCreateCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -373,7 +375,7 @@ class RawCollectionsClient:
 
     def list_syncs(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[ResponseModel]:
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]:
         """
         List Sources by Destination, specifically given a collection and table
 
@@ -388,7 +390,7 @@ class RawCollectionsClient:
 
         Returns
         -------
-        HttpResponse[ResponseModel]
+        HttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -399,9 +401,9 @@ class RawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ResponseModel,
+                    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
                     construct_type(
-                        type_=ResponseModel,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -872,7 +874,7 @@ class AsyncRawCollectionsClient:
         sort: typing.Optional[str] = None,
         drive: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionGetCollectionsResponse]:
+    ) -> AsyncHttpResponse[Response]:
         """
         Parameters
         ----------
@@ -898,7 +900,7 @@ class AsyncRawCollectionsClient:
 
         Returns
         -------
-        AsyncHttpResponse[SrcAppHttpRoutesCollectionGetCollectionsResponse]
+        AsyncHttpResponse[Response]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -917,9 +919,9 @@ class AsyncRawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    SrcAppHttpRoutesCollectionGetCollectionsResponse,
+                    Response,
                     construct_type(
-                        type_=SrcAppHttpRoutesCollectionGetCollectionsResponse,  # type: ignore
+                        type_=Response,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -949,7 +951,7 @@ class AsyncRawCollectionsClient:
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
         table_order: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[Response]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionCreateCollectionResponse]:
         """
         Parameters
         ----------
@@ -968,7 +970,7 @@ class AsyncRawCollectionsClient:
 
         Returns
         -------
-        AsyncHttpResponse[Response]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionCreateCollectionResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -990,9 +992,9 @@ class AsyncRawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    Response,
+                    SrcAppHttpRoutesCollectionCreateCollectionResponse,
                     construct_type(
-                        type_=Response,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionCreateCollectionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1188,7 +1190,7 @@ class AsyncRawCollectionsClient:
 
     async def list_syncs(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[ResponseModel]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]:
         """
         List Sources by Destination, specifically given a collection and table
 
@@ -1203,7 +1205,7 @@ class AsyncRawCollectionsClient:
 
         Returns
         -------
-        AsyncHttpResponse[ResponseModel]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -1214,9 +1216,9 @@ class AsyncRawCollectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ResponseModel,
+                    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
                     construct_type(
-                        type_=ResponseModel,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
