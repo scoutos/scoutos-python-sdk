@@ -3,8 +3,7 @@
 import typing
 
 from .agent_execute import AgentExecute
-from .briefing_execute import BriefingExecute
 from .source_sync import SourceSync
 from .workflow_execute import WorkflowExecute
 
-SlackTriggerConfigOutputAction = typing.Union[AgentExecute, BriefingExecute, SourceSync, WorkflowExecute]
+SlackTriggerConfigOutputAction = typing.Union[AgentExecute, SourceSync, WorkflowExecute]

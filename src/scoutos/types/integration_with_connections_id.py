@@ -32,6 +32,8 @@ IntegrationWithConnectionsId = typing.Union[
         "microsoft365",
         "sanity",
         "myla",
+        "northbeam",
+        "telegram",
     ],
     typing.Any,
 ]

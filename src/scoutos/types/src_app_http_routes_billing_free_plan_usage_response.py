@@ -5,11 +5,11 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .data import Data
+from .src_app_http_routes_billing_free_plan_usage_data import SrcAppHttpRoutesBillingFreePlanUsageData
 
 
 class SrcAppHttpRoutesBillingFreePlanUsageResponse(UncheckedBaseModel):
-    data: Data
+    data: SrcAppHttpRoutesBillingFreePlanUsageData
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -5,10 +5,12 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .api_key_auth_field import ApiKeyAuthField
 
 
 class ApiKeyAuthType(UncheckedBaseModel):
     type: typing.Literal["api_key"] = "api_key"
+    fields: typing.Optional[typing.List[ApiKeyAuthField]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -19,7 +19,7 @@ from ..types.active_agent_response import ActiveAgentResponse
 from ..types.agent import Agent
 from ..types.delete_agent_response import DeleteAgentResponse
 from ..types.http_validation_error import HttpValidationError
-from ..types.incoming_message import IncomingMessage
+from ..types.src_app_http_routes_world_interact_incoming_message import SrcAppHttpRoutesWorldInteractIncomingMessage
 from ..types.upsert_agent_response import UpsertAgentResponse
 
 # this is used as the default value for optional parameters
@@ -35,9 +35,10 @@ class RawAgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Iterator[HttpResponse[typing.Iterator[typing.Optional[typing.Any]]]]:
         """
@@ -45,12 +46,16 @@ class RawAgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -68,9 +73,12 @@ class RawAgentsClient:
             },
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
+                    object_=messages,
+                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+                    direction="write",
                 ),
                 "metadata": metadata,
+                "callback_url": callback_url,
             },
             headers={
                 "content-type": "application/json",
@@ -126,9 +134,10 @@ class RawAgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[typing.Optional[typing.Any]]:
         """
@@ -136,12 +145,16 @@ class RawAgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -159,9 +172,12 @@ class RawAgentsClient:
             },
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
+                    object_=messages,
+                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+                    direction="write",
                 ),
                 "metadata": metadata,
+                "callback_url": callback_url,
             },
             headers={
                 "content-type": "application/json",
@@ -203,8 +219,9 @@ class RawAgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Iterator[HttpResponse[typing.Iterator[typing.Optional[typing.Any]]]]:
         """
@@ -214,10 +231,14 @@ class RawAgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -232,9 +253,12 @@ class RawAgentsClient:
             method="POST",
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
+                    object_=messages,
+                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+                    direction="write",
                 ),
                 "metadata": metadata,
+                "callback_url": callback_url,
             },
             headers={
                 "content-type": "application/json",
@@ -291,8 +315,9 @@ class RawAgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[typing.Optional[typing.Any]]:
         """
@@ -302,10 +327,14 @@ class RawAgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -320,9 +349,12 @@ class RawAgentsClient:
             method="POST",
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
+                    object_=messages,
+                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+                    direction="write",
                 ),
                 "metadata": metadata,
+                "callback_url": callback_url,
             },
             headers={
                 "content-type": "application/json",
@@ -571,9 +603,10 @@ class AsyncRawAgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.AsyncIterator[AsyncHttpResponse[typing.AsyncIterator[typing.Optional[typing.Any]]]]:
         """
@@ -581,12 +614,16 @@ class AsyncRawAgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -604,9 +641,12 @@ class AsyncRawAgentsClient:
             },
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
+                    object_=messages,
+                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+                    direction="write",
                 ),
                 "metadata": metadata,
+                "callback_url": callback_url,
             },
             headers={
                 "content-type": "application/json",
@@ -662,9 +702,10 @@ class AsyncRawAgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
         """
@@ -672,12 +713,16 @@ class AsyncRawAgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -695,9 +740,12 @@ class AsyncRawAgentsClient:
             },
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
+                    object_=messages,
+                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+                    direction="write",
                 ),
                 "metadata": metadata,
+                "callback_url": callback_url,
             },
             headers={
                 "content-type": "application/json",
@@ -739,8 +787,9 @@ class AsyncRawAgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.AsyncIterator[AsyncHttpResponse[typing.AsyncIterator[typing.Optional[typing.Any]]]]:
         """
@@ -750,10 +799,14 @@ class AsyncRawAgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -768,9 +821,12 @@ class AsyncRawAgentsClient:
             method="POST",
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
+                    object_=messages,
+                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+                    direction="write",
                 ),
                 "metadata": metadata,
+                "callback_url": callback_url,
             },
             headers={
                 "content-type": "application/json",
@@ -827,8 +883,9 @@ class AsyncRawAgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
         """
@@ -838,10 +895,14 @@ class AsyncRawAgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -856,9 +917,12 @@ class AsyncRawAgentsClient:
             method="POST",
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
+                    object_=messages,
+                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+                    direction="write",
                 ),
                 "metadata": metadata,
+                "callback_url": callback_url,
             },
             headers={
                 "content-type": "application/json",

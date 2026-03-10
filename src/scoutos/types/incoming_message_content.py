@@ -2,8 +2,4 @@
 
 import typing
 
-from .incoming_message_content_two_item import IncomingMessageContentTwoItem
-
-IncomingMessageContent = typing.Union[
-    str, typing.Dict[str, typing.Optional[typing.Any]], typing.List[IncomingMessageContentTwoItem]
-]
+IncomingMessageContent = typing.Union[str, typing.Dict[str, typing.Optional[typing.Any]]]

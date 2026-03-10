@@ -71,6 +71,20 @@ class EvaluationMetrics(UncheckedBaseModel):
     Average composite score across all tests (0-1)
     """
 
+    dimension_metrics: typing.Optional[typing.Dict[str, typing.Optional[typing.Dict[str, typing.Optional[float]]]]] = (
+        pydantic.Field(default=None)
+    )
+    """
+    Per-dimension aggregated metrics {dimension_name: {avg, min, max, count}}
+    """
+
+    tag_metrics: typing.Optional[typing.Dict[str, typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]]] = (
+        pydantic.Field(default=None)
+    )
+    """
+    Metrics grouped by test case tags {tag: {count, pass_rate, ...}}
+    """
+
     human_review_pending_count: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of test cases with pending human reviews

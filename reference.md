@@ -2536,6 +2536,78 @@ client.triggers.execute_slack()
 </dl>
 </details>
 
+<details><summary><code>client.triggers.<a href="src/scoutos/triggers/client.py">execute_telegram</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Receive Telegram webhook updates.
+Telegram sends POST with JSON body (Update object). Respond 200 quickly;
+look up Trigger docs for this connection and run agent, streaming replies to Telegram.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from scoutos import Scout
+
+client = Scout(
+    api_key="YOUR_API_KEY",
+)
+client.triggers.execute_telegram(
+    connection_id="connection_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**connection_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.triggers.<a href="src/scoutos/triggers/client.py">execute_cron</a>()</code></summary>
 <dl>
 <dd>
@@ -5667,7 +5739,7 @@ client.syncs.execute(
 <dd>
 
 ```python
-from scoutos import IncomingMessage, Scout
+from scoutos import Scout, SrcAppHttpRoutesWorldInteractIncomingMessage
 
 client = Scout(
     api_key="YOUR_API_KEY",
@@ -5676,7 +5748,7 @@ response = client.agents.interact(
     agent_id="agent_id",
     session_id="session_id",
     messages=[
-        IncomingMessage(
+        SrcAppHttpRoutesWorldInteractIncomingMessage(
             content="content",
         )
     ],
@@ -5706,7 +5778,7 @@ for chunk in response.data:
 <dl>
 <dd>
 
-**messages:** `typing.Sequence[IncomingMessage]` 
+**messages:** `typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]` — List of incoming user messages and drive file references.
     
 </dd>
 </dl>
@@ -5723,6 +5795,14 @@ for chunk in response.data:
 <dd>
 
 **metadata:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — Optional metadata (e.g., salesforce_session)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**callback_url:** `typing.Optional[str]` — Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
     
 </dd>
 </dl>
@@ -5755,7 +5835,7 @@ for chunk in response.data:
 <dd>
 
 ```python
-from scoutos import IncomingMessage, Scout
+from scoutos import Scout, SrcAppHttpRoutesWorldInteractIncomingMessage
 
 client = Scout(
     api_key="YOUR_API_KEY",
@@ -5764,7 +5844,7 @@ client.agents.interact_sync(
     agent_id="agent_id",
     session_id="session_id",
     messages=[
-        IncomingMessage(
+        SrcAppHttpRoutesWorldInteractIncomingMessage(
             content="content",
         )
     ],
@@ -5792,7 +5872,7 @@ client.agents.interact_sync(
 <dl>
 <dd>
 
-**messages:** `typing.Sequence[IncomingMessage]` 
+**messages:** `typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]` — List of incoming user messages and drive file references.
     
 </dd>
 </dl>
@@ -5809,6 +5889,14 @@ client.agents.interact_sync(
 <dd>
 
 **metadata:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — Optional metadata (e.g., salesforce_session)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**callback_url:** `typing.Optional[str]` — Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
     
 </dd>
 </dl>
@@ -5841,7 +5929,7 @@ client.agents.interact_sync(
 <dd>
 
 ```python
-from scoutos import IncomingMessage, Scout
+from scoutos import Scout, SrcAppHttpRoutesWorldInteractIncomingMessage
 
 client = Scout(
     api_key="YOUR_API_KEY",
@@ -5850,7 +5938,7 @@ response = client.agents.interact_with_session(
     agent_id="agent_id",
     session_id="session_id",
     messages=[
-        IncomingMessage(
+        SrcAppHttpRoutesWorldInteractIncomingMessage(
             content="content",
         )
     ],
@@ -5888,7 +5976,7 @@ for chunk in response.data:
 <dl>
 <dd>
 
-**messages:** `typing.Sequence[IncomingMessage]` 
+**messages:** `typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]` — List of incoming user messages and drive file references.
     
 </dd>
 </dl>
@@ -5897,6 +5985,14 @@ for chunk in response.data:
 <dd>
 
 **metadata:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — Optional metadata (e.g., salesforce_session)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**callback_url:** `typing.Optional[str]` — Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
     
 </dd>
 </dl>
@@ -5929,7 +6025,7 @@ for chunk in response.data:
 <dd>
 
 ```python
-from scoutos import IncomingMessage, Scout
+from scoutos import Scout, SrcAppHttpRoutesWorldInteractIncomingMessage
 
 client = Scout(
     api_key="YOUR_API_KEY",
@@ -5938,7 +6034,7 @@ client.agents.interact_sync_with_session(
     agent_id="agent_id",
     session_id="session_id",
     messages=[
-        IncomingMessage(
+        SrcAppHttpRoutesWorldInteractIncomingMessage(
             content="content",
         )
     ],
@@ -5974,7 +6070,7 @@ client.agents.interact_sync_with_session(
 <dl>
 <dd>
 
-**messages:** `typing.Sequence[IncomingMessage]` 
+**messages:** `typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]` — List of incoming user messages and drive file references.
     
 </dd>
 </dl>
@@ -5983,6 +6079,14 @@ client.agents.interact_sync_with_session(
 <dd>
 
 **metadata:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — Optional metadata (e.g., salesforce_session)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**callback_url:** `typing.Optional[str]` — Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
     
 </dd>
 </dl>

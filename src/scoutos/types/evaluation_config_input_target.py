@@ -3,8 +3,9 @@
 import typing
 
 from .agent_target import AgentTarget
+from .byo_target import ByoTarget
 from .prompt_target import PromptTarget
 from .tool_target import ToolTarget
 from .workflow_target import WorkflowTarget
 
-EvaluationConfigInputTarget = typing.Union[AgentTarget, PromptTarget, ToolTarget, WorkflowTarget]
+EvaluationConfigInputTarget = typing.Union[AgentTarget, ByoTarget, PromptTarget, ToolTarget, WorkflowTarget]

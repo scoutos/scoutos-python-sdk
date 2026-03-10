@@ -209,6 +209,40 @@ class TriggersClient:
         _response = self._raw_client.execute_slack(request_options=request_options)
         return _response.data
 
+    def execute_telegram(
+        self, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, bool]:
+        """
+        Receive Telegram webhook updates.
+        Telegram sends POST with JSON body (Update object). Respond 200 quickly;
+        look up Trigger docs for this connection and run agent, streaming replies to Telegram.
+
+        Parameters
+        ----------
+        connection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, bool]
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.triggers.execute_telegram(
+            connection_id="connection_id",
+        )
+        """
+        _response = self._raw_client.execute_telegram(connection_id, request_options=request_options)
+        return _response.data
+
     def execute_cron(self, *, request_options: typing.Optional[RequestOptions] = None) -> ExecuteTriggerResponse:
         """
         Parameters
@@ -511,6 +545,48 @@ class AsyncTriggersClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.execute_slack(request_options=request_options)
+        return _response.data
+
+    async def execute_telegram(
+        self, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, bool]:
+        """
+        Receive Telegram webhook updates.
+        Telegram sends POST with JSON body (Update object). Respond 200 quickly;
+        look up Trigger docs for this connection and run agent, streaming replies to Telegram.
+
+        Parameters
+        ----------
+        connection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, bool]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.triggers.execute_telegram(
+                connection_id="connection_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.execute_telegram(connection_id, request_options=request_options)
         return _response.data
 
     async def execute_cron(self, *, request_options: typing.Optional[RequestOptions] = None) -> ExecuteTriggerResponse:

@@ -7,7 +7,6 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .actor_identity import ActorIdentity
-from .scout_hook_config_http import ScoutHookConfigHttp
 from .scout_hook_event_trigger import ScoutHookEventTrigger
 
 
@@ -19,7 +18,7 @@ class ScoutHook(UncheckedBaseModel):
     created_at: typing.Optional[dt.datetime] = None
     updated_at: typing.Optional[dt.datetime] = None
     is_seed: typing.Optional[bool] = None
-    hook_config: ScoutHookConfigHttp
+    hook_config: typing.Dict[str, typing.Optional[typing.Any]]
     name: str
     description: typing.Optional[str] = None
     metadata: typing.Dict[str, typing.Optional[typing.Any]]

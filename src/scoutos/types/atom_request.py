@@ -5,6 +5,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .agent_config import AgentConfig
 from .cache_directive import CacheDirective
 
 
@@ -21,7 +22,8 @@ class AtomRequest(UncheckedBaseModel):
     - More fields → more specific cache → fewer hits, fresher data
     - Fewer fields → broader cache → more hits, potentially staler
 
-    Platform always injects org_id and user_id from the authenticated session.
+    Platform always injects org_id from the authenticated session.
+    Product faces can include user_id in context if per-user caching is desired.
     """
 
     atoms: typing.Dict[str, typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field()
@@ -36,7 +38,7 @@ class AtomRequest(UncheckedBaseModel):
 
     context: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
     """
-    Product-defined context for cache granularity. Platform injects org_id and user_id from session. Product can add page, date, or other fields to control caching.
+    Product-defined context for cache granularity. Platform injects org_id from session. Product can add user_id, page, date, or other fields to control caching.
     """
 
     cache: typing.Optional[CacheDirective] = pydantic.Field(default=None)
@@ -46,7 +48,12 @@ class AtomRequest(UncheckedBaseModel):
 
     tools: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
     """
-    Additional tool names to enable for the agent. Platform always enables emit_atoms. Product can request integration tools (e.g., 'Salesforce__salesforce_query').
+    DEPRECATED: Use agent.tools instead. Additional tool names to enable for the agent. Falls back to this if agent.tools is not set.
+    """
+
+    agent: typing.Optional[AgentConfig] = pydantic.Field(default=None)
+    """
+    Agent configuration overrides (model, temperature, max_tokens, tools).
     """
 
     if IS_PYDANTIC_V2:

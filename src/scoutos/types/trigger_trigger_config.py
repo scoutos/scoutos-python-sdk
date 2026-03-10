@@ -4,5 +4,6 @@ import typing
 
 from .cron_trigger_config import CronTriggerConfig
 from .slack_trigger_config_output import SlackTriggerConfigOutput
+from .telegram_trigger_config import TelegramTriggerConfig
 
-TriggerTriggerConfig = typing.Union[CronTriggerConfig, SlackTriggerConfigOutput]
+TriggerTriggerConfig = typing.Union[CronTriggerConfig, SlackTriggerConfigOutput, TelegramTriggerConfig]

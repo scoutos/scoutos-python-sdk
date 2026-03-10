@@ -24,6 +24,7 @@ class AgentSchedule(UncheckedBaseModel):
     timezone: typing.Optional[str] = None
     agent_directives: typing.List[AgentScheduleAgentDirectivesItem]
     scheduled_up_to: dt.datetime
+    consecutive_agent_not_found_count: typing.Optional[int] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

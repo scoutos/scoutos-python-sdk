@@ -10,7 +10,6 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 class UserTokenResponse(UncheckedBaseModel):
     integration_type: str
     access_token: str
-    refresh_token: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

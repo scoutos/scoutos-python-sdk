@@ -8,7 +8,7 @@ from ..core.request_options import RequestOptions
 from ..types.active_agent_response import ActiveAgentResponse
 from ..types.agent import Agent
 from ..types.delete_agent_response import DeleteAgentResponse
-from ..types.incoming_message import IncomingMessage
+from ..types.src_app_http_routes_world_interact_incoming_message import SrcAppHttpRoutesWorldInteractIncomingMessage
 from ..types.upsert_agent_response import UpsertAgentResponse
 from .raw_client import AsyncRawAgentsClient, RawAgentsClient
 
@@ -35,9 +35,10 @@ class AgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Iterator[typing.Optional[typing.Any]]:
         """
@@ -45,12 +46,16 @@ class AgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -62,7 +67,7 @@ class AgentsClient:
 
         Examples
         --------
-        from scoutos import IncomingMessage, Scout
+        from scoutos import Scout, SrcAppHttpRoutesWorldInteractIncomingMessage
 
         client = Scout(
             api_key="YOUR_API_KEY",
@@ -71,7 +76,7 @@ class AgentsClient:
             agent_id="agent_id",
             session_id="session_id",
             messages=[
-                IncomingMessage(
+                SrcAppHttpRoutesWorldInteractIncomingMessage(
                     content="content",
                 )
             ],
@@ -80,7 +85,12 @@ class AgentsClient:
             yield chunk
         """
         with self._raw_client.interact(
-            agent_id, messages=messages, session_id=session_id, metadata=metadata, request_options=request_options
+            agent_id,
+            messages=messages,
+            session_id=session_id,
+            metadata=metadata,
+            callback_url=callback_url,
+            request_options=request_options,
         ) as r:
             yield from r.data
 
@@ -88,9 +98,10 @@ class AgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[typing.Any]:
         """
@@ -98,12 +109,16 @@ class AgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -115,7 +130,7 @@ class AgentsClient:
 
         Examples
         --------
-        from scoutos import IncomingMessage, Scout
+        from scoutos import Scout, SrcAppHttpRoutesWorldInteractIncomingMessage
 
         client = Scout(
             api_key="YOUR_API_KEY",
@@ -124,14 +139,19 @@ class AgentsClient:
             agent_id="agent_id",
             session_id="session_id",
             messages=[
-                IncomingMessage(
+                SrcAppHttpRoutesWorldInteractIncomingMessage(
                     content="content",
                 )
             ],
         )
         """
         _response = self._raw_client.interact_sync(
-            agent_id, messages=messages, session_id=session_id, metadata=metadata, request_options=request_options
+            agent_id,
+            messages=messages,
+            session_id=session_id,
+            metadata=metadata,
+            callback_url=callback_url,
+            request_options=request_options,
         )
         return _response.data
 
@@ -140,8 +160,9 @@ class AgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Iterator[typing.Optional[typing.Any]]:
         """
@@ -151,10 +172,14 @@ class AgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -166,7 +191,7 @@ class AgentsClient:
 
         Examples
         --------
-        from scoutos import IncomingMessage, Scout
+        from scoutos import Scout, SrcAppHttpRoutesWorldInteractIncomingMessage
 
         client = Scout(
             api_key="YOUR_API_KEY",
@@ -175,7 +200,7 @@ class AgentsClient:
             agent_id="agent_id",
             session_id="session_id",
             messages=[
-                IncomingMessage(
+                SrcAppHttpRoutesWorldInteractIncomingMessage(
                     content="content",
                 )
             ],
@@ -184,7 +209,12 @@ class AgentsClient:
             yield chunk
         """
         with self._raw_client.interact_with_session(
-            agent_id, session_id, messages=messages, metadata=metadata, request_options=request_options
+            agent_id,
+            session_id,
+            messages=messages,
+            metadata=metadata,
+            callback_url=callback_url,
+            request_options=request_options,
         ) as r:
             yield from r.data
 
@@ -193,8 +223,9 @@ class AgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[typing.Any]:
         """
@@ -204,10 +235,14 @@ class AgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -219,7 +254,7 @@ class AgentsClient:
 
         Examples
         --------
-        from scoutos import IncomingMessage, Scout
+        from scoutos import Scout, SrcAppHttpRoutesWorldInteractIncomingMessage
 
         client = Scout(
             api_key="YOUR_API_KEY",
@@ -228,14 +263,19 @@ class AgentsClient:
             agent_id="agent_id",
             session_id="session_id",
             messages=[
-                IncomingMessage(
+                SrcAppHttpRoutesWorldInteractIncomingMessage(
                     content="content",
                 )
             ],
         )
         """
         _response = self._raw_client.interact_sync_with_session(
-            agent_id, session_id, messages=messages, metadata=metadata, request_options=request_options
+            agent_id,
+            session_id,
+            messages=messages,
+            metadata=metadata,
+            callback_url=callback_url,
+            request_options=request_options,
         )
         return _response.data
 
@@ -396,9 +436,10 @@ class AsyncAgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.AsyncIterator[typing.Optional[typing.Any]]:
         """
@@ -406,12 +447,16 @@ class AsyncAgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -425,7 +470,7 @@ class AsyncAgentsClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScout, IncomingMessage
+        from scoutos import AsyncScout, SrcAppHttpRoutesWorldInteractIncomingMessage
 
         client = AsyncScout(
             api_key="YOUR_API_KEY",
@@ -437,7 +482,7 @@ class AsyncAgentsClient:
                 agent_id="agent_id",
                 session_id="session_id",
                 messages=[
-                    IncomingMessage(
+                    SrcAppHttpRoutesWorldInteractIncomingMessage(
                         content="content",
                     )
                 ],
@@ -449,7 +494,12 @@ class AsyncAgentsClient:
         asyncio.run(main())
         """
         async with self._raw_client.interact(
-            agent_id, messages=messages, session_id=session_id, metadata=metadata, request_options=request_options
+            agent_id,
+            messages=messages,
+            session_id=session_id,
+            metadata=metadata,
+            callback_url=callback_url,
+            request_options=request_options,
         ) as r:
             async for _chunk in r.data:
                 yield _chunk
@@ -458,9 +508,10 @@ class AsyncAgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[typing.Any]:
         """
@@ -468,12 +519,16 @@ class AsyncAgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -487,7 +542,7 @@ class AsyncAgentsClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScout, IncomingMessage
+        from scoutos import AsyncScout, SrcAppHttpRoutesWorldInteractIncomingMessage
 
         client = AsyncScout(
             api_key="YOUR_API_KEY",
@@ -499,7 +554,7 @@ class AsyncAgentsClient:
                 agent_id="agent_id",
                 session_id="session_id",
                 messages=[
-                    IncomingMessage(
+                    SrcAppHttpRoutesWorldInteractIncomingMessage(
                         content="content",
                     )
                 ],
@@ -509,7 +564,12 @@ class AsyncAgentsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.interact_sync(
-            agent_id, messages=messages, session_id=session_id, metadata=metadata, request_options=request_options
+            agent_id,
+            messages=messages,
+            session_id=session_id,
+            metadata=metadata,
+            callback_url=callback_url,
+            request_options=request_options,
         )
         return _response.data
 
@@ -518,8 +578,9 @@ class AsyncAgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.AsyncIterator[typing.Optional[typing.Any]]:
         """
@@ -529,10 +590,14 @@ class AsyncAgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -546,7 +611,7 @@ class AsyncAgentsClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScout, IncomingMessage
+        from scoutos import AsyncScout, SrcAppHttpRoutesWorldInteractIncomingMessage
 
         client = AsyncScout(
             api_key="YOUR_API_KEY",
@@ -558,7 +623,7 @@ class AsyncAgentsClient:
                 agent_id="agent_id",
                 session_id="session_id",
                 messages=[
-                    IncomingMessage(
+                    SrcAppHttpRoutesWorldInteractIncomingMessage(
                         content="content",
                     )
                 ],
@@ -570,7 +635,12 @@ class AsyncAgentsClient:
         asyncio.run(main())
         """
         async with self._raw_client.interact_with_session(
-            agent_id, session_id, messages=messages, metadata=metadata, request_options=request_options
+            agent_id,
+            session_id,
+            messages=messages,
+            metadata=metadata,
+            callback_url=callback_url,
+            request_options=request_options,
         ) as r:
             async for _chunk in r.data:
                 yield _chunk
@@ -580,8 +650,9 @@ class AsyncAgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[IncomingMessage],
+        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[typing.Any]:
         """
@@ -591,10 +662,14 @@ class AsyncAgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[IncomingMessage]
+        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+            List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        callback_url : typing.Optional[str]
+            Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -608,7 +683,7 @@ class AsyncAgentsClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScout, IncomingMessage
+        from scoutos import AsyncScout, SrcAppHttpRoutesWorldInteractIncomingMessage
 
         client = AsyncScout(
             api_key="YOUR_API_KEY",
@@ -620,7 +695,7 @@ class AsyncAgentsClient:
                 agent_id="agent_id",
                 session_id="session_id",
                 messages=[
-                    IncomingMessage(
+                    SrcAppHttpRoutesWorldInteractIncomingMessage(
                         content="content",
                     )
                 ],
@@ -630,7 +705,12 @@ class AsyncAgentsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.interact_sync_with_session(
-            agent_id, session_id, messages=messages, metadata=metadata, request_options=request_options
+            agent_id,
+            session_id,
+            messages=messages,
+            metadata=metadata,
+            callback_url=callback_url,
+            request_options=request_options,
         )
         return _response.data
 

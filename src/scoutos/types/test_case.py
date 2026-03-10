@@ -44,6 +44,11 @@ class TestCase(UncheckedBaseModel):
     Additional metadata (e.g., row_id, tags)
     """
 
+    tags: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
+    """
+    Tags for grouping (e.g., feature names)
+    """
+
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
     else:

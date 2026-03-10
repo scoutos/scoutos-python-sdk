@@ -6,6 +6,8 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .date_time_column_date_format import DateTimeColumnDateFormat
+from .date_time_column_time_format import DateTimeColumnTimeFormat
 from .typescript_automation_config import TypescriptAutomationConfig
 
 
@@ -21,6 +23,10 @@ class DateTimeColumn(UncheckedBaseModel):
     """
 
     default: typing.Optional[dt.datetime] = None
+    include_time: typing.Optional[bool] = None
+    date_format: typing.Optional[DateTimeColumnDateFormat] = None
+    time_format: typing.Optional[DateTimeColumnTimeFormat] = None
+    time_zone: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

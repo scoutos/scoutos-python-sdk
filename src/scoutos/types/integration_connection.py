@@ -12,6 +12,7 @@ from .integration_connection_integration_type import IntegrationConnectionIntegr
 
 class IntegrationConnection(UncheckedBaseModel):
     id: str
+    connection_name: typing.Optional[str] = None
     auth_client: str
     integration_type: IntegrationConnectionIntegrationType
     auth_type: IntegrationConnectionAuthType

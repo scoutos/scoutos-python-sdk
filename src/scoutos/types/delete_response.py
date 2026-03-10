@@ -8,12 +8,8 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 
 
 class DeleteResponse(UncheckedBaseModel):
-    """
-    Delete response
-    """
-
-    ok: typing.Optional[bool] = None
-    message: typing.Optional[str] = None
+    status: typing.Optional[str] = None
+    session_id: str
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

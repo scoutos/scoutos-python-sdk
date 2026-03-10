@@ -6,6 +6,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .details import Details
 from .document_created_by import DocumentCreatedBy
 from .document_data_value import DocumentDataValue
 from .document_last_updated_by import DocumentLastUpdatedBy
@@ -24,6 +25,10 @@ class Document(UncheckedBaseModel):
     sync_id: typing.Optional[str] = None
     studio_row_id: typing.Optional[str] = None
     cells: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
+    search_metadata: typing.Optional[typing.List[Details]] = pydantic.Field(default=None)
+    """
+    Present when document was returned from a search query; enables relevance sorting and match highlighting.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

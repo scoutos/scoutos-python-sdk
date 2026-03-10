@@ -5,11 +5,13 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .src_app_http_routes_billing_create_portal_session_data import SrcAppHttpRoutesBillingCreatePortalSessionData
+from .file import File
 
 
 class Response(UncheckedBaseModel):
-    data: SrcAppHttpRoutesBillingCreatePortalSessionData
+    original_file_text: typing.Optional[str] = None
+    original_file: File
+    parsed_text_file: File
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

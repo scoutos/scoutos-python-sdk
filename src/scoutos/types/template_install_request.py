@@ -13,6 +13,7 @@ class TemplateInstallRequest(UncheckedBaseModel):
     """
 
     template_name: str
+    template_slug: typing.Optional[str] = None
     template_description: str
     steps: typing.List[str]
     tools: typing.Optional[typing.List[str]] = None

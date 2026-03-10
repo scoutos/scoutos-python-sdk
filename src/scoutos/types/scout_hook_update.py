@@ -5,12 +5,11 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .scout_hook_config_http import ScoutHookConfigHttp
 from .scout_hook_update_triggering_events_item import ScoutHookUpdateTriggeringEventsItem
 
 
 class ScoutHookUpdate(UncheckedBaseModel):
-    hook_config: typing.Optional[ScoutHookConfigHttp] = None
+    hook_config: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
     name: typing.Optional[str] = None
     description: typing.Optional[str] = None
     metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None

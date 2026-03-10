@@ -16,6 +16,8 @@ if typing.TYPE_CHECKING:
     from .add_credits_payload import AddCreditsPayload
     from .add_credits_response import AddCreditsResponse
     from .agent import Agent
+    from .agent_config import AgentConfig
+    from .agent_config_model import AgentConfigModel
     from .agent_directive import AgentDirective
     from .agent_execute import AgentExecute
     from .agent_revision_input import AgentRevisionInput
@@ -36,6 +38,7 @@ if typing.TYPE_CHECKING:
     from .agent_target import AgentTarget
     from .agentic_model import AgenticModel
     from .ai_agent import AiAgent
+    from .api_key_auth_field import ApiKeyAuthField
     from .api_key_auth_type import ApiKeyAuthType
     from .api_key_identity import ApiKeyIdentity
     from .api_key_identity_details import ApiKeyIdentityDetails
@@ -58,8 +61,6 @@ if typing.TYPE_CHECKING:
     from .billing_usage import BillingUsage
     from .blob_asset_content import BlobAssetContent
     from .blob_url_content import BlobUrlContent
-    from .block_action import BlockAction
-    from .block_action_type import BlockActionType
     from .block_config_item_boolean import BlockConfigItemBoolean
     from .block_config_item_json import BlockConfigItemJson
     from .block_config_item_llm import BlockConfigItemLlm
@@ -98,46 +99,11 @@ if typing.TYPE_CHECKING:
     from .body_update_user_logo_users_user_id_profile_image_put import BodyUpdateUserLogoUsersUserIdProfileImagePut
     from .body_upload_files_to_drive_drive_files_post import BodyUploadFilesToDriveDriveFilesPost
     from .body_upload_private_files_inbox_session_id_files_post import BodyUploadPrivateFilesInboxSessionIdFilesPost
-    from .briefing_agent_config import BriefingAgentConfig
-    from .briefing_config import BriefingConfig
-    from .briefing_config_create import BriefingConfigCreate
-    from .briefing_config_update import BriefingConfigUpdate
-    from .briefing_content_config import BriefingContentConfig
-    from .briefing_content_config_metrics_item import BriefingContentConfigMetricsItem
-    from .briefing_content_config_sections_item import BriefingContentConfigSectionsItem
-    from .briefing_copilot_config import BriefingCopilotConfig
-    from .briefing_copilot_config_create import BriefingCopilotConfigCreate
-    from .briefing_copilot_config_update import BriefingCopilotConfigUpdate
-    from .briefing_execute import BriefingExecute
-    from .briefing_layout_create import BriefingLayoutCreate
-    from .briefing_layout_create_default_access import BriefingLayoutCreateDefaultAccess
-    from .briefing_layout_revision import BriefingLayoutRevision
-    from .briefing_layout_update import BriefingLayoutUpdate
-    from .briefing_layout_update_default_access import BriefingLayoutUpdateDefaultAccess
-    from .briefing_layout_with_revision import BriefingLayoutWithRevision
-    from .briefing_layout_with_revision_default_access import BriefingLayoutWithRevisionDefaultAccess
-    from .briefing_output import BriefingOutput
-    from .briefing_output_blocks_item import BriefingOutputBlocksItem
-    from .briefing_run import BriefingRun
-    from .briefing_run_status import BriefingRunStatus
-    from .briefing_run_summary import BriefingRunSummary
-    from .briefing_run_summary_status import BriefingRunSummaryStatus
-    from .briefing_schedule import BriefingSchedule
-    from .briefing_schedule_day import BriefingScheduleDay
-    from .briefing_thresholds import BriefingThresholds
-    from .bullet_list_block import BulletListBlock
+    from .byo_target import ByoTarget
     from .cache_directive import CacheDirective
-    from .callout_block import CalloutBlock
-    from .callout_block_variant import CalloutBlockVariant
     from .cancel_response import CancelResponse
-    from .card_block import CardBlock
-    from .card_block_blocks_item import CardBlockBlocksItem
-    from .card_block_variant import CardBlockVariant
     from .card_display_field import CardDisplayField
-    from .change_block import ChangeBlock
-    from .change_block_change_type import ChangeBlockChangeType
     from .channel import Channel
-    from .chat_request import ChatRequest
     from .check_box_column import CheckBoxColumn
     from .collection import Collection
     from .collection_config import CollectionConfig
@@ -149,13 +115,9 @@ if typing.TYPE_CHECKING:
     from .collection_view_state_output_views_value import CollectionViewStateOutputViewsValue
     from .column_type import ColumnType
     from .column_type_base import ColumnTypeBase
-    from .columns_block import ColumnsBlock
-    from .columns_block_columns_item_item import ColumnsBlockColumnsItemItem
     from .condition import Condition
     from .condition_field import ConditionField
     from .condition_operator import ConditionOperator
-    from .config_list_response import ConfigListResponse
-    from .config_response import ConfigResponse
     from .connect_integration_request import ConnectIntegrationRequest
     from .connect_integration_request_auth_type import ConnectIntegrationRequestAuthType
     from .contains_assertion import ContainsAssertion
@@ -163,14 +125,11 @@ if typing.TYPE_CHECKING:
     from .copilot_config import CopilotConfig
     from .copilot_config_code_theme import CopilotConfigCodeTheme
     from .copilot_config_fab_value import CopilotConfigFabValue
-    from .copilot_config_list_response import CopilotConfigListResponse
     from .copilot_config_mode import CopilotConfigMode
-    from .copilot_config_response import CopilotConfigResponse
-    from .copilot_run_list_response import CopilotRunListResponse
-    from .copilot_run_response import CopilotRunResponse
-    from .copilot_schedule import CopilotSchedule
     from .create_agent_schedule_body import CreateAgentScheduleBody
     from .create_agent_schedule_body_instructions_item import CreateAgentScheduleBodyInstructionsItem
+    from .create_connection_response import CreateConnectionResponse
+    from .create_custom_client_request import CreateCustomClientRequest
     from .create_drive_node_request import CreateDriveNodeRequest
     from .create_drive_node_request_resource_type import CreateDriveNodeRequestResourceType
     from .create_drive_node_response import CreateDriveNodeResponse
@@ -178,7 +137,6 @@ if typing.TYPE_CHECKING:
     from .create_evaluation_request import CreateEvaluationRequest
     from .create_feedback_request import CreateFeedbackRequest
     from .create_feedback_request_target_type import CreateFeedbackRequestTargetType
-    from .create_integrations_response import CreateIntegrationsResponse
     from .create_scorer_request import CreateScorerRequest
     from .create_scorer_request_scorer import CreateScorerRequestScorer
     from .create_tag_response import CreateTagResponse
@@ -191,8 +149,8 @@ if typing.TYPE_CHECKING:
     from .data import Data
     from .data_type import DataType
     from .date_time_column import DateTimeColumn
-    from .deal_card_block import DealCardBlock
-    from .deal_card_block_risk_level import DealCardBlockRiskLevel
+    from .date_time_column_date_format import DateTimeColumnDateFormat
+    from .date_time_column_time_format import DateTimeColumnTimeFormat
     from .default_input import DefaultInput
     from .default_output import DefaultOutput
     from .delete_agent_response import DeleteAgentResponse
@@ -203,9 +161,9 @@ if typing.TYPE_CHECKING:
     from .delete_trigger_response import DeleteTriggerResponse
     from .delete_view_response import DeleteViewResponse
     from .dependency import Dependency
+    from .details import Details
     from .determined_billing_limits import DeterminedBillingLimits
     from .dimensions import Dimensions
-    from .divider_block import DividerBlock
     from .document import Document
     from .document_created_by import DocumentCreatedBy
     from .document_data_value import DocumentDataValue
@@ -213,6 +171,7 @@ if typing.TYPE_CHECKING:
     from .document_response import DocumentResponse
     from .documents_update_request import DocumentsUpdateRequest
     from .documents_update_request_value import DocumentsUpdateRequestValue
+    from .drive_file_message import DriveFileMessage
     from .drive_node import DriveNode
     from .drive_node_type import DriveNodeType
     from .edge_ui import EdgeUi
@@ -223,6 +182,11 @@ if typing.TYPE_CHECKING:
     from .environment_deployment_config_revision_lookup import EnvironmentDeploymentConfigRevisionLookup
     from .environment_deployment_document import EnvironmentDeploymentDocument
     from .ephemeral_agent_directive import EphemeralAgentDirective
+    from .evaluate_check import EvaluateCheck
+    from .evaluate_check_agent import EvaluateCheckAgent
+    from .evaluate_check_ai import EvaluateCheckAi
+    from .evaluate_item import EvaluateItem
+    from .evaluate_request import EvaluateRequest
     from .evaluation import Evaluation
     from .evaluation_config_input import EvaluationConfigInput
     from .evaluation_config_input_target import EvaluationConfigInputTarget
@@ -271,7 +235,6 @@ if typing.TYPE_CHECKING:
     from .get_info_response import GetInfoResponse
     from .guided_step import GuidedStep
     from .guided_step_action import GuidedStepAction
-    from .header_block import HeaderBlock
     from .healed_step import HealedStep
     from .hive_action_request import HiveActionRequest
     from .hook_update import HookUpdate
@@ -286,7 +249,7 @@ if typing.TYPE_CHECKING:
     from .identity_types import IdentityTypes
     from .incoming_message import IncomingMessage
     from .incoming_message_content import IncomingMessageContent
-    from .incoming_message_content_two_item import IncomingMessageContentTwoItem
+    from .incoming_message_content_type import IncomingMessageContentType
     from .incoming_serializable_entity import IncomingSerializableEntity
     from .incoming_serializable_entity_content import IncomingSerializableEntityContent
     from .incoming_serializable_entity_content_six_item import IncomingSerializableEntityContentSixItem
@@ -301,23 +264,24 @@ if typing.TYPE_CHECKING:
     from .integration_with_connections import IntegrationWithConnections
     from .integration_with_connections_id import IntegrationWithConnectionsId
     from .interaction_request import InteractionRequest
+    from .interaction_request_participants_item import InteractionRequestParticipantsItem
     from .interval import Interval
     from .interval_types import IntervalTypes
     from .invoice import Invoice
     from .invoice_meta import InvoiceMeta
     from .invoice_status import InvoiceStatus
+    from .issue_organization_credential_request import IssueOrganizationCredentialRequest
+    from .issue_organization_credential_response import IssueOrganizationCredentialResponse
     from .json_column import JsonColumn
     from .kanban_view_input import KanbanViewInput
     from .kanban_view_output import KanbanViewOutput
     from .kanban_view_settings_input import KanbanViewSettingsInput
     from .kanban_view_settings_output import KanbanViewSettingsOutput
-    from .layout_list_response import LayoutListResponse
-    from .layout_request import LayoutRequest
-    from .layout_response import LayoutResponse
     from .legacy_identity import LegacyIdentity
     from .legacy_identity_details import LegacyIdentityDetails
     from .line_item import LineItem
     from .list_drive_nodes_response import ListDriveNodesResponse
+    from .list_organization_credentials_response import ListOrganizationCredentialsResponse
     from .list_scorers_response import ListScorersResponse
     from .list_scorers_response_scorers_item import ListScorersResponseScorersItem
     from .list_tags_response import ListTagsResponse
@@ -333,8 +297,6 @@ if typing.TYPE_CHECKING:
     from .mention_participant import MentionParticipant
     from .message import Message
     from .message_chunk import MessageChunk
-    from .metric_block import MetricBlock
-    from .metric_block_change_direction import MetricBlockChangeDirection
     from .model_provider import ModelProvider
     from .move_drive_node_request import MoveDriveNodeRequest
     from .move_drive_node_response import MoveDriveNodeResponse
@@ -362,6 +324,9 @@ if typing.TYPE_CHECKING:
     from .number_column_min_value import NumberColumnMinValue
     from .o_auth_auth_type import OAuthAuthType
     from .organization import Organization
+    from .organization_credential import OrganizationCredential
+    from .organization_credential_private_key_response import OrganizationCredentialPrivateKeyResponse
+    from .organization_credential_status import OrganizationCredentialStatus
     from .organization_member_invite import OrganizationMemberInvite
     from .organization_member_invite_roles_item import OrganizationMemberInviteRolesItem
     from .paragraph_splitter_config import ParagraphSplitterConfig
@@ -395,35 +360,28 @@ if typing.TYPE_CHECKING:
     from .rename_request import RenameRequest
     from .rename_response import RenameResponse
     from .req_body import ReqBody
+    from .request_body import RequestBody
     from .response import Response
     from .response_model import ResponseModel
     from .response_model_usage import ResponseModelUsage
     from .result import Result
     from .review_option import ReviewOption
-    from .revision_list_response import RevisionListResponse
+    from .revoke_organization_member_invite import RevokeOrganizationMemberInvite
     from .rotate_api_keys_request import RotateApiKeysRequest
-    from .row_block import RowBlock
-    from .row_block_align import RowBlockAlign
-    from .row_block_blocks_item import RowBlockBlocksItem
-    from .row_block_gap import RowBlockGap
     from .rule import Rule
     from .rules_input import RulesInput
     from .rules_output import RulesOutput
     from .run_evaluation_request import RunEvaluationRequest
     from .run_evaluation_request_target_override import RunEvaluationRequestTargetOverride
-    from .run_list_response import RunListResponse
     from .run_log import RunLog
     from .run_log_pagination import RunLogPagination
-    from .run_response import RunResponse
     from .schedule import Schedule
-    from .scheduler_payload import SchedulerPayload
     from .schema_response import SchemaResponse
     from .score_field import ScoreField
     from .scorer_config_runtime import ScorerConfigRuntime
     from .scorer_response import ScorerResponse
     from .scorer_response_scorer import ScorerResponseScorer
     from .scout_hook import ScoutHook
-    from .scout_hook_config_http import ScoutHookConfigHttp
     from .scout_hook_event_discriminator import ScoutHookEventDiscriminator
     from .scout_hook_event_discriminator_type import ScoutHookEventDiscriminatorType
     from .scout_hook_event_trigger import ScoutHookEventTrigger
@@ -433,8 +391,6 @@ if typing.TYPE_CHECKING:
     from .scout_hook_update_triggering_events_item import ScoutHookUpdateTriggeringEventsItem
     from .scout_hooks_response import ScoutHooksResponse
     from .scout_user import ScoutUser
-    from .section_block import SectionBlock
-    from .section_block_blocks_item import SectionBlockBlocksItem
     from .select_column import SelectColumn
     from .select_option_item import SelectOptionItem
     from .semantic_similarity_assertion import SemanticSimilarityAssertion
@@ -490,17 +446,25 @@ if typing.TYPE_CHECKING:
     from .source_sync_sitemap_settings_output_mode import SourceSyncSitemapSettingsOutputMode
     from .source_sync_website_settings import SourceSyncWebsiteSettings
     from .source_sync_website_settings_splitter import SourceSyncWebsiteSettingsSplitter
+    from .src_app_http_routes_admin_get_limits_data import SrcAppHttpRoutesAdminGetLimitsData
+    from .src_app_http_routes_admin_get_limits_response import SrcAppHttpRoutesAdminGetLimitsResponse
+    from .src_app_http_routes_admin_upsert_limits_data import SrcAppHttpRoutesAdminUpsertLimitsData
+    from .src_app_http_routes_admin_upsert_limits_response import SrcAppHttpRoutesAdminUpsertLimitsResponse
     from .src_app_http_routes_billing_change_billing_plan_response import (
         SrcAppHttpRoutesBillingChangeBillingPlanResponse,
     )
     from .src_app_http_routes_billing_create_portal_session_data import SrcAppHttpRoutesBillingCreatePortalSessionData
+    from .src_app_http_routes_billing_create_portal_session_response import (
+        SrcAppHttpRoutesBillingCreatePortalSessionResponse,
+    )
+    from .src_app_http_routes_billing_free_plan_usage_data import SrcAppHttpRoutesBillingFreePlanUsageData
     from .src_app_http_routes_billing_free_plan_usage_response import SrcAppHttpRoutesBillingFreePlanUsageResponse
     from .src_app_http_routes_billing_get_billing_data import SrcAppHttpRoutesBillingGetBillingData
     from .src_app_http_routes_billing_get_billing_response import SrcAppHttpRoutesBillingGetBillingResponse
+    from .src_app_http_routes_billing_get_info_get_info_response import SrcAppHttpRoutesBillingGetInfoGetInfoResponse
     from .src_app_http_routes_billing_get_invoices_data import SrcAppHttpRoutesBillingGetInvoicesData
     from .src_app_http_routes_billing_get_invoices_response import SrcAppHttpRoutesBillingGetInvoicesResponse
     from .src_app_http_routes_billing_get_notifications_response import SrcAppHttpRoutesBillingGetNotificationsResponse
-    from .src_app_http_routes_billing_renew_plans_data import SrcAppHttpRoutesBillingRenewPlansData
     from .src_app_http_routes_billing_renew_plans_response import SrcAppHttpRoutesBillingRenewPlansResponse
     from .src_app_http_routes_collection_create_collection_response import (
         SrcAppHttpRoutesCollectionCreateCollectionResponse,
@@ -528,7 +492,6 @@ if typing.TYPE_CHECKING:
     from .src_app_http_routes_collection_list_collection_syncs_response_model import (
         SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
     )
-    from .src_app_http_routes_collection_parse_file_response import SrcAppHttpRoutesCollectionParseFileResponse
     from .src_app_http_routes_collection_sync_table_response import SrcAppHttpRoutesCollectionSyncTableResponse
     from .src_app_http_routes_collection_update_collection_response import (
         SrcAppHttpRoutesCollectionUpdateCollectionResponse,
@@ -543,33 +506,21 @@ if typing.TYPE_CHECKING:
         SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings,
     )
     from .src_app_http_routes_drive_sdk_drive_upload_response import SrcAppHttpRoutesDriveSdkDriveUploadResponse
-    from .src_app_http_routes_inbox_handle_delete_session_delete_response import (
-        SrcAppHttpRoutesInboxHandleDeleteSessionDeleteResponse,
-    )
-    from .src_app_http_routes_inbox_handle_message_incoming_message import (
-        SrcAppHttpRoutesInboxHandleMessageIncomingMessage,
-    )
-    from .src_app_http_routes_inbox_handle_message_incoming_message_content import (
-        SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent,
-    )
-    from .src_app_http_routes_inbox_handle_message_incoming_message_content_type import (
-        SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType,
-    )
-    from .src_app_http_routes_inbox_handle_message_interaction_request import (
-        SrcAppHttpRoutesInboxHandleMessageInteractionRequest,
-    )
-    from .src_app_http_routes_inbox_handle_message_interaction_request_participants_item import (
-        SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem,
-    )
     from .src_app_http_routes_integration_mcp_exchange_mcp_auth_payload import (
         SrcAppHttpRoutesIntegrationMcpExchangeMcpAuthPayload,
     )
-    from .src_app_http_routes_root_get_info_response import SrcAppHttpRoutesRootGetInfoResponse
-    from .src_app_http_routes_tables_get_tool_tables_request_body import SrcAppHttpRoutesTablesGetToolTablesRequestBody
     from .src_app_http_routes_tables_get_tool_tables_response import SrcAppHttpRoutesTablesGetToolTablesResponse
     from .src_app_http_routes_tags_create_tag_payload import SrcAppHttpRoutesTagsCreateTagPayload
     from .src_app_http_routes_tags_update_tag_payload import SrcAppHttpRoutesTagsUpdateTagPayload
     from .src_app_http_routes_trigger_create_trigger_response import SrcAppHttpRoutesTriggerCreateTriggerResponse
+    from .src_app_http_routes_world_interact_incoming_message import SrcAppHttpRoutesWorldInteractIncomingMessage
+    from .src_app_http_routes_world_interact_incoming_message_content import (
+        SrcAppHttpRoutesWorldInteractIncomingMessageContent,
+    )
+    from .src_app_http_routes_world_interact_incoming_message_content_two_item import (
+        SrcAppHttpRoutesWorldInteractIncomingMessageContentTwoItem,
+    )
+    from .src_app_http_routes_world_interact_interaction_request import SrcAppHttpRoutesWorldInteractInteractionRequest
     from .src_handlers_create_copilot_response import SrcHandlersCreateCopilotResponse
     from .src_handlers_create_workflow_response import SrcHandlersCreateWorkflowResponse
     from .src_handlers_create_workflow_revision_response import SrcHandlersCreateWorkflowRevisionResponse
@@ -587,8 +538,6 @@ if typing.TYPE_CHECKING:
     from .src_handlers_update_workflow_environment_response import SrcHandlersUpdateWorkflowEnvironmentResponse
     from .src_handlers_update_workflow_response import SrcHandlersUpdateWorkflowResponse
     from .src_handlers_update_workflow_revision_response import SrcHandlersUpdateWorkflowRevisionResponse
-    from .stage_card_block import StageCardBlock
-    from .stage_card_block_health import StageCardBlockHealth
     from .store_response import StoreResponse
     from .stripe_provider import StripeProvider
     from .stripe_provider_meta import StripeProviderMeta
@@ -600,8 +549,6 @@ if typing.TYPE_CHECKING:
     from .sync_config_output_source_settings import SyncConfigOutputSourceSettings
     from .table import Table
     from .table_and_collection_item import TableAndCollectionItem
-    from .table_block import TableBlock
-    from .table_block_alignment_item import TableBlockAlignmentItem
     from .table_config_output import TableConfigOutput
     from .table_config_output_schema_item import TableConfigOutputSchemaItem
     from .table_item import TableItem
@@ -613,16 +560,14 @@ if typing.TYPE_CHECKING:
     from .table_view_settings_output_row_height import TableViewSettingsOutputRowHeight
     from .tag import Tag
     from .tags_response import TagsResponse
-    from .task_hook import TaskHook
-    from .task_hook_input import TaskHookInput
-    from .task_target_config import TaskTargetConfig
+    from .telegram_trigger_config import TelegramTriggerConfig
+    from .telegram_trigger_config_action import TelegramTriggerConfigAction
     from .template_install_request import TemplateInstallRequest
     from .template_variable import TemplateVariable
     from .test_case import TestCase
     from .test_case_assertions_item import TestCaseAssertionsItem
     from .test_result import TestResult
     from .test_result_status import TestResultStatus
-    from .text_block import TextBlock
     from .text_content import TextContent
     from .text_extractor import TextExtractor
     from .text_extractor_config import TextExtractorConfig
@@ -647,8 +592,6 @@ if typing.TYPE_CHECKING:
     from .units import Units
     from .update_agent_schedule_body import UpdateAgentScheduleBody
     from .update_agent_schedule_body_instructions_item import UpdateAgentScheduleBodyInstructionsItem
-    from .update_checklist_block import UpdateChecklistBlock
-    from .update_checklist_item import UpdateChecklistItem
     from .update_cron_auth_response import UpdateCronAuthResponse
     from .update_drive_node_request import UpdateDriveNodeRequest
     from .update_drive_node_response import UpdateDriveNodeResponse
@@ -657,6 +600,8 @@ if typing.TYPE_CHECKING:
     from .update_feedback_request import UpdateFeedbackRequest
     from .update_feedback_request_priority import UpdateFeedbackRequestPriority
     from .update_feedback_request_status import UpdateFeedbackRequestStatus
+    from .update_organization_credential_request import UpdateOrganizationCredentialRequest
+    from .update_preferences_body import UpdatePreferencesBody
     from .update_scorer_request import UpdateScorerRequest
     from .update_scorer_request_scorer import UpdateScorerRequestScorer
     from .update_tag_response import UpdateTagResponse
@@ -664,6 +609,8 @@ if typing.TYPE_CHECKING:
     from .update_trigger_response import UpdateTriggerResponse
     from .uploaded_file import UploadedFile
     from .upsert_agent_response import UpsertAgentResponse
+    from .upsert_limits_payload import UpsertLimitsPayload
+    from .upsert_limits_request import UpsertLimitsRequest
     from .url_column import UrlColumn
     from .usage import Usage
     from .usage_types import UsageTypes
@@ -722,6 +669,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AddCreditsPayload": ".add_credits_payload",
     "AddCreditsResponse": ".add_credits_response",
     "Agent": ".agent",
+    "AgentConfig": ".agent_config",
+    "AgentConfigModel": ".agent_config_model",
     "AgentDirective": ".agent_directive",
     "AgentExecute": ".agent_execute",
     "AgentRevisionInput": ".agent_revision_input",
@@ -742,6 +691,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AgentTarget": ".agent_target",
     "AgenticModel": ".agentic_model",
     "AiAgent": ".ai_agent",
+    "ApiKeyAuthField": ".api_key_auth_field",
     "ApiKeyAuthType": ".api_key_auth_type",
     "ApiKeyIdentity": ".api_key_identity",
     "ApiKeyIdentityDetails": ".api_key_identity_details",
@@ -764,8 +714,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "BillingUsage": ".billing_usage",
     "BlobAssetContent": ".blob_asset_content",
     "BlobUrlContent": ".blob_url_content",
-    "BlockAction": ".block_action",
-    "BlockActionType": ".block_action_type",
     "BlockConfigItemBoolean": ".block_config_item_boolean",
     "BlockConfigItemJson": ".block_config_item_json",
     "BlockConfigItemLlm": ".block_config_item_llm",
@@ -802,46 +750,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "BodyUpdateUserLogoUsersUserIdProfileImagePut": ".body_update_user_logo_users_user_id_profile_image_put",
     "BodyUploadFilesToDriveDriveFilesPost": ".body_upload_files_to_drive_drive_files_post",
     "BodyUploadPrivateFilesInboxSessionIdFilesPost": ".body_upload_private_files_inbox_session_id_files_post",
-    "BriefingAgentConfig": ".briefing_agent_config",
-    "BriefingConfig": ".briefing_config",
-    "BriefingConfigCreate": ".briefing_config_create",
-    "BriefingConfigUpdate": ".briefing_config_update",
-    "BriefingContentConfig": ".briefing_content_config",
-    "BriefingContentConfigMetricsItem": ".briefing_content_config_metrics_item",
-    "BriefingContentConfigSectionsItem": ".briefing_content_config_sections_item",
-    "BriefingCopilotConfig": ".briefing_copilot_config",
-    "BriefingCopilotConfigCreate": ".briefing_copilot_config_create",
-    "BriefingCopilotConfigUpdate": ".briefing_copilot_config_update",
-    "BriefingExecute": ".briefing_execute",
-    "BriefingLayoutCreate": ".briefing_layout_create",
-    "BriefingLayoutCreateDefaultAccess": ".briefing_layout_create_default_access",
-    "BriefingLayoutRevision": ".briefing_layout_revision",
-    "BriefingLayoutUpdate": ".briefing_layout_update",
-    "BriefingLayoutUpdateDefaultAccess": ".briefing_layout_update_default_access",
-    "BriefingLayoutWithRevision": ".briefing_layout_with_revision",
-    "BriefingLayoutWithRevisionDefaultAccess": ".briefing_layout_with_revision_default_access",
-    "BriefingOutput": ".briefing_output",
-    "BriefingOutputBlocksItem": ".briefing_output_blocks_item",
-    "BriefingRun": ".briefing_run",
-    "BriefingRunStatus": ".briefing_run_status",
-    "BriefingRunSummary": ".briefing_run_summary",
-    "BriefingRunSummaryStatus": ".briefing_run_summary_status",
-    "BriefingSchedule": ".briefing_schedule",
-    "BriefingScheduleDay": ".briefing_schedule_day",
-    "BriefingThresholds": ".briefing_thresholds",
-    "BulletListBlock": ".bullet_list_block",
+    "ByoTarget": ".byo_target",
     "CacheDirective": ".cache_directive",
-    "CalloutBlock": ".callout_block",
-    "CalloutBlockVariant": ".callout_block_variant",
     "CancelResponse": ".cancel_response",
-    "CardBlock": ".card_block",
-    "CardBlockBlocksItem": ".card_block_blocks_item",
-    "CardBlockVariant": ".card_block_variant",
     "CardDisplayField": ".card_display_field",
-    "ChangeBlock": ".change_block",
-    "ChangeBlockChangeType": ".change_block_change_type",
     "Channel": ".channel",
-    "ChatRequest": ".chat_request",
     "CheckBoxColumn": ".check_box_column",
     "Collection": ".collection",
     "CollectionConfig": ".collection_config",
@@ -853,13 +766,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CollectionViewStateOutputViewsValue": ".collection_view_state_output_views_value",
     "ColumnType": ".column_type",
     "ColumnTypeBase": ".column_type_base",
-    "ColumnsBlock": ".columns_block",
-    "ColumnsBlockColumnsItemItem": ".columns_block_columns_item_item",
     "Condition": ".condition",
     "ConditionField": ".condition_field",
     "ConditionOperator": ".condition_operator",
-    "ConfigListResponse": ".config_list_response",
-    "ConfigResponse": ".config_response",
     "ConnectIntegrationRequest": ".connect_integration_request",
     "ConnectIntegrationRequestAuthType": ".connect_integration_request_auth_type",
     "ContainsAssertion": ".contains_assertion",
@@ -867,14 +776,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CopilotConfig": ".copilot_config",
     "CopilotConfigCodeTheme": ".copilot_config_code_theme",
     "CopilotConfigFabValue": ".copilot_config_fab_value",
-    "CopilotConfigListResponse": ".copilot_config_list_response",
     "CopilotConfigMode": ".copilot_config_mode",
-    "CopilotConfigResponse": ".copilot_config_response",
-    "CopilotRunListResponse": ".copilot_run_list_response",
-    "CopilotRunResponse": ".copilot_run_response",
-    "CopilotSchedule": ".copilot_schedule",
     "CreateAgentScheduleBody": ".create_agent_schedule_body",
     "CreateAgentScheduleBodyInstructionsItem": ".create_agent_schedule_body_instructions_item",
+    "CreateConnectionResponse": ".create_connection_response",
+    "CreateCustomClientRequest": ".create_custom_client_request",
     "CreateDriveNodeRequest": ".create_drive_node_request",
     "CreateDriveNodeRequestResourceType": ".create_drive_node_request_resource_type",
     "CreateDriveNodeResponse": ".create_drive_node_response",
@@ -882,7 +788,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreateEvaluationRequest": ".create_evaluation_request",
     "CreateFeedbackRequest": ".create_feedback_request",
     "CreateFeedbackRequestTargetType": ".create_feedback_request_target_type",
-    "CreateIntegrationsResponse": ".create_integrations_response",
     "CreateScorerRequest": ".create_scorer_request",
     "CreateScorerRequestScorer": ".create_scorer_request_scorer",
     "CreateTagResponse": ".create_tag_response",
@@ -895,8 +800,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Data": ".data",
     "DataType": ".data_type",
     "DateTimeColumn": ".date_time_column",
-    "DealCardBlock": ".deal_card_block",
-    "DealCardBlockRiskLevel": ".deal_card_block_risk_level",
+    "DateTimeColumnDateFormat": ".date_time_column_date_format",
+    "DateTimeColumnTimeFormat": ".date_time_column_time_format",
     "DefaultInput": ".default_input",
     "DefaultOutput": ".default_output",
     "DeleteAgentResponse": ".delete_agent_response",
@@ -907,9 +812,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DeleteTriggerResponse": ".delete_trigger_response",
     "DeleteViewResponse": ".delete_view_response",
     "Dependency": ".dependency",
+    "Details": ".details",
     "DeterminedBillingLimits": ".determined_billing_limits",
     "Dimensions": ".dimensions",
-    "DividerBlock": ".divider_block",
     "Document": ".document",
     "DocumentCreatedBy": ".document_created_by",
     "DocumentDataValue": ".document_data_value",
@@ -917,6 +822,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DocumentResponse": ".document_response",
     "DocumentsUpdateRequest": ".documents_update_request",
     "DocumentsUpdateRequestValue": ".documents_update_request_value",
+    "DriveFileMessage": ".drive_file_message",
     "DriveNode": ".drive_node",
     "DriveNodeType": ".drive_node_type",
     "EdgeUi": ".edge_ui",
@@ -927,6 +833,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "EnvironmentDeploymentConfigRevisionLookup": ".environment_deployment_config_revision_lookup",
     "EnvironmentDeploymentDocument": ".environment_deployment_document",
     "EphemeralAgentDirective": ".ephemeral_agent_directive",
+    "EvaluateCheck": ".evaluate_check",
+    "EvaluateCheckAgent": ".evaluate_check_agent",
+    "EvaluateCheckAi": ".evaluate_check_ai",
+    "EvaluateItem": ".evaluate_item",
+    "EvaluateRequest": ".evaluate_request",
     "Evaluation": ".evaluation",
     "EvaluationConfigInput": ".evaluation_config_input",
     "EvaluationConfigInputTarget": ".evaluation_config_input_target",
@@ -975,7 +886,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetInfoResponse": ".get_info_response",
     "GuidedStep": ".guided_step",
     "GuidedStepAction": ".guided_step_action",
-    "HeaderBlock": ".header_block",
     "HealedStep": ".healed_step",
     "HiveActionRequest": ".hive_action_request",
     "HookUpdate": ".hook_update",
@@ -990,7 +900,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "IdentityTypes": ".identity_types",
     "IncomingMessage": ".incoming_message",
     "IncomingMessageContent": ".incoming_message_content",
-    "IncomingMessageContentTwoItem": ".incoming_message_content_two_item",
+    "IncomingMessageContentType": ".incoming_message_content_type",
     "IncomingSerializableEntity": ".incoming_serializable_entity",
     "IncomingSerializableEntityContent": ".incoming_serializable_entity_content",
     "IncomingSerializableEntityContentSixItem": ".incoming_serializable_entity_content_six_item",
@@ -1005,23 +915,24 @@ _dynamic_imports: typing.Dict[str, str] = {
     "IntegrationWithConnections": ".integration_with_connections",
     "IntegrationWithConnectionsId": ".integration_with_connections_id",
     "InteractionRequest": ".interaction_request",
+    "InteractionRequestParticipantsItem": ".interaction_request_participants_item",
     "Interval": ".interval",
     "IntervalTypes": ".interval_types",
     "Invoice": ".invoice",
     "InvoiceMeta": ".invoice_meta",
     "InvoiceStatus": ".invoice_status",
+    "IssueOrganizationCredentialRequest": ".issue_organization_credential_request",
+    "IssueOrganizationCredentialResponse": ".issue_organization_credential_response",
     "JsonColumn": ".json_column",
     "KanbanViewInput": ".kanban_view_input",
     "KanbanViewOutput": ".kanban_view_output",
     "KanbanViewSettingsInput": ".kanban_view_settings_input",
     "KanbanViewSettingsOutput": ".kanban_view_settings_output",
-    "LayoutListResponse": ".layout_list_response",
-    "LayoutRequest": ".layout_request",
-    "LayoutResponse": ".layout_response",
     "LegacyIdentity": ".legacy_identity",
     "LegacyIdentityDetails": ".legacy_identity_details",
     "LineItem": ".line_item",
     "ListDriveNodesResponse": ".list_drive_nodes_response",
+    "ListOrganizationCredentialsResponse": ".list_organization_credentials_response",
     "ListScorersResponse": ".list_scorers_response",
     "ListScorersResponseScorersItem": ".list_scorers_response_scorers_item",
     "ListTagsResponse": ".list_tags_response",
@@ -1037,8 +948,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "MentionParticipant": ".mention_participant",
     "Message": ".message",
     "MessageChunk": ".message_chunk",
-    "MetricBlock": ".metric_block",
-    "MetricBlockChangeDirection": ".metric_block_change_direction",
     "ModelProvider": ".model_provider",
     "MoveDriveNodeRequest": ".move_drive_node_request",
     "MoveDriveNodeResponse": ".move_drive_node_response",
@@ -1066,6 +975,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "NumberColumnMinValue": ".number_column_min_value",
     "OAuthAuthType": ".o_auth_auth_type",
     "Organization": ".organization",
+    "OrganizationCredential": ".organization_credential",
+    "OrganizationCredentialPrivateKeyResponse": ".organization_credential_private_key_response",
+    "OrganizationCredentialStatus": ".organization_credential_status",
     "OrganizationMemberInvite": ".organization_member_invite",
     "OrganizationMemberInviteRolesItem": ".organization_member_invite_roles_item",
     "ParagraphSplitterConfig": ".paragraph_splitter_config",
@@ -1099,35 +1011,28 @@ _dynamic_imports: typing.Dict[str, str] = {
     "RenameRequest": ".rename_request",
     "RenameResponse": ".rename_response",
     "ReqBody": ".req_body",
+    "RequestBody": ".request_body",
     "Response": ".response",
     "ResponseModel": ".response_model",
     "ResponseModelUsage": ".response_model_usage",
     "Result": ".result",
     "ReviewOption": ".review_option",
-    "RevisionListResponse": ".revision_list_response",
+    "RevokeOrganizationMemberInvite": ".revoke_organization_member_invite",
     "RotateApiKeysRequest": ".rotate_api_keys_request",
-    "RowBlock": ".row_block",
-    "RowBlockAlign": ".row_block_align",
-    "RowBlockBlocksItem": ".row_block_blocks_item",
-    "RowBlockGap": ".row_block_gap",
     "Rule": ".rule",
     "RulesInput": ".rules_input",
     "RulesOutput": ".rules_output",
     "RunEvaluationRequest": ".run_evaluation_request",
     "RunEvaluationRequestTargetOverride": ".run_evaluation_request_target_override",
-    "RunListResponse": ".run_list_response",
     "RunLog": ".run_log",
     "RunLogPagination": ".run_log_pagination",
-    "RunResponse": ".run_response",
     "Schedule": ".schedule",
-    "SchedulerPayload": ".scheduler_payload",
     "SchemaResponse": ".schema_response",
     "ScoreField": ".score_field",
     "ScorerConfigRuntime": ".scorer_config_runtime",
     "ScorerResponse": ".scorer_response",
     "ScorerResponseScorer": ".scorer_response_scorer",
     "ScoutHook": ".scout_hook",
-    "ScoutHookConfigHttp": ".scout_hook_config_http",
     "ScoutHookEventDiscriminator": ".scout_hook_event_discriminator",
     "ScoutHookEventDiscriminatorType": ".scout_hook_event_discriminator_type",
     "ScoutHookEventTrigger": ".scout_hook_event_trigger",
@@ -1137,8 +1042,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ScoutHookUpdateTriggeringEventsItem": ".scout_hook_update_triggering_events_item",
     "ScoutHooksResponse": ".scout_hooks_response",
     "ScoutUser": ".scout_user",
-    "SectionBlock": ".section_block",
-    "SectionBlockBlocksItem": ".section_block_blocks_item",
     "SelectColumn": ".select_column",
     "SelectOptionItem": ".select_option_item",
     "SemanticSimilarityAssertion": ".semantic_similarity_assertion",
@@ -1192,15 +1095,21 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SourceSyncSitemapSettingsOutputMode": ".source_sync_sitemap_settings_output_mode",
     "SourceSyncWebsiteSettings": ".source_sync_website_settings",
     "SourceSyncWebsiteSettingsSplitter": ".source_sync_website_settings_splitter",
+    "SrcAppHttpRoutesAdminGetLimitsData": ".src_app_http_routes_admin_get_limits_data",
+    "SrcAppHttpRoutesAdminGetLimitsResponse": ".src_app_http_routes_admin_get_limits_response",
+    "SrcAppHttpRoutesAdminUpsertLimitsData": ".src_app_http_routes_admin_upsert_limits_data",
+    "SrcAppHttpRoutesAdminUpsertLimitsResponse": ".src_app_http_routes_admin_upsert_limits_response",
     "SrcAppHttpRoutesBillingChangeBillingPlanResponse": ".src_app_http_routes_billing_change_billing_plan_response",
     "SrcAppHttpRoutesBillingCreatePortalSessionData": ".src_app_http_routes_billing_create_portal_session_data",
+    "SrcAppHttpRoutesBillingCreatePortalSessionResponse": ".src_app_http_routes_billing_create_portal_session_response",
+    "SrcAppHttpRoutesBillingFreePlanUsageData": ".src_app_http_routes_billing_free_plan_usage_data",
     "SrcAppHttpRoutesBillingFreePlanUsageResponse": ".src_app_http_routes_billing_free_plan_usage_response",
     "SrcAppHttpRoutesBillingGetBillingData": ".src_app_http_routes_billing_get_billing_data",
     "SrcAppHttpRoutesBillingGetBillingResponse": ".src_app_http_routes_billing_get_billing_response",
+    "SrcAppHttpRoutesBillingGetInfoGetInfoResponse": ".src_app_http_routes_billing_get_info_get_info_response",
     "SrcAppHttpRoutesBillingGetInvoicesData": ".src_app_http_routes_billing_get_invoices_data",
     "SrcAppHttpRoutesBillingGetInvoicesResponse": ".src_app_http_routes_billing_get_invoices_response",
     "SrcAppHttpRoutesBillingGetNotificationsResponse": ".src_app_http_routes_billing_get_notifications_response",
-    "SrcAppHttpRoutesBillingRenewPlansData": ".src_app_http_routes_billing_renew_plans_data",
     "SrcAppHttpRoutesBillingRenewPlansResponse": ".src_app_http_routes_billing_renew_plans_response",
     "SrcAppHttpRoutesCollectionCreateCollectionResponse": ".src_app_http_routes_collection_create_collection_response",
     "SrcAppHttpRoutesCollectionCreateSyncResponse": ".src_app_http_routes_collection_create_sync_response",
@@ -1218,7 +1127,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SrcAppHttpRoutesCollectionGetTableResponse": ".src_app_http_routes_collection_get_table_response",
     "SrcAppHttpRoutesCollectionGetTablesResponse": ".src_app_http_routes_collection_get_tables_response",
     "SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel": ".src_app_http_routes_collection_list_collection_syncs_response_model",
-    "SrcAppHttpRoutesCollectionParseFileResponse": ".src_app_http_routes_collection_parse_file_response",
     "SrcAppHttpRoutesCollectionSyncTableResponse": ".src_app_http_routes_collection_sync_table_response",
     "SrcAppHttpRoutesCollectionUpdateCollectionResponse": ".src_app_http_routes_collection_update_collection_response",
     "SrcAppHttpRoutesCollectionUpdateDocumentResponse": ".src_app_http_routes_collection_update_document_response",
@@ -1227,19 +1135,15 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SrcAppHttpRoutesDriveCreateDriveCrawlPayload": ".src_app_http_routes_drive_create_drive_crawl_payload",
     "SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings": ".src_app_http_routes_drive_create_drive_crawl_payload_source_sync_settings",
     "SrcAppHttpRoutesDriveSdkDriveUploadResponse": ".src_app_http_routes_drive_sdk_drive_upload_response",
-    "SrcAppHttpRoutesInboxHandleDeleteSessionDeleteResponse": ".src_app_http_routes_inbox_handle_delete_session_delete_response",
-    "SrcAppHttpRoutesInboxHandleMessageIncomingMessage": ".src_app_http_routes_inbox_handle_message_incoming_message",
-    "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent": ".src_app_http_routes_inbox_handle_message_incoming_message_content",
-    "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType": ".src_app_http_routes_inbox_handle_message_incoming_message_content_type",
-    "SrcAppHttpRoutesInboxHandleMessageInteractionRequest": ".src_app_http_routes_inbox_handle_message_interaction_request",
-    "SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem": ".src_app_http_routes_inbox_handle_message_interaction_request_participants_item",
     "SrcAppHttpRoutesIntegrationMcpExchangeMcpAuthPayload": ".src_app_http_routes_integration_mcp_exchange_mcp_auth_payload",
-    "SrcAppHttpRoutesRootGetInfoResponse": ".src_app_http_routes_root_get_info_response",
-    "SrcAppHttpRoutesTablesGetToolTablesRequestBody": ".src_app_http_routes_tables_get_tool_tables_request_body",
     "SrcAppHttpRoutesTablesGetToolTablesResponse": ".src_app_http_routes_tables_get_tool_tables_response",
     "SrcAppHttpRoutesTagsCreateTagPayload": ".src_app_http_routes_tags_create_tag_payload",
     "SrcAppHttpRoutesTagsUpdateTagPayload": ".src_app_http_routes_tags_update_tag_payload",
     "SrcAppHttpRoutesTriggerCreateTriggerResponse": ".src_app_http_routes_trigger_create_trigger_response",
+    "SrcAppHttpRoutesWorldInteractIncomingMessage": ".src_app_http_routes_world_interact_incoming_message",
+    "SrcAppHttpRoutesWorldInteractIncomingMessageContent": ".src_app_http_routes_world_interact_incoming_message_content",
+    "SrcAppHttpRoutesWorldInteractIncomingMessageContentTwoItem": ".src_app_http_routes_world_interact_incoming_message_content_two_item",
+    "SrcAppHttpRoutesWorldInteractInteractionRequest": ".src_app_http_routes_world_interact_interaction_request",
     "SrcHandlersCreateCopilotResponse": ".src_handlers_create_copilot_response",
     "SrcHandlersCreateWorkflowResponse": ".src_handlers_create_workflow_response",
     "SrcHandlersCreateWorkflowRevisionResponse": ".src_handlers_create_workflow_revision_response",
@@ -1257,8 +1161,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SrcHandlersUpdateWorkflowEnvironmentResponse": ".src_handlers_update_workflow_environment_response",
     "SrcHandlersUpdateWorkflowResponse": ".src_handlers_update_workflow_response",
     "SrcHandlersUpdateWorkflowRevisionResponse": ".src_handlers_update_workflow_revision_response",
-    "StageCardBlock": ".stage_card_block",
-    "StageCardBlockHealth": ".stage_card_block_health",
     "StoreResponse": ".store_response",
     "StripeProvider": ".stripe_provider",
     "StripeProviderMeta": ".stripe_provider_meta",
@@ -1270,8 +1172,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SyncConfigOutputSourceSettings": ".sync_config_output_source_settings",
     "Table": ".table",
     "TableAndCollectionItem": ".table_and_collection_item",
-    "TableBlock": ".table_block",
-    "TableBlockAlignmentItem": ".table_block_alignment_item",
     "TableConfigOutput": ".table_config_output",
     "TableConfigOutputSchemaItem": ".table_config_output_schema_item",
     "TableItem": ".table_item",
@@ -1283,16 +1183,14 @@ _dynamic_imports: typing.Dict[str, str] = {
     "TableViewSettingsOutputRowHeight": ".table_view_settings_output_row_height",
     "Tag": ".tag",
     "TagsResponse": ".tags_response",
-    "TaskHook": ".task_hook",
-    "TaskHookInput": ".task_hook_input",
-    "TaskTargetConfig": ".task_target_config",
+    "TelegramTriggerConfig": ".telegram_trigger_config",
+    "TelegramTriggerConfigAction": ".telegram_trigger_config_action",
     "TemplateInstallRequest": ".template_install_request",
     "TemplateVariable": ".template_variable",
     "TestCase": ".test_case",
     "TestCaseAssertionsItem": ".test_case_assertions_item",
     "TestResult": ".test_result",
     "TestResultStatus": ".test_result_status",
-    "TextBlock": ".text_block",
     "TextContent": ".text_content",
     "TextExtractor": ".text_extractor",
     "TextExtractorConfig": ".text_extractor_config",
@@ -1318,8 +1216,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Units": ".units",
     "UpdateAgentScheduleBody": ".update_agent_schedule_body",
     "UpdateAgentScheduleBodyInstructionsItem": ".update_agent_schedule_body_instructions_item",
-    "UpdateChecklistBlock": ".update_checklist_block",
-    "UpdateChecklistItem": ".update_checklist_item",
     "UpdateCronAuthResponse": ".update_cron_auth_response",
     "UpdateDriveNodeRequest": ".update_drive_node_request",
     "UpdateDriveNodeResponse": ".update_drive_node_response",
@@ -1328,6 +1224,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "UpdateFeedbackRequest": ".update_feedback_request",
     "UpdateFeedbackRequestPriority": ".update_feedback_request_priority",
     "UpdateFeedbackRequestStatus": ".update_feedback_request_status",
+    "UpdateOrganizationCredentialRequest": ".update_organization_credential_request",
+    "UpdatePreferencesBody": ".update_preferences_body",
     "UpdateScorerRequest": ".update_scorer_request",
     "UpdateScorerRequestScorer": ".update_scorer_request_scorer",
     "UpdateTagResponse": ".update_tag_response",
@@ -1335,6 +1233,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "UpdateTriggerResponse": ".update_trigger_response",
     "UploadedFile": ".uploaded_file",
     "UpsertAgentResponse": ".upsert_agent_response",
+    "UpsertLimitsPayload": ".upsert_limits_payload",
+    "UpsertLimitsRequest": ".upsert_limits_request",
     "UrlColumn": ".url_column",
     "Usage": ".usage",
     "UsageTypes": ".usage_types",
@@ -1417,6 +1317,8 @@ __all__ = [
     "AddCreditsPayload",
     "AddCreditsResponse",
     "Agent",
+    "AgentConfig",
+    "AgentConfigModel",
     "AgentDirective",
     "AgentExecute",
     "AgentRevisionInput",
@@ -1437,6 +1339,7 @@ __all__ = [
     "AgentTarget",
     "AgenticModel",
     "AiAgent",
+    "ApiKeyAuthField",
     "ApiKeyAuthType",
     "ApiKeyIdentity",
     "ApiKeyIdentityDetails",
@@ -1459,8 +1362,6 @@ __all__ = [
     "BillingUsage",
     "BlobAssetContent",
     "BlobUrlContent",
-    "BlockAction",
-    "BlockActionType",
     "BlockConfigItemBoolean",
     "BlockConfigItemJson",
     "BlockConfigItemLlm",
@@ -1497,46 +1398,11 @@ __all__ = [
     "BodyUpdateUserLogoUsersUserIdProfileImagePut",
     "BodyUploadFilesToDriveDriveFilesPost",
     "BodyUploadPrivateFilesInboxSessionIdFilesPost",
-    "BriefingAgentConfig",
-    "BriefingConfig",
-    "BriefingConfigCreate",
-    "BriefingConfigUpdate",
-    "BriefingContentConfig",
-    "BriefingContentConfigMetricsItem",
-    "BriefingContentConfigSectionsItem",
-    "BriefingCopilotConfig",
-    "BriefingCopilotConfigCreate",
-    "BriefingCopilotConfigUpdate",
-    "BriefingExecute",
-    "BriefingLayoutCreate",
-    "BriefingLayoutCreateDefaultAccess",
-    "BriefingLayoutRevision",
-    "BriefingLayoutUpdate",
-    "BriefingLayoutUpdateDefaultAccess",
-    "BriefingLayoutWithRevision",
-    "BriefingLayoutWithRevisionDefaultAccess",
-    "BriefingOutput",
-    "BriefingOutputBlocksItem",
-    "BriefingRun",
-    "BriefingRunStatus",
-    "BriefingRunSummary",
-    "BriefingRunSummaryStatus",
-    "BriefingSchedule",
-    "BriefingScheduleDay",
-    "BriefingThresholds",
-    "BulletListBlock",
+    "ByoTarget",
     "CacheDirective",
-    "CalloutBlock",
-    "CalloutBlockVariant",
     "CancelResponse",
-    "CardBlock",
-    "CardBlockBlocksItem",
-    "CardBlockVariant",
     "CardDisplayField",
-    "ChangeBlock",
-    "ChangeBlockChangeType",
     "Channel",
-    "ChatRequest",
     "CheckBoxColumn",
     "Collection",
     "CollectionConfig",
@@ -1548,13 +1414,9 @@ __all__ = [
     "CollectionViewStateOutputViewsValue",
     "ColumnType",
     "ColumnTypeBase",
-    "ColumnsBlock",
-    "ColumnsBlockColumnsItemItem",
     "Condition",
     "ConditionField",
     "ConditionOperator",
-    "ConfigListResponse",
-    "ConfigResponse",
     "ConnectIntegrationRequest",
     "ConnectIntegrationRequestAuthType",
     "ContainsAssertion",
@@ -1562,14 +1424,11 @@ __all__ = [
     "CopilotConfig",
     "CopilotConfigCodeTheme",
     "CopilotConfigFabValue",
-    "CopilotConfigListResponse",
     "CopilotConfigMode",
-    "CopilotConfigResponse",
-    "CopilotRunListResponse",
-    "CopilotRunResponse",
-    "CopilotSchedule",
     "CreateAgentScheduleBody",
     "CreateAgentScheduleBodyInstructionsItem",
+    "CreateConnectionResponse",
+    "CreateCustomClientRequest",
     "CreateDriveNodeRequest",
     "CreateDriveNodeRequestResourceType",
     "CreateDriveNodeResponse",
@@ -1577,7 +1436,6 @@ __all__ = [
     "CreateEvaluationRequest",
     "CreateFeedbackRequest",
     "CreateFeedbackRequestTargetType",
-    "CreateIntegrationsResponse",
     "CreateScorerRequest",
     "CreateScorerRequestScorer",
     "CreateTagResponse",
@@ -1590,8 +1448,8 @@ __all__ = [
     "Data",
     "DataType",
     "DateTimeColumn",
-    "DealCardBlock",
-    "DealCardBlockRiskLevel",
+    "DateTimeColumnDateFormat",
+    "DateTimeColumnTimeFormat",
     "DefaultInput",
     "DefaultOutput",
     "DeleteAgentResponse",
@@ -1602,9 +1460,9 @@ __all__ = [
     "DeleteTriggerResponse",
     "DeleteViewResponse",
     "Dependency",
+    "Details",
     "DeterminedBillingLimits",
     "Dimensions",
-    "DividerBlock",
     "Document",
     "DocumentCreatedBy",
     "DocumentDataValue",
@@ -1612,6 +1470,7 @@ __all__ = [
     "DocumentResponse",
     "DocumentsUpdateRequest",
     "DocumentsUpdateRequestValue",
+    "DriveFileMessage",
     "DriveNode",
     "DriveNodeType",
     "EdgeUi",
@@ -1622,6 +1481,11 @@ __all__ = [
     "EnvironmentDeploymentConfigRevisionLookup",
     "EnvironmentDeploymentDocument",
     "EphemeralAgentDirective",
+    "EvaluateCheck",
+    "EvaluateCheckAgent",
+    "EvaluateCheckAi",
+    "EvaluateItem",
+    "EvaluateRequest",
     "Evaluation",
     "EvaluationConfigInput",
     "EvaluationConfigInputTarget",
@@ -1670,7 +1534,6 @@ __all__ = [
     "GetInfoResponse",
     "GuidedStep",
     "GuidedStepAction",
-    "HeaderBlock",
     "HealedStep",
     "HiveActionRequest",
     "HookUpdate",
@@ -1685,7 +1548,7 @@ __all__ = [
     "IdentityTypes",
     "IncomingMessage",
     "IncomingMessageContent",
-    "IncomingMessageContentTwoItem",
+    "IncomingMessageContentType",
     "IncomingSerializableEntity",
     "IncomingSerializableEntityContent",
     "IncomingSerializableEntityContentSixItem",
@@ -1700,23 +1563,24 @@ __all__ = [
     "IntegrationWithConnections",
     "IntegrationWithConnectionsId",
     "InteractionRequest",
+    "InteractionRequestParticipantsItem",
     "Interval",
     "IntervalTypes",
     "Invoice",
     "InvoiceMeta",
     "InvoiceStatus",
+    "IssueOrganizationCredentialRequest",
+    "IssueOrganizationCredentialResponse",
     "JsonColumn",
     "KanbanViewInput",
     "KanbanViewOutput",
     "KanbanViewSettingsInput",
     "KanbanViewSettingsOutput",
-    "LayoutListResponse",
-    "LayoutRequest",
-    "LayoutResponse",
     "LegacyIdentity",
     "LegacyIdentityDetails",
     "LineItem",
     "ListDriveNodesResponse",
+    "ListOrganizationCredentialsResponse",
     "ListScorersResponse",
     "ListScorersResponseScorersItem",
     "ListTagsResponse",
@@ -1732,8 +1596,6 @@ __all__ = [
     "MentionParticipant",
     "Message",
     "MessageChunk",
-    "MetricBlock",
-    "MetricBlockChangeDirection",
     "ModelProvider",
     "MoveDriveNodeRequest",
     "MoveDriveNodeResponse",
@@ -1761,6 +1623,9 @@ __all__ = [
     "NumberColumnMinValue",
     "OAuthAuthType",
     "Organization",
+    "OrganizationCredential",
+    "OrganizationCredentialPrivateKeyResponse",
+    "OrganizationCredentialStatus",
     "OrganizationMemberInvite",
     "OrganizationMemberInviteRolesItem",
     "ParagraphSplitterConfig",
@@ -1794,35 +1659,28 @@ __all__ = [
     "RenameRequest",
     "RenameResponse",
     "ReqBody",
+    "RequestBody",
     "Response",
     "ResponseModel",
     "ResponseModelUsage",
     "Result",
     "ReviewOption",
-    "RevisionListResponse",
+    "RevokeOrganizationMemberInvite",
     "RotateApiKeysRequest",
-    "RowBlock",
-    "RowBlockAlign",
-    "RowBlockBlocksItem",
-    "RowBlockGap",
     "Rule",
     "RulesInput",
     "RulesOutput",
     "RunEvaluationRequest",
     "RunEvaluationRequestTargetOverride",
-    "RunListResponse",
     "RunLog",
     "RunLogPagination",
-    "RunResponse",
     "Schedule",
-    "SchedulerPayload",
     "SchemaResponse",
     "ScoreField",
     "ScorerConfigRuntime",
     "ScorerResponse",
     "ScorerResponseScorer",
     "ScoutHook",
-    "ScoutHookConfigHttp",
     "ScoutHookEventDiscriminator",
     "ScoutHookEventDiscriminatorType",
     "ScoutHookEventTrigger",
@@ -1832,8 +1690,6 @@ __all__ = [
     "ScoutHookUpdateTriggeringEventsItem",
     "ScoutHooksResponse",
     "ScoutUser",
-    "SectionBlock",
-    "SectionBlockBlocksItem",
     "SelectColumn",
     "SelectOptionItem",
     "SemanticSimilarityAssertion",
@@ -1887,15 +1743,21 @@ __all__ = [
     "SourceSyncSitemapSettingsOutputMode",
     "SourceSyncWebsiteSettings",
     "SourceSyncWebsiteSettingsSplitter",
+    "SrcAppHttpRoutesAdminGetLimitsData",
+    "SrcAppHttpRoutesAdminGetLimitsResponse",
+    "SrcAppHttpRoutesAdminUpsertLimitsData",
+    "SrcAppHttpRoutesAdminUpsertLimitsResponse",
     "SrcAppHttpRoutesBillingChangeBillingPlanResponse",
     "SrcAppHttpRoutesBillingCreatePortalSessionData",
+    "SrcAppHttpRoutesBillingCreatePortalSessionResponse",
+    "SrcAppHttpRoutesBillingFreePlanUsageData",
     "SrcAppHttpRoutesBillingFreePlanUsageResponse",
     "SrcAppHttpRoutesBillingGetBillingData",
     "SrcAppHttpRoutesBillingGetBillingResponse",
+    "SrcAppHttpRoutesBillingGetInfoGetInfoResponse",
     "SrcAppHttpRoutesBillingGetInvoicesData",
     "SrcAppHttpRoutesBillingGetInvoicesResponse",
     "SrcAppHttpRoutesBillingGetNotificationsResponse",
-    "SrcAppHttpRoutesBillingRenewPlansData",
     "SrcAppHttpRoutesBillingRenewPlansResponse",
     "SrcAppHttpRoutesCollectionCreateCollectionResponse",
     "SrcAppHttpRoutesCollectionCreateSyncResponse",
@@ -1913,7 +1775,6 @@ __all__ = [
     "SrcAppHttpRoutesCollectionGetTableResponse",
     "SrcAppHttpRoutesCollectionGetTablesResponse",
     "SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel",
-    "SrcAppHttpRoutesCollectionParseFileResponse",
     "SrcAppHttpRoutesCollectionSyncTableResponse",
     "SrcAppHttpRoutesCollectionUpdateCollectionResponse",
     "SrcAppHttpRoutesCollectionUpdateDocumentResponse",
@@ -1922,19 +1783,15 @@ __all__ = [
     "SrcAppHttpRoutesDriveCreateDriveCrawlPayload",
     "SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings",
     "SrcAppHttpRoutesDriveSdkDriveUploadResponse",
-    "SrcAppHttpRoutesInboxHandleDeleteSessionDeleteResponse",
-    "SrcAppHttpRoutesInboxHandleMessageIncomingMessage",
-    "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent",
-    "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType",
-    "SrcAppHttpRoutesInboxHandleMessageInteractionRequest",
-    "SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem",
     "SrcAppHttpRoutesIntegrationMcpExchangeMcpAuthPayload",
-    "SrcAppHttpRoutesRootGetInfoResponse",
-    "SrcAppHttpRoutesTablesGetToolTablesRequestBody",
     "SrcAppHttpRoutesTablesGetToolTablesResponse",
     "SrcAppHttpRoutesTagsCreateTagPayload",
     "SrcAppHttpRoutesTagsUpdateTagPayload",
     "SrcAppHttpRoutesTriggerCreateTriggerResponse",
+    "SrcAppHttpRoutesWorldInteractIncomingMessage",
+    "SrcAppHttpRoutesWorldInteractIncomingMessageContent",
+    "SrcAppHttpRoutesWorldInteractIncomingMessageContentTwoItem",
+    "SrcAppHttpRoutesWorldInteractInteractionRequest",
     "SrcHandlersCreateCopilotResponse",
     "SrcHandlersCreateWorkflowResponse",
     "SrcHandlersCreateWorkflowRevisionResponse",
@@ -1952,8 +1809,6 @@ __all__ = [
     "SrcHandlersUpdateWorkflowEnvironmentResponse",
     "SrcHandlersUpdateWorkflowResponse",
     "SrcHandlersUpdateWorkflowRevisionResponse",
-    "StageCardBlock",
-    "StageCardBlockHealth",
     "StoreResponse",
     "StripeProvider",
     "StripeProviderMeta",
@@ -1965,8 +1820,6 @@ __all__ = [
     "SyncConfigOutputSourceSettings",
     "Table",
     "TableAndCollectionItem",
-    "TableBlock",
-    "TableBlockAlignmentItem",
     "TableConfigOutput",
     "TableConfigOutputSchemaItem",
     "TableItem",
@@ -1978,16 +1831,14 @@ __all__ = [
     "TableViewSettingsOutputRowHeight",
     "Tag",
     "TagsResponse",
-    "TaskHook",
-    "TaskHookInput",
-    "TaskTargetConfig",
+    "TelegramTriggerConfig",
+    "TelegramTriggerConfigAction",
     "TemplateInstallRequest",
     "TemplateVariable",
     "TestCase",
     "TestCaseAssertionsItem",
     "TestResult",
     "TestResultStatus",
-    "TextBlock",
     "TextContent",
     "TextExtractor",
     "TextExtractorConfig",
@@ -2013,8 +1864,6 @@ __all__ = [
     "Units",
     "UpdateAgentScheduleBody",
     "UpdateAgentScheduleBodyInstructionsItem",
-    "UpdateChecklistBlock",
-    "UpdateChecklistItem",
     "UpdateCronAuthResponse",
     "UpdateDriveNodeRequest",
     "UpdateDriveNodeResponse",
@@ -2023,6 +1872,8 @@ __all__ = [
     "UpdateFeedbackRequest",
     "UpdateFeedbackRequestPriority",
     "UpdateFeedbackRequestStatus",
+    "UpdateOrganizationCredentialRequest",
+    "UpdatePreferencesBody",
     "UpdateScorerRequest",
     "UpdateScorerRequestScorer",
     "UpdateTagResponse",
@@ -2030,6 +1881,8 @@ __all__ = [
     "UpdateTriggerResponse",
     "UploadedFile",
     "UpsertAgentResponse",
+    "UpsertLimitsPayload",
+    "UpsertLimitsRequest",
     "UrlColumn",
     "Usage",
     "UsageTypes",

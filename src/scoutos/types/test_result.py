@@ -96,6 +96,11 @@ class TestResult(UncheckedBaseModel):
     Test case metadata passed through
     """
 
+    tags: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
+    """
+    Tags from the original test case
+    """
+
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
     else:
