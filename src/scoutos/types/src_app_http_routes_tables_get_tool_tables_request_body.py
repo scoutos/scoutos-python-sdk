@@ -5,11 +5,13 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .sync import Sync
+from .table_and_collection_item import TableAndCollectionItem
 
 
-class SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel(UncheckedBaseModel):
-    syncs: typing.List[Sync]
+class SrcAppHttpRoutesTablesGetToolTablesRequestBody(UncheckedBaseModel):
+    query: typing.Optional[str] = None
+    limit: typing.Optional[int] = None
+    include_tables: typing.Optional[typing.List[TableAndCollectionItem]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

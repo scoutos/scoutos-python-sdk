@@ -44,6 +44,8 @@ if typing.TYPE_CHECKING:
     from .api_key_identity_details import ApiKeyIdentityDetails
     from .assertion_result import AssertionResult
     from .assertion_result_assertion_type import AssertionResultAssertionType
+    from .async_interaction_accepted_response import AsyncInteractionAcceptedResponse
+    from .async_interaction_request import AsyncInteractionRequest
     from .atom_request import AtomRequest
     from .automation_hook import AutomationHook
     from .automation_hook_input import AutomationHookInput
@@ -236,7 +238,6 @@ if typing.TYPE_CHECKING:
     from .guided_step import GuidedStep
     from .guided_step_action import GuidedStepAction
     from .healed_step import HealedStep
-    from .hive_action_request import HiveActionRequest
     from .hook_update import HookUpdate
     from .hooks_list_response import HooksListResponse
     from .html_2_text import Html2Text
@@ -249,7 +250,7 @@ if typing.TYPE_CHECKING:
     from .identity_types import IdentityTypes
     from .incoming_message import IncomingMessage
     from .incoming_message_content import IncomingMessageContent
-    from .incoming_message_content_type import IncomingMessageContentType
+    from .incoming_message_content_two_item import IncomingMessageContentTwoItem
     from .incoming_serializable_entity import IncomingSerializableEntity
     from .incoming_serializable_entity_content import IncomingSerializableEntityContent
     from .incoming_serializable_entity_content_six_item import IncomingSerializableEntityContentSixItem
@@ -264,7 +265,6 @@ if typing.TYPE_CHECKING:
     from .integration_with_connections import IntegrationWithConnections
     from .integration_with_connections_id import IntegrationWithConnectionsId
     from .interaction_request import InteractionRequest
-    from .interaction_request_participants_item import InteractionRequestParticipantsItem
     from .interval import Interval
     from .interval_types import IntervalTypes
     from .invoice import Invoice
@@ -360,7 +360,6 @@ if typing.TYPE_CHECKING:
     from .rename_request import RenameRequest
     from .rename_response import RenameResponse
     from .req_body import ReqBody
-    from .request_body import RequestBody
     from .response import Response
     from .response_model import ResponseModel
     from .response_model_usage import ResponseModelUsage
@@ -453,7 +452,6 @@ if typing.TYPE_CHECKING:
     from .src_app_http_routes_billing_change_billing_plan_response import (
         SrcAppHttpRoutesBillingChangeBillingPlanResponse,
     )
-    from .src_app_http_routes_billing_create_portal_session_data import SrcAppHttpRoutesBillingCreatePortalSessionData
     from .src_app_http_routes_billing_create_portal_session_response import (
         SrcAppHttpRoutesBillingCreatePortalSessionResponse,
     )
@@ -465,6 +463,7 @@ if typing.TYPE_CHECKING:
     from .src_app_http_routes_billing_get_invoices_data import SrcAppHttpRoutesBillingGetInvoicesData
     from .src_app_http_routes_billing_get_invoices_response import SrcAppHttpRoutesBillingGetInvoicesResponse
     from .src_app_http_routes_billing_get_notifications_response import SrcAppHttpRoutesBillingGetNotificationsResponse
+    from .src_app_http_routes_billing_renew_plans_data import SrcAppHttpRoutesBillingRenewPlansData
     from .src_app_http_routes_billing_renew_plans_response import SrcAppHttpRoutesBillingRenewPlansResponse
     from .src_app_http_routes_collection_create_collection_response import (
         SrcAppHttpRoutesCollectionCreateCollectionResponse,
@@ -489,9 +488,10 @@ if typing.TYPE_CHECKING:
     from .src_app_http_routes_collection_get_syncs_response import SrcAppHttpRoutesCollectionGetSyncsResponse
     from .src_app_http_routes_collection_get_table_response import SrcAppHttpRoutesCollectionGetTableResponse
     from .src_app_http_routes_collection_get_tables_response import SrcAppHttpRoutesCollectionGetTablesResponse
-    from .src_app_http_routes_collection_list_collection_syncs_response_model import (
-        SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
+    from .src_app_http_routes_collection_list_source_archetypes_response_model import (
+        SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel,
     )
+    from .src_app_http_routes_collection_parse_file_response import SrcAppHttpRoutesCollectionParseFileResponse
     from .src_app_http_routes_collection_sync_table_response import SrcAppHttpRoutesCollectionSyncTableResponse
     from .src_app_http_routes_collection_update_collection_response import (
         SrcAppHttpRoutesCollectionUpdateCollectionResponse,
@@ -506,21 +506,28 @@ if typing.TYPE_CHECKING:
         SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings,
     )
     from .src_app_http_routes_drive_sdk_drive_upload_response import SrcAppHttpRoutesDriveSdkDriveUploadResponse
+    from .src_app_http_routes_inbox_handle_message_incoming_message import (
+        SrcAppHttpRoutesInboxHandleMessageIncomingMessage,
+    )
+    from .src_app_http_routes_inbox_handle_message_incoming_message_content import (
+        SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent,
+    )
+    from .src_app_http_routes_inbox_handle_message_incoming_message_content_type import (
+        SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType,
+    )
+    from .src_app_http_routes_inbox_handle_message_interaction_request import (
+        SrcAppHttpRoutesInboxHandleMessageInteractionRequest,
+    )
+    from .src_app_http_routes_inbox_handle_message_interaction_request_participants_item import (
+        SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem,
+    )
+    from .src_app_http_routes_integration_mcp_connect_mcp_payload import SrcAppHttpRoutesIntegrationMcpConnectMcpPayload
     from .src_app_http_routes_integration_mcp_exchange_mcp_auth_payload import (
         SrcAppHttpRoutesIntegrationMcpExchangeMcpAuthPayload,
     )
+    from .src_app_http_routes_tables_get_tool_tables_request_body import SrcAppHttpRoutesTablesGetToolTablesRequestBody
     from .src_app_http_routes_tables_get_tool_tables_response import SrcAppHttpRoutesTablesGetToolTablesResponse
     from .src_app_http_routes_tags_create_tag_payload import SrcAppHttpRoutesTagsCreateTagPayload
-    from .src_app_http_routes_tags_update_tag_payload import SrcAppHttpRoutesTagsUpdateTagPayload
-    from .src_app_http_routes_trigger_create_trigger_response import SrcAppHttpRoutesTriggerCreateTriggerResponse
-    from .src_app_http_routes_world_interact_incoming_message import SrcAppHttpRoutesWorldInteractIncomingMessage
-    from .src_app_http_routes_world_interact_incoming_message_content import (
-        SrcAppHttpRoutesWorldInteractIncomingMessageContent,
-    )
-    from .src_app_http_routes_world_interact_incoming_message_content_two_item import (
-        SrcAppHttpRoutesWorldInteractIncomingMessageContentTwoItem,
-    )
-    from .src_app_http_routes_world_interact_interaction_request import SrcAppHttpRoutesWorldInteractInteractionRequest
     from .src_handlers_create_copilot_response import SrcHandlersCreateCopilotResponse
     from .src_handlers_create_workflow_response import SrcHandlersCreateWorkflowResponse
     from .src_handlers_create_workflow_revision_response import SrcHandlersCreateWorkflowRevisionResponse
@@ -697,6 +704,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ApiKeyIdentityDetails": ".api_key_identity_details",
     "AssertionResult": ".assertion_result",
     "AssertionResultAssertionType": ".assertion_result_assertion_type",
+    "AsyncInteractionAcceptedResponse": ".async_interaction_accepted_response",
+    "AsyncInteractionRequest": ".async_interaction_request",
     "AtomRequest": ".atom_request",
     "AutomationHook": ".automation_hook",
     "AutomationHookInput": ".automation_hook_input",
@@ -887,7 +896,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GuidedStep": ".guided_step",
     "GuidedStepAction": ".guided_step_action",
     "HealedStep": ".healed_step",
-    "HiveActionRequest": ".hive_action_request",
     "HookUpdate": ".hook_update",
     "HooksListResponse": ".hooks_list_response",
     "Html2Text": ".html_2_text",
@@ -900,7 +908,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "IdentityTypes": ".identity_types",
     "IncomingMessage": ".incoming_message",
     "IncomingMessageContent": ".incoming_message_content",
-    "IncomingMessageContentType": ".incoming_message_content_type",
+    "IncomingMessageContentTwoItem": ".incoming_message_content_two_item",
     "IncomingSerializableEntity": ".incoming_serializable_entity",
     "IncomingSerializableEntityContent": ".incoming_serializable_entity_content",
     "IncomingSerializableEntityContentSixItem": ".incoming_serializable_entity_content_six_item",
@@ -915,7 +923,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "IntegrationWithConnections": ".integration_with_connections",
     "IntegrationWithConnectionsId": ".integration_with_connections_id",
     "InteractionRequest": ".interaction_request",
-    "InteractionRequestParticipantsItem": ".interaction_request_participants_item",
     "Interval": ".interval",
     "IntervalTypes": ".interval_types",
     "Invoice": ".invoice",
@@ -1011,7 +1018,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "RenameRequest": ".rename_request",
     "RenameResponse": ".rename_response",
     "ReqBody": ".req_body",
-    "RequestBody": ".request_body",
     "Response": ".response",
     "ResponseModel": ".response_model",
     "ResponseModelUsage": ".response_model_usage",
@@ -1100,7 +1106,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SrcAppHttpRoutesAdminUpsertLimitsData": ".src_app_http_routes_admin_upsert_limits_data",
     "SrcAppHttpRoutesAdminUpsertLimitsResponse": ".src_app_http_routes_admin_upsert_limits_response",
     "SrcAppHttpRoutesBillingChangeBillingPlanResponse": ".src_app_http_routes_billing_change_billing_plan_response",
-    "SrcAppHttpRoutesBillingCreatePortalSessionData": ".src_app_http_routes_billing_create_portal_session_data",
     "SrcAppHttpRoutesBillingCreatePortalSessionResponse": ".src_app_http_routes_billing_create_portal_session_response",
     "SrcAppHttpRoutesBillingFreePlanUsageData": ".src_app_http_routes_billing_free_plan_usage_data",
     "SrcAppHttpRoutesBillingFreePlanUsageResponse": ".src_app_http_routes_billing_free_plan_usage_response",
@@ -1110,6 +1115,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SrcAppHttpRoutesBillingGetInvoicesData": ".src_app_http_routes_billing_get_invoices_data",
     "SrcAppHttpRoutesBillingGetInvoicesResponse": ".src_app_http_routes_billing_get_invoices_response",
     "SrcAppHttpRoutesBillingGetNotificationsResponse": ".src_app_http_routes_billing_get_notifications_response",
+    "SrcAppHttpRoutesBillingRenewPlansData": ".src_app_http_routes_billing_renew_plans_data",
     "SrcAppHttpRoutesBillingRenewPlansResponse": ".src_app_http_routes_billing_renew_plans_response",
     "SrcAppHttpRoutesCollectionCreateCollectionResponse": ".src_app_http_routes_collection_create_collection_response",
     "SrcAppHttpRoutesCollectionCreateSyncResponse": ".src_app_http_routes_collection_create_sync_response",
@@ -1126,7 +1132,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SrcAppHttpRoutesCollectionGetSyncsResponse": ".src_app_http_routes_collection_get_syncs_response",
     "SrcAppHttpRoutesCollectionGetTableResponse": ".src_app_http_routes_collection_get_table_response",
     "SrcAppHttpRoutesCollectionGetTablesResponse": ".src_app_http_routes_collection_get_tables_response",
-    "SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel": ".src_app_http_routes_collection_list_collection_syncs_response_model",
+    "SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel": ".src_app_http_routes_collection_list_source_archetypes_response_model",
+    "SrcAppHttpRoutesCollectionParseFileResponse": ".src_app_http_routes_collection_parse_file_response",
     "SrcAppHttpRoutesCollectionSyncTableResponse": ".src_app_http_routes_collection_sync_table_response",
     "SrcAppHttpRoutesCollectionUpdateCollectionResponse": ".src_app_http_routes_collection_update_collection_response",
     "SrcAppHttpRoutesCollectionUpdateDocumentResponse": ".src_app_http_routes_collection_update_document_response",
@@ -1135,15 +1142,16 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SrcAppHttpRoutesDriveCreateDriveCrawlPayload": ".src_app_http_routes_drive_create_drive_crawl_payload",
     "SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings": ".src_app_http_routes_drive_create_drive_crawl_payload_source_sync_settings",
     "SrcAppHttpRoutesDriveSdkDriveUploadResponse": ".src_app_http_routes_drive_sdk_drive_upload_response",
+    "SrcAppHttpRoutesInboxHandleMessageIncomingMessage": ".src_app_http_routes_inbox_handle_message_incoming_message",
+    "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent": ".src_app_http_routes_inbox_handle_message_incoming_message_content",
+    "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType": ".src_app_http_routes_inbox_handle_message_incoming_message_content_type",
+    "SrcAppHttpRoutesInboxHandleMessageInteractionRequest": ".src_app_http_routes_inbox_handle_message_interaction_request",
+    "SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem": ".src_app_http_routes_inbox_handle_message_interaction_request_participants_item",
+    "SrcAppHttpRoutesIntegrationMcpConnectMcpPayload": ".src_app_http_routes_integration_mcp_connect_mcp_payload",
     "SrcAppHttpRoutesIntegrationMcpExchangeMcpAuthPayload": ".src_app_http_routes_integration_mcp_exchange_mcp_auth_payload",
+    "SrcAppHttpRoutesTablesGetToolTablesRequestBody": ".src_app_http_routes_tables_get_tool_tables_request_body",
     "SrcAppHttpRoutesTablesGetToolTablesResponse": ".src_app_http_routes_tables_get_tool_tables_response",
     "SrcAppHttpRoutesTagsCreateTagPayload": ".src_app_http_routes_tags_create_tag_payload",
-    "SrcAppHttpRoutesTagsUpdateTagPayload": ".src_app_http_routes_tags_update_tag_payload",
-    "SrcAppHttpRoutesTriggerCreateTriggerResponse": ".src_app_http_routes_trigger_create_trigger_response",
-    "SrcAppHttpRoutesWorldInteractIncomingMessage": ".src_app_http_routes_world_interact_incoming_message",
-    "SrcAppHttpRoutesWorldInteractIncomingMessageContent": ".src_app_http_routes_world_interact_incoming_message_content",
-    "SrcAppHttpRoutesWorldInteractIncomingMessageContentTwoItem": ".src_app_http_routes_world_interact_incoming_message_content_two_item",
-    "SrcAppHttpRoutesWorldInteractInteractionRequest": ".src_app_http_routes_world_interact_interaction_request",
     "SrcHandlersCreateCopilotResponse": ".src_handlers_create_copilot_response",
     "SrcHandlersCreateWorkflowResponse": ".src_handlers_create_workflow_response",
     "SrcHandlersCreateWorkflowRevisionResponse": ".src_handlers_create_workflow_revision_response",
@@ -1345,6 +1353,8 @@ __all__ = [
     "ApiKeyIdentityDetails",
     "AssertionResult",
     "AssertionResultAssertionType",
+    "AsyncInteractionAcceptedResponse",
+    "AsyncInteractionRequest",
     "AtomRequest",
     "AutomationHook",
     "AutomationHookInput",
@@ -1535,7 +1545,6 @@ __all__ = [
     "GuidedStep",
     "GuidedStepAction",
     "HealedStep",
-    "HiveActionRequest",
     "HookUpdate",
     "HooksListResponse",
     "Html2Text",
@@ -1548,7 +1557,7 @@ __all__ = [
     "IdentityTypes",
     "IncomingMessage",
     "IncomingMessageContent",
-    "IncomingMessageContentType",
+    "IncomingMessageContentTwoItem",
     "IncomingSerializableEntity",
     "IncomingSerializableEntityContent",
     "IncomingSerializableEntityContentSixItem",
@@ -1563,7 +1572,6 @@ __all__ = [
     "IntegrationWithConnections",
     "IntegrationWithConnectionsId",
     "InteractionRequest",
-    "InteractionRequestParticipantsItem",
     "Interval",
     "IntervalTypes",
     "Invoice",
@@ -1659,7 +1667,6 @@ __all__ = [
     "RenameRequest",
     "RenameResponse",
     "ReqBody",
-    "RequestBody",
     "Response",
     "ResponseModel",
     "ResponseModelUsage",
@@ -1748,7 +1755,6 @@ __all__ = [
     "SrcAppHttpRoutesAdminUpsertLimitsData",
     "SrcAppHttpRoutesAdminUpsertLimitsResponse",
     "SrcAppHttpRoutesBillingChangeBillingPlanResponse",
-    "SrcAppHttpRoutesBillingCreatePortalSessionData",
     "SrcAppHttpRoutesBillingCreatePortalSessionResponse",
     "SrcAppHttpRoutesBillingFreePlanUsageData",
     "SrcAppHttpRoutesBillingFreePlanUsageResponse",
@@ -1758,6 +1764,7 @@ __all__ = [
     "SrcAppHttpRoutesBillingGetInvoicesData",
     "SrcAppHttpRoutesBillingGetInvoicesResponse",
     "SrcAppHttpRoutesBillingGetNotificationsResponse",
+    "SrcAppHttpRoutesBillingRenewPlansData",
     "SrcAppHttpRoutesBillingRenewPlansResponse",
     "SrcAppHttpRoutesCollectionCreateCollectionResponse",
     "SrcAppHttpRoutesCollectionCreateSyncResponse",
@@ -1774,7 +1781,8 @@ __all__ = [
     "SrcAppHttpRoutesCollectionGetSyncsResponse",
     "SrcAppHttpRoutesCollectionGetTableResponse",
     "SrcAppHttpRoutesCollectionGetTablesResponse",
-    "SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel",
+    "SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel",
+    "SrcAppHttpRoutesCollectionParseFileResponse",
     "SrcAppHttpRoutesCollectionSyncTableResponse",
     "SrcAppHttpRoutesCollectionUpdateCollectionResponse",
     "SrcAppHttpRoutesCollectionUpdateDocumentResponse",
@@ -1783,15 +1791,16 @@ __all__ = [
     "SrcAppHttpRoutesDriveCreateDriveCrawlPayload",
     "SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings",
     "SrcAppHttpRoutesDriveSdkDriveUploadResponse",
+    "SrcAppHttpRoutesInboxHandleMessageIncomingMessage",
+    "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent",
+    "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType",
+    "SrcAppHttpRoutesInboxHandleMessageInteractionRequest",
+    "SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem",
+    "SrcAppHttpRoutesIntegrationMcpConnectMcpPayload",
     "SrcAppHttpRoutesIntegrationMcpExchangeMcpAuthPayload",
+    "SrcAppHttpRoutesTablesGetToolTablesRequestBody",
     "SrcAppHttpRoutesTablesGetToolTablesResponse",
     "SrcAppHttpRoutesTagsCreateTagPayload",
-    "SrcAppHttpRoutesTagsUpdateTagPayload",
-    "SrcAppHttpRoutesTriggerCreateTriggerResponse",
-    "SrcAppHttpRoutesWorldInteractIncomingMessage",
-    "SrcAppHttpRoutesWorldInteractIncomingMessageContent",
-    "SrcAppHttpRoutesWorldInteractIncomingMessageContentTwoItem",
-    "SrcAppHttpRoutesWorldInteractInteractionRequest",
     "SrcHandlersCreateCopilotResponse",
     "SrcHandlersCreateWorkflowResponse",
     "SrcHandlersCreateWorkflowRevisionResponse",

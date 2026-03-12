@@ -5,20 +5,24 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .agent_revision_input import AgentRevisionInput
-from .files_attribute import FilesAttribute
 from .incoming_message import IncomingMessage
-from .interaction_request_participants_item import InteractionRequestParticipantsItem
-from .mention import Mention
 
 
 class InteractionRequest(UncheckedBaseModel):
-    messages: typing.List[IncomingMessage]
-    participants: typing.List[InteractionRequestParticipantsItem]
-    history: typing.Optional[typing.List[IncomingMessage]] = None
-    files: typing.Optional[typing.List[FilesAttribute]] = None
-    mentions: typing.Optional[typing.List[Mention]] = None
-    ephemeral_agent_revision: typing.Optional[AgentRevisionInput] = None
+    messages: typing.List[IncomingMessage] = pydantic.Field()
+    """
+    List of incoming user messages and drive file references.
+    """
+
+    metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
+    """
+    Optional metadata (e.g., salesforce_session)
+    """
+
+    callback_url: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

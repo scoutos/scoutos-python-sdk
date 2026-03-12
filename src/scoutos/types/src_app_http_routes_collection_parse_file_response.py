@@ -5,16 +5,13 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .src_app_http_routes_world_interact_incoming_message_content import (
-    SrcAppHttpRoutesWorldInteractIncomingMessageContent,
-)
+from .file import File
 
 
-class SrcAppHttpRoutesWorldInteractIncomingMessage(UncheckedBaseModel):
-    content: SrcAppHttpRoutesWorldInteractIncomingMessageContent = pydantic.Field()
-    """
-    The content of the incoming message. May be plain text, a single 'drive_file' reference, or a list mixing the two.
-    """
+class SrcAppHttpRoutesCollectionParseFileResponse(UncheckedBaseModel):
+    original_file_text: typing.Optional[str] = None
+    original_file: File
+    parsed_text_file: File
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -4,4 +4,4 @@ import typing
 
 from .drive_file_message import DriveFileMessage
 
-SrcAppHttpRoutesWorldInteractIncomingMessageContentTwoItem = typing.Union[str, DriveFileMessage]
+IncomingMessageContentTwoItem = typing.Union[str, DriveFileMessage]

@@ -6,6 +6,7 @@ from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.collection_view_state_input import CollectionViewStateInput
 from ..types.delete_view_response import DeleteViewResponse
+from ..types.response_model import ResponseModel
 from ..types.src_app_http_routes_collection_create_collection_response import (
     SrcAppHttpRoutesCollectionCreateCollectionResponse,
 )
@@ -17,9 +18,6 @@ from ..types.src_app_http_routes_collection_get_collection_response import (
 )
 from ..types.src_app_http_routes_collection_get_collections_response import (
     SrcAppHttpRoutesCollectionGetCollectionsResponse,
-)
-from ..types.src_app_http_routes_collection_list_collection_syncs_response_model import (
-    SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
 )
 from ..types.src_app_http_routes_collection_update_collection_response import (
     SrcAppHttpRoutesCollectionUpdateCollectionResponse,
@@ -292,7 +290,7 @@ class CollectionsClient:
 
     def list_syncs(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel:
+    ) -> ResponseModel:
         """
         List Sources by Destination, specifically given a collection and table
 
@@ -307,7 +305,7 @@ class CollectionsClient:
 
         Returns
         -------
-        SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel
+        ResponseModel
             Successful Response
 
         Examples
@@ -919,7 +917,7 @@ class AsyncCollectionsClient:
 
     async def list_syncs(
         self, collection_id: str, table_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel:
+    ) -> ResponseModel:
         """
         List Sources by Destination, specifically given a collection and table
 
@@ -934,7 +932,7 @@ class AsyncCollectionsClient:
 
         Returns
         -------
-        SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel
+        ResponseModel
             Successful Response
 
         Examples

@@ -7,10 +7,16 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 
 
-class SrcAppHttpRoutesTagsUpdateTagPayload(UncheckedBaseModel):
-    name: typing.Optional[str] = None
-    description: typing.Optional[str] = None
-    active: typing.Optional[bool] = None
+class AsyncInteractionAcceptedResponse(UncheckedBaseModel):
+    session_id: str = pydantic.Field()
+    """
+    The session ID for the interaction.
+    """
+
+    events_url: str = pydantic.Field()
+    """
+    URL to replay the interaction's event stream.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

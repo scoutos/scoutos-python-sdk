@@ -6,18 +6,12 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .incoming_message_content import IncomingMessageContent
-from .incoming_message_content_type import IncomingMessageContentType
 
 
 class IncomingMessage(UncheckedBaseModel):
     content: IncomingMessageContent = pydantic.Field()
     """
-    The content of the incoming message
-    """
-
-    content_type: IncomingMessageContentType = pydantic.Field()
-    """
-    The type of content in the message
+    The content of the incoming message. May be plain text, a single 'drive_file' reference, or a list mixing the two.
     """
 
     if IS_PYDANTIC_V2:

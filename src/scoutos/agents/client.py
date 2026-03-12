@@ -7,8 +7,9 @@ from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.active_agent_response import ActiveAgentResponse
 from ..types.agent import Agent
+from ..types.async_interaction_accepted_response import AsyncInteractionAcceptedResponse
 from ..types.delete_agent_response import DeleteAgentResponse
-from ..types.src_app_http_routes_world_interact_incoming_message import SrcAppHttpRoutesWorldInteractIncomingMessage
+from ..types.incoming_message import IncomingMessage
 from ..types.upsert_agent_response import UpsertAgentResponse
 from .raw_client import AsyncRawAgentsClient, RawAgentsClient
 
@@ -35,7 +36,7 @@ class AgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
@@ -46,7 +47,7 @@ class AgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
@@ -67,7 +68,7 @@ class AgentsClient:
 
         Examples
         --------
-        from scoutos import Scout, SrcAppHttpRoutesWorldInteractIncomingMessage
+        from scoutos import IncomingMessage, Scout
 
         client = Scout(
             api_key="YOUR_API_KEY",
@@ -76,7 +77,7 @@ class AgentsClient:
             agent_id="agent_id",
             session_id="session_id",
             messages=[
-                SrcAppHttpRoutesWorldInteractIncomingMessage(
+                IncomingMessage(
                     content="content",
                 )
             ],
@@ -98,7 +99,7 @@ class AgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
@@ -109,7 +110,7 @@ class AgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
@@ -130,7 +131,7 @@ class AgentsClient:
 
         Examples
         --------
-        from scoutos import Scout, SrcAppHttpRoutesWorldInteractIncomingMessage
+        from scoutos import IncomingMessage, Scout
 
         client = Scout(
             api_key="YOUR_API_KEY",
@@ -139,7 +140,7 @@ class AgentsClient:
             agent_id="agent_id",
             session_id="session_id",
             messages=[
-                SrcAppHttpRoutesWorldInteractIncomingMessage(
+                IncomingMessage(
                     content="content",
                 )
             ],
@@ -160,7 +161,7 @@ class AgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -172,7 +173,7 @@ class AgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
@@ -191,7 +192,7 @@ class AgentsClient:
 
         Examples
         --------
-        from scoutos import Scout, SrcAppHttpRoutesWorldInteractIncomingMessage
+        from scoutos import IncomingMessage, Scout
 
         client = Scout(
             api_key="YOUR_API_KEY",
@@ -200,7 +201,7 @@ class AgentsClient:
             agent_id="agent_id",
             session_id="session_id",
             messages=[
-                SrcAppHttpRoutesWorldInteractIncomingMessage(
+                IncomingMessage(
                     content="content",
                 )
             ],
@@ -223,7 +224,7 @@ class AgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -235,7 +236,7 @@ class AgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
@@ -254,7 +255,7 @@ class AgentsClient:
 
         Examples
         --------
-        from scoutos import Scout, SrcAppHttpRoutesWorldInteractIncomingMessage
+        from scoutos import IncomingMessage, Scout
 
         client = Scout(
             api_key="YOUR_API_KEY",
@@ -263,7 +264,7 @@ class AgentsClient:
             agent_id="agent_id",
             session_id="session_id",
             messages=[
-                SrcAppHttpRoutesWorldInteractIncomingMessage(
+                IncomingMessage(
                     content="content",
                 )
             ],
@@ -275,6 +276,138 @@ class AgentsClient:
             messages=messages,
             metadata=metadata,
             callback_url=callback_url,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def interact_async(
+        self,
+        agent_id: str,
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        callback_url: str,
+        session_id: typing.Optional[str] = None,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncInteractionAcceptedResponse:
+        """
+        Dedicated handler for async agent interactions exposed via the SDK.
+
+        Requires callback_url and always returns 202 with session_id + events_url.
+
+        Parameters
+        ----------
+        agent_id : str
+
+        messages : typing.Sequence[IncomingMessage]
+            List of incoming user messages and drive file references.
+
+        callback_url : str
+            Callback URL that Scout will POST to when the interaction completes. The request is signed with HMAC-SHA256 using the organization's secret key.
+
+        session_id : typing.Optional[str]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncInteractionAcceptedResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import IncomingMessage, Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.agents.interact_async(
+            agent_id="agent_id",
+            session_id="session_id",
+            messages=[
+                IncomingMessage(
+                    content="content",
+                )
+            ],
+            callback_url="callback_url",
+        )
+        """
+        _response = self._raw_client.interact_async(
+            agent_id,
+            messages=messages,
+            callback_url=callback_url,
+            session_id=session_id,
+            metadata=metadata,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def interact_async_with_session(
+        self,
+        agent_id: str,
+        session_id: typing.Optional[str],
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        callback_url: str,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncInteractionAcceptedResponse:
+        """
+        Dedicated handler for async agent interactions exposed via the SDK.
+
+        Requires callback_url and always returns 202 with session_id + events_url.
+
+        Parameters
+        ----------
+        agent_id : str
+
+        session_id : typing.Optional[str]
+
+        messages : typing.Sequence[IncomingMessage]
+            List of incoming user messages and drive file references.
+
+        callback_url : str
+            Callback URL that Scout will POST to when the interaction completes. The request is signed with HMAC-SHA256 using the organization's secret key.
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncInteractionAcceptedResponse
+            Successful Response
+
+        Examples
+        --------
+        from scoutos import IncomingMessage, Scout
+
+        client = Scout(
+            api_key="YOUR_API_KEY",
+        )
+        client.agents.interact_async_with_session(
+            agent_id="agent_id",
+            session_id="session_id",
+            messages=[
+                IncomingMessage(
+                    content="content",
+                )
+            ],
+            callback_url="callback_url",
+        )
+        """
+        _response = self._raw_client.interact_async_with_session(
+            agent_id,
+            session_id,
+            messages=messages,
+            callback_url=callback_url,
+            metadata=metadata,
             request_options=request_options,
         )
         return _response.data
@@ -436,7 +569,7 @@ class AsyncAgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
@@ -447,7 +580,7 @@ class AsyncAgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
@@ -470,7 +603,7 @@ class AsyncAgentsClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScout, SrcAppHttpRoutesWorldInteractIncomingMessage
+        from scoutos import AsyncScout, IncomingMessage
 
         client = AsyncScout(
             api_key="YOUR_API_KEY",
@@ -482,7 +615,7 @@ class AsyncAgentsClient:
                 agent_id="agent_id",
                 session_id="session_id",
                 messages=[
-                    SrcAppHttpRoutesWorldInteractIncomingMessage(
+                    IncomingMessage(
                         content="content",
                     )
                 ],
@@ -508,7 +641,7 @@ class AsyncAgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
@@ -519,7 +652,7 @@ class AsyncAgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
@@ -542,7 +675,7 @@ class AsyncAgentsClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScout, SrcAppHttpRoutesWorldInteractIncomingMessage
+        from scoutos import AsyncScout, IncomingMessage
 
         client = AsyncScout(
             api_key="YOUR_API_KEY",
@@ -554,7 +687,7 @@ class AsyncAgentsClient:
                 agent_id="agent_id",
                 session_id="session_id",
                 messages=[
-                    SrcAppHttpRoutesWorldInteractIncomingMessage(
+                    IncomingMessage(
                         content="content",
                     )
                 ],
@@ -578,7 +711,7 @@ class AsyncAgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -590,7 +723,7 @@ class AsyncAgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
@@ -611,7 +744,7 @@ class AsyncAgentsClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScout, SrcAppHttpRoutesWorldInteractIncomingMessage
+        from scoutos import AsyncScout, IncomingMessage
 
         client = AsyncScout(
             api_key="YOUR_API_KEY",
@@ -623,7 +756,7 @@ class AsyncAgentsClient:
                 agent_id="agent_id",
                 session_id="session_id",
                 messages=[
-                    SrcAppHttpRoutesWorldInteractIncomingMessage(
+                    IncomingMessage(
                         content="content",
                     )
                 ],
@@ -650,7 +783,7 @@ class AsyncAgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -662,7 +795,7 @@ class AsyncAgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
@@ -683,7 +816,7 @@ class AsyncAgentsClient:
         --------
         import asyncio
 
-        from scoutos import AsyncScout, SrcAppHttpRoutesWorldInteractIncomingMessage
+        from scoutos import AsyncScout, IncomingMessage
 
         client = AsyncScout(
             api_key="YOUR_API_KEY",
@@ -695,7 +828,7 @@ class AsyncAgentsClient:
                 agent_id="agent_id",
                 session_id="session_id",
                 messages=[
-                    SrcAppHttpRoutesWorldInteractIncomingMessage(
+                    IncomingMessage(
                         content="content",
                     )
                 ],
@@ -710,6 +843,154 @@ class AsyncAgentsClient:
             messages=messages,
             metadata=metadata,
             callback_url=callback_url,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def interact_async(
+        self,
+        agent_id: str,
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        callback_url: str,
+        session_id: typing.Optional[str] = None,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncInteractionAcceptedResponse:
+        """
+        Dedicated handler for async agent interactions exposed via the SDK.
+
+        Requires callback_url and always returns 202 with session_id + events_url.
+
+        Parameters
+        ----------
+        agent_id : str
+
+        messages : typing.Sequence[IncomingMessage]
+            List of incoming user messages and drive file references.
+
+        callback_url : str
+            Callback URL that Scout will POST to when the interaction completes. The request is signed with HMAC-SHA256 using the organization's secret key.
+
+        session_id : typing.Optional[str]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncInteractionAcceptedResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout, IncomingMessage
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.agents.interact_async(
+                agent_id="agent_id",
+                session_id="session_id",
+                messages=[
+                    IncomingMessage(
+                        content="content",
+                    )
+                ],
+                callback_url="callback_url",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.interact_async(
+            agent_id,
+            messages=messages,
+            callback_url=callback_url,
+            session_id=session_id,
+            metadata=metadata,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def interact_async_with_session(
+        self,
+        agent_id: str,
+        session_id: typing.Optional[str],
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        callback_url: str,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncInteractionAcceptedResponse:
+        """
+        Dedicated handler for async agent interactions exposed via the SDK.
+
+        Requires callback_url and always returns 202 with session_id + events_url.
+
+        Parameters
+        ----------
+        agent_id : str
+
+        session_id : typing.Optional[str]
+
+        messages : typing.Sequence[IncomingMessage]
+            List of incoming user messages and drive file references.
+
+        callback_url : str
+            Callback URL that Scout will POST to when the interaction completes. The request is signed with HMAC-SHA256 using the organization's secret key.
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncInteractionAcceptedResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from scoutos import AsyncScout, IncomingMessage
+
+        client = AsyncScout(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.agents.interact_async_with_session(
+                agent_id="agent_id",
+                session_id="session_id",
+                messages=[
+                    IncomingMessage(
+                        content="content",
+                    )
+                ],
+                callback_url="callback_url",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.interact_async_with_session(
+            agent_id,
+            session_id,
+            messages=messages,
+            callback_url=callback_url,
+            metadata=metadata,
             request_options=request_options,
         )
         return _response.data

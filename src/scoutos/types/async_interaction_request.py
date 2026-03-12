@@ -5,11 +5,11 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .src_app_http_routes_world_interact_incoming_message import SrcAppHttpRoutesWorldInteractIncomingMessage
+from .incoming_message import IncomingMessage
 
 
-class SrcAppHttpRoutesWorldInteractInteractionRequest(UncheckedBaseModel):
-    messages: typing.List[SrcAppHttpRoutesWorldInteractIncomingMessage] = pydantic.Field()
+class AsyncInteractionRequest(UncheckedBaseModel):
+    messages: typing.List[IncomingMessage] = pydantic.Field()
     """
     List of incoming user messages and drive file references.
     """
@@ -19,9 +19,9 @@ class SrcAppHttpRoutesWorldInteractInteractionRequest(UncheckedBaseModel):
     Optional metadata (e.g., salesforce_session)
     """
 
-    callback_url: typing.Optional[str] = pydantic.Field(default=None)
+    callback_url: str = pydantic.Field()
     """
-    Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
+    Callback URL that Scout will POST to when the interaction completes. The request is signed with HMAC-SHA256 using the organization's secret key.
     """
 
     if IS_PYDANTIC_V2:

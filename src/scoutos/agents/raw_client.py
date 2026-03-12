@@ -17,9 +17,10 @@ from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.active_agent_response import ActiveAgentResponse
 from ..types.agent import Agent
+from ..types.async_interaction_accepted_response import AsyncInteractionAcceptedResponse
 from ..types.delete_agent_response import DeleteAgentResponse
 from ..types.http_validation_error import HttpValidationError
-from ..types.src_app_http_routes_world_interact_incoming_message import SrcAppHttpRoutesWorldInteractIncomingMessage
+from ..types.incoming_message import IncomingMessage
 from ..types.upsert_agent_response import UpsertAgentResponse
 
 # this is used as the default value for optional parameters
@@ -35,7 +36,7 @@ class RawAgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
@@ -46,7 +47,7 @@ class RawAgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
@@ -73,9 +74,7 @@ class RawAgentsClient:
             },
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages,
-                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
-                    direction="write",
+                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
                 "callback_url": callback_url,
@@ -134,7 +133,7 @@ class RawAgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
@@ -145,7 +144,7 @@ class RawAgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
@@ -172,9 +171,7 @@ class RawAgentsClient:
             },
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages,
-                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
-                    direction="write",
+                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
                 "callback_url": callback_url,
@@ -219,7 +216,7 @@ class RawAgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -231,7 +228,7 @@ class RawAgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
@@ -253,9 +250,7 @@ class RawAgentsClient:
             method="POST",
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages,
-                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
-                    direction="write",
+                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
                 "callback_url": callback_url,
@@ -315,7 +310,7 @@ class RawAgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -327,7 +322,7 @@ class RawAgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
@@ -349,9 +344,7 @@ class RawAgentsClient:
             method="POST",
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages,
-                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
-                    direction="write",
+                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
                 "callback_url": callback_url,
@@ -370,6 +363,169 @@ class RawAgentsClient:
                     typing.Optional[typing.Any],
                     construct_type(
                         type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def interact_async(
+        self,
+        agent_id: str,
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        callback_url: str,
+        session_id: typing.Optional[str] = None,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[AsyncInteractionAcceptedResponse]:
+        """
+        Dedicated handler for async agent interactions exposed via the SDK.
+
+        Requires callback_url and always returns 202 with session_id + events_url.
+
+        Parameters
+        ----------
+        agent_id : str
+
+        messages : typing.Sequence[IncomingMessage]
+            List of incoming user messages and drive file references.
+
+        callback_url : str
+            Callback URL that Scout will POST to when the interaction completes. The request is signed with HMAC-SHA256 using the organization's secret key.
+
+        session_id : typing.Optional[str]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[AsyncInteractionAcceptedResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"world/{jsonable_encoder(agent_id)}/_interact_async",
+            method="POST",
+            params={
+                "session_id": session_id,
+            },
+            json={
+                "messages": convert_and_respect_annotation_metadata(
+                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
+                ),
+                "metadata": metadata,
+                "callback_url": callback_url,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    AsyncInteractionAcceptedResponse,
+                    construct_type(
+                        type_=AsyncInteractionAcceptedResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def interact_async_with_session(
+        self,
+        agent_id: str,
+        session_id: typing.Optional[str],
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        callback_url: str,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[AsyncInteractionAcceptedResponse]:
+        """
+        Dedicated handler for async agent interactions exposed via the SDK.
+
+        Requires callback_url and always returns 202 with session_id + events_url.
+
+        Parameters
+        ----------
+        agent_id : str
+
+        session_id : typing.Optional[str]
+
+        messages : typing.Sequence[IncomingMessage]
+            List of incoming user messages and drive file references.
+
+        callback_url : str
+            Callback URL that Scout will POST to when the interaction completes. The request is signed with HMAC-SHA256 using the organization's secret key.
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[AsyncInteractionAcceptedResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"world/{jsonable_encoder(agent_id)}/{jsonable_encoder(session_id)}/_interact_async",
+            method="POST",
+            json={
+                "messages": convert_and_respect_annotation_metadata(
+                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
+                ),
+                "metadata": metadata,
+                "callback_url": callback_url,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    AsyncInteractionAcceptedResponse,
+                    construct_type(
+                        type_=AsyncInteractionAcceptedResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -603,7 +759,7 @@ class AsyncRawAgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
@@ -614,7 +770,7 @@ class AsyncRawAgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
@@ -641,9 +797,7 @@ class AsyncRawAgentsClient:
             },
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages,
-                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
-                    direction="write",
+                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
                 "callback_url": callback_url,
@@ -702,7 +856,7 @@ class AsyncRawAgentsClient:
         self,
         agent_id: str,
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
@@ -713,7 +867,7 @@ class AsyncRawAgentsClient:
         ----------
         agent_id : str
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         session_id : typing.Optional[str]
@@ -740,9 +894,7 @@ class AsyncRawAgentsClient:
             },
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages,
-                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
-                    direction="write",
+                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
                 "callback_url": callback_url,
@@ -787,7 +939,7 @@ class AsyncRawAgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -799,7 +951,7 @@ class AsyncRawAgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
@@ -821,9 +973,7 @@ class AsyncRawAgentsClient:
             method="POST",
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages,
-                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
-                    direction="write",
+                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
                 "callback_url": callback_url,
@@ -883,7 +1033,7 @@ class AsyncRawAgentsClient:
         agent_id: str,
         session_id: typing.Optional[str],
         *,
-        messages: typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
+        messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -895,7 +1045,7 @@ class AsyncRawAgentsClient:
 
         session_id : typing.Optional[str]
 
-        messages : typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage]
+        messages : typing.Sequence[IncomingMessage]
             List of incoming user messages and drive file references.
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
@@ -917,9 +1067,7 @@ class AsyncRawAgentsClient:
             method="POST",
             json={
                 "messages": convert_and_respect_annotation_metadata(
-                    object_=messages,
-                    annotation=typing.Sequence[SrcAppHttpRoutesWorldInteractIncomingMessage],
-                    direction="write",
+                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
                 "callback_url": callback_url,
@@ -938,6 +1086,169 @@ class AsyncRawAgentsClient:
                     typing.Optional[typing.Any],
                     construct_type(
                         type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def interact_async(
+        self,
+        agent_id: str,
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        callback_url: str,
+        session_id: typing.Optional[str] = None,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[AsyncInteractionAcceptedResponse]:
+        """
+        Dedicated handler for async agent interactions exposed via the SDK.
+
+        Requires callback_url and always returns 202 with session_id + events_url.
+
+        Parameters
+        ----------
+        agent_id : str
+
+        messages : typing.Sequence[IncomingMessage]
+            List of incoming user messages and drive file references.
+
+        callback_url : str
+            Callback URL that Scout will POST to when the interaction completes. The request is signed with HMAC-SHA256 using the organization's secret key.
+
+        session_id : typing.Optional[str]
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[AsyncInteractionAcceptedResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"world/{jsonable_encoder(agent_id)}/_interact_async",
+            method="POST",
+            params={
+                "session_id": session_id,
+            },
+            json={
+                "messages": convert_and_respect_annotation_metadata(
+                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
+                ),
+                "metadata": metadata,
+                "callback_url": callback_url,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    AsyncInteractionAcceptedResponse,
+                    construct_type(
+                        type_=AsyncInteractionAcceptedResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        construct_type(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def interact_async_with_session(
+        self,
+        agent_id: str,
+        session_id: typing.Optional[str],
+        *,
+        messages: typing.Sequence[IncomingMessage],
+        callback_url: str,
+        metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[AsyncInteractionAcceptedResponse]:
+        """
+        Dedicated handler for async agent interactions exposed via the SDK.
+
+        Requires callback_url and always returns 202 with session_id + events_url.
+
+        Parameters
+        ----------
+        agent_id : str
+
+        session_id : typing.Optional[str]
+
+        messages : typing.Sequence[IncomingMessage]
+            List of incoming user messages and drive file references.
+
+        callback_url : str
+            Callback URL that Scout will POST to when the interaction completes. The request is signed with HMAC-SHA256 using the organization's secret key.
+
+        metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional metadata (e.g., salesforce_session)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[AsyncInteractionAcceptedResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"world/{jsonable_encoder(agent_id)}/{jsonable_encoder(session_id)}/_interact_async",
+            method="POST",
+            json={
+                "messages": convert_and_respect_annotation_metadata(
+                    object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
+                ),
+                "metadata": metadata,
+                "callback_url": callback_url,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    AsyncInteractionAcceptedResponse,
+                    construct_type(
+                        type_=AsyncInteractionAcceptedResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -8,14 +8,18 @@ from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.request_options import RequestOptions
 from ..core.unchecked_base_model import construct_type
-from ..types.response_model import ResponseModel
+from ..types.src_app_http_routes_collection_list_source_archetypes_response_model import (
+    SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel,
+)
 
 
 class RawSourcesClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def list(self, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[ResponseModel]:
+    def list(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel]:
         """
         Parameters
         ----------
@@ -24,7 +28,7 @@ class RawSourcesClient:
 
         Returns
         -------
-        HttpResponse[ResponseModel]
+        HttpResponse[SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -35,9 +39,9 @@ class RawSourcesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ResponseModel,
+                    SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel,
                     construct_type(
-                        type_=ResponseModel,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -54,7 +58,7 @@ class AsyncRawSourcesClient:
 
     async def list(
         self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[ResponseModel]:
+    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel]:
         """
         Parameters
         ----------
@@ -63,7 +67,7 @@ class AsyncRawSourcesClient:
 
         Returns
         -------
-        AsyncHttpResponse[ResponseModel]
+        AsyncHttpResponse[SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -74,9 +78,9 @@ class AsyncRawSourcesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ResponseModel,
+                    SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel,
                     construct_type(
-                        type_=ResponseModel,  # type: ignore
+                        type_=SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

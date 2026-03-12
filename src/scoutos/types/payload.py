@@ -8,10 +8,9 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 
 
 class Payload(UncheckedBaseModel):
-    url: str
-    name: str
-    headers: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = None
-    integration_id: str
+    name: typing.Optional[str] = None
+    description: typing.Optional[str] = None
+    active: typing.Optional[bool] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

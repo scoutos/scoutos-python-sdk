@@ -5,13 +5,11 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .file import File
+from .trigger import Trigger
 
 
 class Response(UncheckedBaseModel):
-    original_file_text: typing.Optional[str] = None
-    original_file: File
-    parsed_text_file: File
+    data: typing.Optional[Trigger] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

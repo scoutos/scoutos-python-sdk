@@ -2,4 +2,7 @@
 
 import typing
 
-IncomingMessageContent = typing.Union[str, typing.Dict[str, typing.Optional[typing.Any]]]
+from .drive_file_message import DriveFileMessage
+from .incoming_message_content_two_item import IncomingMessageContentTwoItem
+
+IncomingMessageContent = typing.Union[str, DriveFileMessage, typing.List[IncomingMessageContentTwoItem]]

@@ -16,7 +16,7 @@ from ..types.delete_trigger_response import DeleteTriggerResponse
 from ..types.execute_trigger_response import ExecuteTriggerResponse
 from ..types.http_validation_error import HttpValidationError
 from ..types.list_triggers_response import ListTriggersResponse
-from ..types.src_app_http_routes_trigger_create_trigger_response import SrcAppHttpRoutesTriggerCreateTriggerResponse
+from ..types.response import Response
 from ..types.update_cron_auth_response import UpdateCronAuthResponse
 from ..types.update_trigger_response import UpdateTriggerResponse
 from .types.triggers_create_request import TriggersCreateRequest
@@ -96,7 +96,7 @@ class RawTriggersClient:
 
     def create(
         self, *, request: TriggersCreateRequest, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[SrcAppHttpRoutesTriggerCreateTriggerResponse]:
+    ) -> HttpResponse[Response]:
         """
         Parameters
         ----------
@@ -107,7 +107,7 @@ class RawTriggersClient:
 
         Returns
         -------
-        HttpResponse[SrcAppHttpRoutesTriggerCreateTriggerResponse]
+        HttpResponse[Response]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -125,9 +125,9 @@ class RawTriggersClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    SrcAppHttpRoutesTriggerCreateTriggerResponse,
+                    Response,
                     construct_type(
-                        type_=SrcAppHttpRoutesTriggerCreateTriggerResponse,  # type: ignore
+                        type_=Response,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -510,7 +510,7 @@ class AsyncRawTriggersClient:
 
     async def create(
         self, *, request: TriggersCreateRequest, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[SrcAppHttpRoutesTriggerCreateTriggerResponse]:
+    ) -> AsyncHttpResponse[Response]:
         """
         Parameters
         ----------
@@ -521,7 +521,7 @@ class AsyncRawTriggersClient:
 
         Returns
         -------
-        AsyncHttpResponse[SrcAppHttpRoutesTriggerCreateTriggerResponse]
+        AsyncHttpResponse[Response]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -539,9 +539,9 @@ class AsyncRawTriggersClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    SrcAppHttpRoutesTriggerCreateTriggerResponse,
+                    Response,
                     construct_type(
-                        type_=SrcAppHttpRoutesTriggerCreateTriggerResponse,  # type: ignore
+                        type_=Response,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -4,7 +4,9 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.response_model import ResponseModel
+from ..types.src_app_http_routes_collection_list_source_archetypes_response_model import (
+    SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel,
+)
 from .raw_client import AsyncRawSourcesClient, RawSourcesClient
 
 
@@ -23,7 +25,9 @@ class SourcesClient:
         """
         return self._raw_client
 
-    def list(self, *, request_options: typing.Optional[RequestOptions] = None) -> ResponseModel:
+    def list(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel:
         """
         Parameters
         ----------
@@ -32,7 +36,7 @@ class SourcesClient:
 
         Returns
         -------
-        ResponseModel
+        SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel
             Successful Response
 
         Examples
@@ -63,7 +67,9 @@ class AsyncSourcesClient:
         """
         return self._raw_client
 
-    async def list(self, *, request_options: typing.Optional[RequestOptions] = None) -> ResponseModel:
+    async def list(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel:
         """
         Parameters
         ----------
@@ -72,7 +78,7 @@ class AsyncSourcesClient:
 
         Returns
         -------
-        ResponseModel
+        SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel
             Successful Response
 
         Examples
