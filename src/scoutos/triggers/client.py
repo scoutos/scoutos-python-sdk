@@ -8,7 +8,7 @@ from ..types.action_type import ActionType
 from ..types.delete_trigger_response import DeleteTriggerResponse
 from ..types.execute_trigger_response import ExecuteTriggerResponse
 from ..types.list_triggers_response import ListTriggersResponse
-from ..types.response import Response
+from ..types.src_app_http_routes_trigger_create_trigger_response import SrcAppHttpRoutesTriggerCreateTriggerResponse
 from ..types.update_cron_auth_response import UpdateCronAuthResponse
 from ..types.update_trigger_response import UpdateTriggerResponse
 from .raw_client import AsyncRawTriggersClient, RawTriggersClient
@@ -82,7 +82,7 @@ class TriggersClient:
 
     def create(
         self, *, request: TriggersCreateRequest, request_options: typing.Optional[RequestOptions] = None
-    ) -> Response:
+    ) -> SrcAppHttpRoutesTriggerCreateTriggerResponse:
         """
         Parameters
         ----------
@@ -93,7 +93,7 @@ class TriggersClient:
 
         Returns
         -------
-        Response
+        SrcAppHttpRoutesTriggerCreateTriggerResponse
             Successful Response
 
         Examples
@@ -386,7 +386,7 @@ class AsyncTriggersClient:
 
     async def create(
         self, *, request: TriggersCreateRequest, request_options: typing.Optional[RequestOptions] = None
-    ) -> Response:
+    ) -> SrcAppHttpRoutesTriggerCreateTriggerResponse:
         """
         Parameters
         ----------
@@ -397,7 +397,7 @@ class AsyncTriggersClient:
 
         Returns
         -------
-        Response
+        SrcAppHttpRoutesTriggerCreateTriggerResponse
             Successful Response
 
         Examples

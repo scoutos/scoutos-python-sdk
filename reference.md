@@ -3134,6 +3134,14 @@ client.collections.create()
 <dl>
 <dd>
 
+**collection_id:** `typing.Optional[str]` — Optional user-provided collection ID. Must be a lowercase slug (a-z, 0-9, hyphens, underscores) between 3 and 63 characters. If omitted, an ID is auto-generated.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -3310,8 +3318,8 @@ client.collections.update(
 <dl>
 <dd>
 
-Queue collection deletion and return immediately.
-Deletion happens asynchronously in background.
+Delete a collection. By default, enqueues deletion and returns immediately.
+Pass await_completion=true to block until deletion is fully complete.
 </dd>
 </dl>
 </dd>
@@ -3333,6 +3341,7 @@ client = Scout(
 )
 client.collections.delete(
     collection_id="collection_id",
+    await_completion=True,
 )
 
 ```
@@ -3350,6 +3359,14 @@ client.collections.delete(
 <dd>
 
 **collection_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**await_completion:** `typing.Optional[bool]` — Whether to wait for collection deletion to complete before responding
     
 </dd>
 </dl>
@@ -4116,7 +4133,7 @@ client.tables.create(
 <dl>
 <dd>
 
-**schema:** `typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]` 
+**schema:** `typing.Optional[typing.Sequence[CreateTableRequestSchemaItem]]` 
     
 </dd>
 </dl>
@@ -4149,6 +4166,14 @@ client.tables.create(
 <dd>
 
 **plural_name:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `typing.Optional[str]` — Optional user-provided table ID. Must be a lowercase slug (a-z, 0-9, hyphens, underscores) between 3 and 63 characters. If omitted, an ID is auto-generated.
     
 </dd>
 </dl>
@@ -5810,6 +5835,22 @@ for chunk in response.data:
 <dl>
 <dd>
 
+**revision_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[typing.Sequence[str]]` — Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -5897,6 +5938,22 @@ client.agents.interact_sync(
 <dd>
 
 **callback_url:** `typing.Optional[str]` — Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**revision_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[typing.Sequence[str]]` — Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
     
 </dd>
 </dl>
@@ -6000,6 +6057,22 @@ for chunk in response.data:
 <dl>
 <dd>
 
+**revision_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[typing.Sequence[str]]` — Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -6087,6 +6160,22 @@ client.agents.interact_sync_with_session(
 <dd>
 
 **callback_url:** `typing.Optional[str]` — Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**revision_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[typing.Sequence[str]]` — Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
     
 </dd>
 </dl>
@@ -6205,6 +6294,14 @@ client.agents.interact_async(
 <dl>
 <dd>
 
+**tags:** `typing.Optional[typing.Sequence[str]]` — Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -6309,6 +6406,14 @@ client.agents.interact_async_with_session(
 <dd>
 
 **metadata:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — Optional metadata (e.g., salesforce_session)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[typing.Sequence[str]]` — Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
     
 </dd>
 </dl>

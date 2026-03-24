@@ -135,6 +135,7 @@ class RawCollectionsClient:
         collection_description: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
         table_order: typing.Optional[typing.Sequence[str]] = OMIT,
+        collection_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[SrcAppHttpRoutesCollectionCreateCollectionResponse]:
         """
@@ -149,6 +150,9 @@ class RawCollectionsClient:
         tags : typing.Optional[typing.Sequence[str]]
 
         table_order : typing.Optional[typing.Sequence[str]]
+
+        collection_id : typing.Optional[str]
+            Optional user-provided collection ID. Must be a lowercase slug (a-z, 0-9, hyphens, underscores) between 3 and 63 characters. If omitted, an ID is auto-generated.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -167,6 +171,7 @@ class RawCollectionsClient:
                 "collection_description": collection_description,
                 "tags": tags,
                 "table_order": table_order,
+                "collection_id": collection_id,
             },
             headers={
                 "content-type": "application/json",
@@ -324,15 +329,22 @@ class RawCollectionsClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def delete(
-        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        collection_id: str,
+        *,
+        await_completion: typing.Optional[bool] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[SrcAppHttpRoutesCollectionDeleteCollectionResponse]:
         """
-        Queue collection deletion and return immediately.
-        Deletion happens asynchronously in background.
+        Delete a collection. By default, enqueues deletion and returns immediately.
+        Pass await_completion=true to block until deletion is fully complete.
 
         Parameters
         ----------
         collection_id : str
+
+        await_completion : typing.Optional[bool]
+            Whether to wait for collection deletion to complete before responding
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -345,6 +357,9 @@ class RawCollectionsClient:
         _response = self._client_wrapper.httpx_client.request(
             f"v2/collections/{jsonable_encoder(collection_id)}",
             method="DELETE",
+            params={
+                "await_completion": await_completion,
+            },
             request_options=request_options,
         )
         try:
@@ -950,6 +965,7 @@ class AsyncRawCollectionsClient:
         collection_description: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
         table_order: typing.Optional[typing.Sequence[str]] = OMIT,
+        collection_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionCreateCollectionResponse]:
         """
@@ -964,6 +980,9 @@ class AsyncRawCollectionsClient:
         tags : typing.Optional[typing.Sequence[str]]
 
         table_order : typing.Optional[typing.Sequence[str]]
+
+        collection_id : typing.Optional[str]
+            Optional user-provided collection ID. Must be a lowercase slug (a-z, 0-9, hyphens, underscores) between 3 and 63 characters. If omitted, an ID is auto-generated.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -982,6 +1001,7 @@ class AsyncRawCollectionsClient:
                 "collection_description": collection_description,
                 "tags": tags,
                 "table_order": table_order,
+                "collection_id": collection_id,
             },
             headers={
                 "content-type": "application/json",
@@ -1139,15 +1159,22 @@ class AsyncRawCollectionsClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def delete(
-        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        collection_id: str,
+        *,
+        await_completion: typing.Optional[bool] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionDeleteCollectionResponse]:
         """
-        Queue collection deletion and return immediately.
-        Deletion happens asynchronously in background.
+        Delete a collection. By default, enqueues deletion and returns immediately.
+        Pass await_completion=true to block until deletion is fully complete.
 
         Parameters
         ----------
         collection_id : str
+
+        await_completion : typing.Optional[bool]
+            Whether to wait for collection deletion to complete before responding
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1160,6 +1187,9 @@ class AsyncRawCollectionsClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"v2/collections/{jsonable_encoder(collection_id)}",
             method="DELETE",
+            params={
+                "await_completion": await_completion,
+            },
             request_options=request_options,
         )
         try:

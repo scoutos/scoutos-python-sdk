@@ -6,8 +6,8 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
-    from .types import TableConfigInputSchemaItem, TableDataSchemaItem
-_dynamic_imports: typing.Dict[str, str] = {"TableConfigInputSchemaItem": ".types", "TableDataSchemaItem": ".types"}
+    from .types import CreateTableRequestSchemaItem, TableDataSchemaItem
+_dynamic_imports: typing.Dict[str, str] = {"CreateTableRequestSchemaItem": ".types", "TableDataSchemaItem": ".types"}
 
 
 def __getattr__(attr_name: str) -> typing.Any:
@@ -31,4 +31,4 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["TableConfigInputSchemaItem", "TableDataSchemaItem"]
+__all__ = ["CreateTableRequestSchemaItem", "TableDataSchemaItem"]

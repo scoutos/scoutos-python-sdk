@@ -127,6 +127,7 @@ class CollectionsClient:
         collection_description: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
         table_order: typing.Optional[typing.Sequence[str]] = OMIT,
+        collection_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionCreateCollectionResponse:
         """
@@ -141,6 +142,9 @@ class CollectionsClient:
         tags : typing.Optional[typing.Sequence[str]]
 
         table_order : typing.Optional[typing.Sequence[str]]
+
+        collection_id : typing.Optional[str]
+            Optional user-provided collection ID. Must be a lowercase slug (a-z, 0-9, hyphens, underscores) between 3 and 63 characters. If omitted, an ID is auto-generated.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -165,6 +169,7 @@ class CollectionsClient:
             collection_description=collection_description,
             tags=tags,
             table_order=table_order,
+            collection_id=collection_id,
             request_options=request_options,
         )
         return _response.data
@@ -256,15 +261,22 @@ class CollectionsClient:
         return _response.data
 
     def delete(
-        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        collection_id: str,
+        *,
+        await_completion: typing.Optional[bool] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionDeleteCollectionResponse:
         """
-        Queue collection deletion and return immediately.
-        Deletion happens asynchronously in background.
+        Delete a collection. By default, enqueues deletion and returns immediately.
+        Pass await_completion=true to block until deletion is fully complete.
 
         Parameters
         ----------
         collection_id : str
+
+        await_completion : typing.Optional[bool]
+            Whether to wait for collection deletion to complete before responding
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -283,9 +295,12 @@ class CollectionsClient:
         )
         client.collections.delete(
             collection_id="collection_id",
+            await_completion=True,
         )
         """
-        _response = self._raw_client.delete(collection_id, request_options=request_options)
+        _response = self._raw_client.delete(
+            collection_id, await_completion=await_completion, request_options=request_options
+        )
         return _response.data
 
     def list_syncs(
@@ -722,6 +737,7 @@ class AsyncCollectionsClient:
         collection_description: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
         table_order: typing.Optional[typing.Sequence[str]] = OMIT,
+        collection_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionCreateCollectionResponse:
         """
@@ -736,6 +752,9 @@ class AsyncCollectionsClient:
         tags : typing.Optional[typing.Sequence[str]]
 
         table_order : typing.Optional[typing.Sequence[str]]
+
+        collection_id : typing.Optional[str]
+            Optional user-provided collection ID. Must be a lowercase slug (a-z, 0-9, hyphens, underscores) between 3 and 63 characters. If omitted, an ID is auto-generated.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -768,6 +787,7 @@ class AsyncCollectionsClient:
             collection_description=collection_description,
             tags=tags,
             table_order=table_order,
+            collection_id=collection_id,
             request_options=request_options,
         )
         return _response.data
@@ -875,15 +895,22 @@ class AsyncCollectionsClient:
         return _response.data
 
     async def delete(
-        self, collection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        collection_id: str,
+        *,
+        await_completion: typing.Optional[bool] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionDeleteCollectionResponse:
         """
-        Queue collection deletion and return immediately.
-        Deletion happens asynchronously in background.
+        Delete a collection. By default, enqueues deletion and returns immediately.
+        Pass await_completion=true to block until deletion is fully complete.
 
         Parameters
         ----------
         collection_id : str
+
+        await_completion : typing.Optional[bool]
+            Whether to wait for collection deletion to complete before responding
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -907,12 +934,15 @@ class AsyncCollectionsClient:
         async def main() -> None:
             await client.collections.delete(
                 collection_id="collection_id",
+                await_completion=True,
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.delete(collection_id, request_options=request_options)
+        _response = await self._raw_client.delete(
+            collection_id, await_completion=await_completion, request_options=request_options
+        )
         return _response.data
 
     async def list_syncs(

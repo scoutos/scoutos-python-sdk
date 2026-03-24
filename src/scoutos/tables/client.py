@@ -4,15 +4,15 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.response import Response
 from ..types.schema_response import SchemaResponse
 from ..types.src_app_http_routes_collection_create_table_response import SrcAppHttpRoutesCollectionCreateTableResponse
 from ..types.src_app_http_routes_collection_delete_table_response import SrcAppHttpRoutesCollectionDeleteTableResponse
 from ..types.src_app_http_routes_collection_get_table_response import SrcAppHttpRoutesCollectionGetTableResponse
 from ..types.src_app_http_routes_collection_get_tables_response import SrcAppHttpRoutesCollectionGetTablesResponse
-from ..types.src_app_http_routes_collection_sync_table_response import SrcAppHttpRoutesCollectionSyncTableResponse
 from ..types.src_app_http_routes_collection_update_table_response import SrcAppHttpRoutesCollectionUpdateTableResponse
 from .raw_client import AsyncRawTablesClient, RawTablesClient
-from .types.table_config_input_schema_item import TableConfigInputSchemaItem
+from .types.create_table_request_schema_item import CreateTableRequestSchemaItem
 from .types.table_data_schema_item import TableDataSchemaItem
 
 # this is used as the default value for optional parameters
@@ -71,11 +71,12 @@ class TablesClient:
         table_display_name: typing.Optional[str] = OMIT,
         table_img_url: typing.Optional[str] = OMIT,
         table_description: typing.Optional[str] = OMIT,
-        schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
+        schema: typing.Optional[typing.Sequence[CreateTableRequestSchemaItem]] = OMIT,
         icon_emoji: typing.Optional[str] = OMIT,
         icon_asset_url: typing.Optional[str] = OMIT,
         icon_fill: typing.Optional[str] = OMIT,
         plural_name: typing.Optional[str] = OMIT,
+        table_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionCreateTableResponse:
         """
@@ -89,7 +90,7 @@ class TablesClient:
 
         table_description : typing.Optional[str]
 
-        schema : typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]
+        schema : typing.Optional[typing.Sequence[CreateTableRequestSchemaItem]]
 
         icon_emoji : typing.Optional[str]
 
@@ -98,6 +99,9 @@ class TablesClient:
         icon_fill : typing.Optional[str]
 
         plural_name : typing.Optional[str]
+
+        table_id : typing.Optional[str]
+            Optional user-provided table ID. Must be a lowercase slug (a-z, 0-9, hyphens, underscores) between 3 and 63 characters. If omitted, an ID is auto-generated.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -128,6 +132,7 @@ class TablesClient:
             icon_asset_url=icon_asset_url,
             icon_fill=icon_fill,
             plural_name=plural_name,
+            table_id=table_id,
             request_options=request_options,
         )
         return _response.data
@@ -317,7 +322,7 @@ class TablesClient:
         *,
         request: typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> SrcAppHttpRoutesCollectionSyncTableResponse:
+    ) -> Response:
         """
         Sync a table with a list of documents.
 
@@ -334,7 +339,7 @@ class TablesClient:
 
         Returns
         -------
-        SrcAppHttpRoutesCollectionSyncTableResponse
+        Response
             Successful Response
 
         Examples
@@ -414,11 +419,12 @@ class AsyncTablesClient:
         table_display_name: typing.Optional[str] = OMIT,
         table_img_url: typing.Optional[str] = OMIT,
         table_description: typing.Optional[str] = OMIT,
-        schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
+        schema: typing.Optional[typing.Sequence[CreateTableRequestSchemaItem]] = OMIT,
         icon_emoji: typing.Optional[str] = OMIT,
         icon_asset_url: typing.Optional[str] = OMIT,
         icon_fill: typing.Optional[str] = OMIT,
         plural_name: typing.Optional[str] = OMIT,
+        table_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SrcAppHttpRoutesCollectionCreateTableResponse:
         """
@@ -432,7 +438,7 @@ class AsyncTablesClient:
 
         table_description : typing.Optional[str]
 
-        schema : typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]
+        schema : typing.Optional[typing.Sequence[CreateTableRequestSchemaItem]]
 
         icon_emoji : typing.Optional[str]
 
@@ -441,6 +447,9 @@ class AsyncTablesClient:
         icon_fill : typing.Optional[str]
 
         plural_name : typing.Optional[str]
+
+        table_id : typing.Optional[str]
+            Optional user-provided table ID. Must be a lowercase slug (a-z, 0-9, hyphens, underscores) between 3 and 63 characters. If omitted, an ID is auto-generated.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -479,6 +488,7 @@ class AsyncTablesClient:
             icon_asset_url=icon_asset_url,
             icon_fill=icon_fill,
             plural_name=plural_name,
+            table_id=table_id,
             request_options=request_options,
         )
         return _response.data
@@ -700,7 +710,7 @@ class AsyncTablesClient:
         *,
         request: typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> SrcAppHttpRoutesCollectionSyncTableResponse:
+    ) -> Response:
         """
         Sync a table with a list of documents.
 
@@ -717,7 +727,7 @@ class AsyncTablesClient:
 
         Returns
         -------
-        SrcAppHttpRoutesCollectionSyncTableResponse
+        Response
             Successful Response
 
         Examples

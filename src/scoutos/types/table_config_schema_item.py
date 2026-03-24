@@ -15,7 +15,7 @@ from .text_long_column import TextLongColumn
 from .text_short_column import TextShortColumn
 from .url_column import UrlColumn
 
-TableConfigOutputSchemaItem = typing.Union[
+TableConfigSchemaItem = typing.Union[
     CheckBoxColumn,
     DateTimeColumn,
     JsonColumn,

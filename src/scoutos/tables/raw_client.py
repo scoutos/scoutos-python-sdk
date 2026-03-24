@@ -12,14 +12,14 @@ from ..core.serialization import convert_and_respect_annotation_metadata
 from ..core.unchecked_base_model import construct_type
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
+from ..types.response import Response
 from ..types.schema_response import SchemaResponse
 from ..types.src_app_http_routes_collection_create_table_response import SrcAppHttpRoutesCollectionCreateTableResponse
 from ..types.src_app_http_routes_collection_delete_table_response import SrcAppHttpRoutesCollectionDeleteTableResponse
 from ..types.src_app_http_routes_collection_get_table_response import SrcAppHttpRoutesCollectionGetTableResponse
 from ..types.src_app_http_routes_collection_get_tables_response import SrcAppHttpRoutesCollectionGetTablesResponse
-from ..types.src_app_http_routes_collection_sync_table_response import SrcAppHttpRoutesCollectionSyncTableResponse
 from ..types.src_app_http_routes_collection_update_table_response import SrcAppHttpRoutesCollectionUpdateTableResponse
-from .types.table_config_input_schema_item import TableConfigInputSchemaItem
+from .types.create_table_request_schema_item import CreateTableRequestSchemaItem
 from .types.table_data_schema_item import TableDataSchemaItem
 
 # this is used as the default value for optional parameters
@@ -84,11 +84,12 @@ class RawTablesClient:
         table_display_name: typing.Optional[str] = OMIT,
         table_img_url: typing.Optional[str] = OMIT,
         table_description: typing.Optional[str] = OMIT,
-        schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
+        schema: typing.Optional[typing.Sequence[CreateTableRequestSchemaItem]] = OMIT,
         icon_emoji: typing.Optional[str] = OMIT,
         icon_asset_url: typing.Optional[str] = OMIT,
         icon_fill: typing.Optional[str] = OMIT,
         plural_name: typing.Optional[str] = OMIT,
+        table_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[SrcAppHttpRoutesCollectionCreateTableResponse]:
         """
@@ -102,7 +103,7 @@ class RawTablesClient:
 
         table_description : typing.Optional[str]
 
-        schema : typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]
+        schema : typing.Optional[typing.Sequence[CreateTableRequestSchemaItem]]
 
         icon_emoji : typing.Optional[str]
 
@@ -111,6 +112,9 @@ class RawTablesClient:
         icon_fill : typing.Optional[str]
 
         plural_name : typing.Optional[str]
+
+        table_id : typing.Optional[str]
+            Optional user-provided table ID. Must be a lowercase slug (a-z, 0-9, hyphens, underscores) between 3 and 63 characters. If omitted, an ID is auto-generated.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -128,12 +132,13 @@ class RawTablesClient:
                 "table_img_url": table_img_url,
                 "table_description": table_description,
                 "schema": convert_and_respect_annotation_metadata(
-                    object_=schema, annotation=typing.Sequence[TableConfigInputSchemaItem], direction="write"
+                    object_=schema, annotation=typing.Sequence[CreateTableRequestSchemaItem], direction="write"
                 ),
                 "icon_emoji": icon_emoji,
                 "icon_asset_url": icon_asset_url,
                 "icon_fill": icon_fill,
                 "plural_name": plural_name,
+                "table_id": table_id,
             },
             headers={
                 "content-type": "application/json",
@@ -420,7 +425,7 @@ class RawTablesClient:
         *,
         request: typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[SrcAppHttpRoutesCollectionSyncTableResponse]:
+    ) -> HttpResponse[Response]:
         """
         Sync a table with a list of documents.
 
@@ -437,7 +442,7 @@ class RawTablesClient:
 
         Returns
         -------
-        HttpResponse[SrcAppHttpRoutesCollectionSyncTableResponse]
+        HttpResponse[Response]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -453,9 +458,9 @@ class RawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    SrcAppHttpRoutesCollectionSyncTableResponse,
+                    Response,
                     construct_type(
-                        type_=SrcAppHttpRoutesCollectionSyncTableResponse,  # type: ignore
+                        type_=Response,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -535,11 +540,12 @@ class AsyncRawTablesClient:
         table_display_name: typing.Optional[str] = OMIT,
         table_img_url: typing.Optional[str] = OMIT,
         table_description: typing.Optional[str] = OMIT,
-        schema: typing.Optional[typing.Sequence[TableConfigInputSchemaItem]] = OMIT,
+        schema: typing.Optional[typing.Sequence[CreateTableRequestSchemaItem]] = OMIT,
         icon_emoji: typing.Optional[str] = OMIT,
         icon_asset_url: typing.Optional[str] = OMIT,
         icon_fill: typing.Optional[str] = OMIT,
         plural_name: typing.Optional[str] = OMIT,
+        table_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionCreateTableResponse]:
         """
@@ -553,7 +559,7 @@ class AsyncRawTablesClient:
 
         table_description : typing.Optional[str]
 
-        schema : typing.Optional[typing.Sequence[TableConfigInputSchemaItem]]
+        schema : typing.Optional[typing.Sequence[CreateTableRequestSchemaItem]]
 
         icon_emoji : typing.Optional[str]
 
@@ -562,6 +568,9 @@ class AsyncRawTablesClient:
         icon_fill : typing.Optional[str]
 
         plural_name : typing.Optional[str]
+
+        table_id : typing.Optional[str]
+            Optional user-provided table ID. Must be a lowercase slug (a-z, 0-9, hyphens, underscores) between 3 and 63 characters. If omitted, an ID is auto-generated.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -579,12 +588,13 @@ class AsyncRawTablesClient:
                 "table_img_url": table_img_url,
                 "table_description": table_description,
                 "schema": convert_and_respect_annotation_metadata(
-                    object_=schema, annotation=typing.Sequence[TableConfigInputSchemaItem], direction="write"
+                    object_=schema, annotation=typing.Sequence[CreateTableRequestSchemaItem], direction="write"
                 ),
                 "icon_emoji": icon_emoji,
                 "icon_asset_url": icon_asset_url,
                 "icon_fill": icon_fill,
                 "plural_name": plural_name,
+                "table_id": table_id,
             },
             headers={
                 "content-type": "application/json",
@@ -871,7 +881,7 @@ class AsyncRawTablesClient:
         *,
         request: typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]],
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[SrcAppHttpRoutesCollectionSyncTableResponse]:
+    ) -> AsyncHttpResponse[Response]:
         """
         Sync a table with a list of documents.
 
@@ -888,7 +898,7 @@ class AsyncRawTablesClient:
 
         Returns
         -------
-        AsyncHttpResponse[SrcAppHttpRoutesCollectionSyncTableResponse]
+        AsyncHttpResponse[Response]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -904,9 +914,9 @@ class AsyncRawTablesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    SrcAppHttpRoutesCollectionSyncTableResponse,
+                    Response,
                     construct_type(
-                        type_=SrcAppHttpRoutesCollectionSyncTableResponse,  # type: ignore
+                        type_=Response,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -5,13 +5,25 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .scout_hook_event_discriminator import ScoutHookEventDiscriminator
 from .scout_hook_event_trigger_type import ScoutHookEventTriggerType
 
 
 class ScoutHookEventTrigger(UncheckedBaseModel):
-    type: typing.Optional[ScoutHookEventTriggerType] = None
-    discriminator: typing.Optional[ScoutHookEventDiscriminator] = None
+    """
+    A hook trigger criterion.
+
+    NOTE:
+    - Historically, trigger criteria supported a `discriminator` field for
+      entity-level allow/deny lists.
+    - Discrimination is now expected to be implemented by hook consumers via
+      `hook_config` + matcher functions in the subscribing domain API.
+
+    We deliberately ignore unknown keys so older persisted hook configs that
+    still contain `discriminator` will load successfully, and the field will be
+    dropped on the next persistence write.
+    """
+
+    type: ScoutHookEventTriggerType
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

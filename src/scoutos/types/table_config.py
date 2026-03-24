@@ -7,15 +7,15 @@ import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .table_config_output_schema_item import TableConfigOutputSchemaItem
+from .table_config_schema_item import TableConfigSchemaItem
 
 
-class TableConfigOutput(UncheckedBaseModel):
+class TableConfig(UncheckedBaseModel):
     table_display_name: typing.Optional[str] = None
     table_img_url: typing.Optional[str] = None
     table_description: typing.Optional[str] = None
     schema_: typing_extensions.Annotated[
-        typing.Optional[typing.List[TableConfigOutputSchemaItem]], FieldMetadata(alias="schema")
+        typing.Optional[typing.List[TableConfigSchemaItem]], FieldMetadata(alias="schema")
     ] = None
     icon_emoji: typing.Optional[str] = None
     icon_asset_url: typing.Optional[str] = None

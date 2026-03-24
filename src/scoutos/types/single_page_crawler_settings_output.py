@@ -47,6 +47,16 @@ class SinglePageCrawlerSettingsOutput(UncheckedBaseModel):
     Include raw HTML content in the crawl output for ADA compliance analysis.
     """
 
+    crawl_rate_rps: typing.Optional[float] = pydantic.Field(default=None)
+    """
+    Requests per second
+    """
+
+    concurrent_requests: typing.Optional[int] = pydantic.Field(default=None)
+    """
+    Number of concurrent requests
+    """
+
     max_depth: typing.Optional[int] = pydantic.Field(default=None)
     """
     Fixed to 1 for single page crawls

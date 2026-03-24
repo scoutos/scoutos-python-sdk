@@ -5,4 +5,4 @@ import typing
 from .ai_agent import AiAgent
 from .scout_user import ScoutUser
 
-SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem = typing.Union[ScoutUser, AiAgent]
+InteractionRequestParticipantsItem = typing.Union[ScoutUser, AiAgent]

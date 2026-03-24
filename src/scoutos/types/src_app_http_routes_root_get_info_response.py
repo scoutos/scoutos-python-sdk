@@ -5,16 +5,12 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .schedule import Schedule
-from .src_app_http_routes_drive_create_drive_crawl_payload_source_sync_settings import (
-    SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings,
-)
+from .service_info import ServiceInfo
 
 
-class SrcAppHttpRoutesDriveCreateDriveCrawlPayload(UncheckedBaseModel):
-    source_sync_settings: SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings
-    schedule: typing.Optional[Schedule] = None
-    url: str
+class SrcAppHttpRoutesRootGetInfoResponse(UncheckedBaseModel):
+    message: typing.Optional[str] = None
+    service: ServiceInfo
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

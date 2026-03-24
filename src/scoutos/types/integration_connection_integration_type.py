@@ -34,6 +34,7 @@ IntegrationConnectionIntegrationType = typing.Union[
         "myla",
         "northbeam",
         "telegram",
+        "common_paper",
     ],
     typing.Any,
 ]

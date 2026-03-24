@@ -14,6 +14,7 @@ class SrcAppHttpRoutesCollectionGetDocumentsResponse(UncheckedBaseModel):
     has_more: typing.Optional[bool] = None
     total_count: typing.Optional[int] = None
     documents_uploading: typing.Optional[bool] = None
+    column_mapping: typing.Optional[typing.Dict[str, typing.Optional[str]]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

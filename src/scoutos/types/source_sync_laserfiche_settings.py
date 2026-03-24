@@ -9,6 +9,11 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 
 class SourceSyncLaserficheSettings(UncheckedBaseModel):
     source_archetype_id: typing.Literal["com.laserfiche.repository"] = "com.laserfiche.repository"
+    connection_id: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Which Laserfiche connection to use when multiple are connected to the organization.
+    """
+
     repository_id: typing.Optional[str] = pydantic.Field(default=None)
     """
     The Laserfiche repository ID to sync from (e.g., 'r-7144d39a'). If not provided, uses the first available repository.

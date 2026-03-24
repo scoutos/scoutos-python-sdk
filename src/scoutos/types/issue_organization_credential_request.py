@@ -8,7 +8,7 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 
 
 class IssueOrganizationCredentialRequest(UncheckedBaseModel):
-    roles: typing.Optional[typing.List[str]] = None
+    roles: typing.List[str]
     name: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:

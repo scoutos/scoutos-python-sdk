@@ -7,11 +7,11 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .legacy_identity import LegacyIdentity
-from .table_config_output import TableConfigOutput
+from .table_config import TableConfig
 
 
 class Table(UncheckedBaseModel):
-    table_config: TableConfigOutput
+    table_config: TableConfig
     created_at: typing.Optional[dt.datetime] = None
     last_updated_at: typing.Optional[dt.datetime] = None
     created_by: LegacyIdentity

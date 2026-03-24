@@ -40,6 +40,8 @@ class AgentsClient:
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
+        revision_id: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Iterator[typing.Optional[typing.Any]]:
         """
@@ -57,6 +59,11 @@ class AgentsClient:
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
+
+        revision_id : typing.Optional[str]
+
+        tags : typing.Optional[typing.Sequence[str]]
+            Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -91,6 +98,8 @@ class AgentsClient:
             session_id=session_id,
             metadata=metadata,
             callback_url=callback_url,
+            revision_id=revision_id,
+            tags=tags,
             request_options=request_options,
         ) as r:
             yield from r.data
@@ -103,6 +112,8 @@ class AgentsClient:
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
+        revision_id: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[typing.Any]:
         """
@@ -120,6 +131,11 @@ class AgentsClient:
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
+
+        revision_id : typing.Optional[str]
+
+        tags : typing.Optional[typing.Sequence[str]]
+            Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -152,6 +168,8 @@ class AgentsClient:
             session_id=session_id,
             metadata=metadata,
             callback_url=callback_url,
+            revision_id=revision_id,
+            tags=tags,
             request_options=request_options,
         )
         return _response.data
@@ -164,6 +182,8 @@ class AgentsClient:
         messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
+        revision_id: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Iterator[typing.Optional[typing.Any]]:
         """
@@ -181,6 +201,11 @@ class AgentsClient:
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
+
+        revision_id : typing.Optional[str]
+
+        tags : typing.Optional[typing.Sequence[str]]
+            Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -215,6 +240,8 @@ class AgentsClient:
             messages=messages,
             metadata=metadata,
             callback_url=callback_url,
+            revision_id=revision_id,
+            tags=tags,
             request_options=request_options,
         ) as r:
             yield from r.data
@@ -227,6 +254,8 @@ class AgentsClient:
         messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
+        revision_id: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[typing.Any]:
         """
@@ -244,6 +273,11 @@ class AgentsClient:
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
+
+        revision_id : typing.Optional[str]
+
+        tags : typing.Optional[typing.Sequence[str]]
+            Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -276,6 +310,8 @@ class AgentsClient:
             messages=messages,
             metadata=metadata,
             callback_url=callback_url,
+            revision_id=revision_id,
+            tags=tags,
             request_options=request_options,
         )
         return _response.data
@@ -288,6 +324,7 @@ class AgentsClient:
         callback_url: str,
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncInteractionAcceptedResponse:
         """
@@ -309,6 +346,9 @@ class AgentsClient:
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        tags : typing.Optional[typing.Sequence[str]]
+            Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -342,6 +382,7 @@ class AgentsClient:
             callback_url=callback_url,
             session_id=session_id,
             metadata=metadata,
+            tags=tags,
             request_options=request_options,
         )
         return _response.data
@@ -354,6 +395,7 @@ class AgentsClient:
         messages: typing.Sequence[IncomingMessage],
         callback_url: str,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncInteractionAcceptedResponse:
         """
@@ -375,6 +417,9 @@ class AgentsClient:
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        tags : typing.Optional[typing.Sequence[str]]
+            Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -408,6 +453,7 @@ class AgentsClient:
             messages=messages,
             callback_url=callback_url,
             metadata=metadata,
+            tags=tags,
             request_options=request_options,
         )
         return _response.data
@@ -573,6 +619,8 @@ class AsyncAgentsClient:
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
+        revision_id: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.AsyncIterator[typing.Optional[typing.Any]]:
         """
@@ -590,6 +638,11 @@ class AsyncAgentsClient:
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
+
+        revision_id : typing.Optional[str]
+
+        tags : typing.Optional[typing.Sequence[str]]
+            Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -632,6 +685,8 @@ class AsyncAgentsClient:
             session_id=session_id,
             metadata=metadata,
             callback_url=callback_url,
+            revision_id=revision_id,
+            tags=tags,
             request_options=request_options,
         ) as r:
             async for _chunk in r.data:
@@ -645,6 +700,8 @@ class AsyncAgentsClient:
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
+        revision_id: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[typing.Any]:
         """
@@ -662,6 +719,11 @@ class AsyncAgentsClient:
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
+
+        revision_id : typing.Optional[str]
+
+        tags : typing.Optional[typing.Sequence[str]]
+            Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -702,6 +764,8 @@ class AsyncAgentsClient:
             session_id=session_id,
             metadata=metadata,
             callback_url=callback_url,
+            revision_id=revision_id,
+            tags=tags,
             request_options=request_options,
         )
         return _response.data
@@ -714,6 +778,8 @@ class AsyncAgentsClient:
         messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
+        revision_id: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.AsyncIterator[typing.Optional[typing.Any]]:
         """
@@ -731,6 +797,11 @@ class AsyncAgentsClient:
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
+
+        revision_id : typing.Optional[str]
+
+        tags : typing.Optional[typing.Sequence[str]]
+            Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -773,6 +844,8 @@ class AsyncAgentsClient:
             messages=messages,
             metadata=metadata,
             callback_url=callback_url,
+            revision_id=revision_id,
+            tags=tags,
             request_options=request_options,
         ) as r:
             async for _chunk in r.data:
@@ -786,6 +859,8 @@ class AsyncAgentsClient:
         messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
+        revision_id: typing.Optional[str] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[typing.Any]:
         """
@@ -803,6 +878,11 @@ class AsyncAgentsClient:
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
+
+        revision_id : typing.Optional[str]
+
+        tags : typing.Optional[typing.Sequence[str]]
+            Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -843,6 +923,8 @@ class AsyncAgentsClient:
             messages=messages,
             metadata=metadata,
             callback_url=callback_url,
+            revision_id=revision_id,
+            tags=tags,
             request_options=request_options,
         )
         return _response.data
@@ -855,6 +937,7 @@ class AsyncAgentsClient:
         callback_url: str,
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncInteractionAcceptedResponse:
         """
@@ -876,6 +959,9 @@ class AsyncAgentsClient:
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        tags : typing.Optional[typing.Sequence[str]]
+            Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -917,6 +1003,7 @@ class AsyncAgentsClient:
             callback_url=callback_url,
             session_id=session_id,
             metadata=metadata,
+            tags=tags,
             request_options=request_options,
         )
         return _response.data
@@ -929,6 +1016,7 @@ class AsyncAgentsClient:
         messages: typing.Sequence[IncomingMessage],
         callback_url: str,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncInteractionAcceptedResponse:
         """
@@ -950,6 +1038,9 @@ class AsyncAgentsClient:
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        tags : typing.Optional[typing.Sequence[str]]
+            Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -991,6 +1082,7 @@ class AsyncAgentsClient:
             messages=messages,
             callback_url=callback_url,
             metadata=metadata,
+            tags=tags,
             request_options=request_options,
         )
         return _response.data

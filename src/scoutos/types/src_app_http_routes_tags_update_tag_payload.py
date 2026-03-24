@@ -5,21 +5,12 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .scout_hook_event_discriminator_type import ScoutHookEventDiscriminatorType
 
 
-class ScoutHookEventDiscriminator(UncheckedBaseModel):
-    """
-    A configuration that describes further constraints
-    for when the hook is triggered.
-
-    In other words, an ScoutHookEvent may be dispatched by the system, and this
-    configuration will determine whether or not the event is ultimately
-    triggers the hook
-    """
-
-    type: ScoutHookEventDiscriminatorType
-    entity_ids: typing.List[str]
+class SrcAppHttpRoutesTagsUpdateTagPayload(UncheckedBaseModel):
+    name: typing.Optional[str] = None
+    description: typing.Optional[str] = None
+    active: typing.Optional[bool] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

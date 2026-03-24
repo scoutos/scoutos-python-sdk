@@ -265,6 +265,7 @@ if typing.TYPE_CHECKING:
     from .integration_with_connections import IntegrationWithConnections
     from .integration_with_connections_id import IntegrationWithConnectionsId
     from .interaction_request import InteractionRequest
+    from .interaction_request_participants_item import InteractionRequestParticipantsItem
     from .interval import Interval
     from .interval_types import IntervalTypes
     from .invoice import Invoice
@@ -333,6 +334,7 @@ if typing.TYPE_CHECKING:
     from .participant import Participant
     from .participant_type import ParticipantType
     from .payload import Payload
+    from .payload_source_sync_settings import PayloadSourceSyncSettings
     from .people_column import PeopleColumn
     from .placeholder_input import PlaceholderInput
     from .placeholder_input_type import PlaceholderInputType
@@ -381,8 +383,6 @@ if typing.TYPE_CHECKING:
     from .scorer_response import ScorerResponse
     from .scorer_response_scorer import ScorerResponseScorer
     from .scout_hook import ScoutHook
-    from .scout_hook_event_discriminator import ScoutHookEventDiscriminator
-    from .scout_hook_event_discriminator_type import ScoutHookEventDiscriminatorType
     from .scout_hook_event_trigger import ScoutHookEventTrigger
     from .scout_hook_event_trigger_type import ScoutHookEventTriggerType
     from .scout_hook_response import ScoutHookResponse
@@ -452,14 +452,13 @@ if typing.TYPE_CHECKING:
     from .src_app_http_routes_billing_change_billing_plan_response import (
         SrcAppHttpRoutesBillingChangeBillingPlanResponse,
     )
+    from .src_app_http_routes_billing_create_portal_session_data import SrcAppHttpRoutesBillingCreatePortalSessionData
     from .src_app_http_routes_billing_create_portal_session_response import (
         SrcAppHttpRoutesBillingCreatePortalSessionResponse,
     )
-    from .src_app_http_routes_billing_free_plan_usage_data import SrcAppHttpRoutesBillingFreePlanUsageData
     from .src_app_http_routes_billing_free_plan_usage_response import SrcAppHttpRoutesBillingFreePlanUsageResponse
     from .src_app_http_routes_billing_get_billing_data import SrcAppHttpRoutesBillingGetBillingData
     from .src_app_http_routes_billing_get_billing_response import SrcAppHttpRoutesBillingGetBillingResponse
-    from .src_app_http_routes_billing_get_info_get_info_response import SrcAppHttpRoutesBillingGetInfoGetInfoResponse
     from .src_app_http_routes_billing_get_invoices_data import SrcAppHttpRoutesBillingGetInvoicesData
     from .src_app_http_routes_billing_get_invoices_response import SrcAppHttpRoutesBillingGetInvoicesResponse
     from .src_app_http_routes_billing_get_notifications_response import SrcAppHttpRoutesBillingGetNotificationsResponse
@@ -492,7 +491,6 @@ if typing.TYPE_CHECKING:
         SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel,
     )
     from .src_app_http_routes_collection_parse_file_response import SrcAppHttpRoutesCollectionParseFileResponse
-    from .src_app_http_routes_collection_sync_table_response import SrcAppHttpRoutesCollectionSyncTableResponse
     from .src_app_http_routes_collection_update_collection_response import (
         SrcAppHttpRoutesCollectionUpdateCollectionResponse,
     )
@@ -501,10 +499,6 @@ if typing.TYPE_CHECKING:
     )
     from .src_app_http_routes_collection_update_sync_response import SrcAppHttpRoutesCollectionUpdateSyncResponse
     from .src_app_http_routes_collection_update_table_response import SrcAppHttpRoutesCollectionUpdateTableResponse
-    from .src_app_http_routes_drive_create_drive_crawl_payload import SrcAppHttpRoutesDriveCreateDriveCrawlPayload
-    from .src_app_http_routes_drive_create_drive_crawl_payload_source_sync_settings import (
-        SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings,
-    )
     from .src_app_http_routes_drive_sdk_drive_upload_response import SrcAppHttpRoutesDriveSdkDriveUploadResponse
     from .src_app_http_routes_inbox_handle_message_incoming_message import (
         SrcAppHttpRoutesInboxHandleMessageIncomingMessage,
@@ -515,19 +509,17 @@ if typing.TYPE_CHECKING:
     from .src_app_http_routes_inbox_handle_message_incoming_message_content_type import (
         SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType,
     )
-    from .src_app_http_routes_inbox_handle_message_interaction_request import (
-        SrcAppHttpRoutesInboxHandleMessageInteractionRequest,
-    )
-    from .src_app_http_routes_inbox_handle_message_interaction_request_participants_item import (
-        SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem,
-    )
     from .src_app_http_routes_integration_mcp_connect_mcp_payload import SrcAppHttpRoutesIntegrationMcpConnectMcpPayload
     from .src_app_http_routes_integration_mcp_exchange_mcp_auth_payload import (
         SrcAppHttpRoutesIntegrationMcpExchangeMcpAuthPayload,
     )
+    from .src_app_http_routes_root_get_info_response import SrcAppHttpRoutesRootGetInfoResponse
     from .src_app_http_routes_tables_get_tool_tables_request_body import SrcAppHttpRoutesTablesGetToolTablesRequestBody
     from .src_app_http_routes_tables_get_tool_tables_response import SrcAppHttpRoutesTablesGetToolTablesResponse
     from .src_app_http_routes_tags_create_tag_payload import SrcAppHttpRoutesTagsCreateTagPayload
+    from .src_app_http_routes_tags_update_tag_payload import SrcAppHttpRoutesTagsUpdateTagPayload
+    from .src_app_http_routes_trigger_create_trigger_response import SrcAppHttpRoutesTriggerCreateTriggerResponse
+    from .src_app_http_routes_world_interact_interaction_request import SrcAppHttpRoutesWorldInteractInteractionRequest
     from .src_handlers_create_copilot_response import SrcHandlersCreateCopilotResponse
     from .src_handlers_create_workflow_response import SrcHandlersCreateWorkflowResponse
     from .src_handlers_create_workflow_revision_response import SrcHandlersCreateWorkflowRevisionResponse
@@ -556,8 +548,8 @@ if typing.TYPE_CHECKING:
     from .sync_config_output_source_settings import SyncConfigOutputSourceSettings
     from .table import Table
     from .table_and_collection_item import TableAndCollectionItem
-    from .table_config_output import TableConfigOutput
-    from .table_config_output_schema_item import TableConfigOutputSchemaItem
+    from .table_config import TableConfig
+    from .table_config_schema_item import TableConfigSchemaItem
     from .table_item import TableItem
     from .table_view_input import TableViewInput
     from .table_view_output import TableViewOutput
@@ -923,6 +915,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "IntegrationWithConnections": ".integration_with_connections",
     "IntegrationWithConnectionsId": ".integration_with_connections_id",
     "InteractionRequest": ".interaction_request",
+    "InteractionRequestParticipantsItem": ".interaction_request_participants_item",
     "Interval": ".interval",
     "IntervalTypes": ".interval_types",
     "Invoice": ".invoice",
@@ -991,6 +984,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Participant": ".participant",
     "ParticipantType": ".participant_type",
     "Payload": ".payload",
+    "PayloadSourceSyncSettings": ".payload_source_sync_settings",
     "PeopleColumn": ".people_column",
     "PlaceholderInput": ".placeholder_input",
     "PlaceholderInputType": ".placeholder_input_type",
@@ -1039,8 +1033,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ScorerResponse": ".scorer_response",
     "ScorerResponseScorer": ".scorer_response_scorer",
     "ScoutHook": ".scout_hook",
-    "ScoutHookEventDiscriminator": ".scout_hook_event_discriminator",
-    "ScoutHookEventDiscriminatorType": ".scout_hook_event_discriminator_type",
     "ScoutHookEventTrigger": ".scout_hook_event_trigger",
     "ScoutHookEventTriggerType": ".scout_hook_event_trigger_type",
     "ScoutHookResponse": ".scout_hook_response",
@@ -1106,12 +1098,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SrcAppHttpRoutesAdminUpsertLimitsData": ".src_app_http_routes_admin_upsert_limits_data",
     "SrcAppHttpRoutesAdminUpsertLimitsResponse": ".src_app_http_routes_admin_upsert_limits_response",
     "SrcAppHttpRoutesBillingChangeBillingPlanResponse": ".src_app_http_routes_billing_change_billing_plan_response",
+    "SrcAppHttpRoutesBillingCreatePortalSessionData": ".src_app_http_routes_billing_create_portal_session_data",
     "SrcAppHttpRoutesBillingCreatePortalSessionResponse": ".src_app_http_routes_billing_create_portal_session_response",
-    "SrcAppHttpRoutesBillingFreePlanUsageData": ".src_app_http_routes_billing_free_plan_usage_data",
     "SrcAppHttpRoutesBillingFreePlanUsageResponse": ".src_app_http_routes_billing_free_plan_usage_response",
     "SrcAppHttpRoutesBillingGetBillingData": ".src_app_http_routes_billing_get_billing_data",
     "SrcAppHttpRoutesBillingGetBillingResponse": ".src_app_http_routes_billing_get_billing_response",
-    "SrcAppHttpRoutesBillingGetInfoGetInfoResponse": ".src_app_http_routes_billing_get_info_get_info_response",
     "SrcAppHttpRoutesBillingGetInvoicesData": ".src_app_http_routes_billing_get_invoices_data",
     "SrcAppHttpRoutesBillingGetInvoicesResponse": ".src_app_http_routes_billing_get_invoices_response",
     "SrcAppHttpRoutesBillingGetNotificationsResponse": ".src_app_http_routes_billing_get_notifications_response",
@@ -1134,24 +1125,23 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SrcAppHttpRoutesCollectionGetTablesResponse": ".src_app_http_routes_collection_get_tables_response",
     "SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel": ".src_app_http_routes_collection_list_source_archetypes_response_model",
     "SrcAppHttpRoutesCollectionParseFileResponse": ".src_app_http_routes_collection_parse_file_response",
-    "SrcAppHttpRoutesCollectionSyncTableResponse": ".src_app_http_routes_collection_sync_table_response",
     "SrcAppHttpRoutesCollectionUpdateCollectionResponse": ".src_app_http_routes_collection_update_collection_response",
     "SrcAppHttpRoutesCollectionUpdateDocumentResponse": ".src_app_http_routes_collection_update_document_response",
     "SrcAppHttpRoutesCollectionUpdateSyncResponse": ".src_app_http_routes_collection_update_sync_response",
     "SrcAppHttpRoutesCollectionUpdateTableResponse": ".src_app_http_routes_collection_update_table_response",
-    "SrcAppHttpRoutesDriveCreateDriveCrawlPayload": ".src_app_http_routes_drive_create_drive_crawl_payload",
-    "SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings": ".src_app_http_routes_drive_create_drive_crawl_payload_source_sync_settings",
     "SrcAppHttpRoutesDriveSdkDriveUploadResponse": ".src_app_http_routes_drive_sdk_drive_upload_response",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessage": ".src_app_http_routes_inbox_handle_message_incoming_message",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent": ".src_app_http_routes_inbox_handle_message_incoming_message_content",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType": ".src_app_http_routes_inbox_handle_message_incoming_message_content_type",
-    "SrcAppHttpRoutesInboxHandleMessageInteractionRequest": ".src_app_http_routes_inbox_handle_message_interaction_request",
-    "SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem": ".src_app_http_routes_inbox_handle_message_interaction_request_participants_item",
     "SrcAppHttpRoutesIntegrationMcpConnectMcpPayload": ".src_app_http_routes_integration_mcp_connect_mcp_payload",
     "SrcAppHttpRoutesIntegrationMcpExchangeMcpAuthPayload": ".src_app_http_routes_integration_mcp_exchange_mcp_auth_payload",
+    "SrcAppHttpRoutesRootGetInfoResponse": ".src_app_http_routes_root_get_info_response",
     "SrcAppHttpRoutesTablesGetToolTablesRequestBody": ".src_app_http_routes_tables_get_tool_tables_request_body",
     "SrcAppHttpRoutesTablesGetToolTablesResponse": ".src_app_http_routes_tables_get_tool_tables_response",
     "SrcAppHttpRoutesTagsCreateTagPayload": ".src_app_http_routes_tags_create_tag_payload",
+    "SrcAppHttpRoutesTagsUpdateTagPayload": ".src_app_http_routes_tags_update_tag_payload",
+    "SrcAppHttpRoutesTriggerCreateTriggerResponse": ".src_app_http_routes_trigger_create_trigger_response",
+    "SrcAppHttpRoutesWorldInteractInteractionRequest": ".src_app_http_routes_world_interact_interaction_request",
     "SrcHandlersCreateCopilotResponse": ".src_handlers_create_copilot_response",
     "SrcHandlersCreateWorkflowResponse": ".src_handlers_create_workflow_response",
     "SrcHandlersCreateWorkflowRevisionResponse": ".src_handlers_create_workflow_revision_response",
@@ -1180,8 +1170,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SyncConfigOutputSourceSettings": ".sync_config_output_source_settings",
     "Table": ".table",
     "TableAndCollectionItem": ".table_and_collection_item",
-    "TableConfigOutput": ".table_config_output",
-    "TableConfigOutputSchemaItem": ".table_config_output_schema_item",
+    "TableConfig": ".table_config",
+    "TableConfigSchemaItem": ".table_config_schema_item",
     "TableItem": ".table_item",
     "TableViewInput": ".table_view_input",
     "TableViewOutput": ".table_view_output",
@@ -1572,6 +1562,7 @@ __all__ = [
     "IntegrationWithConnections",
     "IntegrationWithConnectionsId",
     "InteractionRequest",
+    "InteractionRequestParticipantsItem",
     "Interval",
     "IntervalTypes",
     "Invoice",
@@ -1640,6 +1631,7 @@ __all__ = [
     "Participant",
     "ParticipantType",
     "Payload",
+    "PayloadSourceSyncSettings",
     "PeopleColumn",
     "PlaceholderInput",
     "PlaceholderInputType",
@@ -1688,8 +1680,6 @@ __all__ = [
     "ScorerResponse",
     "ScorerResponseScorer",
     "ScoutHook",
-    "ScoutHookEventDiscriminator",
-    "ScoutHookEventDiscriminatorType",
     "ScoutHookEventTrigger",
     "ScoutHookEventTriggerType",
     "ScoutHookResponse",
@@ -1755,12 +1745,11 @@ __all__ = [
     "SrcAppHttpRoutesAdminUpsertLimitsData",
     "SrcAppHttpRoutesAdminUpsertLimitsResponse",
     "SrcAppHttpRoutesBillingChangeBillingPlanResponse",
+    "SrcAppHttpRoutesBillingCreatePortalSessionData",
     "SrcAppHttpRoutesBillingCreatePortalSessionResponse",
-    "SrcAppHttpRoutesBillingFreePlanUsageData",
     "SrcAppHttpRoutesBillingFreePlanUsageResponse",
     "SrcAppHttpRoutesBillingGetBillingData",
     "SrcAppHttpRoutesBillingGetBillingResponse",
-    "SrcAppHttpRoutesBillingGetInfoGetInfoResponse",
     "SrcAppHttpRoutesBillingGetInvoicesData",
     "SrcAppHttpRoutesBillingGetInvoicesResponse",
     "SrcAppHttpRoutesBillingGetNotificationsResponse",
@@ -1783,24 +1772,23 @@ __all__ = [
     "SrcAppHttpRoutesCollectionGetTablesResponse",
     "SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel",
     "SrcAppHttpRoutesCollectionParseFileResponse",
-    "SrcAppHttpRoutesCollectionSyncTableResponse",
     "SrcAppHttpRoutesCollectionUpdateCollectionResponse",
     "SrcAppHttpRoutesCollectionUpdateDocumentResponse",
     "SrcAppHttpRoutesCollectionUpdateSyncResponse",
     "SrcAppHttpRoutesCollectionUpdateTableResponse",
-    "SrcAppHttpRoutesDriveCreateDriveCrawlPayload",
-    "SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings",
     "SrcAppHttpRoutesDriveSdkDriveUploadResponse",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessage",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContent",
     "SrcAppHttpRoutesInboxHandleMessageIncomingMessageContentType",
-    "SrcAppHttpRoutesInboxHandleMessageInteractionRequest",
-    "SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem",
     "SrcAppHttpRoutesIntegrationMcpConnectMcpPayload",
     "SrcAppHttpRoutesIntegrationMcpExchangeMcpAuthPayload",
+    "SrcAppHttpRoutesRootGetInfoResponse",
     "SrcAppHttpRoutesTablesGetToolTablesRequestBody",
     "SrcAppHttpRoutesTablesGetToolTablesResponse",
     "SrcAppHttpRoutesTagsCreateTagPayload",
+    "SrcAppHttpRoutesTagsUpdateTagPayload",
+    "SrcAppHttpRoutesTriggerCreateTriggerResponse",
+    "SrcAppHttpRoutesWorldInteractInteractionRequest",
     "SrcHandlersCreateCopilotResponse",
     "SrcHandlersCreateWorkflowResponse",
     "SrcHandlersCreateWorkflowRevisionResponse",
@@ -1829,8 +1817,8 @@ __all__ = [
     "SyncConfigOutputSourceSettings",
     "Table",
     "TableAndCollectionItem",
-    "TableConfigOutput",
-    "TableConfigOutputSchemaItem",
+    "TableConfig",
+    "TableConfigSchemaItem",
     "TableItem",
     "TableViewInput",
     "TableViewOutput",

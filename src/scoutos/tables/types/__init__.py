@@ -6,10 +6,10 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
-    from .table_config_input_schema_item import TableConfigInputSchemaItem
+    from .create_table_request_schema_item import CreateTableRequestSchemaItem
     from .table_data_schema_item import TableDataSchemaItem
 _dynamic_imports: typing.Dict[str, str] = {
-    "TableConfigInputSchemaItem": ".table_config_input_schema_item",
+    "CreateTableRequestSchemaItem": ".create_table_request_schema_item",
     "TableDataSchemaItem": ".table_data_schema_item",
 }
 
@@ -35,4 +35,4 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["TableConfigInputSchemaItem", "TableDataSchemaItem"]
+__all__ = ["CreateTableRequestSchemaItem", "TableDataSchemaItem"]

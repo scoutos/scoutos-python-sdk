@@ -5,12 +5,14 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .payload_source_sync_settings import PayloadSourceSyncSettings
+from .schedule import Schedule
 
 
 class Payload(UncheckedBaseModel):
-    name: typing.Optional[str] = None
-    description: typing.Optional[str] = None
-    active: typing.Optional[bool] = None
+    source_sync_settings: PayloadSourceSyncSettings
+    schedule: typing.Optional[Schedule] = None
+    url: str
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

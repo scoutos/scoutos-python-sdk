@@ -12,7 +12,7 @@ from .source_sync_page_crawl_settings_input import SourceSyncPageCrawlSettingsIn
 from .source_sync_sitemap_settings_input import SourceSyncSitemapSettingsInput
 from .source_sync_website_settings import SourceSyncWebsiteSettings
 
-SrcAppHttpRoutesDriveCreateDriveCrawlPayloadSourceSyncSettings = typing.Union[
+PayloadSourceSyncSettings = typing.Union[
     SourceSyncGoogleDriveSettings,
     SourceSyncLaserficheSettings,
     SourceSyncMicrosoft365Settings,

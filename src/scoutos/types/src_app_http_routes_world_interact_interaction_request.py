@@ -8,7 +8,7 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 from .incoming_message import IncomingMessage
 
 
-class AsyncInteractionRequest(UncheckedBaseModel):
+class SrcAppHttpRoutesWorldInteractInteractionRequest(UncheckedBaseModel):
     messages: typing.List[IncomingMessage] = pydantic.Field()
     """
     List of incoming user messages and drive file references.
@@ -19,11 +19,12 @@ class AsyncInteractionRequest(UncheckedBaseModel):
     Optional metadata (e.g., salesforce_session)
     """
 
-    callback_url: str = pydantic.Field()
+    callback_url: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Callback URL that Scout will POST to when the interaction completes. The request is signed with HMAC-SHA256 using the organization's secret key.
+    Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
     """
 
+    revision_id: typing.Optional[str] = None
     tags: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
     """
     Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.

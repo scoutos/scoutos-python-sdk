@@ -53,6 +53,16 @@ class SourceSyncWebsiteSettings(UncheckedBaseModel):
     Include raw HTML content in the crawl output for ADA compliance analysis.
     """
 
+    crawl_rate_rps: typing.Optional[float] = pydantic.Field(default=None)
+    """
+    Requests per second
+    """
+
+    concurrent_requests: typing.Optional[int] = pydantic.Field(default=None)
+    """
+    Number of concurrent requests
+    """
+
     source_archetype_id: typing.Literal["com.scoutos.website"] = "com.scoutos.website"
 
     if IS_PYDANTIC_V2:
