@@ -19,6 +19,11 @@ class SrcAppHttpRoutesWorldInteractInteractionRequest(UncheckedBaseModel):
     Optional metadata (e.g., salesforce_session)
     """
 
+    variables: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
+    """
+    Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
+    """
+
     callback_url: typing.Optional[str] = pydantic.Field(default=None)
     """
     Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.

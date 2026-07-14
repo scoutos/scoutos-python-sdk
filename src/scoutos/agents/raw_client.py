@@ -39,6 +39,7 @@ class RawAgentsClient:
         messages: typing.Sequence[IncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        variables: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         revision_id: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -56,6 +57,9 @@ class RawAgentsClient:
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        variables : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
@@ -84,6 +88,7 @@ class RawAgentsClient:
                     object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
+                "variables": variables,
                 "callback_url": callback_url,
                 "revision_id": revision_id,
                 "tags": tags,
@@ -145,6 +150,7 @@ class RawAgentsClient:
         messages: typing.Sequence[IncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        variables: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         revision_id: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -162,6 +168,9 @@ class RawAgentsClient:
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        variables : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
@@ -190,6 +199,7 @@ class RawAgentsClient:
                     object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
+                "variables": variables,
                 "callback_url": callback_url,
                 "revision_id": revision_id,
                 "tags": tags,
@@ -236,6 +246,7 @@ class RawAgentsClient:
         *,
         messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        variables: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         revision_id: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -253,6 +264,9 @@ class RawAgentsClient:
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        variables : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
@@ -278,6 +292,7 @@ class RawAgentsClient:
                     object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
+                "variables": variables,
                 "callback_url": callback_url,
                 "revision_id": revision_id,
                 "tags": tags,
@@ -339,6 +354,7 @@ class RawAgentsClient:
         *,
         messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        variables: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         revision_id: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -356,6 +372,9 @@ class RawAgentsClient:
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        variables : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
@@ -381,6 +400,7 @@ class RawAgentsClient:
                     object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
+                "variables": variables,
                 "callback_url": callback_url,
                 "revision_id": revision_id,
                 "tags": tags,
@@ -427,6 +447,7 @@ class RawAgentsClient:
         callback_url: str,
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        variables: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[AsyncInteractionAcceptedResponse]:
@@ -450,6 +471,9 @@ class RawAgentsClient:
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
 
+        variables : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
+
         tags : typing.Optional[typing.Sequence[str]]
             Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
@@ -472,6 +496,7 @@ class RawAgentsClient:
                     object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
+                "variables": variables,
                 "callback_url": callback_url,
                 "tags": tags,
             },
@@ -515,6 +540,7 @@ class RawAgentsClient:
         messages: typing.Sequence[IncomingMessage],
         callback_url: str,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        variables: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[AsyncInteractionAcceptedResponse]:
@@ -538,6 +564,9 @@ class RawAgentsClient:
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
 
+        variables : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
+
         tags : typing.Optional[typing.Sequence[str]]
             Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
@@ -557,6 +586,7 @@ class RawAgentsClient:
                     object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
+                "variables": variables,
                 "callback_url": callback_url,
                 "tags": tags,
             },
@@ -808,6 +838,7 @@ class AsyncRawAgentsClient:
         messages: typing.Sequence[IncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        variables: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         revision_id: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -825,6 +856,9 @@ class AsyncRawAgentsClient:
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        variables : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
@@ -853,6 +887,7 @@ class AsyncRawAgentsClient:
                     object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
+                "variables": variables,
                 "callback_url": callback_url,
                 "revision_id": revision_id,
                 "tags": tags,
@@ -914,6 +949,7 @@ class AsyncRawAgentsClient:
         messages: typing.Sequence[IncomingMessage],
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        variables: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         revision_id: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -931,6 +967,9 @@ class AsyncRawAgentsClient:
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        variables : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
@@ -959,6 +998,7 @@ class AsyncRawAgentsClient:
                     object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
+                "variables": variables,
                 "callback_url": callback_url,
                 "revision_id": revision_id,
                 "tags": tags,
@@ -1005,6 +1045,7 @@ class AsyncRawAgentsClient:
         *,
         messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        variables: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         revision_id: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -1022,6 +1063,9 @@ class AsyncRawAgentsClient:
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        variables : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
@@ -1047,6 +1091,7 @@ class AsyncRawAgentsClient:
                     object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
+                "variables": variables,
                 "callback_url": callback_url,
                 "revision_id": revision_id,
                 "tags": tags,
@@ -1108,6 +1153,7 @@ class AsyncRawAgentsClient:
         *,
         messages: typing.Sequence[IncomingMessage],
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        variables: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         callback_url: typing.Optional[str] = OMIT,
         revision_id: typing.Optional[str] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
@@ -1125,6 +1171,9 @@ class AsyncRawAgentsClient:
 
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
+
+        variables : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
 
         callback_url : typing.Optional[str]
             Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
@@ -1150,6 +1199,7 @@ class AsyncRawAgentsClient:
                     object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
+                "variables": variables,
                 "callback_url": callback_url,
                 "revision_id": revision_id,
                 "tags": tags,
@@ -1196,6 +1246,7 @@ class AsyncRawAgentsClient:
         callback_url: str,
         session_id: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        variables: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[AsyncInteractionAcceptedResponse]:
@@ -1219,6 +1270,9 @@ class AsyncRawAgentsClient:
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
 
+        variables : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
+
         tags : typing.Optional[typing.Sequence[str]]
             Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
@@ -1241,6 +1295,7 @@ class AsyncRawAgentsClient:
                     object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
+                "variables": variables,
                 "callback_url": callback_url,
                 "tags": tags,
             },
@@ -1284,6 +1339,7 @@ class AsyncRawAgentsClient:
         messages: typing.Sequence[IncomingMessage],
         callback_url: str,
         metadata: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
+        variables: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         tags: typing.Optional[typing.Sequence[str]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[AsyncInteractionAcceptedResponse]:
@@ -1307,6 +1363,9 @@ class AsyncRawAgentsClient:
         metadata : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
             Optional metadata (e.g., salesforce_session)
 
+        variables : typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]
+            Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
+
         tags : typing.Optional[typing.Sequence[str]]
             Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
 
@@ -1326,6 +1385,7 @@ class AsyncRawAgentsClient:
                     object_=messages, annotation=typing.Sequence[IncomingMessage], direction="write"
                 ),
                 "metadata": metadata,
+                "variables": variables,
                 "callback_url": callback_url,
                 "tags": tags,
             },

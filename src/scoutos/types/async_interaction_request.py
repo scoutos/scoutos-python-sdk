@@ -19,6 +19,11 @@ class AsyncInteractionRequest(UncheckedBaseModel):
     Optional metadata (e.g., salesforce_session)
     """
 
+    variables: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
+    """
+    Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
+    """
+
     callback_url: str = pydantic.Field()
     """
     Callback URL that Scout will POST to when the interaction completes. The request is signed with HMAC-SHA256 using the organization's secret key.

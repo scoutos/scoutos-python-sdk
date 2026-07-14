@@ -5827,6 +5827,14 @@ for chunk in response.data:
 <dl>
 <dd>
 
+**variables:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **callback_url:** `typing.Optional[str]` — Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
     
 </dd>
@@ -5930,6 +5938,14 @@ client.agents.interact_sync(
 <dd>
 
 **metadata:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — Optional metadata (e.g., salesforce_session)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**variables:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
     
 </dd>
 </dl>
@@ -6049,6 +6065,14 @@ for chunk in response.data:
 <dl>
 <dd>
 
+**variables:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **callback_url:** `typing.Optional[str]` — Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url.
     
 </dd>
@@ -6152,6 +6176,14 @@ client.agents.interact_sync_with_session(
 <dd>
 
 **metadata:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — Optional metadata (e.g., salesforce_session)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**variables:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
     
 </dd>
 </dl>
@@ -6294,6 +6326,14 @@ client.agents.interact_async(
 <dl>
 <dd>
 
+**variables:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **tags:** `typing.Optional[typing.Sequence[str]]` — Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'.
     
 </dd>
@@ -6406,6 +6446,14 @@ client.agents.interact_async_with_session(
 <dd>
 
 **metadata:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — Optional metadata (e.g., salesforce_session)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**variables:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON.
     
 </dd>
 </dl>
